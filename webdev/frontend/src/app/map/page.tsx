@@ -18,6 +18,7 @@ import { FeedbackModal } from '@/components/header/FeedbackModal';
 import { GovernmentPanel } from '@/components/dashboard/GovernmentPanel';
 import { InvestorPanel } from '@/components/dashboard/InvestorPanel';
 import { CommuterPanel } from '@/components/dashboard/CommuterPanel';
+import { AIChatPanel } from '@/components/ai/AIChatPanel';
 import { Map, SlidersHorizontal, LayoutDashboard, MessageSquare } from 'lucide-react';
 
 const MapContainer = dynamic(
@@ -202,7 +203,13 @@ export default function WebGISPage() {
               />
             )}
             {mobileTab === 'ai' && (
-              <div className="flex items-center justify-center h-full text-slate-400">AI Chat feature coming soon!</div>
+              <div className="h-full w-full overflow-hidden bg-slate-900">
+                <AIChatPanel
+                  activePersona={activePersona}
+                  contextData={{ station: activeStation }}
+                  onExecuteMapAction={handleExecuteMapAction}
+                />
+              </div>
             )}
           </MobileBottomSheet>
         )}
