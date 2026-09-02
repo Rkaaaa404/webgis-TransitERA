@@ -221,7 +221,7 @@ def dispatch_spatial_function(func_name: str, args: Dict[str, Any]) -> AIData:
                 title="Profil Daya Beli & Keramaian",
                 data={
                     "recommended_station": "Stasiun Wonokromo",
-                    "h3_index": "8965ewon002ffff",
+                    "h3_index": "898d80824cbffff",
                     "avg_spending": 38500,
                     "market_density": "Tinggi",
                     "competitor_count": 4
@@ -229,7 +229,7 @@ def dispatch_spatial_function(func_name: str, args: Dict[str, Any]) -> AIData:
             ),
             text_response=(
                 f"Untuk membuka usaha **{biz_label}**, lokasi terbaik adalah sekitar "
-                f"**Stasiun Wonokromo (Grid Sel H3: 8965ewon002ffff)** radius 250m dari pintu utara. "
+                f"**Stasiun Wonokromo (Grid Sel H3: 898d80824cbffff)** radius 250m dari pintu utara. "
                 f"Rata-rata transaksi Struk Go Rp 38.500/orang, percampuran guna lahan komersial aktif, "
                 f"dan tingginya pergerakan komuter harian meminimalkan risiko *tenant mismatch*."
             ),

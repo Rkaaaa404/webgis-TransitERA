@@ -491,9 +491,15 @@ function createHexFeature(stId: string, stName: string, lon: number, lat: number
     const dLon = radiusKm * Math.cos(angleRad) * lonDegPerKm;
     coords.push([+(lon + dLon).toFixed(6), +(lat + dLat).toFixed(6)]);
   }
-  coords.push(coords[0]);
-
-  const h3Index = `8965e${stId.slice(0, 3)}${idx.toString().padStart(3, '0')}ffff`;
+  const stBaseH3: Record<string, string> = {
+    gubeng: '898d80835d3ffff',
+    pasar_turi: '898d808311bffff',
+    semut: '898d808302bffff',
+    wonokromo: '898d80824cbffff',
+    waru: '898d8090d7bffff',
+  };
+  const centerHex = stBaseH3[stId] || '898d80835d3ffff';
+  const h3Index = idx === 0 ? centerHex : `${centerHex.slice(0, 11)}${idx.toString(16).padStart(2, '0')}ffff`;
   return {
     type: 'Feature',
     id: h3Index,

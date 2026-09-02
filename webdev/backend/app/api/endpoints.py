@@ -24,7 +24,12 @@ from app.ai.gemini_proxy import process_ai_query
 from app.core.config import settings
 from app.spatial.ahp import calculate_ahp_weights, calculate_tod_score, DEFAULT_5D_PAIRWISE_MATRIX
 from app.analytics.sdm_regression import SDMRegressor
-from app.spatial.h3_grid import classify_tod_typology
+from app.spatial.h3_grid import (
+    classify_tod_typology,
+    get_station_h3_cell,
+    get_h3_disk,
+    get_h3_distance,
+)
 
 router = APIRouter()
 sdm_engine = SDMRegressor()
@@ -79,6 +84,12 @@ async def get_station_tod_score(station_id: StationId):
     if not data:
         raise HTTPException(status_code=404, detail=f"Stasiun '{station_id}' tidak ditemukan")
 
+    center_cell = get_station_h3_cell(data["latitude"], data["longitude"], resolution=9)
+    station_h3_indexes = sorted(
+        get_h3_disk(center_cell, k=2),
+        key=lambda c: (get_h3_distance(center_cell, c), c)
+    )
+
     return StationTODScoreResponse(
         station_id=data["id"],
         station_name=data["name"],
@@ -88,7 +99,7 @@ async def get_station_tod_score(station_id: StationId):
         typology=data["typology"],
         weakest_dimension=data["weakest_dimension"],
         strongest_dimension=data["strongest_dimension"],
-        h3_indexes=[f"8965e{station_id.value[:3]}{i:03d}ffff" for i in range(19)],
+        h3_indexes=station_h3_indexes,
         policy_recommendations=data["policy_recommendations"],
     )
 

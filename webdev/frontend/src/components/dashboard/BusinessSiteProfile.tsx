@@ -12,12 +12,20 @@ interface BusinessSiteProfileProps {
 export const BusinessSiteProfile: React.FC<BusinessSiteProfileProps> = ({ station, onHighlightCell }) => {
   const [selectedBiz, setSelectedBiz] = useState<'coffee' | 'warung' | 'retail'>('coffee');
 
+  const stationH3 = {
+    gubeng: '898d80835d3ffff',
+    pasar_turi: '898d808311bffff',
+    semut: '898d808302bffff',
+    wonokromo: '898d80824cbffff',
+    waru: '898d8090d7bffff',
+  }[station.id] || '898d80835d3ffff';
+
   const bizProfiles = {
     coffee: {
       label: 'Kedai Kopi / Cafe Komuter',
       icon: Coffee,
       spendingProxy: 'Rp 28.000 - Rp 45.000',
-      recommendedH3: `8965e${station.id.slice(0, 3)}002ffff`,
+      recommendedH3: stationH3,
       catchmentRadius: '0 - 250 meter',
       matchScore: 94,
       rationale: 'Tingginya komuter pejalan kaki pagi/sore hari dan percampuran guna lahan komersial aktif.'
@@ -26,7 +34,7 @@ export const BusinessSiteProfile: React.FC<BusinessSiteProfileProps> = ({ statio
       label: 'Warung Makan / F&B Lokal',
       icon: Store,
       spendingProxy: 'Rp 15.000 - Rp 30.000',
-      recommendedH3: `8965e${station.id.slice(0, 3)}005ffff`,
+      recommendedH3: stationH3,
       catchmentRadius: '100 - 400 meter',
       matchScore: 89,
       rationale: 'Daya beli stabil dari pekerja transit dan mahasiswa di sekitar koridor feeder.'
@@ -35,7 +43,7 @@ export const BusinessSiteProfile: React.FC<BusinessSiteProfileProps> = ({ statio
       label: 'Minimarket & Retail Harian',
       icon: ShoppingBag,
       spendingProxy: 'Rp 35.000 - Rp 60.000',
-      recommendedH3: `8965e${station.id.slice(0, 3)}001ffff`,
+      recommendedH3: stationH3,
       catchmentRadius: '0 - 150 meter',
       matchScore: 96,
       rationale: 'Volume transaksi Struk Go tertinggi di dekat gate keluar stasiun.'
