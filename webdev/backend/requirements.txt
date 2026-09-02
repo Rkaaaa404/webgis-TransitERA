@@ -16,6 +16,11 @@ python-dotenv>=1.0.0
 httpx>=0.27.0
 requests>=2.31.0
 
+# Database & Spatial ORM (PostGIS)
+sqlalchemy>=2.0.0
+geoalchemy2>=0.14.0
+psycopg2-binary>=2.9.0
+
 # Spatial / H3
 numpy>=1.26.0
 h3>=3.7.6

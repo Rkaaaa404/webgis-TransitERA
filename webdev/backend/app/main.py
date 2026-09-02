@@ -8,6 +8,8 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
+from app.db.database import check_db_health
+
 app = FastAPI(
     title="TransitERA API",
     description="Backend Spatial Analytics Engine for TransitERA WebGIS",
@@ -42,10 +44,14 @@ app.include_router(api_router, prefix="/api")
 def root():
     return {"message": "Welcome to TransitERA Backend API. Spatial H3 Engine is running."}
 
-
 @app.get("/health")
 def health_check():
-    return {"status": "healthy", "version": "1.0.0", "service": "TransitERA API"}
+    return {
+        "status": "healthy",
+        "version": "1.0.0",
+        "service": "TransitERA API",
+        "database": check_db_health()
+    }
 
 
 if __name__ == "__main__":

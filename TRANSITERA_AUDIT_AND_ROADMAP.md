@@ -28,21 +28,22 @@ Setiap fase wajib melewati:
 
 ---
 
-### [ ] FASE 1: Fondasi Data Riil Spasial & Library Uber H3
-- [ ] **Task 1.1**: Migrasi `app/spatial/h3_grid.py` ke library `h3-py`. Hasilkan indeks H3 valid (misal: `8965e68340fffff`) dan batas poligon GeoJSON presisi.
-- [ ] **Task 1.2**: Bangun dataset kanonikal survei nyata `app/data/surabaya_ground_truth.json` berbasis 19 titik survei PRD (Klaska, Wonokromo, DTC, JPO, Lansia, Pasar Turi, Gubeng, TIJ, dsb.).
-- [ ] **Task 1.3**: Perbarui `app/data/stations_data.py` dan `app/data/mapid_client.py` agar mengonsumsi data nyata tersebut sebagai baseline dan fallback.
-- [ ] **Task 1.4**: Jalankan dan perbarui unit test backend agar memverifikasi H3 index riil.
-- **Git Commit Target**: `feat(spatial): integrate real h3-py indexing and PRD ground truth survey data`
+### [x] FASE 1: Fondasi Data Riil Spasial & Library Uber H3
+- [x] **Task 1.1**: Migrasi `app/spatial/h3_grid.py` ke library `h3-py`. Hasilkan indeks H3 valid (misal: `898d80835d3ffff`) dan batas poligon GeoJSON presisi.
+- [x] **Task 1.2**: Audit katalog dataset MAPID Surabaya (140 dataset Surabaya & 21 Jatim tercatat di `MAPID_Surabaya_EastJava_Catalog.md`).
+- [x] **Task 1.3**: Perbarui `app/api/endpoints.py`, `dispatcher.py`, dan frontend `BusinessSiteProfile.tsx` agar mengonsumsi indeks H3 resolusi 9 resmi.
+- [x] **Task 1.4**: Jalankan unit test `tests/test_h3.py` (27/27 Pytest passed).
+- **Git Commit Target**: `feat(spatial): integrate real h3-py resolution 9 indexing and mapid surabaya dataset catalog` *(Committed: ef2db7c)*
 
 ---
 
-### [ ] FASE 2: Integrasi Database PostGIS (Dual-Mode: Live Supabase / In-Memory Fallback)
-- [ ] **Task 2.1**: Tambahkan `sqlalchemy>=2.0.0`, `psycopg2-binary>=2.9.9`, `geoalchemy2>=0.14.0` ke `requirements.txt`.
-- [ ] **Task 2.2**: Bangun `app/db/database.py` dengan session maker SQLAlchemy, connection pooling, dan helper query spasial.
-- [ ] **Task 2.3**: Buat script migrasi & seeding otomatis `scripts/seed_database.py` untuk menginjeksi stations, H3 cells, dan survey points ke PostGIS.
-- [ ] **Task 2.4**: Implementasikan arsitektur *Dual-Mode Repository* di `endpoints.py`: jika PostGIS terhubung baca dari DB, jika offline fallback ke in-memory data riil.
-- [ ] **Task 2.5**: Uji endpoint `/api/stations`, `/api/h3-grid`, `/api/survey-points`.
+### [x] FASE 2: Integrasi Database PostGIS (Dual-Mode: Live Supabase / In-Memory Fallback)
+- [x] **Task 2.1**: Tambahkan `sqlalchemy>=2.0.0`, `psycopg2-binary>=2.9.0`, `geoalchemy2>=0.14.0` ke `requirements.txt`.
+- [x] **Task 2.2**: Bangun `app/db/database.py` dengan connection pooling, auto-detect PostGIS live, dan helper status kesehatan.
+- [x] **Task 2.3**: Buat `app/db/seeder.py` untuk menginjeksi 5 stasiun SRRL Surabaya dan 95 sel Uber H3 resolusi 9 ke tabel PostGIS.
+- [x] **Task 2.4**: Implementasikan arsitektur *Dual-Mode Repository* di `endpoints.py`: jika PostGIS terhubung baca dari DB, jika offline fallback otomatis ke in-memory.
+- [x] **Task 2.5**: Tambahkan endpoints `/api/db/status` dan `POST /api/db/seed` serta perbarui root `/health`.
+- [x] **Task 2.6**: Jalankan unit test `tests/test_db.py` (32/32 Pytest passed).
 - **Git Commit Target**: `feat(db): implement dual-mode postgis spatial repository and automated seeding`
 
 ---

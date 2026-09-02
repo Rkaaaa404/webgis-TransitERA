@@ -1,5 +1,7 @@
-from fastapi import APIRouter, HTTPException, Query, Request
+from fastapi import APIRouter, HTTPException, Query, Request, Depends
 from typing import List, Optional, Dict, Any
+import logging
+import json
 import numpy as np
 
 from app.schemas.tod import (
@@ -30,6 +32,13 @@ from app.spatial.h3_grid import (
     get_h3_disk,
     get_h3_distance,
 )
+from app.db.database import get_db, is_db_connected, check_db_health
+from app.db.models import Station, H3TodAnalytics
+from app.db.seeder import seed_database
+from sqlalchemy.orm import Session
+from geoalchemy2.functions import ST_AsGeoJSON
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 sdm_engine = SDMRegressor()
@@ -59,8 +68,29 @@ def _validate_surabaya_bbox(lat: float, lon: float) -> None:
 # ---------------------------------------------------------------------------
 
 @router.get("/stations", response_model=List[StationSummary])
-async def list_stations():
-    """Mengambil ringkasan 5 simpul stasiun transit utama SRRL Surabaya."""
+async def list_stations(db: Optional[Session] = Depends(get_db)):
+    """Mengambil ringkasan 5 simpul stasiun transit utama SRRL Surabaya (PostGIS / In-Memory)."""
+    if is_db_connected() and db is not None:
+        try:
+            db_stations = db.query(Station).all()
+            if db_stations:
+                return [
+                    StationSummary(
+                        id=s.id,
+                        name=s.name,
+                        latitude=float(s.latitude),
+                        longitude=float(s.longitude),
+                        tod_readiness_score=float(s.tod_readiness_score),
+                        typology=s.typology,
+                        weakest_dimension=s.weakest_dimension,
+                        strongest_dimension=s.strongest_dimension,
+                        status="operational",
+                    )
+                    for s in db_stations
+                ]
+        except Exception as e:
+            logger.warning(f"Gagal query stasiun dari database, fallback ke in-memory: {e}")
+
     return [
         StationSummary(
             id=s["id"],
@@ -78,7 +108,7 @@ async def list_stations():
 
 
 @router.get("/tod-score/{station_id}", response_model=StationTODScoreResponse)
-async def get_station_tod_score(station_id: StationId):
+async def get_station_tod_score(station_id: StationId, db: Optional[Session] = Depends(get_db)):
     """Mengambil detail skor 5D TOD, benchmark koridor, dan rekomendasi per stasiun."""
     data = STATIONS_DATA.get(station_id.value)
     if not data:
@@ -90,13 +120,33 @@ async def get_station_tod_score(station_id: StationId):
         key=lambda c: (get_h3_distance(center_cell, c), c)
     )
 
+    tod_score = data["tod_readiness_score"]
+    typology = data["typology"]
+    scores = data["scores"]
+
+    if is_db_connected() and db is not None:
+        try:
+            db_st = db.query(Station).filter(Station.id == station_id.value).first()
+            if db_st:
+                tod_score = float(db_st.tod_readiness_score)
+                typology = db_st.typology
+                scores = {
+                    "density": float(db_st.density_score),
+                    "diversity": float(db_st.diversity_score),
+                    "design": float(db_st.design_score),
+                    "destination_accessibility": float(db_st.destination_score),
+                    "distance_to_transit": float(db_st.distance_score),
+                }
+        except Exception as e:
+            logger.warning(f"Gagal query TOD score dari database: {e}")
+
     return StationTODScoreResponse(
         station_id=data["id"],
         station_name=data["name"],
-        tod_readiness_score=data["tod_readiness_score"],
-        scores=TODDimensionScores(**data["scores"]),
+        tod_readiness_score=tod_score,
+        scores=TODDimensionScores(**scores),
         benchmark_scores=TODDimensionScores(**data["benchmark_scores"]),
-        typology=data["typology"],
+        typology=typology,
         weakest_dimension=data["weakest_dimension"],
         strongest_dimension=data["strongest_dimension"],
         h3_indexes=station_h3_indexes,
@@ -112,11 +162,49 @@ async def get_station_tod_score(station_id: StationId):
 async def get_h3_grid(
     station: Optional[str] = Query(None, description="Filter by station ID"),
     min_score: Optional[float] = Query(None, ge=0, le=100, description="Minimum TOD score filter"),
+    db: Optional[Session] = Depends(get_db),
 ):
     """
     Mengambil GeoJSON FeatureCollection sel H3 (resolusi 9) dengan skor 5D TOD & NJOP.
-    Dihasilkan secara deterministik dari STATIONS_DATA.
+    Mendukung query langsung dari PostGIS bila tersedia, dengan fallback deterministik in-memory.
     """
+    if is_db_connected() and db is not None:
+        try:
+            query = db.query(H3TodAnalytics, ST_AsGeoJSON(H3TodAnalytics.geom).label("geojson_geom"))
+            if station:
+                query = query.filter(H3TodAnalytics.station_cluster == station.lower())
+            if min_score is not None:
+                query = query.filter(H3TodAnalytics.tod_readiness_score >= min_score)
+            results = query.all()
+
+            if results:
+                features = []
+                for cell, geojson_str in results:
+                    features.append({
+                        "type": "Feature",
+                        "id": cell.h3_index,
+                        "properties": {
+                            "h3_index": cell.h3_index,
+                            "station_cluster": cell.station_cluster,
+                            "density_score": float(cell.density_score),
+                            "diversity_score": float(cell.diversity_score),
+                            "design_score": float(cell.design_score),
+                            "destination_score": float(cell.destination_score),
+                            "distance_score": float(cell.distance_score),
+                            "tod_readiness_score": float(cell.tod_readiness_score),
+                            "typology": cell.typology,
+                            "predicted_njop_premium_pct": float(cell.predicted_njop_premium_pct or 0.0),
+                            "ci_lower_pct": float(cell.ci_lower_pct or 0.0),
+                            "ci_upper_pct": float(cell.ci_upper_pct or 0.0),
+                            "njop_m2": int(cell.njop_m2 or 0)
+                        },
+                        "geometry": json.loads(geojson_str)
+                    })
+                return {"type": "FeatureCollection", "features": features}
+        except Exception as e:
+            logger.warning(f"Gagal query PostGIS H3 grid, fallback ke in-memory: {e}")
+
+    # Fallback In-Memory
     geo_data = get_all_h3_features()
     features = geo_data["features"]
 
@@ -132,6 +220,28 @@ async def get_h3_grid(
         ]
 
     return {"type": "FeatureCollection", "features": features}
+
+
+# ---------------------------------------------------------------------------
+# Database Management endpoints
+# ---------------------------------------------------------------------------
+
+@router.get("/db/status")
+async def get_database_status():
+    """Memeriksa status koneksi dan kesehatan database spasial PostGIS."""
+    return check_db_health()
+
+
+@router.post("/db/seed")
+async def seed_postgis_database(
+    force: bool = Query(False, description="Set True untuk menimpa data stasiun & H3 lama di database"),
+    db: Optional[Session] = Depends(get_db)
+):
+    """
+    Melakukan seeding 5 stasiun SRRL Surabaya dan 95 sel Uber H3 resolusi 9
+    lengkap dengan atribut 5D TOD dan geometri EPSG:4326 ke PostGIS.
+    """
+    return seed_database(db, force=force)
 
 
 # ---------------------------------------------------------------------------
