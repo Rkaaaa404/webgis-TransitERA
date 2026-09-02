@@ -27,8 +27,8 @@ const PERSONA_FAQ: Record<PersonaType, Array<{ q: string; a: string }>> = {
       a: 'Buka Settings → Preferensi Government → pilih Format Ekspor (GeoJSON, Shapefile, atau CSV). Tombol ekspor tersedia di panel Government setelah memilih kawasan analisis.',
     },
     {
-      q: 'Apa perbedaan mode bobot AHP (Default, Kustom, Equal)?',
-      a: 'Default menggunakan bobot yang ditetapkan tim peneliti ITS (CR ≤ 0.10). Kustom memungkinkan penyesuaian bobot tiap dimensi secara manual. Equal memberikan bobot merata pada semua dimensi.',
+      q: 'Apa perbedaan mode bobot AHP (Standard Expert, Kustom, Equal)?',
+      a: 'Default menggunakan bobot yang ditetapkan tim peneliti (CR ≤ 0.10). Kustom memungkinkan penyesuaian bobot tiap dimensi secara manual. Equal memberikan bobot merata pada semua dimensi.',
     },
     {
       q: 'Mengapa beberapa hexagon berwarna abu-abu di peta?',
@@ -241,7 +241,7 @@ export function HelpFeedbackModal({ isOpen, onClose, activePersona = 'government
                 <p className="text-xs font-medium text-slate-300">Butuh bantuan lebih lanjut?</p>
                 <p className="text-[11px] text-slate-500">
                   Hubungi tim TransitERA di{' '}
-                  <a href="mailto:transitera@its.ac.id" className="text-brand-lime hover:underline">transitera@its.ac.id</a>
+                  <a href="mailto:hello@transitera.id" className="text-brand-lime hover:underline">hello@transitera.id</a>
                 </p>
               </div>
             </div>

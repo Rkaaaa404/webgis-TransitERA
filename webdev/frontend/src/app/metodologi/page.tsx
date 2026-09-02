@@ -112,7 +112,7 @@ export default function MetodologiPage() {
         <section className="bg-slate-900/60 border border-slate-800 rounded-xl p-5 space-y-2">
           <h2 className="text-base font-bold text-white flex items-center gap-2">
             <Award className="w-4 h-4 text-brand-teal" />
-            Disusun Oleh Tim "Pak, sibuk ga?" — Institut Teknologi Sepuluh Nopember (ITS)
+            Disusun Oleh Tim TransitERA
           </h2>
           <p className="text-xs text-slate-400">
             MAPID WebGIS Competition #2 - 2026 (Maps That Think! - Mass Transportation Edition).

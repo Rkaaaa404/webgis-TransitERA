@@ -40,7 +40,7 @@ export const GovernmentPanel: React.FC<GovernmentPanelProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-brand-lime animate-pulse" />
-              <h3 className="text-xs font-bold text-slate-100 uppercase tracking-wider">PWK Decision Support</h3>
+              <h3 className="text-xs font-bold text-slate-100 uppercase tracking-wider">Spatial Decision Support</h3>
             </div>
             <p className="text-[11px] text-brand-lime font-semibold mt-0.5">
               {station.name.replace('Stasiun Surabaya ', 'St. ').replace('Stasiun ', 'St. ')}

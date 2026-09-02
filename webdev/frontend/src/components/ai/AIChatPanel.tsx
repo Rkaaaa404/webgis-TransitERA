@@ -27,7 +27,7 @@ export const AIChatPanel: React.FC<AIChatPanelProps> = ({
     {
       id: 'init-1',
       sender: 'assistant',
-      text: 'Halo! Saya **TransitERA AI** 🚆. Tanyakan kesiapan TOD di 5 stasiun Surabaya, komparasi antarsimpul, estimasi kenaikan nilai tanah (%ΔNJOP), atau profil kesesuaian lokasi usaha UMKM.',
+      text: 'Halo! Saya **TransitERA AI**. Tanyakan kesiapan TOD di 5 stasiun Surabaya, komparasi antarsimpul, estimasi kenaikan nilai tanah (%ΔNJOP), atau profil kesesuaian lokasi usaha UMKM.',
       timestamp: 'Baru saja'
     }
   ]);

@@ -206,7 +206,7 @@ export default function WebGISPage() {
               <div className="h-full w-full overflow-hidden bg-slate-900">
                 <AIChatPanel
                   activePersona={activePersona}
-                  contextData={{ station: activeStation }}
+                  activeStation={activeStation}
                   onExecuteMapAction={handleExecuteMapAction}
                 />
               </div>

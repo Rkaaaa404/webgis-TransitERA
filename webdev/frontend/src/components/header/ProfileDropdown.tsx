@@ -9,9 +9,9 @@ import {
 
 const DUMMY_USER = {
   name: 'Pak Sibuk',
-  email: 'paksibuk@its.ac.id',
+  email: 'admin@transitera.id',
   role: 'Peneliti Spasial',
-  institution: 'Institut Teknologi Sepuluh Nopember',
+  institution: 'TransitERA Team',
   location: 'Surabaya, Jawa Timur',
   avatar: 'PS',
 };

@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { Modal } from '@/components/ui/Modal';
 import { PersonaType } from '@/lib/persona';
 import {
-  Settings, Map, Ruler, Globe, Eye, Sliders, ChevronRight, CheckCircle2,
-  Building2, Briefcase, Train, Scale, Target, Clock, Route, Star,
+  Settings, Map, Eye, Building2, Briefcase, Train,
+  Footprints, Bus, Globe, Sliders, CheckCircle2, ChevronRight,
 } from 'lucide-react';
 
 interface AppSettings {
@@ -64,7 +64,7 @@ function SettingSection({ title, icon, children }: { title: string; icon: React.
 
 function OptionGroup<T extends string | number>({
   label, options, value, onChange,
-}: { label: string; options: { value: T; label: string }[]; value: T; onChange: (v: T) => void }) {
+}: { label: string; options: { value: T; label: React.ReactNode }[]; value: T; onChange: (v: T) => void }) {
   return (
     <div>
       <p className="text-xs text-slate-400 mb-1.5">{label}</p>
@@ -182,7 +182,7 @@ export function SettingsModal({ isOpen, onClose, activePersona = 'government' }:
             min={0} max={100} step={5} onChange={(v) => update('todThreshold', v)}
             format={(v) => `${v} / 100`} />
           <OptionGroup label="Mode Bobot AHP"
-            options={[{ value: 'default', label: 'Default ITS' }, { value: 'custom', label: 'Kustom' }, { value: 'equal', label: 'Equal Weight' }]}
+            options={[{ value: 'default', label: 'Standard Expert' }, { value: 'custom', label: 'Kustom' }, { value: 'equal', label: 'Equal Weight' }]}
             value={settings.ahpWeightMode} onChange={(v) => update('ahpWeightMode', v as AppSettings['ahpWeightMode'])} />
           <OptionGroup label="Unit Analisis Spasial"
             options={[{ value: 'hexagon', label: 'H3 Hexagon' }, { value: 'kelurahan', label: 'Kelurahan' }, { value: 'kecamatan', label: 'Kecamatan' }]}
@@ -215,7 +215,11 @@ export function SettingsModal({ isOpen, onClose, activePersona = 'government' }:
       {activePersona === 'commuter' && (
         <SettingSection title="Pengaturan Commuter" icon={<Train className="w-3.5 h-3.5" />}>
           <OptionGroup label="Mode Transportasi Default"
-            options={[{ value: 'krl', label: '🚆 KRL SRRL' }, { value: 'bus', label: '🚌 Suroboyo Bus' }, { value: 'walk', label: '🚶 Jalan Kaki' }]}
+            options={[
+              { value: 'krl', label: <div className="flex items-center gap-1.5"><Train className="w-3.5 h-3.5" /><span>KRL SRRL</span></div> },
+              { value: 'bus', label: <div className="flex items-center gap-1.5"><Bus className="w-3.5 h-3.5" /><span>Suroboyo Bus</span></div> },
+              { value: 'walk', label: <div className="flex items-center gap-1.5"><Footprints className="w-3.5 h-3.5" /><span>Jalan Kaki</span></div> }
+            ]}
             value={settings.travelMode} onChange={(v) => update('travelMode', v as AppSettings['travelMode'])} />
           <Toggle label="Tampilkan Rute Feeder"
             description="Overlay rute Suroboyo Bus di peta"

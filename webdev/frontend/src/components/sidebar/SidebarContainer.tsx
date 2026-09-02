@@ -19,7 +19,7 @@ import {
   Store, Landmark, DollarSign, Home,
   Train as TrainIcon, Bus, MapPin, Settings, HelpCircle, MessageSquare,
   ChevronRight, ChevronDown, Clock, AlertTriangle, Droplets, Wind, Thermometer,
-  Eye, EyeOff, Star,
+  Eye, EyeOff, Star, Hexagon, ScrollText, BarChart2, CircleDollarSign, Building2, Car
 } from 'lucide-react';
 
 interface SidebarContainerProps {
@@ -44,10 +44,13 @@ interface SidebarContainerProps {
 }
 
 /* ── Orange Toggle ── */
-function Toggle({ active, onToggle, label }: { active: boolean; onToggle: () => void; label: string }) {
+function Toggle({ active, onToggle, label, icon }: { active: boolean; onToggle: () => void; label: string; icon?: React.ReactNode }) {
   return (
     <button onClick={onToggle} className="w-full flex items-center justify-between py-1.5 px-2 rounded-lg text-xs hover:bg-slate-800/40 transition-colors group">
-      <span className={`font-medium ${active ? 'text-slate-200' : 'text-slate-400'}`}>{label}</span>
+      <div className="flex items-center gap-2">
+        {icon && <span className="text-slate-400 shrink-0">{icon}</span>}
+        <span className={`font-medium ${active ? 'text-slate-200' : 'text-slate-400'}`}>{label}</span>
+      </div>
       <div className={`toggle-switch ${active ? 'active' : ''}`} />
     </button>
   );
@@ -225,13 +228,13 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
     <>
       <SectionHeader label="Lapisan Peta (Layers)" />
       <div className="px-3 space-y-1 pb-2">
-        <Toggle active={choroplethMode === 'tod_score'} onToggle={() => onChangeChoroplethMode('tod_score')} label="⬡ H3 TOD Grid" />
-        <Toggle active={showGistaru} onToggle={() => setShowGistaru(!showGistaru)} label="🗺️ Kawasan BWP (GISTARU)" />
-        <Toggle active={showBhumi} onToggle={() => setShowBhumi(!showBhumi)} label="📜 Persil Tanah (Bhumi ATR)" />
-        <Toggle active={showSurveyPoints} onToggle={onToggleSurveyPoints} label="📊 Opini Publik (Survei MAPID)" />
-        <Toggle active={choroplethMode === 'njop_premium'} onToggle={() => onChangeChoroplethMode('njop_premium')} label="💰 Zona Nilai Lahan (NJOP)" />
-        {isGovBiz && <Toggle active={showEconomicPOI} onToggle={() => setShowEconomicPOI(!showEconomicPOI)} label="🏢 Economic POI" />}
-        <Toggle active={showTraffic} onToggle={() => setShowTraffic(!showTraffic)} label="🚗 Traffic Real-Time" />
+        <Toggle active={choroplethMode === 'tod_score'} onToggle={() => onChangeChoroplethMode('tod_score')} label="H3 TOD Grid" icon={<Hexagon className="w-4 h-4" />} />
+        <Toggle active={showGistaru} onToggle={() => setShowGistaru(!showGistaru)} label="Kawasan BWP (GISTARU)" icon={<Map className="w-4 h-4" />} />
+        <Toggle active={showBhumi} onToggle={() => setShowBhumi(!showBhumi)} label="Persil Tanah (Bhumi ATR)" icon={<ScrollText className="w-4 h-4" />} />
+        <Toggle active={showSurveyPoints} onToggle={onToggleSurveyPoints} label="Opini Publik (Survei MAPID)" icon={<BarChart2 className="w-4 h-4" />} />
+        <Toggle active={choroplethMode === 'njop_premium'} onToggle={() => onChangeChoroplethMode('njop_premium')} label="Zona Nilai Lahan (NJOP)" icon={<CircleDollarSign className="w-4 h-4" />} />
+        {isGovBiz && <Toggle active={showEconomicPOI} onToggle={() => setShowEconomicPOI(!showEconomicPOI)} label="Economic POI" icon={<Building2 className="w-4 h-4" />} />}
+        <Toggle active={showTraffic} onToggle={() => setShowTraffic(!showTraffic)} label="Traffic Real-Time" icon={<Car className="w-4 h-4" />} />
       </div>
 
       <BasemapGrid basemapStyle={basemapStyle} onChangeBasemapStyle={onChangeBasemapStyle} />
@@ -327,7 +330,7 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
         {/* ══════ Government Sidebar ══════ */}
         {activePersona === 'government' && (
           <>
-            <SectionHeader label="Government Tools (PWK)" />
+            <SectionHeader label="Spatial Planning Tools" />
             <div className="px-2 space-y-0.5">
               <NavItem icon={SlidersHorizontal} label="Filter Spasial" active={govActiveTab === 'filter'} onClick={() => setGovActiveTab('filter')} badge={h3ScoreRange[0] > 0 || h3ScoreRange[1] < 100 || h3RingFilter < 5 || njopRange[0] > 0 || njopRange[1] < 25 ? 'Aktif' : undefined} />
               <NavItem icon={Layers} label="Lapisan Peta (Layers)" active={govActiveTab === 'layers'} onClick={() => setGovActiveTab('layers')} />
@@ -502,7 +505,7 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
         {/* ══════ Government Sidebar ══════ */}
         {activePersona === 'government' && (
           <>
-            <SectionHeader label="Government Tools (PWK)" />
+            <SectionHeader label="Spatial Planning Tools" />
             <div className="px-2 space-y-0.5">
               <NavItem icon={SlidersHorizontal} label="Filter Spasial" active={govActiveTab === 'filter'} onClick={() => setGovActiveTab('filter')} badge={h3ScoreRange[0] > 0 || h3ScoreRange[1] < 100 || h3RingFilter < 5 || njopRange[0] > 0 || njopRange[1] < 25 ? 'Aktif' : undefined} />
               <NavItem icon={Layers} label="Lapisan Peta (Layers)" active={govActiveTab === 'layers'} onClick={() => setGovActiveTab('layers')} />
@@ -525,7 +528,7 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
                     {demographics.kecamatan}
                   </div>
                   <span className="text-[9px] bg-brand-lime/10 border border-brand-lime/30 text-brand-lime px-1.5 py-0.5 rounded font-semibold">
-                    PWK Buffer
+                    Radius Buffer
                   </span>
                 </div>
                 
@@ -756,7 +759,9 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
                   {touristSpots.map((d) => (
                     <div key={d.id} className="bg-slate-800/50 rounded-lg p-2.5 border border-slate-700/50 hover:border-brand-lime/30 transition-colors cursor-pointer group">
                       <div className="flex items-start gap-2.5">
-                        <span className="text-xl">{d.imageEmoji}</span>
+                        <div className="w-12 h-12 bg-slate-800/80 rounded flex items-center justify-center shrink-0 border border-slate-700">
+                          <MapPin className="text-slate-400 w-6 h-6" />
+                        </div>
                         <div className="flex-1 min-w-0">
                           <div className="text-[11px] font-bold text-slate-200 group-hover:text-brand-lime transition-colors">{d.name}</div>
                           <div className="text-[10px] text-slate-500 leading-relaxed">{d.description}</div>

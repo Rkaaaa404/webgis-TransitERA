@@ -174,7 +174,7 @@ export const BUS_ROUTES: BusRoute[] = [
   {
     id: 'sb-02',
     routeCode: 'SB-02',
-    routeName: 'Gubeng ↔ ITS Sukolilo',
+    routeName: 'Gubeng ↔ Kampus Timur',
     color: '#3b82f6',
     frequency: 'Setiap 20 menit',
     operatingHours: '06:00 - 20:30 WIB',
@@ -186,7 +186,7 @@ export const BUS_ROUTES: BusRoute[] = [
       { name: 'Jl. Dharmahusada', lat: -7.2710, lng: 112.7650 },
       { name: 'Unair Kampus C', lat: -7.2740, lng: 112.7720 },
       { name: 'Galaxy Mall', lat: -7.2780, lng: 112.7780 },
-      { name: 'ITS Sukolilo', lat: -7.2820, lng: 112.7930 },
+      { name: 'Kampus Timur', lat: -7.2820, lng: 112.7930 },
     ],
     estimatedTime: '30 menit',
   },
@@ -261,7 +261,7 @@ export interface TouristDestination {
   nearestStation: StationId;
   distanceFromStation: string;
   walkTime: string;
-  imageEmoji: string;
+
 }
 
 export const TOURIST_DESTINATIONS: TouristDestination[] = [
@@ -269,91 +269,91 @@ export const TOURIST_DESTINATIONS: TouristDestination[] = [
     id: 'td-01', name: 'Tugu Pahlawan', category: 'heritage',
     description: 'Monumen ikonik peringatan Pertempuran 10 November 1945.',
     lat: -7.2455, lng: 112.7378, rating: 4.6, nearestStation: 'pasar_turi',
-    distanceFromStation: '800m', walkTime: '10 min', imageEmoji: '🏛️',
+    distanceFromStation: '800m', walkTime: '10 min',
   },
   {
     id: 'td-02', name: 'House of Sampoerna', category: 'heritage',
     description: 'Museum rokok & arsitektur kolonial Belanda.',
     lat: -7.2340, lng: 112.7350, rating: 4.7, nearestStation: 'semut',
-    distanceFromStation: '500m', walkTime: '7 min', imageEmoji: '🏚️',
+    distanceFromStation: '500m', walkTime: '7 min',
   },
   {
     id: 'td-03', name: 'Surabaya Submarine Monument', category: 'heritage',
     description: 'Kapal selam KRI Pasopati 410 sebagai museum.',
     lat: -7.2365, lng: 112.7485, rating: 4.4, nearestStation: 'semut',
-    distanceFromStation: '700m', walkTime: '9 min', imageEmoji: '🚢',
+    distanceFromStation: '700m', walkTime: '9 min',
   },
   {
     id: 'td-04', name: 'Kebun Binatang Surabaya', category: 'nature',
     description: 'Kebun binatang tertua di Asia Tenggara.',
     lat: -7.2925, lng: 112.7360, rating: 4.2, nearestStation: 'wonokromo',
-    distanceFromStation: '1.1km', walkTime: '15 min', imageEmoji: '🦁',
+    distanceFromStation: '1.1km', walkTime: '15 min',
   },
   {
     id: 'td-05', name: 'Jembatan Merah', category: 'heritage',
     description: 'Jembatan bersejarah kawasan pecinan Surabaya.',
     lat: -7.2400, lng: 112.7420, rating: 4.3, nearestStation: 'semut',
-    distanceFromStation: '350m', walkTime: '5 min', imageEmoji: '🌉',
+    distanceFromStation: '350m', walkTime: '5 min',
   },
   {
     id: 'td-06', name: 'Grand City Mall', category: 'shopping',
     description: 'Pusat perbelanjaan premium di jantung kota.',
     lat: -7.2720, lng: 112.7530, rating: 4.5, nearestStation: 'gubeng',
-    distanceFromStation: '900m', walkTime: '12 min', imageEmoji: '🛍️',
+    distanceFromStation: '900m', walkTime: '12 min',
   },
   {
     id: 'td-07', name: 'Tunjungan Plaza', category: 'shopping',
     description: 'Mall legendaris Surabaya sejak 1986.',
     lat: -7.2610, lng: 112.7380, rating: 4.4, nearestStation: 'gubeng',
-    distanceFromStation: '1.5km', walkTime: '20 min', imageEmoji: '🏬',
+    distanceFromStation: '1.5km', walkTime: '20 min',
   },
   {
     id: 'td-08', name: 'Masjid Al-Akbar Surabaya', category: 'religious',
     description: 'Masjid terbesar kedua di Indonesia.',
     lat: -7.3245, lng: 112.7170, rating: 4.8, nearestStation: 'wonokromo',
-    distanceFromStation: '3.2km', walkTime: '40 min', imageEmoji: '🕌',
+    distanceFromStation: '3.2km', walkTime: '40 min',
   },
   {
     id: 'td-09', name: 'Pantai Kenjeran Baru', category: 'nature',
     description: 'Taman wisata tepi laut dengan patung Empat Wajah.',
     lat: -7.2380, lng: 112.7890, rating: 4.1, nearestStation: 'semut',
-    distanceFromStation: '5km', walkTime: 'Bus 35 min', imageEmoji: '🏖️',
+    distanceFromStation: '5km', walkTime: 'Bus 35 min',
   },
   {
     id: 'td-10', name: 'Kampung Arab Ampel', category: 'culinary',
     description: 'Kawasan kuliner khas Timur Tengah & masjid bersejarah.',
     lat: -7.2300, lng: 112.7410, rating: 4.5, nearestStation: 'semut',
-    distanceFromStation: '1km', walkTime: '13 min', imageEmoji: '🕌',
+    distanceFromStation: '1km', walkTime: '13 min',
   },
   {
     id: 'td-11', name: 'Klenteng Hok An Kiong', category: 'heritage',
     description: 'Klenteng tertua di Surabaya sejak 1830.',
     lat: -7.2410, lng: 112.7430, rating: 4.3, nearestStation: 'semut',
-    distanceFromStation: '600m', walkTime: '8 min', imageEmoji: '⛩️',
+    distanceFromStation: '600m', walkTime: '8 min',
   },
   {
     id: 'td-12', name: 'Suroboyo Carnival Night Market', category: 'culinary',
     description: 'Pasar malam terbesar di Surabaya.',
     lat: -7.2540, lng: 112.7870, rating: 4.0, nearestStation: 'gubeng',
-    distanceFromStation: '4km', walkTime: 'Bus 25 min', imageEmoji: '🎡',
+    distanceFromStation: '4km', walkTime: 'Bus 25 min',
   },
   {
     id: 'td-13', name: 'Royal Plaza', category: 'shopping',
     description: 'Pusat perbelanjaan dekat stasiun Wonokromo.',
     lat: -7.3020, lng: 112.7310, rating: 4.2, nearestStation: 'wonokromo',
-    distanceFromStation: '300m', walkTime: '4 min', imageEmoji: '🏢',
+    distanceFromStation: '300m', walkTime: '4 min',
   },
   {
     id: 'td-14', name: 'Lontong Balap Pak Gendut', category: 'culinary',
     description: 'Kuliner legendaris khas Pasar Turi.',
     lat: -7.2485, lng: 112.7315, rating: 4.6, nearestStation: 'pasar_turi',
-    distanceFromStation: '150m', walkTime: '2 min', imageEmoji: '🍜',
+    distanceFromStation: '150m', walkTime: '2 min',
   },
   {
     id: 'td-15', name: 'Terminal Purabaya', category: 'heritage',
     description: 'Terminal bus terbesar di Asia Tenggara.',
     lat: -7.3530, lng: 112.7320, rating: 3.8, nearestStation: 'waru',
-    distanceFromStation: '200m', walkTime: '3 min', imageEmoji: '🚌',
+    distanceFromStation: '200m', walkTime: '3 min',
   },
 ];
 

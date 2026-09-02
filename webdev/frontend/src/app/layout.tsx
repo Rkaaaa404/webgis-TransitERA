@@ -18,7 +18,7 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "TransitERA | TOD Readiness & Land Value Intelligence — Surabaya",
   description:
-    "Platform WebGIS interaktif berbasis Decision Support System untuk menilai kesiapan kawasan Transit-Oriented Development (TOD) dan keterkaitannya dengan nilai lahan di Kota Surabaya. Dibangun oleh Tim Pak, sibuk ga? — ITS Surabaya.",
+    "Platform WebGIS interaktif berbasis Decision Support System untuk menilai kesiapan kawasan Transit-Oriented Development (TOD) dan keterkaitannya dengan nilai lahan di Kota Surabaya. Dibangun oleh Tim TransitERA.",
   keywords: [
     "TransitERA",
     "WebGIS",

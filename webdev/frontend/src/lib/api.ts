@@ -52,8 +52,8 @@ export const FALLBACK_STATIONS: StationData[] = [
       { label: 'UMKM (Micro)', value: 18, color: 'bg-cyan-500' }
     ],
     travel_estimates: [
-      { destination: 'RSUD Dr. Soetomo', time: '10 min', icon: '🚶' },
-      { destination: 'Grand City Mall', time: '5 min', icon: '🚗' }
+      { destination: 'RSUD Dr. Soetomo', time: '10 min', icon: 'walk' },
+      { destination: 'Grand City Mall', time: '5 min', icon: 'car' }
     ]
   },
   {
@@ -105,8 +105,8 @@ export const FALLBACK_STATIONS: StationData[] = [
       { label: 'UMKM Keliling', value: 40, color: 'bg-cyan-500' }
     ],
     travel_estimates: [
-      { destination: 'Tugu Pahlawan', time: '12 min', icon: '🚶' },
-      { destination: 'Pasar Turi Baru', time: '3 min', icon: '🚶' }
+      { destination: 'Tugu Pahlawan', time: '12 min', icon: 'walk' },
+      { destination: 'Pasar Turi Baru', time: '3 min', icon: 'walk' }
     ]
   },
   {
