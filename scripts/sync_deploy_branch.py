@@ -63,9 +63,7 @@ def sync_deploy_branch():
     
     # 5. Kembalikan user ke branch asal (main) dan pulihkan stage
     print(f"\nKembali ke branch asal: {current_branch}...")
-    run_cmd(f"git checkout {current_branch}")
-    run_cmd("git restore --staged .", check=False)
-    run_cmd("git checkout -- .", check=False)
+    run_cmd(f"git checkout -f {current_branch}")
     print(f"Selesai! Anda kembali berada di branch '{current_branch}' dengan working tree bersih.")
 
 if __name__ == "__main__":
