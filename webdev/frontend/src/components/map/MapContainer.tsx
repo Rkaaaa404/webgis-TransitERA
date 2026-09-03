@@ -63,7 +63,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
     fetchTransitNodes().then((d) => setTransitCount(d.features?.length ?? 125)).catch(() => setTransitCount(125));
     fetchFloodHazard().then((d) => setFloodCount(d.features?.length ?? 1553)).catch(() => setFloodCount(1553));
     fetchNighttimeLight().then((d) => setNtlCount(d.features?.length ?? 52)).catch(() => setNtlCount(52));
-    fetchMapidSurvey().then((d) => setSurveyCount(d.features?.length ?? 360)).catch(() => setSurveyCount(360));
+    fetchMapidSurvey().then((d) => setSurveyCount(d.features?.length ?? 100)).catch(() => setSurveyCount(100));
   }, []);
 
   // 1. Initialize MapLibre GL Map Instance
@@ -199,7 +199,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
             data: surveyData
           });
 
-          // Circle layer with dynamic category color-coding
+          // Circle layer with dynamic category color-coding for Activities
           map.addLayer({
             id: 'survey-points-circle',
             type: 'circle',
@@ -208,11 +208,12 @@ export const MapContainer: React.FC<MapContainerProps> = ({
               'circle-radius': 5.5,
               'circle-color': [
                 'match',
-                ['get', 'mission_subtype'],
-                'properti_go', '#10B981', // Emerald untuk Properti Go
-                'struk_go', '#F59E0B',    // Amber untuk Struk Go
-                'menu_go', '#8B5CF6',     // Violet untuk Menu Go
-                '#06B6D4'                 // Cyan untuk Activity
+                ['get', 'category'],
+                'Pedestrian & Walkability', '#06B6D4',     // Cyan untuk Pedestrian
+                'Transit Multimodal', '#10B981',           // Emerald untuk Transit Multimodal
+                'Hambatan & Disamenity', '#F59E0B',        // Amber untuk Hambatan / PKL
+                'User Experience & Dinamika', '#8B5CF6',   // Violet untuk UX / Antrean
+                '#3B82F6'                                  // Blue default
               ],
               'circle-stroke-width': 1.5,
               'circle-stroke-color': '#ffffff'
@@ -224,17 +225,28 @@ export const MapContainer: React.FC<MapContainerProps> = ({
             const props = e.features?.[0]?.properties;
             if (!props) return;
 
-            const isMission = props.survey_type === 'mission';
-            const badgeBg = isMission
-              ? (props.mission_subtype === 'properti_go' ? '#059669' : props.mission_subtype === 'struk_go' ? '#d97706' : '#7c3aed')
-              : '#0891b2';
-            const typeLabel = isMission
-              ? (props.mission_subtype === 'properti_go' ? 'Mission Properti Go' : props.mission_subtype === 'struk_go' ? 'Mission Struk Go' : 'Mission Menu Go')
-              : 'Community Activity';
+            const categoryColors: Record<string, string> = {
+              'Pedestrian & Walkability': '#0891b2',
+              'Transit Multimodal': '#059669',
+              'Hambatan & Disamenity': '#d97706',
+              'User Experience & Dinamika': '#7c3aed',
+            };
+            const badgeBg = categoryColors[props.category] || '#2563eb';
 
-            const priceHtml = props.price_info && props.price_info !== 'N/A' && !props.price_info.includes('Fasilitas Publik')
-              ? `<div style="margin: 6px 0; padding: 4px 8px; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 6px; font-weight: 700; color: #b45309; font-size: 11px;">
-                   Informasi Nilai/Harga: ${props.price_info}
+            // Parse images if array or string
+            let imageUrl = '';
+            try {
+              if (props.images) {
+                const parsed = typeof props.images === 'string' ? JSON.parse(props.images) : props.images;
+                if (Array.isArray(parsed) && parsed.length > 0) imageUrl = parsed[0];
+              }
+            } catch {
+              // ignore parse errors
+            }
+
+            const imageHtml = imageUrl
+              ? `<div style="margin: 6px 0; border-radius: 6px; overflow: hidden; max-height: 110px;">
+                   <img src="${imageUrl}" alt="Foto Lapangan" style="width: 100%; height: 105px; object-fit: cover; border-radius: 6px;" onerror="this.style.display='none'" />
                  </div>`
               : '';
 
@@ -244,7 +256,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                 <div style="font-family: system-ui, -apple-system, sans-serif; padding: 6px 4px; font-size: 12px; color: #0f172a;">
                   <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px;">
                     <span style="background: ${badgeBg}; color: #ffffff; padding: 2px 7px; border-radius: 4px; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">
-                      ${typeLabel}
+                      ${props.category || 'Survey Activity'}
                     </span>
                     <span style="font-size: 10px; color: #64748b; font-weight: 600;">
                       ${props.id || '#PakSibukGa'}
@@ -252,18 +264,18 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                   </div>
 
                   <strong style="font-size: 13px; color: #0f172a; display: block; margin-top: 4px; line-height: 1.3;">
-                    ${props.title || 'Observasi Survei Lapangan'}
+                    ${props.title || 'Observasi Lapangan'}
                   </strong>
 
                   <p style="margin: 4px 0 6px 0; color: #475569; font-size: 11px; line-height: 1.4;">
                     ${props.description || 'Data survei primer koridor transit Surabaya.'}
                   </p>
 
-                  ${priceHtml}
+                  ${imageHtml}
 
                   <div style="margin-top: 6px; padding-top: 6px; border-top: 1px solid #e2e8f0; font-size: 10px; color: #64748b; display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
+                    <div><span style="font-weight: 600;">Lokasi:</span> ${props.station_name || props.station_cluster}</div>
                     <div><span style="font-weight: 600;">Zona:</span> ${props.zone ? props.zone.split(' ')[0] : 'Catchment'}</div>
-                    <div><span style="font-weight: 600;">Simpul:</span> ${(props.station_cluster || '').toUpperCase()}</div>
                     <div><span style="font-weight: 600;">Surveyor:</span> ${props.user || '@surveyor'}</div>
                     <div><span style="font-weight: 600;">Waktu:</span> ${(props.timestamp || '').split(' ')[1] || 'WIB'}</div>
                   </div>

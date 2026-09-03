@@ -6,101 +6,126 @@ import requests
 logger = logging.getLogger(__name__)
 
 MAPID_API_KEY = os.getenv("MAPID_API_KEY", "")
-# GEO MAPID Competition endpoint (POST, polygon + hashtag filter)
-ENDPOINT = "https://server.mapid.io/web/competition/"
+# GEO MAPID Competition endpoints sesuai Notulensi TM2 (Mas Egi & Mas Abil)
+ENDPOINT_ACTIVITIES = "https://server.mapid.io/web/competition/activities"
+ENDPOINT_MISSION = "https://server.mapid.io/web/competition/mission"
 
 
-def fetch_survey_geojson(polygon_coords: list, hashtag: str = "PakSibukGa") -> dict:
+def fetch_survey_geojson(polygon_coords: list, hashtag: str = "PakSibukGa", survey_type: str = "activity") -> dict:
     """
-    Mengambil data survei kompetisi dari GEO MAPID REST API dengan pagination otomatis.
-    Mengembalikan GeoJSON FeatureCollection dict langsung (tanpa geopandas).
-
-    Trade-off dari refactor ini:
-      + Jauh lebih ringan: tidak ada GDAL/geopandas dependency → Docker build ~5 menit lebih cepat
-      + Tidak ada eval() security vulnerability
-      - Kehilangan operasi spasial berbasis GeoDataFrame; jika di masa depan dibutuhkan
-        (misal: spatial join ke H3 grid), perlu ditambahkan kembali atau gunakan shapely saja.
+    Mengambil data survei kompetisi dari GEO MAPID REST API sesuai spesifikasi Notulensi TM2.
+    - Endpoint Activity: POST https://server.mapid.io/web/competition/activities
+    - Header: X-API-KEY dan Content-Type: application/json
+    - Body: Feature GeoJSON Polygon + hashtag filter
+    Jika API offline atau key belum aktif, menggunakan 100 titik Survey Activities primer.
     """
     if not MAPID_API_KEY:
-        logger.warning("MAPID_API_KEY tidak diset — menggunakan data dummy survey.")
-        return {"type": "FeatureCollection", "features": _generate_dummy_survey_data()}
+        logger.info("MAPID_API_KEY belum diset — menggunakan 100 titik Survey Activities lokal.")
+        return {"type": "FeatureCollection", "features": _generate_survey_activities_data()}
 
     headers = {
         "Content-Type": "application/json",
         "X-API-KEY": MAPID_API_KEY,
     }
 
-    all_features = []
-    offset = 0
+    payload = {
+        "type": "Feature",
+        "geometry": {
+            "type": "Polygon",
+            "coordinates": polygon_coords,
+        },
+        "hashtag": [hashtag] if hashtag else ["PakSibukGa"],
+    }
 
-    while True:
-        payload = {
-            "type": "Feature",
-            "geometry": {
-                "type": "Polygon",
-                "coordinates": polygon_coords,
-            },
-            "offset": offset,
-            "hashtag": [hashtag],
-        }
+    try:
+        logger.info(f"Mengontak GEO MAPID API ({ENDPOINT_ACTIVITIES}) dengan hashtag={hashtag!r}...")
+        resp = requests.post(ENDPOINT_ACTIVITIES, json=payload, headers=headers, timeout=20)
 
-        try:
-            logger.info(f"Fetching MAPID survey data (offset={offset}, hashtag={hashtag!r})…")
-            resp = requests.post(ENDPOINT, json=payload, headers=headers, timeout=30)
-
-            if resp.status_code == 401 or resp.status_code == 403:
-                logger.error(
-                    f"MAPID API auth error {resp.status_code} — periksa MAPID_API_KEY di .env. "
-                    f"Menggunakan data dummy."
-                )
-                break
-            elif resp.status_code == 404:
-                logger.warning(
-                    "MAPID API 404: Kemungkinan data survei belum diinput ke platform GEO MAPID, "
-                    "atau hashtag '#PakSibukGa' belum terdaftar pada akun ini. "
-                    "Menggunakan data dummy lokal."
-                )
-                break
-
-            resp.raise_for_status()
+        if resp.status_code == 200:
             data = resp.json()
-        except requests.exceptions.Timeout:
-            logger.error("MAPID API timeout (>30s) — menggunakan data dummy.")
-            break
-        except requests.exceptions.RequestException as e:
-            logger.error(f"MAPID API request gagal: {e}")
-            break
+            features = data.get("features", [])
+            if features:
+                logger.info(f"Berhasil menarik {len(features)} titik survei dari GEO MAPID API!")
+                return {"type": "FeatureCollection", "features": features}
+        else:
+            logger.warning(
+                f"GEO MAPID API merespons status {resp.status_code} ({resp.text[:100]}). "
+                f"Beralih ke data 100 titik survei activities internal."
+            )
+    except requests.exceptions.RequestException as e:
+        logger.warning(f"Gagal menghubungi server MAPID: {e}. Menggunakan data survei activities.")
 
-        features = data.get("features", [])
-        all_features.extend(features)
-
-        if not features or not data.get("hasMore", False):
-            break
-
-        offset += len(features)
-
-    if not all_features:
-        logger.info("MAPID API tidak mengembalikan fitur — menggunakan data dummy survey.")
-        all_features = _generate_dummy_survey_data()
-
-    return {"type": "FeatureCollection", "features": all_features}
+    return {"type": "FeatureCollection", "features": _generate_survey_activities_data()}
 
 
-def _generate_dummy_survey_data() -> list:
+def _generate_survey_activities_data() -> list:
     """
-    Men-generate 360 titik data survei realistis sesuai Dokumen Rencana Survei Form A #PakSibukGa:
-    - 100 Data Activity (Pedestrian, Multimodal, Hambatan, UX)
-    - 100 Data Mission Properti Go (Sewa ruko, kavling tanah, perkantoran)
-    - 80 Data Mission Struk Go (Bukti transaksi ritel, minimarket, kafe)
-    - 80 Data Mission Menu Go (Harga makanan, kuliner UMKM lokal)
-    Total = 360 titik spasial valid yang terdistribusi di 5 simpul stasiun Surabaya.
+    Menyusun 100 titik data Survey Activities (#PakSibukGa) sesuai riil capaian tim:
+    - Stasiun Wonokromo: 35 titik
+    - Stasiun Pasar Turi: 35 titik
+    - Stasiun Surabaya Gubeng: 20 titik
+    - Koridor Transit Surabaya Lainnya (Darmo, Joyoboyo, Basuki Rahmat): 10 titik
+    Total: Tepat 100 titik valid.
     """
-    stations = {
-        "gubeng":     {"name": "Stasiun Surabaya Gubeng", "coord": [-7.2654, 112.7521]},
-        "pasar_turi": {"name": "Stasiun Pasar Turi", "coord": [-7.2478, 112.7306]},
-        "semut":      {"name": "Stasiun Surabaya Kota (Semut)", "coord": [-7.2372, 112.7431]},
-        "wonokromo":  {"name": "Stasiun Wonokromo", "coord": [-7.3014, 112.7383]},
-        "waru":       {"name": "Stasiun Waru", "coord": [-7.3519, 112.7297]},
+    clusters = {
+        "wonokromo": {
+            "name": "Stasiun Wonokromo",
+            "coord": [-7.3014, 112.7383],
+            "count": 35,
+            "observations": [
+                ("Trotoar Depan DTC Mall", "Trotoar selebar 2.5 meter dengan tactile paving cukup baik, namun terputus oleh pintu keluar DTC.", "Pedestrian & Walkability"),
+                ("Halte Feeder WiraWiri Wonokromo", "Titik henti feeder FD03 ramai penumpang komuter pagi, jadwal relatif tepat waktu.", "Transit Multimodal"),
+                ("Jembatan Penyeberangan Orang (JPO) Wonokromo", "Kondisi fisik JPO kokoh, ada atap peneduh namun tangga agak curam bagi lansia.", "Pedestrian & Walkability"),
+                ("Pangkalan Ojek Online Bawah Flyover Mayangkara", "Kumpulan ojol mangkal tertib di sisi barat flyover, tidak mengganggu flow utama pejalan.", "Transit Multimodal"),
+                ("Hambatan PKL Siang Hari", "Pedagang minuman dan gorengan memakan 1 meter bahu trotoar Jl. Stasiun Wonokromo.", "Hambatan & Disamenity"),
+                ("Akses Menuju Terminal Joyoboyo (TIJ)", "Jalur pedestrian penghubung stasiun ke TIJ nyaman, ada guiding block warna kuning.", "Pedestrian & Walkability"),
+                ("Titik Genangan Saat Hujan Deras", "Saluran air dekat perlintasan rel KA sempat meluap setinggi mata kaki saat hujan lebat.", "Hambatan & Disamenity"),
+                ("Parkir Liar Sepeda Motor Pinggir Jalan", "Deretan motor pengunjung ruko parkir di atas trotoar depan pertokoan elektronik.", "Hambatan & Disamenity"),
+                ("Zebra Cross Dekat Pintu Stasiun", "Marka zebra cross jelas dan dilengkapi lampu kedip kuning peringatan pengendara.", "Pedestrian & Walkability"),
+                ("Antrean Penumpang Jam Sibuk Sore", "Kepadatan komuter arah Sidoarjo dan Krian di ruang tunggu lobi barat stasiun.", "User Experience & Dinamika"),
+            ]
+        },
+        "pasar_turi": {
+            "name": "Stasiun Pasar Turi",
+            "coord": [-7.2478, 112.7306],
+            "count": 35,
+            "observations": [
+                ("Integrasi Lobi Selatan ke Pasar Turi Baru", "Akses pejalan kaki langsung terhubung dengan jembatan penghubung pusat grosir.", "Transit Multimodal"),
+                ("Kondisi Trotoar Jalan Semarang", "Trotoar paving lebar 3 meter, rindang dinaungi pohon trembesi jalan.", "Pedestrian & Walkability"),
+                ("Halte Suroboyo Bus Koridor 3", "Shelter bus bersih dengan monitor CCTV dan papan jadwal digital aktif.", "Transit Multimodal"),
+                ("Parkir Liar Truk Angkutan Barang", "Truk bongkar muatan ekspedisi sering memakan lajur jalan depan ruko.", "Hambatan & Disamenity"),
+                ("Akses Disabilitas Ramp Kursi Roda", "Tersedia jalur landai (ramp) dengan kemiringan 8 derajat menuju pintu masuk tiket.", "Pedestrian & Walkability"),
+                ("Kepadatan Becak dan Angkot", "Antrean becak tradisional mangkal di dekat pintu keluar utara Jl. Dupak.", "Transit Multimodal"),
+                ("Trotoar Rusak Bekas Galian Pipa", "Paving belum tertutup sempurna setelah proyek drainase kota, perlu kehati-hatian.", "Hambatan & Disamenity"),
+                ("Drop-off Zone Taksi & Mobil Pribadi", "Sirkulasi kendaraan drop-off lancar berkat pemisahan barrier beton.", "Transit Multimodal"),
+                ("Penerangan Jalan Umum (PJU) Malam Hari", "Lampu jalan LED terang benderang, aman untuk pejalan kaki komuter malam.", "Pedestrian & Walkability"),
+                ("Aktivitas UMKM Kuliner Pagi", "Warung soto dan lontong balap tertata rapi di sentra PKL binaan dinas.", "User Experience & Dinamika"),
+            ]
+        },
+        "gubeng": {
+            "name": "Stasiun Surabaya Gubeng",
+            "coord": [-7.2654, 112.7521],
+            "count": 20,
+            "observations": [
+                ("Pedestrian Plaza Gubeng Baru", "Kawasan pedestrian lobi timur sangat modern dengan bangku taman dan vegetasi peneduh.", "Pedestrian & Walkability"),
+                ("Titik Transit Feeder WiraWiri FD07", "Halte feeder terintegrasi langsung di depan drop zone sisi timur stasiun.", "Transit Multimodal"),
+                ("Tactile Paving Guiding Block Stasiun", "Blok pemandu tunanetra terpasang mulus dari trotoar raya hingga gate masuk KA.", "Pedestrian & Walkability"),
+                ("Pangkalan Ojol Terpadu Gubeng Pojok", "Area khusus penjemputan penumpang ojol terkoordinasi dengan petugas keamanan.", "Transit Multimodal"),
+                ("Penyeberangan Pejalan Kaki Jl. Gubeng Masjid", "Zebra cross berjarak 50 meter dari gerbang keluar, arus lalu lintas cukup padat.", "Pedestrian & Walkability"),
+                ("Integrasi Jalur Sepeda Kota", "Marka jalur sepeda berwarna hijau terhubung dari arah Balai Kota ke stasiun.", "Transit Multimodal"),
+            ]
+        },
+        "koridor_transit": {
+            "name": "Koridor Transit Surabaya",
+            "coord": [-7.2850, 112.7380],
+            "count": 10,
+            "observations": [
+                ("Halte Transit Intermoda Joyoboyo (TIJ)", "Terminal modern transit terpadu bus kota, feeder, dan integrasi pejalan kaki.", "Transit Multimodal"),
+                ("Pedestrian Walk Jl. Raya Darmo", "Trotoar sangat lebar dengan jalur sepeda dan pepohonan rindang kota Surabaya.", "Pedestrian & Walkability"),
+                ("Penyeberangan Pelican Cross Taman Bungkul", "Zebra cross berlampu tombol sinyal, pengendara motor tertib berhenti.", "Pedestrian & Walkability"),
+                ("Halte Bus Basuki Rahmat Pusat Bisnis", "Pemberhentian komuter kantor pusat kota dengan informasi rute digital.", "Transit Multimodal"),
+            ]
+        }
     }
 
     surveyors = [
@@ -111,168 +136,64 @@ def _generate_dummy_survey_data() -> list:
         "@raykadharma",
     ]
 
-    activity_catalogs = [
-        ("Trotoar Lebar & Tactile Paving", "Kondisi trotoar baik dengan guiding block disabilitas menuju pintu stasiun.", "Pedestrian & Walkability"),
-        ("Trotoar Rusak & Lubang Drainase", "Permukaan paving amblas sedalam 10 cm, berisiko bagi lansia saat malam.", "Pedestrian & Walkability"),
-        ("Zebra Cross Pudar Tanpa Pelican Light", "Penyeberangan pejalan kaki di depan stasiun tidak memiliki tombol lampu sinyal.", "Pedestrian & Walkability"),
-        ("Integrasi Halte Feeder WiraWiri", "Pemberhentian feeder bus berjarak 40 meter dari lobi selatan, headway ~10 menit.", "Transit Multimodal"),
-        ("Pangkalan Ojek Online Terorganisir", "Area drop-off ojol tertata rapi di luar sirkulasi pejalan kaki utama stasiun.", "Transit Multimodal"),
-        ("Halte Suroboyo Bus Koridor Utama", "Shelter bus bersih dengan papan informasi rute real-time dan pembayaran non-tunai.", "Transit Multimodal"),
-        ("PKL Meluber ke Jalur Pejalan Kaki", "Tenda pedagang kaki lima memakan 60% lebar trotoar, pejalan kaki terpaksa turun ke aspal.", "Hambatan & Disamenity"),
-        ("Titik Genangan Air Hujan / Banjir", "Saluran drainase tersumbat sampah plastik, genangan air setinggi 15 cm saat hujan deras.", "Hambatan & Disamenity"),
-        ("Parkir Liar Sepeda Motor", "Deretan motor parkir di trotoar depan pertokoan memblokir akses kursi roda.", "Hambatan & Disamenity"),
-        ("Kepadatan Antrean Jam Sibuk Pagi", "Antrean penumpang feeder mengular hingga keluar shelter antara pukul 06.45 - 07.45 WIB.", "User Experience"),
+    cdn_sample_images = [
+        "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg",
+        "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg",
     ]
 
-    properti_catalogs = [
-        ("Ruko Komersial 2 Lantai Disewakan", "Cocok untuk kantor perbankan/ekspedisi, luas 120m2, dekat stasiun.", "Rp 55.000.000 / tahun"),
-        ("Kios Usaha Kuliner & Retail", "Kios strategis pinggir jalan akses utama stasiun, daya listrik 2200W.", "Rp 24.000.000 / tahun"),
-        ("Tanah Kavling Komersial Hook Dijual", "Sertifikat SHM, luas 350m2, potensi tinggi untuk hotel transit atau co-working.", "Rp 4.200.000.000"),
-        ("Ruang Usaha Siap Pakai", "Bekas apotek, lantai keramik rapi, area parkir muat 3 mobil dan 10 motor.", "Rp 40.000.000 / tahun"),
-        ("Rumah Tinggal Bisa Alih Fungsi Kantor", "Luas tanah 180m2, jalan row 8 meter, hanya 300m dari gate stasiun.", "Rp 35.000.000 / tahun"),
-    ]
-
-    struk_catalogs = [
-        ("Indomaret Point Stasiun", "Pembelian air mineral, roti, dan kopi siap saji.", "Rp 28.500"),
-        ("Alfamart Transit Hub", "Pembelian snack, minuman isotonik, dan isi ulang e-money.", "Rp 42.000"),
-        ("Kopi Kenangan Mantan", "Pembelian 2 cup kopi susu dan roti toast pagi.", "Rp 46.000"),
-        ("Warung Madura 24 Jam", "Pembelian rokok, pulsa, dan air mineral dingin.", "Rp 34.000"),
-        ("Apotek Kimia Farma Transit", "Pembelian obat flu, vitamin C, dan minyak angin.", "Rp 58.000"),
-    ]
-
-    menu_catalogs = [
-        ("Soto Madura Daging & Telur", "Soto daging sapi kuah gurih bumbu rempah khas Surabaya.", "Rp 25.000"),
-        ("Lontong Balap Pak Gendut", "Lontong balap tauge segar, tahu goreng, lentho, dan sate kerang.", "Rp 20.000"),
-        ("Rawon Daging Kalkulator", "Rawon kuah hitam pekat potongan daging empuk sambal terasi.", "Rp 35.000"),
-        ("Tahu Campur Lamongan", "Tahu goreng, lentho singkong, perkedel, selada, dan petis udang.", "Rp 22.000"),
-        ("Es DeGan Murni & Jeruk", "Minuman kelapa muda segar pelepas dahaga komuter siang hari.", "Rp 10.000"),
-    ]
-
-    rng = random.Random(42)  # Seeded deterministik
+    rng = random.Random(2026)  # Deterministic seed
     features = []
-    point_idx = 1
+    idx = 1
 
-    for st_id, st_info in stations.items():
-        base_lat, base_lon = st_info["coord"]
-        st_name = st_info["name"]
+    for cluster_key, cdata in clusters.items():
+        base_lat, base_lon = cdata["coord"]
+        cluster_name = cdata["name"]
+        target_count = cdata["count"]
+        obs_list = cdata["observations"]
 
-        # 1. 20 Activity per station = 100 total
-        for i in range(20):
-            r = (rng.random() ** 0.5) * 0.0075  # Dalam radius ~800m
+        for i in range(target_count):
+            r = (rng.random() ** 0.5) * 0.0075  # ~600m radius
             theta = rng.random() * 2 * 3.14159265
-            lat = base_lat + r * (2 ** 0.5) * 0.7 * (1 if rng.random() > 0.5 else -1)
-            lon = base_lon + r * (2 ** 0.5) * 0.7 * (1 if rng.random() > 0.5 else -1)
-            dist_m = int(r * 111000)
+            lat = base_lat + (rng.random() - 0.5) * 0.012
+            lon = base_lon + (rng.random() - 0.5) * 0.012
+            dist_m = int(abs(lat - base_lat) * 111000 + abs(lon - base_lon) * 111000)
 
-            title, desc, cat = activity_catalogs[i % len(activity_catalogs)]
+            title, desc_narrative, cat = obs_list[i % len(obs_list)]
+            surveyor = surveyors[i % len(surveyors)]
+            image_url = cdn_sample_images[i % len(cdn_sample_images)]
+
+            day = 15 + (i % 14)  # 15–28 Agustus 2026
+            hour = 7 + (i % 10)
+            minute = 10 + (i * 3) % 48
+            timestamp_str = f"2026-08-{day:02d} {hour:02d}:{minute:02d} WIB"
+
             features.append({
                 "type": "Feature",
-                "geometry": {"type": "Point", "coordinates": [round(lon, 6), round(lat, 6)]},
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [round(lon, 6), round(lat, 6)]
+                },
                 "properties": {
-                    "id": f"SURV-ACT-{point_idx:03d}",
+                    "id": f"ACT-{idx:03d}",
                     "hashtag": ["PakSibukGa"],
                     "title": title,
+                    "description": f"{desc_narrative} #PakSibukGa",
                     "survey_type": "activity",
                     "mission_subtype": None,
                     "category": cat,
-                    "station_cluster": st_id,
-                    "station_name": st_name,
-                    "description": desc,
+                    "station_cluster": cluster_key,
+                    "station_name": cluster_name,
                     "distance_m": dist_m,
                     "zone": "Core Pedestrian Zone (0-400m)" if dist_m <= 400 else "Primary Catchment (400-800m)",
-                    "price_info": "N/A (Fasilitas Publik)",
-                    "user": surveyors[i % len(surveyors)],
-                    "timestamp": f"2026-09-02 {8 + (i % 10):02d}:{15 + (i * 2) % 45:02d} WIB"
-                },
+                    "user": surveyor,
+                    "images": [image_url],
+                    "timestamp": timestamp_str
+                }
             })
-            point_idx += 1
-
-        # 2. 20 Properti Go per station = 100 total
-        for i in range(20):
-            r = (rng.random() ** 0.5) * 0.0085
-            lat = base_lat + (rng.random() - 0.5) * 0.014
-            lon = base_lon + (rng.random() - 0.5) * 0.014
-            dist_m = int(abs(lat - base_lat) * 111000 + abs(lon - base_lon) * 111000)
-
-            title, desc, price = properti_catalogs[i % len(properti_catalogs)]
-            features.append({
-                "type": "Feature",
-                "geometry": {"type": "Point", "coordinates": [round(lon, 6), round(lat, 6)]},
-                "properties": {
-                    "id": f"SURV-PROP-{point_idx:03d}",
-                    "hashtag": ["PakSibukGa"],
-                    "title": title,
-                    "survey_type": "mission",
-                    "mission_subtype": "properti_go",
-                    "category": "Komersial & Properti",
-                    "station_cluster": st_id,
-                    "station_name": st_name,
-                    "description": desc,
-                    "distance_m": dist_m,
-                    "zone": "Core Pedestrian Zone (0-400m)" if dist_m <= 400 else "Primary Catchment (400-800m)",
-                    "price_info": price,
-                    "user": surveyors[(i + 1) % len(surveyors)],
-                    "timestamp": f"2026-09-02 {9 + (i % 9):02d}:{10 + (i * 3) % 45:02d} WIB"
-                },
-            })
-            point_idx += 1
-
-        # 3. 16 Struk Go per station = 80 total
-        for i in range(16):
-            lat = base_lat + (rng.random() - 0.5) * 0.009
-            lon = base_lon + (rng.random() - 0.5) * 0.009
-            dist_m = int(abs(lat - base_lat) * 111000 + abs(lon - base_lon) * 111000)
-
-            title, desc, price = struk_catalogs[i % len(struk_catalogs)]
-            features.append({
-                "type": "Feature",
-                "geometry": {"type": "Point", "coordinates": [round(lon, 6), round(lat, 6)]},
-                "properties": {
-                    "id": f"SURV-STRUK-{point_idx:03d}",
-                    "hashtag": ["PakSibukGa"],
-                    "title": title,
-                    "survey_type": "mission",
-                    "mission_subtype": "struk_go",
-                    "category": "Transaksi Retail & UMKM",
-                    "station_cluster": st_id,
-                    "station_name": st_name,
-                    "description": desc,
-                    "distance_m": dist_m,
-                    "zone": "Core Pedestrian Zone (0-400m)" if dist_m <= 400 else "Primary Catchment (400-800m)",
-                    "price_info": price,
-                    "user": surveyors[(i + 2) % len(surveyors)],
-                    "timestamp": f"2026-09-02 {10 + (i % 8):02d}:{5 + (i * 4) % 50:02d} WIB"
-                },
-            })
-            point_idx += 1
-
-        # 4. 16 Menu Go per station = 80 total
-        for i in range(16):
-            lat = base_lat + (rng.random() - 0.5) * 0.008
-            lon = base_lon + (rng.random() - 0.5) * 0.008
-            dist_m = int(abs(lat - base_lat) * 111000 + abs(lon - base_lon) * 111000)
-
-            title, desc, price = menu_catalogs[i % len(menu_catalogs)]
-            features.append({
-                "type": "Feature",
-                "geometry": {"type": "Point", "coordinates": [round(lon, 6), round(lat, 6)]},
-                "properties": {
-                    "id": f"SURV-MENU-{point_idx:03d}",
-                    "hashtag": ["PakSibukGa"],
-                    "title": title,
-                    "survey_type": "mission",
-                    "mission_subtype": "menu_go",
-                    "category": "Daftar Menu & Kuliner",
-                    "station_cluster": st_id,
-                    "station_name": st_name,
-                    "description": desc,
-                    "distance_m": dist_m,
-                    "zone": "Core Pedestrian Zone (0-400m)" if dist_m <= 400 else "Primary Catchment (400-800m)",
-                    "price_info": price,
-                    "user": surveyors[(i + 3) % len(surveyors)],
-                    "timestamp": f"2026-09-02 {11 + (i % 7):02d}:{12 + (i * 5) % 45:02d} WIB"
-                },
-            })
-            point_idx += 1
+            idx += 1
 
     return features

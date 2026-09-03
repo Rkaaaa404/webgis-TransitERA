@@ -155,7 +155,7 @@ export const LayerControl: React.FC<LayerControlProps> = ({
             Survei Lapangan
           </span>
           <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-800 text-slate-300">
-            {typeof surveyCount === 'number' ? `${surveyCount.toLocaleString('id-ID')} Titik` : '360 Titik'}
+            {typeof surveyCount === 'number' ? `${surveyCount.toLocaleString('id-ID')} Titik` : '100 Titik'}
           </span>
         </button>
 
