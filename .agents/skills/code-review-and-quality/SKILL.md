@@ -39,6 +39,7 @@ Setiap review mengevaluasi kode di 5 dimensi:
 - **TransitERA specific:**
   - Apakah komponen React fokus pada satu tugas?
   - Apakah Pydantic models jelas mendokumentasikan schema?
+  - Apakah UI bebas dari emoji mentah? (Wajib gunakan Lucide Icons, shadcn/ui, atau Mantine UI daripada emoji Unicode).
 
 ### Axis 3: Architecture
 

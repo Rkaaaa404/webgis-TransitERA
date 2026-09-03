@@ -228,7 +228,10 @@ export const MapContainer: React.FC<MapContainerProps> = ({
               .setLngLat(e.lngLat)
               .setHTML(`
                 <div style="font-family: sans-serif; padding: 4px; font-size: 12px;">
-                  <strong style="color: #059669;">🚏 ${props.NAMA || 'Halte Bus'}</strong><br/>
+                  <div style="display: flex; items-center; gap: 6px; margin-bottom: 2px;">
+                    <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981; margin-top: 3px;"></span>
+                    <strong style="color: #059669;">${props.NAMA || 'Halte Bus'}</strong>
+                  </div>
                   <span style="color: #4b5563; font-size: 11px;">${props.ALAMAT || 'Kota Surabaya'}</span>
                 </div>
               `)
@@ -283,8 +286,11 @@ export const MapContainer: React.FC<MapContainerProps> = ({
               .setLngLat(e.lngLat)
               .setHTML(`
                 <div style="font-family: sans-serif; padding: 4px; font-size: 12px;">
-                  <strong style="color: #2563EB;">🌊 Zona Risiko Genangan Banjir</strong><br/>
-                  <span style="font-size: 11px;">Tingkat Kerentanan: ${props.Kelas || 'Terancam Banjir'}</span>
+                  <div style="display: flex; items-center; gap: 6px; margin-bottom: 2px;">
+                    <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2563eb; margin-top: 3px;"></span>
+                    <strong style="color: #2563EB;">Zona Risiko Genangan Banjir</strong>
+                  </div>
+                  <span style="font-size: 11px; color: #475569;">Tingkat Kerentanan: ${props.Kelas || 'Terancam Banjir'}</span>
                 </div>
               `)
               .addTo(map);

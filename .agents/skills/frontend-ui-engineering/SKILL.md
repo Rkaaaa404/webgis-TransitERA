@@ -255,3 +255,41 @@ Memastikan navigasi tetap intuitif pada layar *smartphone*:
    - **FCP** < 1.8s (sesuai PRD)
    - **INP** ≤ 200ms
    - **CLS** ≤ 0.1
+
+---
+
+## 8. Standar Ikonografi & Komponen UI (Anti-Emoji Rule)
+
+> [!IMPORTANT]
+> **DILARANG MENGGUNAKAN EMOJI MENTAH DI UI PRODUKSI**
+> Jangan menggunakan karakter emoji Unicode (seperti 🚏, 🌊, 🚄, ✨, 👁️, 📈, 🚀, 💡, 🏷️, dll.) pada teks antarmuka, label tombol, kartu dashboard, badge, popup peta, atau modal dialog.
+
+### Mengapa Dilarang?
+1. **Inkonsistensi Render Lintas Platform**: Emoji dirender sangat berbeda di Windows, macOS, iOS, Android, dan Linux. Perbedaan ukuran font dan geometri emoji dapat merusak *vertical alignment* dan hierarki visual.
+2. **Kesan Tidak Profesional**: Penggunaan emoji mentah yang marak memberi kesan *toy project* atau purwarupa terburu-buru, bukan produk enterprise WebGIS yang siap dipertandingkan.
+3. **Aksesibilitas (a11y) Buruk**: Pembaca layar (*screen reader*) membacakan label emoji secara harfiah sehingga mengaburkan konteks navigasi bagi penyandang disabilitas.
+
+### Alternatif Komponen yang Wajib Digunakan:
+1. **Lucide Icons (`lucide-react`)**:
+   - Default utama untuk ikon antarmuka TransitERA. Scalable, konsisten, ukuran terkontrol via class Tailwind (`w-4 h-4`, `w-3.5 h-3.5`).
+   - Panduan mapping:
+     - Feeder / Halte Bus: `<Bus className="w-4 h-4 text-emerald-400" />`
+     - Risiko Bahaya Banjir: `<CloudRain className="w-4 h-4 text-blue-400" />`
+     - Simpul Stasiun Transit: `<TrainFront className="w-4 h-4 text-sky-400" />` atau `<Navigation className="w-4 h-4" />`
+     - Radiansi Cahaya Malam (NTL) / AI: `<Sparkles className="w-4 h-4 text-amber-400" />`
+     - Titik Survei Lapangan: `<Eye className="w-4 h-4 text-cyan-400" />`
+     - Lokasi / Geometri: `<MapPin className="w-4 h-4 text-brand-lime" />`
+     - Metrik / Grafik: `<BarChart3 className="w-4 h-4" />` atau `<TrendingUp className="w-4 h-4" />`
+2. **shadcn/ui & Radix UI Primitives**:
+   - Gunakan komponen primitif accessible untuk interaksi kompleks:
+     - Status & Tag: Gunakan `<Badge variant="...">` daripada teks ber-emoji.
+     - Penjelasan fitur: Gunakan `<Tooltip>` dengan teks ringkas.
+     - Kontrol & Pilihan: Gunakan `<DropdownMenu>`, `<Tabs>`, `<Slider>`, `<Popover>`.
+3. **Mantine UI**:
+   - Gunakan komponen Mantine jika membutuhkan:
+     - Segmented Controls (`@mantine/core`) untuk selektor mode visualisasi.
+     - Data Tables / Advanced Grids untuk rekapitulasi data survei 360 titik.
+     - Notification Toasts yang bersih dan animasi halus.
+4. **SVG Vektor / Kartografi Khusus**:
+   - Untuk indikator popup MapLibre, buat elemen HTML dengan icon SVG inline atau styling badge CSS yang konsisten dengan tema Dark Mode TransitERA.
+
