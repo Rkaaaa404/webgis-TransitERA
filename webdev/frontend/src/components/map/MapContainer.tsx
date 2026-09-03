@@ -52,7 +52,19 @@ export const MapContainer: React.FC<MapContainerProps> = ({
   const [showTransitNodes, setShowTransitNodes] = useState(false);
   const [showFloodHazard, setShowFloodHazard] = useState(false);
   const [showNighttimeLight, setShowNighttimeLight] = useState(false);
+  const [surveyCount, setSurveyCount] = useState<number | null>(null);
+  const [transitCount, setTransitCount] = useState<number | null>(null);
+  const [floodCount, setFloodCount] = useState<number | null>(null);
+  const [ntlCount, setNtlCount] = useState<number | null>(null);
   const currentStyleRef = useRef<BasemapStyleKey>(basemapStyle);
+
+  // 0. Pre-fetch Dynamic Layer Counts
+  useEffect(() => {
+    fetchTransitNodes().then((d) => setTransitCount(d.features?.length ?? 125)).catch(() => setTransitCount(125));
+    fetchFloodHazard().then((d) => setFloodCount(d.features?.length ?? 1553)).catch(() => setFloodCount(1553));
+    fetchNighttimeLight().then((d) => setNtlCount(d.features?.length ?? 52)).catch(() => setNtlCount(52));
+    fetchMapidSurvey().then((d) => setSurveyCount(d.features?.length ?? 360)).catch(() => setSurveyCount(360));
+  }, []);
 
   // 1. Initialize MapLibre GL Map Instance
   useEffect(() => {
@@ -170,29 +182,102 @@ export const MapContainer: React.FC<MapContainerProps> = ({
     }
   }, [activePersona, isMapLoaded]);
 
-  // 2. Survey Points Layer
+  // 2. Survey Points Layer (#PakSibukGa 360 Titik)
   useEffect(() => {
     if (!mapRef.current || !isMapLoaded) return;
     const map = mapRef.current;
 
     if (showSurveyPoints) {
       fetchMapidSurvey().then((surveyData) => {
+        if (surveyData.features) {
+          setSurveyCount(surveyData.features.length);
+        }
+
         if (!map.getSource('survey-points-source')) {
           map.addSource('survey-points-source', {
             type: 'geojson',
             data: surveyData
           });
 
+          // Circle layer with dynamic category color-coding
           map.addLayer({
             id: 'survey-points-circle',
             type: 'circle',
             source: 'survey-points-source',
             paint: {
-              'circle-radius': 5,
-              'circle-color': '#4FC5C2',
+              'circle-radius': 5.5,
+              'circle-color': [
+                'match',
+                ['get', 'mission_subtype'],
+                'properti_go', '#10B981', // Emerald untuk Properti Go
+                'struk_go', '#F59E0B',    // Amber untuk Struk Go
+                'menu_go', '#8B5CF6',     // Violet untuk Menu Go
+                '#06B6D4'                 // Cyan untuk Activity
+              ],
               'circle-stroke-width': 1.5,
               'circle-stroke-color': '#ffffff'
             }
+          });
+
+          // Interactive Detail Popup on Click
+          map.on('click', 'survey-points-circle', (e) => {
+            const props = e.features?.[0]?.properties;
+            if (!props) return;
+
+            const isMission = props.survey_type === 'mission';
+            const badgeBg = isMission
+              ? (props.mission_subtype === 'properti_go' ? '#059669' : props.mission_subtype === 'struk_go' ? '#d97706' : '#7c3aed')
+              : '#0891b2';
+            const typeLabel = isMission
+              ? (props.mission_subtype === 'properti_go' ? 'Mission Properti Go' : props.mission_subtype === 'struk_go' ? 'Mission Struk Go' : 'Mission Menu Go')
+              : 'Community Activity';
+
+            const priceHtml = props.price_info && props.price_info !== 'N/A' && !props.price_info.includes('Fasilitas Publik')
+              ? `<div style="margin: 6px 0; padding: 4px 8px; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 6px; font-weight: 700; color: #b45309; font-size: 11px;">
+                   Informasi Nilai/Harga: ${props.price_info}
+                 </div>`
+              : '';
+
+            new maplibregl.Popup({ closeButton: true, maxWidth: '320px' })
+              .setLngLat(e.lngLat)
+              .setHTML(`
+                <div style="font-family: system-ui, -apple-system, sans-serif; padding: 6px 4px; font-size: 12px; color: #0f172a;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px;">
+                    <span style="background: ${badgeBg}; color: #ffffff; padding: 2px 7px; border-radius: 4px; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">
+                      ${typeLabel}
+                    </span>
+                    <span style="font-size: 10px; color: #64748b; font-weight: 600;">
+                      ${props.id || '#PakSibukGa'}
+                    </span>
+                  </div>
+
+                  <strong style="font-size: 13px; color: #0f172a; display: block; margin-top: 4px; line-height: 1.3;">
+                    ${props.title || 'Observasi Survei Lapangan'}
+                  </strong>
+
+                  <p style="margin: 4px 0 6px 0; color: #475569; font-size: 11px; line-height: 1.4;">
+                    ${props.description || 'Data survei primer koridor transit Surabaya.'}
+                  </p>
+
+                  ${priceHtml}
+
+                  <div style="margin-top: 6px; padding-top: 6px; border-top: 1px solid #e2e8f0; font-size: 10px; color: #64748b; display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
+                    <div><span style="font-weight: 600;">Zona:</span> ${props.zone ? props.zone.split(' ')[0] : 'Catchment'}</div>
+                    <div><span style="font-weight: 600;">Simpul:</span> ${(props.station_cluster || '').toUpperCase()}</div>
+                    <div><span style="font-weight: 600;">Surveyor:</span> ${props.user || '@surveyor'}</div>
+                    <div><span style="font-weight: 600;">Waktu:</span> ${(props.timestamp || '').split(' ')[1] || 'WIB'}</div>
+                  </div>
+                </div>
+              `)
+              .addTo(map);
+          });
+
+          // Pointer cursor on hover
+          map.on('mouseenter', 'survey-points-circle', () => {
+            map.getCanvas().style.cursor = 'pointer';
+          });
+          map.on('mouseleave', 'survey-points-circle', () => {
+            map.getCanvas().style.cursor = '';
           });
         } else {
           (map.getSource('survey-points-source') as maplibregl.GeoJSONSource).setData(surveyData);
@@ -453,6 +538,10 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                   onToggleFloodHazard={() => setShowFloodHazard((prev) => !prev)}
                   showNighttimeLight={showNighttimeLight}
                   onToggleNighttimeLight={() => setShowNighttimeLight((prev) => !prev)}
+                  surveyCount={surveyCount}
+                  transitCount={transitCount}
+                  floodCount={floodCount}
+                  ntlCount={ntlCount}
                   basemapStyle={basemapStyle}
                   onChangeBasemapStyle={(style) => {
                     onChangeBasemapStyle(style);

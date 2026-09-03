@@ -15,6 +15,10 @@ interface LayerControlProps {
   onToggleFloodHazard?: () => void;
   showNighttimeLight?: boolean;
   onToggleNighttimeLight?: () => void;
+  surveyCount?: number | null;
+  transitCount?: number | null;
+  floodCount?: number | null;
+  ntlCount?: number | null;
   basemapStyle: BasemapStyleKey;
   onChangeBasemapStyle: (style: BasemapStyleKey) => void;
   onClose?: () => void;
@@ -31,6 +35,10 @@ export const LayerControl: React.FC<LayerControlProps> = ({
   onToggleFloodHazard,
   showNighttimeLight = false,
   onToggleNighttimeLight,
+  surveyCount,
+  transitCount,
+  floodCount,
+  ntlCount,
   basemapStyle,
   onChangeBasemapStyle,
   onClose
@@ -147,7 +155,7 @@ export const LayerControl: React.FC<LayerControlProps> = ({
             Survei Lapangan
           </span>
           <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-800 text-slate-300">
-            360 Titik
+            {typeof surveyCount === 'number' ? `${surveyCount.toLocaleString('id-ID')} Titik` : '360 Titik'}
           </span>
         </button>
 
@@ -165,7 +173,7 @@ export const LayerControl: React.FC<LayerControlProps> = ({
               Halte Feeder &amp; Bus
             </span>
             <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-800 text-slate-300">
-              125 Titik
+              {typeof transitCount === 'number' ? `${transitCount.toLocaleString('id-ID')} Titik` : '125 Titik'}
             </span>
           </button>
         )}
@@ -184,7 +192,7 @@ export const LayerControl: React.FC<LayerControlProps> = ({
               Zona Kerentanan Banjir
             </span>
             <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-800 text-slate-300">
-              1.553 Zona
+              {typeof floodCount === 'number' ? `${floodCount.toLocaleString('id-ID')} Zona` : '1.553 Zona'}
             </span>
           </button>
         )}
@@ -203,7 +211,7 @@ export const LayerControl: React.FC<LayerControlProps> = ({
               Cahaya Malam (NTL)
             </span>
             <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-800 text-slate-300">
-              52 Zona
+              {typeof ntlCount === 'number' ? `${ntlCount.toLocaleString('id-ID')} Zona` : '52 Zona'}
             </span>
           </button>
         )}
