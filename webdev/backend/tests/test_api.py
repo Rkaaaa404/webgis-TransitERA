@@ -267,3 +267,44 @@ async def test_simulate_invalid_station(client):
     }
     response = await client.post("/api/simulate", json=payload)
     assert response.status_code == 422  # Enum validation
+
+
+# ---------------------------------------------------------------------------
+# Spatial Map Layers Endpoints
+# ---------------------------------------------------------------------------
+
+@pytest.mark.asyncio
+async def test_get_transit_nodes_layer(client):
+    response = await client.get("/api/layers/transit-nodes")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["type"] == "FeatureCollection"
+    assert len(data["features"]) == 125  # 125 halte bus/feeder
+
+
+@pytest.mark.asyncio
+async def test_get_flood_hazard_layer(client):
+    response = await client.get("/api/layers/flood-hazard")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["type"] == "FeatureCollection"
+    assert len(data["features"]) > 1000  # 1.553 zona banjir
+
+
+@pytest.mark.asyncio
+async def test_get_nighttime_light_layer(client):
+    response = await client.get("/api/layers/nighttime-light")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["type"] == "FeatureCollection"
+    assert len(data["features"]) == 52  # 52 zona NTL
+
+
+@pytest.mark.asyncio
+async def test_get_stations_layer(client):
+    response = await client.get("/api/layers/stations")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["type"] == "FeatureCollection"
+    assert len(data["features"]) == 17  # 17 stasiun Surabaya
+

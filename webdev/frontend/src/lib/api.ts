@@ -238,10 +238,11 @@ export async function fetchStations(): Promise<StationData[]> {
         const enriched = FALLBACK_STATIONS.find(s => s.id === summary.id);
         return {
           ...summary,
-          // Keep backend as source-of-truth for core fields
-          scores: summary.scores,
-          njop_premium: enriched?.njop_premium ?? summary.njop_premium,
-          policy_recommendations: enriched?.policy_recommendations ?? [],
+          // Keep backend as source-of-truth for core fields, with robust fallback
+          scores: summary.scores ?? enriched?.scores ?? { density: 50, diversity: 50, design: 50, destination_accessibility: 50, distance_to_transit: 50 },
+          benchmark_scores: summary.benchmark_scores ?? enriched?.benchmark_scores ?? { density: 50, diversity: 50, design: 50, destination_accessibility: 50, distance_to_transit: 50 },
+          njop_premium: enriched?.njop_premium ?? summary.njop_premium ?? { avg_njop_premium_pct: 0, ci_lower_pct: 0, ci_upper_pct: 0, affected_h3_count: 0, r_squared: 0, direct_effect_pct: 0, spillover_effect_pct: 0 },
+          policy_recommendations: enriched?.policy_recommendations ?? summary.policy_recommendations ?? [],
           // Frontend-only enrichment
           menu_go_recommendations: enriched?.menu_go_recommendations ?? [],
           tenant_mix: enriched?.tenant_mix ?? [],
@@ -578,4 +579,45 @@ function localAIResponder(prompt: string, activeStation?: StationId) {
     }
   };
 }
+
+export async function fetchTransitNodes(): Promise<any> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/layers/transit-nodes`);
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('fetchTransitNodes failed:', err);
+  }
+  return { type: 'FeatureCollection', features: [] };
+}
+
+export async function fetchFloodHazard(): Promise<any> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/layers/flood-hazard`);
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('fetchFloodHazard failed:', err);
+  }
+  return { type: 'FeatureCollection', features: [] };
+}
+
+export async function fetchNighttimeLight(): Promise<any> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/layers/nighttime-light`);
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('fetchNighttimeLight failed:', err);
+  }
+  return { type: 'FeatureCollection', features: [] };
+}
+
+export async function fetchStationsLayer(): Promise<any> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/layers/stations`);
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('fetchStationsLayer failed:', err);
+  }
+  return { type: 'FeatureCollection', features: [] };
+}
+
 

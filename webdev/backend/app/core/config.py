@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     # Secrets & External APIs
     MAPID_API_KEY: str = os.getenv("MAPID_API_KEY", "")
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
+    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
     
     # Surabaya Geo Bounding Box
     SURABAYA_BBOX: dict = {

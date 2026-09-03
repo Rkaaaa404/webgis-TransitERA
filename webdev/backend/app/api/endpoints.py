@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, Query, Request, Depends
 from typing import List, Optional, Dict, Any
+import os
 import logging
 import json
 import numpy as np
@@ -242,6 +243,51 @@ async def seed_postgis_database(
     lengkap dengan atribut 5D TOD dan geometri EPSG:4326 ke PostGIS.
     """
     return seed_database(db, force=force)
+
+
+# ---------------------------------------------------------------------------
+# Spatial Map Layers (Halte Feeder, Banjir, NTL, Stasiun Surabaya)
+# ---------------------------------------------------------------------------
+
+_SPATIAL_LAYERS_CACHE: Dict[str, Any] = {}
+
+def _load_spatial_layer(filename: str) -> Dict[str, Any]:
+    if filename not in _SPATIAL_LAYERS_CACHE:
+        layer_path = os.path.join(os.path.dirname(__file__), "..", "data", "spatial", filename)
+        if os.path.exists(layer_path):
+            try:
+                with open(layer_path, "r", encoding="utf-8") as f:
+                    _SPATIAL_LAYERS_CACHE[filename] = json.load(f)
+            except Exception as e:
+                logger.error(f"Gagal memuat layer {filename}: {e}")
+                _SPATIAL_LAYERS_CACHE[filename] = {"type": "FeatureCollection", "features": []}
+        else:
+            _SPATIAL_LAYERS_CACHE[filename] = {"type": "FeatureCollection", "features": []}
+    return _SPATIAL_LAYERS_CACHE[filename]
+
+
+@router.get("/layers/transit-nodes")
+async def get_transit_nodes_layer():
+    """Mengambil GeoJSON 125 Halte Bus & Feeder Kota Surabaya untuk visualisasi konektivitas first/last-mile."""
+    return _load_spatial_layer("halte_surabaya.geojson")
+
+
+@router.get("/layers/flood-hazard")
+async def get_flood_hazard_layer():
+    """Mengambil GeoJSON 1.553 zona kerentanan dan bahaya banjir Kota Surabaya."""
+    return _load_spatial_layer("banjir_surabaya.geojson")
+
+
+@router.get("/layers/nighttime-light")
+async def get_nighttime_light_layer():
+    """Mengambil GeoJSON 52 zona intensitas cahaya malam (NTL) Kota Surabaya."""
+    return _load_spatial_layer("nighttime_light_surabaya.geojson")
+
+
+@router.get("/layers/stations")
+async def get_stations_layer():
+    """Mengambil GeoJSON 17 simpul stasiun kereta api aktif di wilayah Surabaya Raya."""
+    return _load_spatial_layer("stasiun_surabaya.geojson")
 
 
 # ---------------------------------------------------------------------------

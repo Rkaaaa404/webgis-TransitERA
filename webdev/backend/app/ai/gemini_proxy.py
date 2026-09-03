@@ -12,10 +12,9 @@ logger = logging.getLogger(__name__)
 
 _DUMMY_KEYS = {"", "dummy", "your_gemini_api_key_here"}
 
-GEMINI_URL = (
-    "https://generativelanguage.googleapis.com/v1beta"
-    "/models/gemini-1.5-flash:generateContent"
-)
+def get_gemini_url() -> str:
+    model = getattr(settings, "GEMINI_MODEL", "gemini-1.5-flash")
+    return f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 
 SYSTEM_INSTRUCTION = (
     "Anda adalah Asisten Spasial AI untuk TransitERA WebGIS di Surabaya. "
@@ -107,7 +106,7 @@ async def process_ai_query(request: AIQueryRequest) -> AIResponse:
             }
             async with httpx.AsyncClient(timeout=10.0) as client:
                 resp = await client.post(
-                    f"{GEMINI_URL}?key={api_key}",
+                    f"{get_gemini_url()}?key={api_key}",
                     json=payload,
                 )
 

@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as maplibregl from 'maplibre-gl';
 import { StationId } from '@/types';
 import { BASEMAP_STYLES, SURABAYA_DEFAULT_ZOOM } from '@/lib/mapid';
-import { FALLBACK_STATIONS, fetchMapidSurvey } from '@/lib/api';
+import { FALLBACK_STATIONS, fetchMapidSurvey, fetchTransitNodes, fetchFloodHazard, fetchNighttimeLight } from '@/lib/api';
 import { ChoroplethMode, BasemapStyleKey, LayerControl } from './LayerControl';
 import { PersonaType } from '@/lib/persona';
 import { Layers } from 'lucide-react';
@@ -49,6 +49,9 @@ export const MapContainer: React.FC<MapContainerProps> = ({
   const mapRef = useRef<maplibregl.Map | null>(null);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
   const [isLayerControlOpen, setIsLayerControlOpen] = useState(false);
+  const [showTransitNodes, setShowTransitNodes] = useState(false);
+  const [showFloodHazard, setShowFloodHazard] = useState(false);
+  const [showNighttimeLight, setShowNighttimeLight] = useState(false);
   const currentStyleRef = useRef<BasemapStyleKey>(basemapStyle);
 
   // 1. Initialize MapLibre GL Map Instance
@@ -197,6 +200,154 @@ export const MapContainer: React.FC<MapContainerProps> = ({
     }
   }, [showSurveyPoints, isMapLoaded]);
 
+  // 2.1 Halte Bus & Feeder Layer
+  useEffect(() => {
+    if (!mapRef.current || !isMapLoaded) return;
+    const map = mapRef.current;
+
+    if (showTransitNodes) {
+      fetchTransitNodes().then((data) => {
+        if (!map.getSource('transit-nodes-source')) {
+          map.addSource('transit-nodes-source', { type: 'geojson', data });
+          map.addLayer({
+            id: 'transit-nodes-circle',
+            type: 'circle',
+            source: 'transit-nodes-source',
+            paint: {
+              'circle-radius': 5,
+              'circle-color': '#10B981',
+              'circle-stroke-width': 1.5,
+              'circle-stroke-color': '#ffffff'
+            }
+          });
+
+          map.on('click', 'transit-nodes-circle', (e) => {
+            const props = e.features?.[0]?.properties;
+            if (!props) return;
+            new maplibregl.Popup()
+              .setLngLat(e.lngLat)
+              .setHTML(`
+                <div style="font-family: sans-serif; padding: 4px; font-size: 12px;">
+                  <strong style="color: #059669;">🚏 ${props.NAMA || 'Halte Bus'}</strong><br/>
+                  <span style="color: #4b5563; font-size: 11px;">${props.ALAMAT || 'Kota Surabaya'}</span>
+                </div>
+              `)
+              .addTo(map);
+          });
+        } else {
+          (map.getSource('transit-nodes-source') as maplibregl.GeoJSONSource).setData(data);
+          if (map.getLayer('transit-nodes-circle')) {
+            map.setLayoutProperty('transit-nodes-circle', 'visibility', 'visible');
+          }
+        }
+      });
+    } else {
+      if (map.getLayer('transit-nodes-circle')) {
+        map.setLayoutProperty('transit-nodes-circle', 'visibility', 'none');
+      }
+    }
+  }, [showTransitNodes, isMapLoaded]);
+
+  // 2.2 Flood Hazard Vulnerability Layer
+  useEffect(() => {
+    if (!mapRef.current || !isMapLoaded) return;
+    const map = mapRef.current;
+
+    if (showFloodHazard) {
+      fetchFloodHazard().then((data) => {
+        if (!map.getSource('flood-hazard-source')) {
+          map.addSource('flood-hazard-source', { type: 'geojson', data });
+          map.addLayer({
+            id: 'flood-hazard-fill',
+            type: 'fill',
+            source: 'flood-hazard-source',
+            paint: {
+              'fill-color': '#3B82F6',
+              'fill-opacity': 0.35
+            }
+          });
+          map.addLayer({
+            id: 'flood-hazard-line',
+            type: 'line',
+            source: 'flood-hazard-source',
+            paint: {
+              'line-color': '#2563EB',
+              'line-width': 1
+            }
+          });
+
+          map.on('click', 'flood-hazard-fill', (e) => {
+            const props = e.features?.[0]?.properties;
+            if (!props) return;
+            new maplibregl.Popup()
+              .setLngLat(e.lngLat)
+              .setHTML(`
+                <div style="font-family: sans-serif; padding: 4px; font-size: 12px;">
+                  <strong style="color: #2563EB;">🌊 Zona Risiko Genangan Banjir</strong><br/>
+                  <span style="font-size: 11px;">Tingkat Kerentanan: ${props.Kelas || 'Terancam Banjir'}</span>
+                </div>
+              `)
+              .addTo(map);
+          });
+        } else {
+          (map.getSource('flood-hazard-source') as maplibregl.GeoJSONSource).setData(data);
+          if (map.getLayer('flood-hazard-fill')) {
+            map.setLayoutProperty('flood-hazard-fill', 'visibility', 'visible');
+            map.setLayoutProperty('flood-hazard-line', 'visibility', 'visible');
+          }
+        }
+      });
+    } else {
+      if (map.getLayer('flood-hazard-fill')) {
+        map.setLayoutProperty('flood-hazard-fill', 'visibility', 'none');
+        map.setLayoutProperty('flood-hazard-line', 'visibility', 'none');
+      }
+    }
+  }, [showFloodHazard, isMapLoaded]);
+
+  // 2.3 Nighttime Light (NTL) Economic Radiance Layer
+  useEffect(() => {
+    if (!mapRef.current || !isMapLoaded) return;
+    const map = mapRef.current;
+
+    if (showNighttimeLight) {
+      fetchNighttimeLight().then((data) => {
+        if (!map.getSource('ntl-source')) {
+          map.addSource('ntl-source', { type: 'geojson', data });
+          map.addLayer({
+            id: 'ntl-fill',
+            type: 'fill',
+            source: 'ntl-source',
+            paint: {
+              'fill-color': '#F59E0B',
+              'fill-opacity': 0.28
+            }
+          });
+          map.addLayer({
+            id: 'ntl-line',
+            type: 'line',
+            source: 'ntl-source',
+            paint: {
+              'line-color': '#D97706',
+              'line-width': 1
+            }
+          });
+        } else {
+          (map.getSource('ntl-source') as maplibregl.GeoJSONSource).setData(data);
+          if (map.getLayer('ntl-fill')) {
+            map.setLayoutProperty('ntl-fill', 'visibility', 'visible');
+            map.setLayoutProperty('ntl-line', 'visibility', 'visible');
+          }
+        }
+      });
+    } else {
+      if (map.getLayer('ntl-fill')) {
+        map.setLayoutProperty('ntl-fill', 'visibility', 'none');
+        map.setLayoutProperty('ntl-line', 'visibility', 'none');
+      }
+    }
+  }, [showNighttimeLight, isMapLoaded]);
+
   // 2.5 Dynamic Basemap Style Switch
   useEffect(() => {
     if (!mapRef.current || currentStyleRef.current === basemapStyle) return;
@@ -282,6 +433,12 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                   }}
                   showSurveyPoints={showSurveyPoints}
                   onToggleSurveyPoints={onToggleSurveyPoints}
+                  showTransitNodes={showTransitNodes}
+                  onToggleTransitNodes={() => setShowTransitNodes((prev) => !prev)}
+                  showFloodHazard={showFloodHazard}
+                  onToggleFloodHazard={() => setShowFloodHazard((prev) => !prev)}
+                  showNighttimeLight={showNighttimeLight}
+                  onToggleNighttimeLight={() => setShowNighttimeLight((prev) => !prev)}
                   basemapStyle={basemapStyle}
                   onChangeBasemapStyle={(style) => {
                     onChangeBasemapStyle(style);

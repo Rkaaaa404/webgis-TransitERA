@@ -1,7 +1,5 @@
-'use client';
-
 import React from 'react';
-import { Layers, Eye, Map, Check, X } from 'lucide-react';
+import { Layers, Eye, Map, Check, X, Bus, CloudRain, Sparkles } from 'lucide-react';
 
 export type ChoroplethMode = 'tod_score' | 'njop_premium' | 'typology';
 export type BasemapStyleKey = 'street' | 'street-2d' | 'dark' | 'light' | 'satellite';
@@ -11,6 +9,12 @@ interface LayerControlProps {
   onChangeChoroplethMode: (mode: ChoroplethMode) => void;
   showSurveyPoints: boolean;
   onToggleSurveyPoints: () => void;
+  showTransitNodes?: boolean;
+  onToggleTransitNodes?: () => void;
+  showFloodHazard?: boolean;
+  onToggleFloodHazard?: () => void;
+  showNighttimeLight?: boolean;
+  onToggleNighttimeLight?: () => void;
   basemapStyle: BasemapStyleKey;
   onChangeBasemapStyle: (style: BasemapStyleKey) => void;
   onClose?: () => void;
@@ -21,6 +25,12 @@ export const LayerControl: React.FC<LayerControlProps> = ({
   onChangeChoroplethMode,
   showSurveyPoints,
   onToggleSurveyPoints,
+  showTransitNodes = false,
+  onToggleTransitNodes,
+  showFloodHazard = false,
+  onToggleFloodHazard,
+  showNighttimeLight = false,
+  onToggleNighttimeLight,
   basemapStyle,
   onChangeBasemapStyle,
   onClose
@@ -118,8 +128,12 @@ export const LayerControl: React.FC<LayerControlProps> = ({
         </div>
       </div>
 
-      {/* Survey Layer Toggle */}
-      <div>
+      {/* Overlay Layers Toggle */}
+      <div className="space-y-1">
+        <div className="text-[10px] uppercase font-semibold text-slate-400 mb-1">
+          Layer Spasial Tematik
+        </div>
+
         <button
           onClick={onToggleSurveyPoints}
           className={`w-full py-1.5 px-2 rounded-lg text-[11px] font-medium flex items-center justify-between border transition-all ${
@@ -130,12 +144,69 @@ export const LayerControl: React.FC<LayerControlProps> = ({
         >
           <span className="flex items-center gap-1.5">
             <Eye className="w-3.5 h-3.5" />
-            Survei Lapangan #PakSibukGa
+            Survei Lapangan
           </span>
           <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-800 text-slate-300">
             360 Titik
           </span>
         </button>
+
+        {onToggleTransitNodes && (
+          <button
+            onClick={onToggleTransitNodes}
+            className={`w-full py-1.5 px-2 rounded-lg text-[11px] font-medium flex items-center justify-between border transition-all ${
+              showTransitNodes
+                ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300 font-bold'
+                : 'bg-slate-950/40 border-slate-800 text-slate-400 hover:text-slate-300'
+            }`}
+          >
+            <span className="flex items-center gap-1.5">
+              <Bus className="w-3.5 h-3.5" />
+              Halte Feeder &amp; Bus
+            </span>
+            <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-800 text-slate-300">
+              125 Titik
+            </span>
+          </button>
+        )}
+
+        {onToggleFloodHazard && (
+          <button
+            onClick={onToggleFloodHazard}
+            className={`w-full py-1.5 px-2 rounded-lg text-[11px] font-medium flex items-center justify-between border transition-all ${
+              showFloodHazard
+                ? 'bg-blue-500/20 border-blue-500/50 text-blue-300 font-bold'
+                : 'bg-slate-950/40 border-slate-800 text-slate-400 hover:text-slate-300'
+            }`}
+          >
+            <span className="flex items-center gap-1.5">
+              <CloudRain className="w-3.5 h-3.5" />
+              Zona Kerentanan Banjir
+            </span>
+            <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-800 text-slate-300">
+              1.553 Zona
+            </span>
+          </button>
+        )}
+
+        {onToggleNighttimeLight && (
+          <button
+            onClick={onToggleNighttimeLight}
+            className={`w-full py-1.5 px-2 rounded-lg text-[11px] font-medium flex items-center justify-between border transition-all ${
+              showNighttimeLight
+                ? 'bg-amber-500/20 border-amber-500/50 text-amber-300 font-bold'
+                : 'bg-slate-950/40 border-slate-800 text-slate-400 hover:text-slate-300'
+            }`}
+          >
+            <span className="flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5" />
+              Cahaya Malam (NTL)
+            </span>
+            <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-800 text-slate-300">
+              52 Zona
+            </span>
+          </button>
+        )}
       </div>
 
       {/* Dynamic Color Ramp Legend */}

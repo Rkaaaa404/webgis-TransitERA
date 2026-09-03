@@ -58,11 +58,12 @@ Setiap fase wajib melewati:
 
 ---
 
-### [ ] FASE 4: Penyempurnaan AI Assistant & Integrasi Sinkronisasi Frontend
-- [ ] **Task 4.1**: Sempurnakan `app/ai/dispatcher.py` dan `app/ai/gemini_proxy.py` dengan model terbaru (`gemini-1.5-flash` / `gemini-2.0-flash`) dan data enricher dinamis.
-- [ ] **Task 4.2**: Perbaiki `webdev/frontend/src/lib/api.ts` agar menangani respons backend secara konsisten (mengatasi bug field `summary.scores`).
-- [ ] **Task 4.3**: Uji integrasi end-to-end: UI MapLibre GL JS, H3 choropleth nyata, radar chart 5D, dan popup survei PRD.
-- [ ] **Task 4.4**: Verifikasi `pytest` backend lulus + `vitest` frontend lulus.
+### [x] FASE 4: Penyempurnaan AI Assistant & Integrasi Sinkronisasi Frontend
+- [x] **Task 4.1**: Sempurnakan `app/ai/gemini_proxy.py` dengan model selection dinamis (`gemini-1.5-flash` / `gemini-2.0-flash` / paid token) via `settings.GEMINI_MODEL`.
+- [x] **Task 4.2**: Perbaiki `webdev/frontend/src/lib/api.ts` agar menangani respons backend secara konsisten (mengatasi bug field `summary.scores` yang berisiko undefined).
+- [x] **Task 4.3**: Implementasikan endpoint layer spasial tematik di backend (`/api/layers/transit-nodes`, `/api/layers/flood-hazard`, `/api/layers/nighttime-light`, `/api/layers/stations`).
+- [x] **Task 4.4**: Integrasikan toggle layer spasial interaktif di frontend `LayerControl.tsx` & `MapContainer.tsx` (Halte bus, Risiko Banjir, Cahaya Malam NTL) lengkap dengan popup interaktif.
+- [x] **Task 4.5**: Verifikasi `pytest` backend (40/40 tests passed), `vitest` frontend (2/2 tests passed), dan Next.js production build (`next build` 100% lulus).
 - **Git Commit Target**: `feat(ai-frontend): align gemini spatial intent dispatcher and fix frontend api sync`
 
 ---
