@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as maplibregl from 'maplibre-gl';
 import { StationId } from '@/types';
-import { BASEMAP_STYLES, SURABAYA_DEFAULT_ZOOM } from '@/lib/mapid';
+import { BASEMAP_STYLES, FALLBACK_BASEMAP_STYLES, SURABAYA_DEFAULT_ZOOM } from '@/lib/mapid';
 import { FALLBACK_STATIONS, fetchMapidSurvey, fetchTransitNodes, fetchFloodHazard, fetchNighttimeLight } from '@/lib/api';
 import { ChoroplethMode, BasemapStyleKey, LayerControl } from './LayerControl';
 import { PersonaType } from '@/lib/persona';
@@ -74,6 +74,14 @@ export const MapContainer: React.FC<MapContainerProps> = ({
 
     map.on('error', (e) => {
       console.error('MAPLIBRE ERROR:', e.error || e);
+      const errStr = String(e.error?.message || e.error || '');
+      if (errStr.includes('401') || errStr.includes('Failed to fetch') || errStr.includes('Forbidden')) {
+        const fallback = FALLBACK_BASEMAP_STYLES[basemapStyle] || FALLBACK_BASEMAP_STYLES.street;
+        console.warn('MapLibre: Auto-switching to reliable fallback style:', fallback);
+        try {
+          map.setStyle(fallback);
+        } catch {}
+      }
     });
 
     // Suppress console spam: provide a silent 1x1 transparent fallback
