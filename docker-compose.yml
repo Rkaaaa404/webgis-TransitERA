@@ -1,0 +1,54 @@
+services:
+  # 1. PostGIS Database Service
+  postgis:
+    image: postgis/postgis:16-3.4-alpine
+    container_name: transitera-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: transitera
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-transitera_secure_2026}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgis_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d transitera"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # 2. FastAPI Backend Engine
+  backend:
+    build:
+      context: ./webdev/backend
+      dockerfile: Dockerfile
+    container_name: transitera-backend
+    restart: unless-stopped
+    depends_on:
+      postgis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://postgres:${DB_PASSWORD:-transitera_secure_2026}@postgis:5432/transitera
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-1.5-flash}
+      MAPID_API_KEY: ${MAPID_API_KEY:-}
+    ports:
+      - "8000:8000"
+
+  # 3. Next.js Frontend WebGIS
+  frontend:
+    build:
+      context: ./webdev/frontend
+      dockerfile: Dockerfile
+    container_name: transitera-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_BACKEND_URL: ${NEXT_PUBLIC_BACKEND_URL:-http://localhost:8000/api}
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgis_data:

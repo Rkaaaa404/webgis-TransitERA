@@ -68,10 +68,11 @@ Setiap fase wajib melewati:
 
 ---
 
-### [ ] FASE 5: Konfigurasi Deployment Free Tier / Student & Dokumentasi Lengkap
-- [ ] **Task 5.1**: Siapkan konfigurasi deployment: `vercel.json`, Dockerfile backend teroptimasi (multistage slim), serta panduan langkah demi langkah setup Supabase & Azure for Students.
-- [ ] **Task 5.2**: Buat dokumen panduan deployment komprehensif di `docs/DEPLOYMENT_GUIDE.md` yang merinci cara klaim GitHub Student Developer Pack bagi mahasiswa ITS dan konfigurasi env production.
-- [ ] **Task 5.3**: Jalankan security scan (`scripts/scan-secrets.js`) dan verifikasi sanitasi API key.
+### [x] FASE 5: Konfigurasi Deployment Free Tier / Student & Dokumentasi Lengkap
+- [x] **Task 5.1**: Siapkan konfigurasi deployment: `webdev/frontend/vercel.json`, `webdev/backend/Dockerfile` (*multistage slim*), `docker-compose.yml`, dan panduan setup Supabase PostGIS.
+- [x] **Task 5.2**: Buat dokumen panduan deployment komprehensif di `docs/DEPLOYMENT_GUIDE.md` yang merinci cara klaim GitHub Student Developer Pack & Azure for Students bagi mahasiswa ITS, free custom domain, dan konfigurasi env production.
+- [x] **Task 5.3**: Jalankan security scan (`scripts/scan_secrets.py`) dan verifikasi sanitasi API key (100% Bersih).
+- [x] **Task 5.4**: Sediakan skrip `scripts/sync_deploy_branch.py` untuk isolasi otomatis branch produksi `deploy` yang bersih dari file konteks internal.
 - **Git Commit Target**: `chore(deploy): add deployment configs for vercel supabase and student cloud guide`
 
 ---
