@@ -21,8 +21,12 @@ sqlalchemy>=2.0.0
 geoalchemy2>=0.14.0
 psycopg2-binary>=2.9.0
 
-# Spatial / H3
+# Spatial & Machine Learning (AI / PCA / H3)
 numpy>=1.26.0
+scipy>=1.12.0
+scikit-learn>=1.4.0
+shapely>=2.0.0
+joblib>=1.3.0
 h3>=3.7.6
 
 # Rate limiting

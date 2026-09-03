@@ -4,57 +4,30 @@ import h3
 
 def classify_tod_typology(scores: Dict[str, float]) -> Dict[str, Any]:
     """
-    Klasifikasi Tipologi Kawasan TOD berbasis Multi-Criteria Spatial Indicators
-    (Density, Diversity, Design, Destination, Distance).
-    
-    Tipologi Resmi:
-    1. Commercial Transit Hub (Skor TOD >= 78, Diversity >= 80)
-    2. Mixed-Use Heritage Core (Skor TOD >= 70, Diversity >= 75)
-    3. Mixed-Use Residential Area (Skor TOD >= 70, Distance >= 80)
-    4. Low-Accessibility Feeder Zone (Skor TOD < 70 atau Design < 55)
+    Klasifikasi Tipologi Kawasan TOD berbasis Machine Learning riil (StandardScaler -> PCA -> Random Forest)
+    dan Multi-Criteria Spatial Indicators (Density, Diversity, Design, Destination, Distance).
     """
-    tod = scores.get("tod_readiness_score", 0.0)
-    if tod == 0.0:
-        tod = (
-            scores.get("density", 50) * 0.25 +
-            scores.get("diversity", 50) * 0.22 +
-            scores.get("design", 50) * 0.18 +
-            scores.get("destination_accessibility", 50) * 0.18 +
-            scores.get("distance_to_transit", 50) * 0.17
-        )
+    from app.analytics.typology_classifier import predict_tod_typology_ml
 
+    density = scores.get("density", 50.0)
     diversity = scores.get("diversity", 50.0)
-    distance = scores.get("distance_to_transit", 50.0)
     design = scores.get("design", 50.0)
+    destination = scores.get("destination_accessibility", 50.0)
+    distance = scores.get("distance_to_transit", 50.0)
 
-    if tod >= 78.0 and diversity >= 80.0:
-        typology = "Commercial Transit Hub"
-        confidence = 0.94
-        description = "Pusat aktivitas komersial transit berkepadatan tinggi dengan daya tarik koridor utama."
-        zoning_advice = "Terapkan insentif FAR bonus dan penataan koridor komersial pejalan kaki berkanopi."
-    elif tod >= 70.0 and diversity >= 75.0 and design < 65.0:
-        typology = "Mixed-Use Heritage Core"
-        confidence = 0.88
-        description = "Kawasan cagar budaya & perdagangan campuran dengan akses transit tinggi namun butuh revitalisasi pedestrian."
-        zoning_advice = "Preservasi fasad bangunan bersejarah terintegrasi rute feeder micro-mobility."
-    elif tod >= 70.0:
-        typology = "Mixed-Use Residential Area"
-        confidence = 0.91
-        description = "Kawasan hunian campuran padat yang terhubung kuat dengan stasiun commuter."
-        zoning_advice = "Kembangkan integrasi transfer antarmoda mikrolet dan penyediaan park & ride terpadu."
-    else:
-        typology = "Low-Accessibility Feeder Zone"
-        confidence = 0.85
-        description = "Zona pengumpan pinggiran dengan keterbatasan konektivitas first/last-mile."
-        zoning_advice = "Prioritaskan ekspansi trayek feeder WiraWiri dan pembangunan trotoar primer."
+    # Estimasi proksi fitur spasial aktual dari indikator 5D
+    pop_est = 3000.0 + (density / 100.0) * 18000.0
+    ntl = 20.0 + (diversity / 100.0) * 45.0
+    feeder_count = max(0, int((design / 100.0) * 7))
+    dist_km = max(0.05, round((1.0 - (distance / 100.0)) * 1.5, 2))
 
-    return {
-        "typology": typology,
-        "confidence": confidence,
-        "tod_score": round(tod, 1),
-        "description": description,
-        "zoning_advice": zoning_advice
-    }
+    return predict_tod_typology_ml(
+        pop_estimate=pop_est,
+        ntl_radiance=ntl,
+        feeder_halte_count=feeder_count,
+        distance_to_station_km=dist_km,
+        scores_5d=scores
+    )
 
 
 def get_station_h3_cell(lat: float, lon: float, resolution: int = 9) -> str:
