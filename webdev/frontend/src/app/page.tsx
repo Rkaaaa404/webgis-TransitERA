@@ -3,11 +3,13 @@
 import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { motion, useScroll, useTransform, useMotionValueEvent, useReducedMotion } from 'framer-motion';
 
 import { Menu, X } from 'lucide-react';
 
 export default function LandingPage() {
+  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
@@ -246,9 +248,14 @@ export default function LandingPage() {
             viewport={{ once: true, amount: 0.1 }}
           >
             {/* Government */}
-            <motion.div variants={cardVars} className="group relative rounded-3xl overflow-hidden bg-surface-container h-[280px] sm:h-[340px] lg:h-[400px] transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-900/40">
-              <Image alt="Government Urban Planning" className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500" src="/assets/landing/a_high_tech_futuristic_aerial_view_of_a_smart_city_transit_corridor_in_surabaya.png" fill sizes="(max-width: 768px) 100vw, 33vw" />
+            <motion.div 
+              variants={cardVars} 
+              onClick={() => router.push('/map')}
+              className="group relative rounded-3xl overflow-hidden bg-surface-container border border-white/10 hover:border-white/40 h-[280px] sm:h-[340px] lg:h-[400px] transition-all duration-300 hover:-translate-y-2 shadow-lg hover:shadow-[0_20px_50px_rgba(255,255,255,0.22)] cursor-pointer"
+            >
+              <Image alt="Government Urban Planning" className="object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500" src="/assets/landing/a_high_tech_futuristic_aerial_view_of_a_smart_city_transit_corridor_in_surabaya.png" fill sizes="(max-width: 768px) 100vw, 33vw" />
               <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/80 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-white/15 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl" />
               <div className="absolute bottom-0 left-0 p-6 lg:p-8">
                 <span className="px-3 py-1 rounded-full bg-surface-container/80 text-on-surface border border-surface-container-highest text-xs font-semibold mb-4 inline-block backdrop-blur-sm">Government</span>
                 <h3 className="text-2xl font-bold text-white mb-2">Policy &amp; Planning</h3>
@@ -257,9 +264,14 @@ export default function LandingPage() {
             </motion.div>
 
             {/* Business */}
-            <motion.div variants={cardVars} className="group relative rounded-3xl overflow-hidden bg-surface-container h-[280px] sm:h-[340px] lg:h-[400px] transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-lime/20">
-              <Image alt="Business Retail Area" className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500" src="/assets/landing/a_futuristic_tech_enabled_retail_shopping_district_near_a_transit_hub._subtle.png" fill sizes="(max-width: 768px) 100vw, 33vw" />
+            <motion.div 
+              variants={cardVars} 
+              onClick={() => router.push('/map')}
+              className="group relative rounded-3xl overflow-hidden bg-surface-container border border-white/10 hover:border-white/40 h-[280px] sm:h-[340px] lg:h-[400px] transition-all duration-300 hover:-translate-y-2 shadow-lg hover:shadow-[0_20px_50px_rgba(255,255,255,0.22)] cursor-pointer"
+            >
+              <Image alt="Business Retail Area" className="object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500" src="/assets/landing/a_futuristic_tech_enabled_retail_shopping_district_near_a_transit_hub._subtle.png" fill sizes="(max-width: 768px) 100vw, 33vw" />
               <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/80 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-white/15 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl" />
               <div className="absolute bottom-0 left-0 p-6 lg:p-8">
                 <span className="px-3 py-1 rounded-full bg-brand-lime/20 text-brand-lime border border-brand-lime/30 text-xs font-semibold mb-4 inline-block backdrop-blur-sm">Business &amp; Investor</span>
                 <h3 className="text-2xl font-bold text-white mb-2">Commercial Viability</h3>
@@ -268,9 +280,14 @@ export default function LandingPage() {
             </motion.div>
 
             {/* Commuter */}
-            <motion.div variants={cardVars} className="group relative rounded-3xl overflow-hidden bg-surface-container h-[280px] sm:h-[340px] lg:h-[400px] transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent-green/20">
-              <Image alt="Commuter Transit Station" className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500" src="/assets/landing/a_first_person_perspective_of_a_commuter_walking_through_a_modern_clean_and.png" fill sizes="(max-width: 768px) 100vw, 33vw" />
+            <motion.div 
+              variants={cardVars} 
+              onClick={() => router.push('/map')}
+              className="group relative rounded-3xl overflow-hidden bg-surface-container border border-white/10 hover:border-white/40 h-[280px] sm:h-[340px] lg:h-[400px] transition-all duration-300 hover:-translate-y-2 shadow-lg hover:shadow-[0_20px_50px_rgba(255,255,255,0.22)] cursor-pointer"
+            >
+              <Image alt="Commuter Transit Station" className="object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-500" src="/assets/landing/a_first_person_perspective_of_a_commuter_walking_through_a_modern_clean_and.png" fill sizes="(max-width: 768px) 100vw, 33vw" />
               <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/80 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-white/15 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl" />
               <div className="absolute bottom-0 left-0 p-6 lg:p-8">
                 <span className="px-3 py-1 rounded-full bg-success-green/20 text-success-green border border-success-green/30 text-xs font-semibold mb-4 inline-block backdrop-blur-sm">Commuter &amp; Tourist</span>
                 <h3 className="text-2xl font-bold text-white mb-2">Seamless Transit</h3>

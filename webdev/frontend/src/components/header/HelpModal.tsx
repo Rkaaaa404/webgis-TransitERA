@@ -46,7 +46,7 @@ const PERSONA_FAQ: Record<PersonaType, Array<{ q: string; a: string }>> = {
     },
     {
       q: 'Apa itu Retail Success Score dan bagaimana menggunakannya?',
-      a: 'Retail Success Score (0–100) diprediksi menggunakan model Random Forest berdasarkan densitas pejalan kaki, mix-use index, dan aksesibilitas. Gunakan sebagai acuan pendukung keputusan investasi ritel/usaha.',
+      a: 'Retail Success Score (0–100, Beta v1.2) mengukur kelayakan titik usaha Retail Komuter & Convenience F&B (kedai kopi, minimarket transit, QSR) di radius stasiun. Skor dihitung dari 5 variabel berbobot: 30% Foot Traffic (NTL VIIRS & POI MAPID), 25% Aksesibilitas Transit, 20% Densitas Kependudukan BPS, 15% Diversitas Guna Lahan, dan 10% Daya Beli SES.',
     },
     {
       q: 'Bagaimana cara menghitung potensi ROI investasi properti?',

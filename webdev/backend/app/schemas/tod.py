@@ -8,6 +8,16 @@ class StationId(str, Enum):
     SEMUT = "semut"
     WONOKROMO = "wonokromo"
     WARU = "waru"
+    TANDES = "tandes"
+    KANDANGAN = "kandangan"
+    BENOWO = "benowo"
+    NGAGEL = "ngagel"
+    MARGOREJO = "margorejo"
+    JEMURSARI = "jemursari"
+    KERTOMENANGGAL = "kertomenanggal"
+    KALIMAS = "kalimas"
+    BENTENG = "benteng"
+    SIDOTOPO = "sidotopo"
 
 class TODDimensionScores(BaseModel):
     density: float = Field(..., ge=0, le=100, description="Kepadatan penduduk & intensitas ruang")
@@ -26,6 +36,7 @@ class StationSummary(BaseModel):
     weakest_dimension: str
     strongest_dimension: str
     status: str
+    is_tier_1: bool = Field(False, description="True jika merupakan Anchor Hub fokus analisis mikro")
 
 class StationTODScoreResponse(BaseModel):
     station_id: StationId

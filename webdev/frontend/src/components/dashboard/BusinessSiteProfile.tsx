@@ -12,13 +12,24 @@ interface BusinessSiteProfileProps {
 export const BusinessSiteProfile: React.FC<BusinessSiteProfileProps> = ({ station, onHighlightCell }) => {
   const [selectedBiz, setSelectedBiz] = useState<'coffee' | 'warung' | 'retail'>('coffee');
 
-  const stationH3 = {
+  const stationH3Map: Record<string, string> = {
     gubeng: '898d80835d3ffff',
-    pasar_turi: '898d808311bffff',
-    semut: '898d808302bffff',
-    wonokromo: '898d80824cbffff',
-    waru: '898d8090d7bffff',
-  }[station.id] || '898d80835d3ffff';
+    pasar_turi: '898d8083113ffff',
+    semut: '898d8083037ffff',
+    wonokromo: '898d80824dbffff',
+    waru: '898d8090d73ffff',
+    tandes: '898d8080503ffff',
+    kandangan: '898d8080ccfffff',
+    benowo: '898d808096bffff',
+    ngagel: '898d809196bffff',
+    margorejo: '898d8090a2fffff',
+    jemursari: '898d809086fffff',
+    kertomenanggal: '898d8090837ffff',
+    kalimas: '898d808337bffff',
+    benteng: '898d8083227ffff',
+    sidotopo: '898d8083053ffff',
+  };
+  const stationH3 = stationH3Map[station.id] || '898d80835d3ffff';
 
   const bizProfiles = {
     coffee: {

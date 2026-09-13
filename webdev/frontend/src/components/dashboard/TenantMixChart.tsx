@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React from 'react';
 
@@ -15,8 +15,9 @@ const DEFAULT_TENANT_MIX: TenantMixItem[] = [
   { label: 'UMKM (Micro)', value: 18, color: 'bg-cyan-500' },
 ];
 
-export const TenantMixChart: React.FC<TenantMixChartProps> = ({ data = DEFAULT_TENANT_MIX }) => {
-  const maxValue = Math.max(...data.map((d) => d.value));
+export const TenantMixChart: React.FC<TenantMixChartProps> = ({ data }) => {
+  const chartData = data && data.length > 0 ? data : DEFAULT_TENANT_MIX;
+  const maxValue = Math.max(...chartData.map((d) => d.value), 1);
 
   return (
     <div className="space-y-2">
@@ -28,7 +29,7 @@ export const TenantMixChart: React.FC<TenantMixChartProps> = ({ data = DEFAULT_T
       </div>
 
       <div className="space-y-2">
-        {data.map((item) => (
+        {chartData.map((item) => (
           <div key={item.label} className="space-y-0.5">
             <div className="flex justify-between text-[11px]">
               <span className="text-slate-400">{item.label}</span>

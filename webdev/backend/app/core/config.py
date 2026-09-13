@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     # Secrets & External APIs
     MAPID_API_KEY: str = os.getenv("MAPID_API_KEY", "")
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
-    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
+    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
     
     # Surabaya Geo Bounding Box
     SURABAYA_BBOX: dict = {
@@ -24,12 +24,14 @@ class Settings(BaseSettings):
     CORS_ORIGINS: List[str] = [
         "http://localhost:3000",
         "http://127.0.0.1:3000",
+        "http://localhost:3030",
+        "http://127.0.0.1:3030",
         "http://localhost:5173",
         "https://*.vercel.app"
     ]
 
     model_config = {
-        "env_file": ".env",
+        "env_file": [".env", "../.env", "../../.env"],
         "extra": "ignore"
     }
 

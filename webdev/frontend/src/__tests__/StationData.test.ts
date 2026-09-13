@@ -2,14 +2,17 @@ import { describe, it, expect } from 'vitest';
 import { FALLBACK_STATIONS } from '@/lib/api';
 
 describe('TransitERA Station Data & Scorecard Contract', () => {
-  it('contains 5 SRRL Surabaya stations', () => {
-    expect(FALLBACK_STATIONS).toHaveLength(5);
+  it('contains SRRL Surabaya stations and major intermodal terminals', () => {
+    expect(FALLBACK_STATIONS.length).toBeGreaterThanOrEqual(8);
     const stationIds = FALLBACK_STATIONS.map((s) => s.id);
     expect(stationIds).toContain('gubeng');
     expect(stationIds).toContain('pasar_turi');
     expect(stationIds).toContain('semut');
     expect(stationIds).toContain('wonokromo');
     expect(stationIds).toContain('waru');
+    expect(stationIds).toContain('terminal_joyoboyo');
+    expect(stationIds).toContain('terminal_purabaya');
+    expect(stationIds).toContain('terminal_bratang');
   });
 
   it('validates 5D dimensions range between 0 and 100', () => {

@@ -1,4 +1,23 @@
-export type StationId = 'gubeng' | 'pasar_turi' | 'semut' | 'wonokromo' | 'waru';
+export type StationId =
+  | 'gubeng'
+  | 'pasar_turi'
+  | 'semut'
+  | 'wonokromo'
+  | 'waru'
+  | 'terminal_joyoboyo'
+  | 'terminal_purabaya'
+  | 'terminal_bratang'
+  | 'tandes'
+  | 'kandangan'
+  | 'benowo'
+  | 'ngagel'
+  | 'margorejo'
+  | 'jemursari'
+  | 'kertomenanggal'
+  | 'sidotopo'
+  | 'kalimas'
+  | 'benteng'
+  | (string & {});
 
 export interface TODDimensionScores {
   density: number;
@@ -21,15 +40,39 @@ export interface TenantMixItem {
   color: string;
 }
 
+export interface IntermodalStep {
+  mode: 'walk' | 'feeder' | 'bus' | 'train' | string;
+  desc: string;
+  duration: string;
+  distance?: string;
+  line_code?: string;
+  line_color?: string;
+}
+
+export interface IntermodalPlan {
+  destination: string;
+  total_time: string;
+  total_distance_km: number;
+  fare: string;
+  route_id?: string;
+  modes_used: string[];
+  steps: IntermodalStep[];
+}
+
 export interface TravelEstimateItem {
   destination: string;
   time: string;
-  icon: string;
+  icon?: string;
+  total_distance_km?: number;
+  fare?: string;
+  route_id?: string;
+  steps?: IntermodalStep[];
 }
 
 export interface StationData {
   id: StationId;
   name: string;
+  kecamatan?: string;
   latitude: number;
   longitude: number;
   tod_readiness_score: number;
@@ -39,6 +82,7 @@ export interface StationData {
   weakest_dimension: string;
   strongest_dimension: string;
   status: string;
+  is_tier_1?: boolean;
   njop_premium: {
     avg_njop_premium_pct: number;
     ci_lower_pct: number;
@@ -49,9 +93,25 @@ export interface StationData {
     spillover_effect_pct: number;
   };
   policy_recommendations: string[];
+  walkability?: {
+    score: number;
+    label: string;
+    pedestrian_poi_count?: number;
+    feeder_count_500m?: number;
+    disamenity_count?: number;
+    flood_risk_penalty?: number;
+    provenance?: string;
+  };
+  provenance?: {
+    tod_score?: string;
+    walkability?: string;
+    njop_premium?: string;
+    last_updated?: string;
+  };
   menu_go_recommendations?: MenuGoItem[];
   tenant_mix?: TenantMixItem[];
   travel_estimates?: TravelEstimateItem[];
+  intermodal_plans?: IntermodalPlan[];
 }
 
 export interface H3FeatureProperties {
@@ -99,4 +159,27 @@ export interface AIChatMessage {
   targetStation?: StationId;
   timestamp: string;
   chartPayload?: any;
+}
+
+export interface RouteStep {
+  mode: 'walk' | 'bus' | 'train' | 'feeder';
+  route_id?: string;
+  route_name?: string;
+  line_code?: string;
+  line_color?: string;
+  from_station: string;
+  to_station: string;
+  duration_min: number;
+  desc: string;
+  coordinates?: [number, number][];
+}
+
+export interface RoutePlan {
+  from: StationId;
+  to: StationId;
+  steps: RouteStep[];
+  total_min: number;
+  route_ids: string[];
+  has_transfer: boolean;
+  geometry?: [number, number][];
 }

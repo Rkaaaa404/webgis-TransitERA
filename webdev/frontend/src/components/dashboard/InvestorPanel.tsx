@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { StationData, StationId } from '@/types';
 import { DiamondGauge } from './DiamondGauge';
 import dynamic from 'next/dynamic';
@@ -9,7 +9,9 @@ const TenantMixChart = dynamic(() => import('./TenantMixChart').then(mod => mod.
   loading: () => <div className="w-full h-48 bg-slate-900/50 backdrop-blur-md rounded-xl animate-pulse" /> 
 });
 import { AIChatPanel } from '@/components/ai/AIChatPanel';
-import { Building, TrendingUp, LineChart, Wallet, ArrowUpRight } from 'lucide-react';
+import { Building, TrendingUp, LineChart, Wallet, ArrowUpRight, Users, Info, Sparkles } from 'lucide-react';
+import { getDemographicsForStation } from '@/lib/dummy-data';
+import { RetailMethodologyModal } from './RetailMethodologyModal';
 
 interface InvestorPanelProps {
   station: StationData;
@@ -24,6 +26,36 @@ export const InvestorPanel: React.FC<InvestorPanelProps> = ({
   activeH3Index,
   onExecuteMapAction,
 }) => {
+  const [showMethodologyModal, setShowMethodologyModal] = useState(false);
+  const demographics = getDemographicsForStation(activeStation) || {
+    stationId: activeStation,
+    kecamatan: station.kecamatan || 'Surabaya',
+    population: 45000,
+    density: 9500,
+    avgIncome: 'Rp 6.2 Jt',
+    incomeLevel: 'medium' as const,
+    ageDistribution: { youth: 22, productive: 66, elderly: 12 },
+    householdCount: 12000,
+    employmentRate: 85.0,
+  };
+
+  // Multi-Criteria Retail Success Score (Target: Retail Komuter & Convenience FnB)
+  const footTraffic = Math.min(100, Math.max(30, station.scores.density * 1.12));
+  const transitAccess = Math.min(100, (station.scores.distance_to_transit * 0.6) + (station.scores.destination_accessibility * 0.4));
+  const demographicDensity = Math.min(100, Math.max(35, (demographics.density / 16000) * 100));
+  const landUseDiversity = Math.min(100, station.scores.diversity);
+  const purchasingPower = Math.min(100, demographics.employmentRate * 1.05);
+
+  const rawRetailScore = (
+    footTraffic * 0.30 +
+    transitAccess * 0.25 +
+    demographicDensity * 0.20 +
+    landUseDiversity * 0.15 +
+    purchasingPower * 0.10
+  );
+  const retailScore = Math.round(rawRetailScore);
+  const retailRating = retailScore >= 80 ? 'Sangat Potensial' : retailScore >= 65 ? 'Potensial' : 'Moderat';
+
   // Dummy projection data based on TOD score
   const baseGrowth = 4.5;
   const todMultiplier = (station.tod_readiness_score / 100) * 5; 
@@ -46,7 +78,40 @@ export const InvestorPanel: React.FC<InvestorPanelProps> = ({
 
       {/* Scrollable Content */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        
+        {/* ROW 0: Area Summary (Karakteristik Pasar & Populasi 1km) */}
+        {demographics && (
+          <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4 text-brand-lime" />
+                <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">Area Summary</h4>
+              </div>
+              <span className="text-[9px] text-slate-400 font-mono bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">
+                {demographics.kecamatan} • Radius 1km
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-slate-950/60 rounded-lg p-2.5 text-center border border-slate-800/80">
+                <div className="text-base font-black text-brand-lime font-mono">{demographics.population.toLocaleString()}</div>
+                <div className="text-[10px] text-slate-400 mt-0.5">Populasi</div>
+              </div>
+              <div className="bg-slate-950/60 rounded-lg p-2.5 text-center border border-slate-800/80">
+                <div className="text-base font-black text-cyan-400 font-mono">{demographics.density.toLocaleString()}</div>
+                <div className="text-[10px] text-slate-400 mt-0.5">Jiwa/km²</div>
+              </div>
+              <div className="bg-slate-950/60 rounded-lg p-2.5 text-center border border-slate-800/80">
+                <div className="text-sm font-bold text-emerald-400 font-mono">{demographics.avgIncome}</div>
+                <div className="text-[10px] text-slate-400 mt-0.5">Rata-rata Pendapatan</div>
+              </div>
+              <div className="bg-slate-950/60 rounded-lg p-2.5 text-center border border-slate-800/80">
+                <div className="text-sm font-bold text-brand-teal font-mono">{demographics.employmentRate}%</div>
+                <div className="text-[10px] text-slate-400 mt-0.5">Tingkat Pekerjaan</div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* ROW 1: Retail Score & Tenant Mix */}
         <div className="grid grid-cols-1 gap-4">
           <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4">
@@ -54,21 +119,34 @@ export const InvestorPanel: React.FC<InvestorPanelProps> = ({
               <div className="flex items-center gap-2">
                 <TrendingUp className="w-4 h-4 text-brand-lime" />
                 <h4 className="text-xs font-bold text-slate-200">Retail Success Score</h4>
+                <button
+                  onClick={() => setShowMethodologyModal(true)}
+                  title="Lihat Metodologi & Formula Perhitungan"
+                  className="p-1 rounded-md text-slate-400 hover:text-amber-400 hover:bg-slate-800/80 transition-colors"
+                >
+                  <Info className="w-3.5 h-3.5" />
+                </button>
               </div>
-              <span className="text-[9px] tabular-nums text-slate-500 bg-slate-800/60 px-1.5 py-0.5 rounded">
-                RF Model
+              <span className="text-[9px] font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded flex items-center gap-1">
+                <Sparkles className="w-2.5 h-2.5" /> Beta v1.2
               </span>
             </div>
             
             <div className="flex flex-col items-center justify-center py-2">
               <DiamondGauge
-                score={Math.round(station.tod_readiness_score * 1.04)} 
-                label="Excellent"
+                score={retailScore} 
+                label={retailRating}
                 size="lg"
               />
               <p className="text-[10px] text-slate-400 text-center mt-3 leading-relaxed px-4">
-                High foot traffic correlation with nearby transit hub and existing commercial clusters.
+                Kesesuaian tinggi untuk <strong>Retail Komuter & FnB</strong> berdasarkan arus pejalan kaki transit & densitas kependudukan.
               </p>
+              <button
+                onClick={() => setShowMethodologyModal(true)}
+                className="mt-2 text-[10px] text-cyan-400 hover:text-cyan-300 underline underline-offset-2 flex items-center gap-1 font-medium transition-colors"
+              >
+                Detail formula & sumber data <ArrowUpRight className="w-2.5 h-2.5" />
+              </button>
             </div>
           </div>
 
@@ -148,6 +226,21 @@ export const InvestorPanel: React.FC<InvestorPanelProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Retail Scoring Methodology Modal */}
+      <RetailMethodologyModal
+        isOpen={showMethodologyModal}
+        onClose={() => setShowMethodologyModal(false)}
+        station={station}
+        computedScore={retailScore}
+        variableBreakdown={{
+          footTraffic,
+          transitAccess,
+          demographicDensity,
+          landUseDiversity,
+          purchasingPower,
+        }}
+      />
     </div>
   );
 };

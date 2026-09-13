@@ -22,6 +22,7 @@ from app.schemas.tod import (
 )
 from app.schemas.ai import AIQueryRequest, AIResponse
 from app.data.stations_data import STATIONS_DATA, get_all_h3_features, get_all_survey_features
+from app.spatial.real_data_pipeline import compute_all_station_analytics, get_all_real_h3_features
 from app.data.mapid_client import fetch_survey_geojson
 from app.ai.gemini_proxy import process_ai_query
 from app.core.config import settings
@@ -69,12 +70,19 @@ def _validate_surabaya_bbox(lat: float, lon: float) -> None:
 # ---------------------------------------------------------------------------
 
 @router.get("/stations", response_model=List[StationSummary])
-async def list_stations(db: Optional[Session] = Depends(get_db)):
-    """Mengambil ringkasan 5 simpul stasiun transit utama SRRL Surabaya (PostGIS / In-Memory)."""
+async def list_stations(
+    all: bool = Query(False, description="Set True untuk seluruh 15 stasiun Surabaya Raya, False untuk 5 stasiun utama SRRL"),
+    db: Optional[Session] = Depends(get_db)
+):
+    """Mengambil ringkasan simpul stasiun transit SRRL Surabaya (PostGIS / In-Memory)."""
+    core_ids = {"gubeng", "pasar_turi", "semut", "wonokromo", "waru"}
+
     if is_db_connected() and db is not None:
         try:
             db_stations = db.query(Station).all()
             if db_stations:
+                if not all:
+                    db_stations = [s for s in db_stations if s.id in core_ids]
                 return [
                     StationSummary(
                         id=s.id,
@@ -85,12 +93,18 @@ async def list_stations(db: Optional[Session] = Depends(get_db)):
                         typology=s.typology,
                         weakest_dimension=s.weakest_dimension,
                         strongest_dimension=s.strongest_dimension,
-                        status="operational",
+                        status="Focus Area" if s.id in {"gubeng", "pasar_turi", "wonokromo"} else "Surabaya Rail Network",
+                        is_tier_1=s.id in {"gubeng", "pasar_turi", "wonokromo"},
                     )
                     for s in db_stations
                 ]
         except Exception as e:
-            logger.warning(f"Gagal query stasiun dari database, fallback ke in-memory: {e}")
+            logger.warning(f"Gagal query stasiun dari database, fallback ke real data pipeline: {e}")
+
+    all_computed = compute_all_station_analytics()
+    station_list = list(all_computed.values())
+    if not all:
+        station_list = [s for s in station_list if s["id"] in core_ids]
 
     return [
         StationSummary(
@@ -102,16 +116,18 @@ async def list_stations(db: Optional[Session] = Depends(get_db)):
             typology=s["typology"],
             weakest_dimension=s["weakest_dimension"],
             strongest_dimension=s["strongest_dimension"],
-            status=s["status"],
+            status=s.get("status", "Focus Area" if s.get("is_tier_1") else "Surabaya Rail Network"),
+            is_tier_1=s.get("is_tier_1", False),
         )
-        for s in STATIONS_DATA.values()
+        for s in station_list
     ]
 
 
 @router.get("/tod-score/{station_id}", response_model=StationTODScoreResponse)
 async def get_station_tod_score(station_id: StationId, db: Optional[Session] = Depends(get_db)):
     """Mengambil detail skor 5D TOD, benchmark koridor, dan rekomendasi per stasiun."""
-    data = STATIONS_DATA.get(station_id.value)
+    all_computed = compute_all_station_analytics()
+    data = all_computed.get(station_id.value) or STATIONS_DATA.get(station_id.value)
     if not data:
         raise HTTPException(status_code=404, detail=f"Stasiun '{station_id}' tidak ditemukan")
 
@@ -205,8 +221,12 @@ async def get_h3_grid(
         except Exception as e:
             logger.warning(f"Gagal query PostGIS H3 grid, fallback ke in-memory: {e}")
 
-    # Fallback In-Memory
-    geo_data = get_all_h3_features()
+    # Fallback In-Memory (computed from real spatial dataset)
+    try:
+        geo_data = get_all_real_h3_features()
+    except Exception as e:
+        logger.warning(f"Fallback ke static h3 features: {e}")
+        geo_data = get_all_h3_features()
     features = geo_data["features"]
 
     if station:
@@ -221,6 +241,59 @@ async def get_h3_grid(
         ]
 
     return {"type": "FeatureCollection", "features": features}
+
+
+# ---------------------------------------------------------------------------
+# Isochrone (15-Minute City Network Accessibility) endpoint
+# ---------------------------------------------------------------------------
+
+_ISOCHRONE_CACHE = None
+
+@router.get("/isochrone")
+async def get_station_isochrone(
+    station: Optional[str] = Query(None, description="Station ID (e.g. gubeng, pasar_turi)"),
+    mode: Optional[str] = Query(None, description="Transport mode: walk | motor | car"),
+    minutes: Optional[int] = Query(None, description="Duration in minutes: 5 | 10 | 15"),
+):
+    """
+    Mengambil poligon isochrone jangkauan perjalanan berbasis jaringan jalan raya Kota Surabaya
+    untuk analisis '15-Minute City' simpul transit stasiun.
+    Mendukung filter moda (walk/motor/car), durasi waktu (5/10/15 mnt), dan ID stasiun.
+    """
+    global _ISOCHRONE_CACHE
+    if _ISOCHRONE_CACHE is None:
+        isochrone_file = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+            "data",
+            "station_isochrones.json"
+        )
+        if os.path.exists(isochrone_file):
+            with open(isochrone_file, "r", encoding="utf-8") as f:
+                _ISOCHRONE_CACHE = json.load(f)
+        else:
+            _ISOCHRONE_CACHE = {"type": "FeatureCollection", "features": []}
+
+    features = _ISOCHRONE_CACHE.get("features", [])
+
+    if station:
+        st_norm = station.lower().strip()
+        features = [f for f in features if f["properties"].get("station_id") == st_norm]
+    if mode:
+        m_norm = mode.lower().strip()
+        features = [f for f in features if f["properties"].get("mode") == m_norm]
+    if minutes is not None:
+        features = [f for f in features if f["properties"].get("minutes") == minutes]
+
+    return {
+        "type": "FeatureCollection",
+        "features": features,
+        "metadata": {
+            "total_features": len(features),
+            "filter_station": station,
+            "filter_mode": mode,
+            "filter_minutes": minutes
+        }
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -290,6 +363,61 @@ async def get_stations_layer():
     return _load_spatial_layer("stasiun_surabaya.geojson")
 
 
+@router.get("/layers/shopping-centers")
+async def get_shopping_centers_layer():
+    """Mengambil GeoJSON 35 pusat perbelanjaan (mall & retail hubs) Kota Surabaya tahun 2025."""
+    return _load_spatial_layer("PUSAT PERBELANJAAN DI KOTA SURABAYA TAHUN 2025.geojson")
+
+
+@router.get("/layers/property-prices")
+async def get_property_prices_layer():
+    """Mengambil GeoJSON 2.926 data harga properti & NJOP riil Kota Surabaya tahun 2024."""
+    return _load_spatial_layer("HARGA PROPERTI DI KOTA SURABAYA TAHUN 2024.geojson")
+
+
+@router.get("/layers/demographics")
+async def get_demographics_layer():
+    """Mengambil GeoJSON 154 wilayah kelurahan demografi Kota Surabaya."""
+    return _load_spatial_layer("demografi_surabaya.geojson")
+
+
+@router.get("/layers/socioeconomic")
+async def get_socioeconomic_layer():
+    """Mengambil GeoJSON 154 kelurahan status ekonomi sosial (SES) Kota Surabaya tahun 2024."""
+    return _load_spatial_layer("STATUS EKONOMI DAN SOSIAL - SOCIOECONOMIC STATUS (SES) KOTA SURABAYA TAHUN 2024.geojson")
+
+
+@router.get("/layers/transit-routes")
+async def get_transit_routes_layer(
+    category: Optional[str] = Query(None, description="suroboyo_bus | trans_semanggi | feeder_wirawiri | bus_tumpuk"),
+    station_id: Optional[str] = Query(None, description="Filter rute yang terhubung dengan stasiun KA tertentu")
+):
+    """Mengambil GeoJSON 16 rute trayek riil Suroboyo Bus, Trans Semanggi, dan Feeder WiraWiri."""
+    data = _load_spatial_layer("trayek_surabaya.geojson")
+    features = data.get("features", [])
+    if category:
+        features = [f for f in features if f.get("properties", {}).get("category") == category]
+    if station_id:
+        st_id = station_id.lower().strip()
+        features = [
+            f for f in features
+            if st_id in f.get("properties", {}).get("connected_station_ids", [])
+        ]
+    return {
+        "type": "FeatureCollection",
+        "metadata": data.get("metadata", {}),
+        "features": features
+    }
+
+
+@router.get("/transit/intermodal-routes/{station_id}")
+async def get_station_intermodal_routes(station_id: StationId):
+    """Mengambil opsi navigasi perjalanan intermoda riil dari stasiun ke destinasi penting."""
+    from app.spatial.intermodal_engine import get_intermodal_plans
+    plans = get_intermodal_plans(station_id.value)
+    return {"station_id": station_id.value, "plans": plans}
+
+
 # ---------------------------------------------------------------------------
 # NJOP Premium endpoint
 # ---------------------------------------------------------------------------
@@ -297,7 +425,8 @@ async def get_stations_layer():
 @router.get("/njop-premium/{station_id}", response_model=NJOPPremiumResponse)
 async def get_njop_premium(station_id: StationId):
     """Mengambil estimasi premium nilai lahan (%ΔNJOP) berbasis Spatial Durbin Model."""
-    data = STATIONS_DATA.get(station_id.value)
+    all_computed = compute_all_station_analytics()
+    data = all_computed.get(station_id.value) or STATIONS_DATA.get(station_id.value)
     if not data:
         raise HTTPException(status_code=404, detail="Stasiun tidak ditemukan")
 
@@ -442,6 +571,12 @@ async def get_survey_points(
     return {"type": "FeatureCollection", "features": features}
 
 
+@router.get("/layers/mapid-survey")
+async def get_mapid_survey_layer():
+    """Mengambil GeoJSON 100 titik aktivitas dan survei lapangan #PakSibukGa Kota Surabaya."""
+    return fetch_survey_geojson(polygon_coords=_SURABAYA_POLYGON, hashtag="PakSibukGa")
+
+
 # ---------------------------------------------------------------------------
 # Scenario Simulation endpoint
 # ---------------------------------------------------------------------------
@@ -486,7 +621,8 @@ _SCENARIO_IMPACTS = {
 @router.post("/simulate", response_model=ScenarioSimulationResponse)
 async def simulate_scenario(request: ScenarioSimulationRequest):
     """Mensimulasikan skenario intervensi what-if terhadap skor TOD dan %ΔNJOP."""
-    st_data = STATIONS_DATA.get(request.target_station.value, STATIONS_DATA["waru"])
+    all_stations = compute_all_station_analytics()
+    st_data = all_stations.get(request.target_station.value) or STATIONS_DATA.get(request.target_station.value, STATIONS_DATA["waru"])
     base_score = st_data["tod_readiness_score"]
     base_njop = st_data["njop_premium"]["avg_njop_premium_pct"]
 
@@ -524,3 +660,57 @@ async def simulate_scenario(request: ScenarioSimulationRequest):
 async def ai_query(request: AIQueryRequest):
     """Proxy endpoint Asisten Spasial AI (Google Gemini via JSON Function Calling)."""
     return await process_ai_query(request)
+
+
+# ---------------------------------------------------------------------------
+# ATR/BPN Spatial Layer endpoints
+# ---------------------------------------------------------------------------
+
+_SPATIAL_DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "spatial")
+
+
+def _load_geojson(filename: str) -> dict:
+    """Load a GeoJSON file from the spatial data directory."""
+    path = os.path.normpath(os.path.join(_SPATIAL_DATA_DIR, filename))
+    if not os.path.exists(path):
+        return {"type": "FeatureCollection", "features": [], "_note": f"{filename} not yet generated — run scripts/extract_gistaru_bhumi.py"}
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+@router.get("/layers/gistaru")
+async def get_gistaru_layer():
+    """
+    Mengembalikan data Rencana Pola Ruang RDTR Kota Surabaya dari GISTARU ATR/BPN.
+
+    Sumber: Kementerian ATR/BPN — GISTARU RTR Online (RDTR Kota Surabaya, Perda No. 8 Tahun 2018)
+    URL Resmi: https://gistaru.atrbpn.go.id/rtronline/
+
+    Returns GeoJSON FeatureCollection dengan properti:
+    - NAMOBJ: Nama objek (mis. Perumahan, Perdagangan & Jasa)
+    - NAMZON / KODZON: Nama & kode zona pola ruang
+    - NAMSZN / KODSZN: Nama & kode sub-zona (K-1, R-1, SPU, RTH)
+    - KODBWP: Kode Bagian Wilayah Perkotaan
+    - TOD_04: Ketentuan khusus TOD
+    - LUASHA: Luas area (hektar)
+    """
+    return _load_geojson("gistaru_pola_ruang_surabaya.geojson")
+
+
+@router.get("/layers/bhumi")
+async def get_bhumi_layer():
+    """
+    Mengembalikan data Persil Bidang Tanah Terdaftar di koridor stasiun commuter Surabaya.
+
+    Sumber: Kementerian ATR/BPN — Peta Interaktif BHUMI (Bidang Tanah Terdaftar)
+    URL Resmi: https://bhumi.atrbpn.go.id/peta
+
+    Returns GeoJSON FeatureCollection dengan properti:
+    - nib: Nomor Induk Bidang (NIB)
+    - tipehak: Jenis Hak (Hak Milik, Hak Guna Bangunan, Hak Pakai, dsb.)
+    - luas: Luas bidang tanah dalam m²
+    - akurasibidang: Status akurasi pengukuran bidang tanah
+    - _station_id: ID stasiun transit terdekat
+    """
+    return _load_geojson("bhumi_persil_surabaya.geojson")
+

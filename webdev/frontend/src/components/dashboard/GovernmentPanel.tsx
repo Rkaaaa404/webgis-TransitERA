@@ -160,24 +160,21 @@ export const GovernmentPanel: React.FC<GovernmentPanelProps> = ({
                 </div>
               </div>
             </div>
-          </div>
-        )}
 
-        {/* ══ TAB 2: POLICY SIMULATION (WHAT-IF) ══ */}
-        {(activeTab === 'simulation' || activeTab === 'all') && (
-          <div className="space-y-4">
-            {/* Interactive Scenario Simulator */}
-            <ScenarioSimulator station={station} />
-
-            {/* Policy Recommendations */}
+            {/* Rekomendasi Kebijakan Tata Ruang (Terintegrasi di 5D TOD) */}
             <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4">
-              <div className="flex items-center gap-2 mb-3">
-                <Shield className="w-4 h-4 text-emerald-400" />
-                <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">Rekomendasi Kebijakan Tata Ruang</h4>
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <Shield className="w-4 h-4 text-brand-lime" />
+                  <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">Rekomendasi Kebijakan Tata Ruang</h4>
+                </div>
+                <span className="text-[9px] font-mono text-amber-400 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded">
+                  Fokus: {station.weakest_dimension}
+                </span>
               </div>
               <ul className="space-y-2">
                 {station.policy_recommendations.map((rec, i) => (
-                  <li key={i} className="text-[11px] text-slate-300 leading-relaxed flex items-start gap-2 bg-slate-950/40 p-2.5 rounded-lg border border-slate-800/80">
+                  <li key={i} className="text-[11px] text-slate-300 leading-relaxed flex items-start gap-2.5 bg-slate-950/40 p-2.5 rounded-lg border border-slate-800/80 hover:border-brand-lime/30 transition-colors">
                     <span className="w-5 h-5 rounded-full bg-brand-lime/20 text-brand-lime font-bold flex items-center justify-center flex-shrink-0 text-[10px] mt-0.5">
                       {i + 1}
                     </span>
@@ -186,6 +183,14 @@ export const GovernmentPanel: React.FC<GovernmentPanelProps> = ({
                 ))}
               </ul>
             </div>
+          </div>
+        )}
+
+        {/* ══ TAB 2: POLICY SIMULATION (WHAT-IF) ══ */}
+        {(activeTab === 'simulation' || activeTab === 'all') && (
+          <div className="space-y-4">
+            {/* Interactive Scenario Simulator - Pure Simulation with 5D Projections */}
+            <ScenarioSimulator station={station} />
           </div>
         )}
 

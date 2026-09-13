@@ -27,13 +27,34 @@ export const AIChatPanel: React.FC<AIChatPanelProps> = ({
     {
       id: 'init-1',
       sender: 'assistant',
-      text: 'Halo! Saya **TransitERA AI**. Tanyakan kesiapan TOD di 5 stasiun Surabaya, komparasi antarsimpul, estimasi kenaikan nilai tanah (%ΔNJOP), atau profil kesesuaian lokasi usaha UMKM.',
+      text:
+        activePersona === 'commuter'
+          ? 'Halo Sobat Komuter! Saya **Asisten AI Transit Surabaya**. Tanyakan rute tercepat ke tujuanmu, feeder WiraWiri terdekat, jadwal kereta komuter, estimasi ongkos, atau rekomendasi kuliner & ATM 5 menit jalan kaki dari stasiun ini!'
+          : 'Halo! Saya **TransitERA AI**. Tanyakan kesiapan TOD di simpul transit Surabaya, komparasi antarsimpul, estimasi kenaikan nilai tanah (%ΔNJOP), atau profil kesesuaian lokasi usaha.',
       timestamp: 'Baru saja'
     }
   ]);
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const welcomeText =
+      activePersona === 'commuter'
+        ? 'Halo Sobat Komuter! Saya **Asisten AI Transit Surabaya**. Tanyakan rute tercepat ke tujuanmu, feeder WiraWiri terdekat, jadwal kereta komuter, estimasi ongkos, atau rekomendasi kuliner & ATM 5 menit jalan kaki dari stasiun ini!'
+        : activePersona === 'business'
+        ? 'Halo! Saya **TransitERA AI Investor Advisor**. Tanyakan analisis potensi kenaikan NJOP (%ΔNJOP), estimasi ROI properti komersial, kepadatan foot-traffic, atau profil demografi konsumen di sekitar simpul transit.'
+        : 'Halo! Saya **TransitERA AI Policy Advisor**. Tanyakan evaluasi kesiapan TOD 5D, simulasi skenario intervensi tata ruang, perbandingan indeks kesiapan antarsimpul, atau kepatuhan regulasi Perda RTRW Surabaya.';
+
+    setMessages([
+      {
+        id: `init-${activePersona}`,
+        sender: 'assistant',
+        text: welcomeText,
+        timestamp: 'Baru saja'
+      }
+    ]);
+  }, [activePersona]);
 
   useEffect(() => {
     if (scrollContainerRef.current) {

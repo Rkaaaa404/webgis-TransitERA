@@ -77,3 +77,9 @@ Thumbs.db
 *.tsbuildinfo
 next-env.d.ts
 
+# Archives & Large Datasets
+*.zip
+*.tar.gz
+*.7z
+
+

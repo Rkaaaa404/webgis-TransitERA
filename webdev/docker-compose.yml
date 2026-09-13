@@ -51,12 +51,8 @@ services:
     environment:
       - NEXT_PUBLIC_MAPID_API_KEY=${NEXT_PUBLIC_MAPID_API_KEY}
       - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL:-http://localhost:8000/api}
-      - NODE_ENV=development
       - PORT=3030
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-      - /app/.next
+      - HOSTNAME=0.0.0.0
     depends_on:
       - backend
 

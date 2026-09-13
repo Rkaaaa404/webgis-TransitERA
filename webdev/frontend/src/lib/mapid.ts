@@ -1,21 +1,35 @@
-// MAPID API Key
-const MAPID_KEY = process.env.NEXT_PUBLIC_MAPID_API_KEY || '6a8fc28753df37905b3a5c56';
+// ==============================================================================
+// TransitERA Basemap & Cartographic Configuration
+// Supports MAPID GL Style with Graceful Fallback to High-Speed Carto Vector Styles
+// ==============================================================================
+
+export const FALLBACK_BASEMAP_STYLES: Record<string, string> = {
+  // Carto Voyager (Clean Street Navigation Vector Style)
+  street: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
+
+  // Carto Voyager 2D
+  'street-2d': 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
+
+  // Carto Dark Matter (Sleek Dark Theme for TOD Analysis)
+  dark: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
+
+  // Carto Positron (Minimal Light Style)
+  light: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+
+  // Satellite fallback
+  satellite: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
+};
+
+// MAPID API Key from Environment
+const MAPID_KEY = process.env.NEXT_PUBLIC_MAPID_API_KEY || '';
 
 export const BASEMAP_STYLES: Record<string, string> = {
-  // Street Mapid (Default: 3D & 2D building) [ID: basic]
-  street: `https://basemap.mapid.io/styles/basic/style.json?key=${MAPID_KEY}`,
-
-  // Street Mapid - 2D building only [ID: street-2d-building]
-  'street-2d': `https://basemap.mapid.io/styles/street-2d-building/style.json?key=${MAPID_KEY}`,
-
-  // Dark Mapid [ID: dark]
-  dark: `https://basemap.mapid.io/styles/dark/style.json?key=${MAPID_KEY}`,
-
-  // Light Mapid [ID: light]
-  light: `https://basemap.mapid.io/styles/light/style.json?key=${MAPID_KEY}`,
-
-  // Satellite [ID: satellite]
-  satellite: `https://basemap.mapid.io/styles/satellite/style.json?key=${MAPID_KEY}`,
+  // If MAPID_KEY is provided in .env, use official MAPID tiles; otherwise fallback to Carto GL
+  street: MAPID_KEY ? `https://basemap.mapid.io/styles/basic/style.json?key=${MAPID_KEY}` : FALLBACK_BASEMAP_STYLES.street,
+  'street-2d': MAPID_KEY ? `https://basemap.mapid.io/styles/street-2d-building/style.json?key=${MAPID_KEY}` : FALLBACK_BASEMAP_STYLES['street-2d'],
+  dark: MAPID_KEY ? `https://basemap.mapid.io/styles/dark/style.json?key=${MAPID_KEY}` : FALLBACK_BASEMAP_STYLES.dark,
+  light: MAPID_KEY ? `https://basemap.mapid.io/styles/light/style.json?key=${MAPID_KEY}` : FALLBACK_BASEMAP_STYLES.light,
+  satellite: MAPID_KEY ? `https://basemap.mapid.io/styles/satellite/style.json?key=${MAPID_KEY}` : FALLBACK_BASEMAP_STYLES.satellite,
 };
 
 export const SURABAYA_CENTER: [number, number] = [112.7521, -7.2654];

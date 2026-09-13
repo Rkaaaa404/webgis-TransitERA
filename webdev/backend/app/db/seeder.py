@@ -87,8 +87,9 @@ def seed_database(db: Session, force: bool = False) -> Dict[str, Any]:
         db.add(station)
         stations_seeded += 1
 
-    # 2. Seed Tabel H3TodAnalytics (19 sel H3 per stasiun = 95 sel)
+    # 2. Seed Tabel H3TodAnalytics (Deduplikasi sel yang saling beririsan antar stasiun)
     h3_cells_seeded = 0
+    seen_h3_indices = set()
     for s_id, s_data in STATIONS_DATA.items():
         cells = generate_station_h3_cluster(
             station_id=s_data["id"],
@@ -103,13 +104,18 @@ def seed_database(db: Session, force: bool = False) -> Dict[str, Any]:
 
         for feat in cells:
             props = feat["properties"]
+            h3_idx = props["h3_index"]
+            if h3_idx in seen_h3_indices:
+                continue
+            seen_h3_indices.add(h3_idx)
+
             geom_dict = feat["geometry"]
             geom_json_str = json.dumps(geom_dict)
 
             # Format WKT atau fungsi PostGIS
             # GeoAlchemy2 menerima GeoJSON string via ST_GeomFromGeoJSON
             h3_cell = H3TodAnalytics(
-                h3_index=props["h3_index"],
+                h3_index=h3_idx,
                 resolution=9,
                 station_cluster=props["station_cluster"],
                 density_score=props["density_score"],
