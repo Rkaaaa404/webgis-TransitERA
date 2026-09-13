@@ -20,29 +20,33 @@ TransitERA tidak menggunakan radius lingkaran konvensional, melainkan **H3 Hexag
 ### 2. Spatial Durbin Model (SDM) untuk Prediksi Nilai Tanah
 TransitERA tidak hanya mengukur infrastruktur, tapi juga potensi ekonomi. Menggunakan ekonometrika spasial (SDM via PySAL), platform ini memprediksi **% Kenaikan Nilai Jual Objek Pajak (NJOP Premium)** dari sebuah parsel tanah akibat efek langsung (*direct effect*) dan efek limpahan tata ruang tetangga (*spatial spillover*).
 
-### 3. Asisten Spatial AI (Gemini)
+### 3. Machine Learning TOD Typology Classifier (Unsupervised Clustering + PCA)
+Model klasifikasi tipologi kawasan transit *data-driven* yang bebas dari bias pelabelan subjektif. Menggabungkan 5 indikator spasial (densitas populasi, radiansi NTL, sebaran halte feeder, kedekatan stasiun KA, risiko banjir) pada 492 sel Uber H3 Resolusi 9 di Surabaya, diproyeksikan ke ruang laten PCA (variansi terjelaskan **93.23%**), dan diklasterkan secara *unsupervised* (K-Means $k=4$) untuk menghasilkan 4 tipologi kawasan TOD empiris (*Commercial Transit Hub*, *Mixed-Use Residential Area*, *Mixed-Use Heritage Core*, *Low-Accessibility Feeder Zone*). Dilengkapi model Random Forest dan generator rekomendasi zonasi adaptif.
+
+### 4. Asisten Spatial AI (Gemini)
 Dilengkapi dengan asisten obrolan cerdas bertenaga Google Gemini. AI ini memahami konteks spasial (RAG), mampu menjawab pertanyaan terkait kelayakan investasi stasiun tertentu, membandingkan antar-koridor, dan **secara otomatis menggerakkan viewport peta (FlyTo)** serta mengubah *layer* sesuai instruksi pengguna.
 
-### 4. Tri-Persona Dashboard
+### 5. Tri-Persona Dashboard
 Tampilan dan alat analisis disesuaikan untuk 3 persona spesifik:
-- 🏛️ **Government:** Fokus pada *policy recommendations*, pendeteksian titik buta pejalan kaki, dan skor TOD per stasiun.
-- 🏢 **Business:** Fokus pada *tenant mix*, keramaian (Activity Data MAPID), dan estimasi kenaikan NJOP lahan komersial.
-- 🚶 **Commuter:** Fokus pada integrasi rute feeder, *Menu Go* (POI sekitar stasiun), dan estimasi waktu tempuh.
+- Government: Fokus pada *policy recommendations*, pendeteksian titik buta pejalan kaki, dan skor TOD per stasiun.
+- Business: Fokus pada *tenant mix*, keramaian (Activity Data MAPID), dan estimasi kenaikan NJOP lahan komersial.
+- Commuter: Fokus pada integrasi rute feeder, *Menu Go* (POI sekitar stasiun), dan estimasi waktu tempuh.
 
 ---
 
 ## 🛠️ Arsitektur Teknologi
 
 ### Frontend (User Interface & Map Client)
-- **Framework:** Next.js 15 (App Router) + React 19
+- **Framework:** Next.js 16 (App Router) + React 19
 - **Map Engine:** MapLibre GL JS + MAPID MAPS Basemap
 - **Styling:** Tailwind CSS + Framer Motion (untuk animasi *Mission Control*)
 - **Data Visualizations:** Recharts (Radar Chart & Gauge)
 
 ### Backend (Spatial Engine & AI)
 - **Framework:** FastAPI (Python)
-- **Geospatial Processing:** PostGIS, `h3-py`, `geopandas`, `osmnx`
-- **Econometrics:** PySAL (`spreg`)
+- **Geospatial Processing:** PostGIS, `h3-py`, `shapely`, `geopandas`, `osmnx`
+- **Machine Learning:** Scikit-learn (PCA, K-Means, Random Forest, KNN)
+- **Econometrics:** PySAL (`spreg` - Spatial Durbin Model)
 - **AI Integration:** Google Gemini API (*Function Calling*)
 
 ---
@@ -57,12 +61,15 @@ TransitERA/
 │   ├── prd/                  # Master PRD, spesifikasi responsif & keamanan
 │   ├── roadmap/              # Roadmap pengembangan & audit kesiapan
 │   └── design/               # Design token & panduan antarmuka
+├── notebooks/                # Jupyter Notebooks riset spasial & machine learning pre-rendered
+│   ├── TransitERA_H3_Spatial_ML_Typology_Classifier.ipynb  # H3 Unsupervised Clustering, PCA, Radar Chart
+│   └── TransitERA_Station_Clustering_and_Regression.ipynb  # Station K-Means & SDM Econometric Regression
 ├── webdev/                   # Workspace kode aplikasi
 │   ├── frontend/             # Next.js 16 + React 19 + MapLibre GL JS
-│   ├── backend/              # FastAPI + Uber H3 + PySAL SDM + Gemini AI
+│   ├── backend/              # FastAPI + Uber H3 + Scikit-learn + PySAL SDM + Gemini AI
 │   └── docker-compose.yml    # Orkestrasi container dev
 ├── context/                  # Arsip riset, notulensi coaching, katalog data MAPID
-├── scripts/                  # Helper script (secret scanning, model training, sync)
+├── scripts/                  # Helper script (model training, notebook generation, secret scanning, sync)
 ├── docker-compose.yml        # Orkestrasi stack production
 ├── AGENTS.md                 # Aturan koding & standar repository
 └── README.md                 # Ikhtisar proyek ini
