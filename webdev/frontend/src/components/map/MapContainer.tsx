@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as maplibregl from 'maplibre-gl';
 import { StationId, RoutePlan } from '@/types';
 import { BASEMAP_STYLES, FALLBACK_BASEMAP_STYLES, SURABAYA_DEFAULT_ZOOM } from '@/lib/mapid';
-import { FALLBACK_STATIONS, fetchMapidSurvey, fetchTransitNodes, fetchTransitRoutes, fetchFloodHazard, fetchNighttimeLight, fetchShoppingCenters } from '@/lib/api';
+import { FALLBACK_STATIONS, fetchMapidSurvey, fetchTransitNodes, fetchTransitRoutes, fetchFloodHazard, fetchNighttimeLight, fetchShoppingCenters, fetchGistaru, fetchBhumi } from '@/lib/api';
 import { ChoroplethMode, BasemapStyleKey, LayerControl } from './LayerControl';
 import { PersonaType } from '@/lib/persona';
 import { Layers } from 'lucide-react';
@@ -32,7 +32,11 @@ interface MapContainerProps {
   mapActionTrigger?: any;
   activeRouteIds?: string[];
   activeRoutePlan?: RoutePlan | null;
-  // ATR/BPN Layer Controls
+  // Layer Controls
+  showTransitRoutes?: boolean;
+  onToggleTransitRoutes?: () => void;
+  showEconomicPOI?: boolean;
+  onToggleEconomicPOI?: () => void;
   showGistaru?: boolean;
   showBhumi?: boolean;
 }
@@ -54,6 +58,10 @@ export const MapContainer: React.FC<MapContainerProps> = ({
   mapActionTrigger,
   activeRouteIds = [],
   activeRoutePlan = null,
+  showTransitRoutes = true,
+  onToggleTransitRoutes,
+  showEconomicPOI = false,
+  onToggleEconomicPOI,
   showGistaru = false,
   showBhumi = false,
 }) => {
@@ -62,10 +70,8 @@ export const MapContainer: React.FC<MapContainerProps> = ({
   const [isMapLoaded, setIsMapLoaded] = useState(false);
   const [isLayerControlOpen, setIsLayerControlOpen] = useState(false);
   const [showTransitNodes, setShowTransitNodes] = useState(false);
-  const [showTransitRoutes, setShowTransitRoutes] = useState(true);
   const [showFloodHazard, setShowFloodHazard] = useState(false);
   const [showNighttimeLight, setShowNighttimeLight] = useState(false);
-  const [showShoppingCenters, setShowShoppingCenters] = useState(false);
   const [showIsochrone, setShowIsochrone] = useState(false);
   const [isochroneMode, setIsochroneMode] = useState<IsochroneMode>('walk');
   const [isochroneMinutes, setIsochroneMinutes] = useState<IsochroneMinutes>(15);
@@ -181,7 +187,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
     if (!mapRef.current || !isMapLoaded) return;
     const map = mapRef.current;
     
-    const shouldShow = showTransitRoutes || activePersona === 'commuter';
+    const shouldShow = Boolean(showTransitRoutes);
 
     if (shouldShow) {
       fetchTransitRoutes().then((data) => {
@@ -697,75 +703,6 @@ export const MapContainer: React.FC<MapContainerProps> = ({
     };
   }, [showNighttimeLight, isMapLoaded]);
 
-  // 2.4 Shopping Centers (Pusat Perbelanjaan GEO MAPID 2025) Layer
-  useEffect(() => {
-    let isMounted = true;
-    if (!mapRef.current || !isMapLoaded) return;
-    const map = mapRef.current;
-
-    if (showShoppingCenters) {
-      fetchShoppingCenters().then((data) => {
-        if (!isMounted || !mapRef.current) return;
-        const currentMap = mapRef.current;
-        if (typeof currentMap.getSource !== 'function' || !currentMap.getStyle()) return;
-        if (!data || !data.type) return;
-
-        const beforeStationId = currentMap.getLayer('station-points-halo') ? 'station-points-halo' : undefined;
-
-        if (!currentMap.getSource('shopping-centers-source')) {
-          currentMap.addSource('shopping-centers-source', { type: 'geojson', data });
-          currentMap.addLayer({
-            id: 'shopping-centers-circle',
-            type: 'circle',
-            source: 'shopping-centers-source',
-            paint: {
-              'circle-radius': 6,
-              'circle-color': '#EC4899',
-              'circle-stroke-width': 1.5,
-              'circle-stroke-color': '#ffffff'
-            }
-          }, beforeStationId);
-
-          bringStationMarkersToFront(currentMap);
-
-          currentMap.on('click', 'shopping-centers-circle', (e) => {
-            const props = e.features?.[0]?.properties;
-            if (!props) return;
-            new maplibregl.Popup()
-              .setLngLat(e.lngLat)
-              .setHTML(`
-                <div style="font-family: sans-serif; padding: 4px; font-size: 12px; color: #0f172a;">
-                  <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
-                    <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #ec4899;"></span>
-                    <strong style="color: #db2777;">${props.NAMA || 'Pusat Perbelanjaan'}</strong>
-                  </div>
-                  <div style="color: #475569; font-size: 11px; margin-top: 2px;">${props.ALAMAT || 'Kota Surabaya'}</div>
-                  <div style="color: #64748b; font-size: 9.5px; margin-top: 4px; font-weight: 600;">Sumber: GEO MAPID Data Catalog 2025</div>
-                </div>
-              `)
-              .addTo(currentMap);
-          });
-        } else {
-          const src = currentMap.getSource('shopping-centers-source') as maplibregl.GeoJSONSource | undefined;
-          if (src && typeof src.setData === 'function') {
-            src.setData(data);
-          }
-          if (currentMap.getLayer('shopping-centers-circle')) {
-            currentMap.setLayoutProperty('shopping-centers-circle', 'visibility', 'visible');
-          }
-        }
-      }).catch(() => {});
-    } else {
-      if (map && typeof map.getLayer === 'function' && map.getLayer('shopping-centers-circle')) {
-        map.setLayoutProperty('shopping-centers-circle', 'visibility', 'none');
-      }
-    }
-
-    return () => {
-      isMounted = false;
-    };
-  }, [showShoppingCenters, isMapLoaded]);
-
   // 2.5 Dynamic Basemap Style Switch
   useEffect(() => {
     if (!mapRef.current || currentStyleRef.current === basemapStyle) return;
@@ -813,15 +750,13 @@ export const MapContainer: React.FC<MapContainerProps> = ({
     let isMounted = true;
     if (!mapRef.current || !isMapLoaded) return;
     const map = mapRef.current;
-    const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
     if (showGistaru) {
-      fetch(`${API_BASE}/api/layers/gistaru`)
-        .then((r) => r.json())
+      fetchGistaru()
         .then((data) => {
           if (!isMounted || !mapRef.current) return;
           const m = mapRef.current;
-          if (!m.getStyle()) return;
+          if (!m.getStyle() || !data || !data.type) return;
 
           // Zone-code color palette (RDTR Surabaya sub-zones)
           const ZONA_COLORS: Record<string, string> = {
@@ -857,7 +792,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                   'I', ZONA_COLORS['I'],
                   ZONA_COLORS['default'],
                 ],
-                'fill-opacity': 0.25,
+                'fill-opacity': 0.35,
               },
             }, beforeStationId);
 
@@ -867,9 +802,9 @@ export const MapContainer: React.FC<MapContainerProps> = ({
               type: 'line',
               source: 'gistaru-source',
               paint: {
-                'line-color': '#f59e0b',
-                'line-width': 0.8,
-                'line-opacity': 0.6,
+                'line-color': '#d97706',
+                'line-width': 1.0,
+                'line-opacity': 0.75,
               },
             }, beforeStationId);
 
@@ -923,15 +858,13 @@ export const MapContainer: React.FC<MapContainerProps> = ({
     let isMounted = true;
     if (!mapRef.current || !isMapLoaded) return;
     const map = mapRef.current;
-    const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
     if (showBhumi) {
-      fetch(`${API_BASE}/api/layers/bhumi`)
-        .then((r) => r.json())
+      fetchBhumi()
         .then((data) => {
           if (!isMounted || !mapRef.current) return;
           const m = mapRef.current;
-          if (!m.getStyle()) return;
+          if (!m.getStyle() || !data || !data.type) return;
 
           const beforeStationId = m.getLayer('station-points-halo') ? 'station-points-halo' : undefined;
 
@@ -947,13 +880,13 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                 'fill-color': [
                   'match',
                   ['coalesce', ['get', 'tipehak'], 'HGB'],
-                  'Hak Milik', '#22c55e',
+                  'Hak Milik', '#10b981',
                   'Hak Guna Bangunan', '#3b82f6',
                   'Hak Pakai', '#f59e0b',
                   'Hak Guna Usaha', '#ef4444',
-                  '#94a3b8',
+                  '#06b6d4',
                 ],
-                'fill-opacity': 0.25,
+                'fill-opacity': 0.45,
               },
             }, beforeStationId);
 
@@ -963,10 +896,29 @@ export const MapContainer: React.FC<MapContainerProps> = ({
               type: 'line',
               source: 'bhumi-source',
               paint: {
-                'line-color': '#22c55e',
-                'line-width': 1.0,
-                'line-opacity': 0.7,
+                'line-color': '#059669',
+                'line-width': 2.0,
+                'line-opacity': 0.95,
               },
+            }, beforeStationId);
+
+            // NIB Label
+            m.addLayer({
+              id: 'bhumi-label',
+              type: 'symbol',
+              source: 'bhumi-source',
+              layout: {
+                'text-field': ['concat', 'NIB: ', ['coalesce', ['get', 'nib'], 'Persil']],
+                'text-size': 10,
+                'text-offset': [0, 0],
+                'text-anchor': 'center',
+                'text-allow-overlap': false,
+              },
+              paint: {
+                'text-color': '#ffffff',
+                'text-halo-color': '#064e3b',
+                'text-halo-width': 2.0,
+              }
             }, beforeStationId);
 
             bringStationMarkersToFront(m);
@@ -979,16 +931,23 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                 .setLngLat(e.lngLat)
                 .setHTML(`
                   <div style="font-family:system-ui,sans-serif;font-size:12px;color:#0f172a;padding:6px 4px">
-                    <div style="font-weight:700;font-size:13px;margin-bottom:4px">Bidang Tanah</div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px;">
+                      <span style="background: #10b981; color: #ffffff; padding: 2px 7px; border-radius: 4px; font-size: 9px; font-weight: 700; text-transform: uppercase;">
+                        ${p.tipehak || 'Persil Tanah'}
+                      </span>
+                      <span style="font-size: 10px; color: #64748b; font-weight: 600;">
+                        NIB: ${p.nib || '–'}
+                      </span>
+                    </div>
+                    <div style="font-weight:700;font-size:13px;margin-bottom:4px">Bidang Tanah Terdaftar</div>
                     <div style="color:#475569;margin-bottom:3px">
-                      NIB: <strong>${p.nib || p.persilpasifid || '–'}</strong><br/>
                       Tipe Hak: <strong>${p.tipehak || '–'}</strong><br/>
-                      Luas: <strong>${p.luas ? Math.round(p.luas) + ' m²' : '–'}</strong><br/>
-                      Akurasi: <strong>${p.akurasibidang || '–'}</strong><br/>
-                      Stasiun Terdekat: <strong>${(p._station_id || '–').replace(/_/g, ' ')}</strong>
+                      Luas Bidang: <strong>${p.luas ? Math.round(p.luas).toLocaleString('id-ID') + ' m²' : '–'}</strong><br/>
+                      Status Akurasi: <strong>${p.akurasibidang || 'Terpetakan'}</strong><br/>
+                      Koridor Stasiun: <strong>${(p._station_id || '–').replace(/_/g, ' ').toUpperCase()}</strong>
                     </div>
                     <div style="font-size:9px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:4px;margin-top:4px">
-                      Sumber: BHUMI ATR/BPN — Bidang Tanah Terdaftar
+                      Sumber: BHUMI ATR/BPN — Peta Interaktif Bidang Tanah Terdaftar
                     </div>
                   </div>
                 `)
@@ -1003,15 +962,130 @@ export const MapContainer: React.FC<MapContainerProps> = ({
 
           if (m.getLayer('bhumi-fill')) m.setLayoutProperty('bhumi-fill', 'visibility', 'visible');
           if (m.getLayer('bhumi-line')) m.setLayoutProperty('bhumi-line', 'visibility', 'visible');
+          if (m.getLayer('bhumi-label')) m.setLayoutProperty('bhumi-label', 'visibility', 'visible');
         })
         .catch(() => {});
     } else {
       const m = mapRef.current;
       if (m?.getLayer('bhumi-fill')) m.setLayoutProperty('bhumi-fill', 'visibility', 'none');
       if (m?.getLayer('bhumi-line')) m.setLayoutProperty('bhumi-line', 'visibility', 'none');
+      if (m?.getLayer('bhumi-label')) m.setLayoutProperty('bhumi-label', 'visibility', 'none');
     }
     return () => { isMounted = false; };
   }, [showBhumi, isMapLoaded]);
+
+  // 8. Economic POI — Pusat Perbelanjaan & Retail Komersial (Mall / Shopping Centers)
+  useEffect(() => {
+    let isMounted = true;
+    if (!mapRef.current || !isMapLoaded) return;
+    const map = mapRef.current;
+
+    if (showEconomicPOI) {
+      fetchShoppingCenters().then((data) => {
+        if (!isMounted || !mapRef.current) return;
+        const m = mapRef.current;
+        if (!m.getStyle() || !data || !data.type) return;
+
+        const beforeStationId = m.getLayer('station-points-halo') ? 'station-points-halo' : undefined;
+
+        if (!m.getSource('economic-poi-source')) {
+          m.addSource('economic-poi-source', { type: 'geojson', data });
+
+          // Glowing circular pin
+          m.addLayer({
+            id: 'economic-poi-circle',
+            type: 'circle',
+            source: 'economic-poi-source',
+            paint: {
+              'circle-radius': [
+                'interpolate', ['linear'], ['zoom'],
+                10, 5.0,
+                13, 7.5,
+                16, 11.0
+              ],
+              'circle-color': '#f59e0b', // Amber gold
+              'circle-stroke-width': 2.0,
+              'circle-stroke-color': '#ffffff',
+              'circle-opacity': 0.95,
+            }
+          }, beforeStationId);
+
+          // Mall name label
+          m.addLayer({
+            id: 'economic-poi-label',
+            type: 'symbol',
+            source: 'economic-poi-source',
+            layout: {
+              'text-field': ['get', 'NAMA'],
+              'text-size': [
+                'interpolate', ['linear'], ['zoom'],
+                11, 8.5,
+                13, 10.0,
+                15, 12.0
+              ],
+              'text-offset': [0, 1.3],
+              'text-anchor': 'top',
+              'text-allow-overlap': false,
+            },
+            paint: {
+              'text-color': '#fef08a',
+              'text-halo-color': '#0f172a',
+              'text-halo-width': 2.5,
+              'text-halo-blur': 0.5,
+            }
+          }, beforeStationId);
+
+          bringStationMarkersToFront(m);
+
+          // Click popup
+          m.on('click', 'economic-poi-circle', (e) => {
+            const p = e.features?.[0]?.properties;
+            if (!p) return;
+            new maplibregl.Popup({ maxWidth: '280px' })
+              .setLngLat(e.lngLat)
+              .setHTML(`
+                <div style="font-family:system-ui,sans-serif;font-size:12px;color:#0f172a;padding:6px 4px">
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px;">
+                    <span style="background: #f59e0b; color: #ffffff; padding: 2px 7px; border-radius: 4px; font-size: 9px; font-weight: 700; text-transform: uppercase;">
+                      Economic POI
+                    </span>
+                    <span style="font-size: 10px; color: #059669; font-weight: 700;">
+                      ${p.STATUS || 'Aktif Operasional'}
+                    </span>
+                  </div>
+                  <div style="font-weight:700;font-size:13px;color:#0f172a;margin-bottom:3px">${p.NAMA || 'Pusat Perbelanjaan'}</div>
+                  <div style="font-size:10.5px;color:#475569;margin-bottom:3px">
+                    Kategori: <strong>${p.TIPE_2 || 'Pusat Perbelanjaan'}</strong><br/>
+                    Kecamatan: <strong>${p.KECAMATAN || 'Surabaya'}</strong><br/>
+                    Alamat: <strong>${p.ALAMAT || '–'}</strong>
+                  </div>
+                  <div style="font-size:9px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:4px;margin-top:4px">
+                    Sumber: Data Spasial Pusat Perbelanjaan & Retail Kota Surabaya
+                  </div>
+                </div>
+              `)
+              .addTo(m);
+          });
+
+          m.on('mouseenter', 'economic-poi-circle', () => { if (m.getCanvas()) m.getCanvas().style.cursor = 'pointer'; });
+          m.on('mouseleave', 'economic-poi-circle', () => { if (m.getCanvas()) m.getCanvas().style.cursor = ''; });
+        } else {
+          const src = m.getSource('economic-poi-source') as maplibregl.GeoJSONSource | undefined;
+          if (src) src.setData(data);
+        }
+
+        if (m.getLayer('economic-poi-circle')) m.setLayoutProperty('economic-poi-circle', 'visibility', 'visible');
+        if (m.getLayer('economic-poi-label')) m.setLayoutProperty('economic-poi-label', 'visibility', 'visible');
+      }).catch(() => {});
+    } else {
+      const m = mapRef.current;
+      if (m?.getLayer('economic-poi-circle')) m.setLayoutProperty('economic-poi-circle', 'visibility', 'none');
+      if (m?.getLayer('economic-poi-label')) m.setLayoutProperty('economic-poi-label', 'visibility', 'none');
+    }
+
+    return () => { isMounted = false; };
+  }, [showEconomicPOI, isMapLoaded]);
+
 
   return (
     <div className="relative w-full h-full">
@@ -1059,11 +1133,11 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                   showTransitNodes={showTransitNodes}
                   onToggleTransitNodes={() => setShowTransitNodes((prev) => !prev)}
                   showTransitRoutes={showTransitRoutes}
-                  onToggleTransitRoutes={() => setShowTransitRoutes((prev) => !prev)}
+                  onToggleTransitRoutes={onToggleTransitRoutes ?? (() => {})}
                   routesCount={routesCount}
-                  showShoppingCenters={showShoppingCenters}
-                  onToggleShoppingCenters={() => setShowShoppingCenters((prev) => !prev)}
-                  shoppingCount={shoppingCount}
+                  showShoppingCenters={showEconomicPOI}
+                  onToggleShoppingCenters={onToggleEconomicPOI ?? (() => {})}
+                  shoppingCount={35}
                   showFloodHazard={showFloodHazard}
                   onToggleFloodHazard={() => setShowFloodHazard((prev) => !prev)}
                   showNighttimeLight={showNighttimeLight}

@@ -1709,6 +1709,34 @@ export async function fetchShoppingCenters(): Promise<any> {
   return { type: 'FeatureCollection', features: [] };
 }
 
+export async function fetchGistaru(): Promise<any> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/layers/gistaru`);
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('Backend offline, loading real GISTARU Pola Ruang dataset:', err);
+  }
+  try {
+    const res = await fetch('/data/gistaru_pola_ruang_surabaya.geojson');
+    if (res.ok) return await res.json();
+  } catch (e) {}
+  return { type: 'FeatureCollection', features: [] };
+}
+
+export async function fetchBhumi(): Promise<any> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/layers/bhumi`);
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('Backend offline, loading real BHUMI Persil dataset:', err);
+  }
+  try {
+    const res = await fetch('/data/bhumi_persil_surabaya.geojson');
+    if (res.ok) return await res.json();
+  } catch (e) {}
+  return { type: 'FeatureCollection', features: [] };
+}
+
 export async function fetchStationRealPOIs(stationId: string): Promise<any[]> {
   try {
     const res = await fetch('/data/station_real_pois.json');

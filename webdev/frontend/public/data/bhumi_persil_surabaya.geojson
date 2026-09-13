@@ -1,1 +1,4887 @@
-{"type": "FeatureCollection", "name": "Bidang Tanah Terdaftar — BHUMI ATR/BPN", "attribution": "Data: Kementerian ATR/BPN — Peta Interaktif BHUMI (Persil Bidang Tanah Terdaftar)", "features": [{"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.75171549, -7.26772762], [112.75217323, -7.26772762], [112.75217323, -7.26421803], [112.75171549, -7.26421803], [112.75171549, -7.26772762]]]}, "properties": {"persilpasifid": "U2FsdGVkX19U+Iz6yQVUkK9d4jCv5u5XapzUKQLdr9DZCgOGBq5KrnX6XZ/VRRce43ZEzxKnGXQBkJ1inY4jIg==", "tipehak": "Hak Pakai", "luas": 7410, "nib": "02521", "akurasibidang": null, "_station_id": "gubeng"}, "type": "Feature", "id": "Persil.fid--2f4fae0_1a09b911202_-6040", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.75171549, -7.26772762], [112.75217416, -7.26772762], [112.75217416, -7.26420828], [112.75171549, -7.26420828], [112.75171549, -7.26772762]]]}, "properties": {"persilpasifid": "U2FsdGVkX1/iduKNVbjNMT76NARJw8Y4ErwXVhvM98mkqtTzzPhMWnhPRjiz+4HwmPIgvc6BXKutnP1bUgq/7A==", "tipehak": "Kosong", "luas": 12921, "nib": null, "akurasibidang": null, "_station_id": "gubeng"}, "type": "Feature", "id": "Persil.fid--2f4fae0_1a09b911202_-603f", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.75188807, -7.26766007], [112.75368471, -7.26766007], [112.75368471, -7.25597416], [112.75188807, -7.25597416], [112.75188807, -7.26766007]]]}, "properties": {"persilpasifid": "U2FsdGVkX18esYtj2QNSEmaq4lVLlqWPGRDznWmdrxU/ThRRj8pUJUM88uUssSk/BReQ84F3TfsgYTF9lUTt+A==", "tipehak": "Hak Pakai", "luas": 117427, "nib": "00414", "akurasibidang": null, "_station_id": "gubeng"}, "type": "Feature", "id": "Persil.fid--2f4fae0_1a09b911202_-603d", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.72959532, -7.24888615], [112.73239273, -7.24888615], [112.73239273, -7.24643984], [112.72959532, -7.24643984], [112.72959532, -7.24888615]]]}, "properties": {"persilpasifid": "U2FsdGVkX183wXhMe3oQHGKmh0bF61xlw23RMmlqMYCJXXPUzbNZaUtCu45LqA3voSaxftaXEhPxHgCBQHhSsA==", "tipehak": "Hak Guna Bangunan", "luas": 26403, "nib": "08382", "akurasibidang": null, "_station_id": "pasar_turi"}, "type": "Feature", "id": "Persil.fid--2f4fae0_1a09b911202_-5fd2", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.72923453, -7.24841405], [112.73192771, -7.24841405], [112.73192771, -7.24620579], [112.72923453, -7.24620579], [112.72923453, -7.24841405]]]}, "properties": {"persilpasifid": "U2FsdGVkX1/Vs4THDyI/D+XdO/tXArMpJ4hIl79rmUmDdFfBAQyy9UKABVMlzCYKeipWpfNHeklrBXqZoDQgoQ==", "tipehak": "Hak Guna Bangunan", "luas": 21908, "nib": "08327", "akurasibidang": null, "_station_id": "pasar_turi"}, "type": "Feature", "id": "Persil.fid--2f4fae0_1a09b911202_-5fcf", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.74315869, -7.23714589], [112.74332336, -7.23714589], [112.74332336, -7.23709816], [112.74315869, -7.23709816], [112.74315869, -7.23714589]]]}, "properties": {"persilpasifid": "U2FsdGVkX18xuNp2OvEOEpKa0oIMV3U1LmhgQdqKTXd87rPY8ttsd5MO5XHwCNaZBk0gvkyUV2rdXWq0hP7Ekw==", "tipehak": "Kosong", "luas": 70, "nib": null, "akurasibidang": null, "_station_id": "semut"}, "type": "Feature", "id": "Persil.fid--72dc2eb5_1a09b8fa6f0_-d4b", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.7431242, -7.23713685], [112.74327481, -7.23713685], [112.74327481, -7.23692805], [112.7431242, -7.23692805], [112.7431242, -7.23713685]]]}, "properties": {"persilpasifid": "U2FsdGVkX1+rI9Gp+/9/l3nSz0L2lZcJ+hVCNV1Q6UtGZPL9Qt2a9amKI9KRHGrFzdEOzZu4WyPU7WG1DzSIww==", "tipehak": "Hak Milik", "luas": 276, "nib": "01832", "akurasibidang": null, "_station_id": "semut"}, "type": "Feature", "id": "Persil.fid--72dc2eb5_1a09b8fa6f0_-d48", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.74311888, -7.23735319], [112.74319484, -7.23735319], [112.74319484, -7.23721989], [112.74311888, -7.23721989], [112.74311888, -7.23735319]]]}, "properties": {"persilpasifid": "U2FsdGVkX19/KWaqT/+O+FTj7qXfX0B8DFt41030hjSU57VXsKn3+uFRrJazzyLsP6Nzr4hvRmITJJediHOe0g==", "tipehak": "Kosong", "luas": 75, "nib": null, "akurasibidang": null, "_station_id": "semut"}, "type": "Feature", "id": "Persil.fid--72dc2eb5_1a09b8fa6f0_-d47", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.74316394, -7.23734314], [112.74323909, -7.23734314], [112.74323909, -7.23721033], [112.74316394, -7.23721033], [112.74316394, -7.23734314]]]}, "properties": {"persilpasifid": "U2FsdGVkX1+TaMtFq+F0oTdrsa/0vdhDrsUrTIIH/xYVnTTHbBHrpITcF05M8iFnftFk2n9/xFBmA091QjRBVQ==", "tipehak": "Kosong", "luas": 61, "nib": null, "akurasibidang": null, "_station_id": "semut"}, "type": "Feature", "id": "Persil.fid--72dc2eb5_1a09b8fa6f0_-d46", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.74303121, -7.23733586], [112.74314641, -7.23733586], [112.74314641, -7.23722639], [112.74303121, -7.23722639], [112.74303121, -7.23733586]]]}, "properties": {"persilpasifid": "U2FsdGVkX1++051kLEO9W6NeRDTHyZ7ACXo3lIQH09sxB3wAUMlqgLH1st9CMzcuwgH1heecXngiqHow6YT6gw==", "tipehak": "Kosong", "luas": 91, "nib": null, "akurasibidang": null, "_station_id": "semut"}, "type": "Feature", "id": "Persil.fid--72dc2eb5_1a09b8fa6f0_-d44", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.73661466, -7.30453026], [112.73972966, -7.30453026], [112.73972966, -7.30008332], [112.73661466, -7.30008332], [112.73661466, -7.30453026]]]}, "properties": {"persilpasifid": "U2FsdGVkX1/hQPROhy/4UE+4PyDp1ApvF/e6BCrWAntzWcDed+gd8uf7wh1w29FOv9fOWRxqNKMeZ35bPDsHiw==", "tipehak": "Kosong", "luas": 49630, "nib": null, "akurasibidang": null, "_station_id": "wonokromo"}, "type": "Feature", "id": "Persil.fid--2f4fae0_1a09b911202_-5f37", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.72955983, -7.354758], [112.7299654, -7.354758], [112.7299654, -7.35423819], [112.72955983, -7.35423819], [112.72955983, -7.354758]]]}, "properties": {"persilpasifid": "U2FsdGVkX1+dlYOpLD/esODjSfQQTMYOihSuGeFaXJlwoGPmN705aclTI9aTJnI1KR0ms6RS67KDmTmryVvCVg==", "tipehak": "Kosong", "luas": 1672, "nib": null, "akurasibidang": 0.19, "_station_id": "waru"}, "type": "Feature", "id": "Persil.fid--750e27e5_1a09b918af4_-283b", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.72960023, -7.35510738], [112.72995637, -7.35510738], [112.72995637, -7.35474345], [112.72960023, -7.35474345], [112.72960023, -7.35510738]]]}, "properties": {"persilpasifid": "U2FsdGVkX1/7wBI273HbXKddsJyRFCuuCj7+2yy89E8Qknaj6AvBWSlSwBLzruPyHSRmAKY54N4UlpcEPnrBDw==", "tipehak": "Hak Milik", "luas": 1358, "nib": "00345", "akurasibidang": null, "_station_id": "waru"}, "type": "Feature", "id": "Persil.fid--750e27e5_1a09b918af4_-2834", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.71994328, -7.30724298], [112.73789286, -7.30724298], [112.73789286, -7.29817667], [112.71994328, -7.29817667], [112.71994328, -7.30724298]]]}, "properties": {"persilpasifid": "U2FsdGVkX1+MHjD42NoyvtdzzRamAJnbMRJJuRB2KZcYzPCD62I5PkRHnH6+x6WMaIPH+2rI5BoP/Ysr8B/F0w==", "tipehak": "Kosong", "luas": 64140, "nib": null, "akurasibidang": null, "_station_id": "terminal_joyoboyo"}, "type": "Feature", "id": "Persil.fid--72dc2eb5_1a09b8fa6f0_-c72", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.71994705, -7.30802485], [112.73735315, -7.30802485], [112.73735315, -7.29938146], [112.71994705, -7.29938146], [112.71994705, -7.30802485]]]}, "properties": {"persilpasifid": "U2FsdGVkX1/JQlFpP2b97bZpxF7zRw3DlD7JPZXFn5qmwUeYzrd78zWsDdq2yzTRJRaFy/wEd8zkhHGAqrRF5g==", "tipehak": "Kosong", "luas": 78490, "nib": null, "akurasibidang": null, "_station_id": "terminal_joyoboyo"}, "type": "Feature", "id": "Persil.fid--72dc2eb5_1a09b8fa6f0_-c71", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.7482254, -7.28770279], [112.74827475, -7.28770279], [112.74827475, -7.28760547], [112.7482254, -7.28760547], [112.7482254, -7.28770279]]]}, "properties": {"persilpasifid": "U2FsdGVkX1/2uMGDkNiS3Y7KGbtWGoFZgevK4oDYAwFpFzwcrfGGHPAzYbKBhsO+b/06or0PsIEJyK6tjCqGXA==", "tipehak": "Kosong", "luas": 36, "nib": null, "akurasibidang": null, "_station_id": "ngagel"}, "type": "Feature", "id": "Persil.fid--2f4fae0_1a09b911202_-5e28", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.74825857, -7.28771267], [112.74833156, -7.28771267], [112.74833156, -7.28761148], [112.74825857, -7.28761148], [112.74825857, -7.28771267]]]}, "properties": {"persilpasifid": "U2FsdGVkX18JFLAst2jjRVnQPJEpsdbAMylSazRN0QKoODh/jW6LAY6nXCnWVURwcOwR+SBD54ejG/S/KpDPpQ==", "tipehak": "Kosong", "luas": 64, "nib": null, "akurasibidang": null, "_station_id": "ngagel"}, "type": "Feature", "id": "Persil.fid--2f4fae0_1a09b911202_-5e27", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.74822904, -7.28782186], [112.74828542, -7.28782186], [112.74828542, -7.28771163], [112.74822904, -7.28771163], [112.74822904, -7.28782186]]]}, "properties": {"persilpasifid": "U2FsdGVkX1+xuogtXEH3TblU6bOBq08/lm7Xz6cM6LjXL/TsTarwVnGf7fVglXYSfC8VXTMAx31Ix5zIsK1l8g==", "tipehak": "Kosong", "luas": 51, "nib": null, "akurasibidang": null, "_station_id": "ngagel"}, "type": "Feature", "id": "Persil.fid--2f4fae0_1a09b911202_-5e26", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.7482683, -7.28783178], [112.74834283, -7.28783178], [112.74834283, -7.28771824], [112.7482683, -7.28771824], [112.7482683, -7.28783178]]]}, "properties": {"persilpasifid": "U2FsdGVkX19uKOkm0XAyKMTmpj4fNBzXEjT2lTsySr0FE1BCj+1qYvbicN00+u57RiseOHChbVGmTaSagHoSnQ==", "tipehak": "Kosong", "luas": 75, "nib": null, "akurasibidang": null, "_station_id": "ngagel"}, "type": "Feature", "id": "Persil.fid--2f4fae0_1a09b911202_-5e25", "geometry_name": "batas"}, {"geometry": null, "bbox": {"type": "Polygon", "coordinates": [[[112.7482187, -7.28804926], [112.74832132, -7.28804926], [112.74832132, -7.28782074], [112.7482187, -7.28782074], [112.7482187, -7.28804926]]]}, "properties": {"persilpasifid": "U2FsdGVkX1/ZPBDjX6oNzrnTCFqqAqH8YI1mqH1ih44D+ev+h67qPwmWPdPiQamw4/Bs0eewx825cjsbkdi+XA==", "tipehak": "Kosong", "luas": 174, "nib": null, "akurasibidang": null, "_station_id": "ngagel"}, "type": "Feature", "id": "Persil.fid--2f4fae0_1a09b911202_-5e24", "geometry_name": "batas"}]}
+{
+  "type": "FeatureCollection",
+  "name": "Bidang Tanah Terdaftar — BHUMI ATR/BPN",
+  "attribution": "Data: Kementerian ATR/BPN — Peta Interaktif BHUMI (Persil Bidang Tanah Terdaftar)",
+  "features": [
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.75171549,
+              -7.26772762
+            ],
+            [
+              112.75217323,
+              -7.26772762
+            ],
+            [
+              112.75217323,
+              -7.26421803
+            ],
+            [
+              112.75171549,
+              -7.26421803
+            ],
+            [
+              112.75171549,
+              -7.26772762
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.75171549,
+        -7.26772762,
+        112.75217323,
+        -7.26421803
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX19U+Iz6yQVUkK9d4jCv5u5XapzUKQLdr9DZCgOGBq5KrnX6XZ/VRRce43ZEzxKnGXQBkJ1inY4jIg==",
+        "tipehak": "Hak Pakai",
+        "luas": 7410,
+        "nib": "02521",
+        "akurasibidang": null,
+        "_station_id": "gubeng"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--2f4fae0_1a09b911202_-6040",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.75171549,
+              -7.26772762
+            ],
+            [
+              112.75217416,
+              -7.26772762
+            ],
+            [
+              112.75217416,
+              -7.26420828
+            ],
+            [
+              112.75171549,
+              -7.26420828
+            ],
+            [
+              112.75171549,
+              -7.26772762
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.75171549,
+        -7.26772762,
+        112.75217416,
+        -7.26420828
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX1/iduKNVbjNMT76NARJw8Y4ErwXVhvM98mkqtTzzPhMWnhPRjiz+4HwmPIgvc6BXKutnP1bUgq/7A==",
+        "tipehak": "Kosong",
+        "luas": 12921,
+        "nib": null,
+        "akurasibidang": null,
+        "_station_id": "gubeng"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--2f4fae0_1a09b911202_-603f",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.75188807,
+              -7.26766007
+            ],
+            [
+              112.75368471,
+              -7.26766007
+            ],
+            [
+              112.75368471,
+              -7.25597416
+            ],
+            [
+              112.75188807,
+              -7.25597416
+            ],
+            [
+              112.75188807,
+              -7.26766007
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.75188807,
+        -7.26766007,
+        112.75368471,
+        -7.25597416
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX18esYtj2QNSEmaq4lVLlqWPGRDznWmdrxU/ThRRj8pUJUM88uUssSk/BReQ84F3TfsgYTF9lUTt+A==",
+        "tipehak": "Hak Pakai",
+        "luas": 117427,
+        "nib": "00414",
+        "akurasibidang": null,
+        "_station_id": "gubeng"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--2f4fae0_1a09b911202_-603d",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.72959532,
+              -7.24888615
+            ],
+            [
+              112.73239273,
+              -7.24888615
+            ],
+            [
+              112.73239273,
+              -7.24643984
+            ],
+            [
+              112.72959532,
+              -7.24643984
+            ],
+            [
+              112.72959532,
+              -7.24888615
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.72959532,
+        -7.24888615,
+        112.73239273,
+        -7.24643984
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX183wXhMe3oQHGKmh0bF61xlw23RMmlqMYCJXXPUzbNZaUtCu45LqA3voSaxftaXEhPxHgCBQHhSsA==",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 26403,
+        "nib": "08382",
+        "akurasibidang": null,
+        "_station_id": "pasar_turi"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--2f4fae0_1a09b911202_-5fd2",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.72923453,
+              -7.24841405
+            ],
+            [
+              112.73192771,
+              -7.24841405
+            ],
+            [
+              112.73192771,
+              -7.24620579
+            ],
+            [
+              112.72923453,
+              -7.24620579
+            ],
+            [
+              112.72923453,
+              -7.24841405
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.72923453,
+        -7.24841405,
+        112.73192771,
+        -7.24620579
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX1/Vs4THDyI/D+XdO/tXArMpJ4hIl79rmUmDdFfBAQyy9UKABVMlzCYKeipWpfNHeklrBXqZoDQgoQ==",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 21908,
+        "nib": "08327",
+        "akurasibidang": null,
+        "_station_id": "pasar_turi"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--2f4fae0_1a09b911202_-5fcf",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.74315869,
+              -7.23714589
+            ],
+            [
+              112.74332336,
+              -7.23714589
+            ],
+            [
+              112.74332336,
+              -7.23709816
+            ],
+            [
+              112.74315869,
+              -7.23709816
+            ],
+            [
+              112.74315869,
+              -7.23714589
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.74315869,
+        -7.23714589,
+        112.74332336,
+        -7.23709816
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX18xuNp2OvEOEpKa0oIMV3U1LmhgQdqKTXd87rPY8ttsd5MO5XHwCNaZBk0gvkyUV2rdXWq0hP7Ekw==",
+        "tipehak": "Kosong",
+        "luas": 70,
+        "nib": null,
+        "akurasibidang": null,
+        "_station_id": "semut"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--72dc2eb5_1a09b8fa6f0_-d4b",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.7431242,
+              -7.23713685
+            ],
+            [
+              112.74327481,
+              -7.23713685
+            ],
+            [
+              112.74327481,
+              -7.23692805
+            ],
+            [
+              112.7431242,
+              -7.23692805
+            ],
+            [
+              112.7431242,
+              -7.23713685
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.7431242,
+        -7.23713685,
+        112.74327481,
+        -7.23692805
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX1+rI9Gp+/9/l3nSz0L2lZcJ+hVCNV1Q6UtGZPL9Qt2a9amKI9KRHGrFzdEOzZu4WyPU7WG1DzSIww==",
+        "tipehak": "Hak Milik",
+        "luas": 276,
+        "nib": "01832",
+        "akurasibidang": null,
+        "_station_id": "semut"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--72dc2eb5_1a09b8fa6f0_-d48",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.74311888,
+              -7.23735319
+            ],
+            [
+              112.74319484,
+              -7.23735319
+            ],
+            [
+              112.74319484,
+              -7.23721989
+            ],
+            [
+              112.74311888,
+              -7.23721989
+            ],
+            [
+              112.74311888,
+              -7.23735319
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.74311888,
+        -7.23735319,
+        112.74319484,
+        -7.23721989
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX19/KWaqT/+O+FTj7qXfX0B8DFt41030hjSU57VXsKn3+uFRrJazzyLsP6Nzr4hvRmITJJediHOe0g==",
+        "tipehak": "Kosong",
+        "luas": 75,
+        "nib": null,
+        "akurasibidang": null,
+        "_station_id": "semut"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--72dc2eb5_1a09b8fa6f0_-d47",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.74316394,
+              -7.23734314
+            ],
+            [
+              112.74323909,
+              -7.23734314
+            ],
+            [
+              112.74323909,
+              -7.23721033
+            ],
+            [
+              112.74316394,
+              -7.23721033
+            ],
+            [
+              112.74316394,
+              -7.23734314
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.74316394,
+        -7.23734314,
+        112.74323909,
+        -7.23721033
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX1+TaMtFq+F0oTdrsa/0vdhDrsUrTIIH/xYVnTTHbBHrpITcF05M8iFnftFk2n9/xFBmA091QjRBVQ==",
+        "tipehak": "Kosong",
+        "luas": 61,
+        "nib": null,
+        "akurasibidang": null,
+        "_station_id": "semut"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--72dc2eb5_1a09b8fa6f0_-d46",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.74303121,
+              -7.23733586
+            ],
+            [
+              112.74314641,
+              -7.23733586
+            ],
+            [
+              112.74314641,
+              -7.23722639
+            ],
+            [
+              112.74303121,
+              -7.23722639
+            ],
+            [
+              112.74303121,
+              -7.23733586
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.74303121,
+        -7.23733586,
+        112.74314641,
+        -7.23722639
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX1++051kLEO9W6NeRDTHyZ7ACXo3lIQH09sxB3wAUMlqgLH1st9CMzcuwgH1heecXngiqHow6YT6gw==",
+        "tipehak": "Kosong",
+        "luas": 91,
+        "nib": null,
+        "akurasibidang": null,
+        "_station_id": "semut"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--72dc2eb5_1a09b8fa6f0_-d44",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73661466,
+              -7.30453026
+            ],
+            [
+              112.73972966,
+              -7.30453026
+            ],
+            [
+              112.73972966,
+              -7.30008332
+            ],
+            [
+              112.73661466,
+              -7.30008332
+            ],
+            [
+              112.73661466,
+              -7.30453026
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73661466,
+        -7.30453026,
+        112.73972966,
+        -7.30008332
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX1/hQPROhy/4UE+4PyDp1ApvF/e6BCrWAntzWcDed+gd8uf7wh1w29FOv9fOWRxqNKMeZ35bPDsHiw==",
+        "tipehak": "Kosong",
+        "luas": 49630,
+        "nib": null,
+        "akurasibidang": null,
+        "_station_id": "wonokromo"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--2f4fae0_1a09b911202_-5f37",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.72955983,
+              -7.354758
+            ],
+            [
+              112.7299654,
+              -7.354758
+            ],
+            [
+              112.7299654,
+              -7.35423819
+            ],
+            [
+              112.72955983,
+              -7.35423819
+            ],
+            [
+              112.72955983,
+              -7.354758
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.72955983,
+        -7.354758,
+        112.7299654,
+        -7.35423819
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX1+dlYOpLD/esODjSfQQTMYOihSuGeFaXJlwoGPmN705aclTI9aTJnI1KR0ms6RS67KDmTmryVvCVg==",
+        "tipehak": "Kosong",
+        "luas": 1672,
+        "nib": null,
+        "akurasibidang": 0.19,
+        "_station_id": "waru"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--750e27e5_1a09b918af4_-283b",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.72960023,
+              -7.35510738
+            ],
+            [
+              112.72995637,
+              -7.35510738
+            ],
+            [
+              112.72995637,
+              -7.35474345
+            ],
+            [
+              112.72960023,
+              -7.35474345
+            ],
+            [
+              112.72960023,
+              -7.35510738
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.72960023,
+        -7.35510738,
+        112.72995637,
+        -7.35474345
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX1/7wBI273HbXKddsJyRFCuuCj7+2yy89E8Qknaj6AvBWSlSwBLzruPyHSRmAKY54N4UlpcEPnrBDw==",
+        "tipehak": "Hak Milik",
+        "luas": 1358,
+        "nib": "00345",
+        "akurasibidang": null,
+        "_station_id": "waru"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--750e27e5_1a09b918af4_-2834",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.71994328,
+              -7.30724298
+            ],
+            [
+              112.73789286,
+              -7.30724298
+            ],
+            [
+              112.73789286,
+              -7.29817667
+            ],
+            [
+              112.71994328,
+              -7.29817667
+            ],
+            [
+              112.71994328,
+              -7.30724298
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.71994328,
+        -7.30724298,
+        112.73789286,
+        -7.29817667
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX1+MHjD42NoyvtdzzRamAJnbMRJJuRB2KZcYzPCD62I5PkRHnH6+x6WMaIPH+2rI5BoP/Ysr8B/F0w==",
+        "tipehak": "Kosong",
+        "luas": 64140,
+        "nib": null,
+        "akurasibidang": null,
+        "_station_id": "terminal_joyoboyo"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--72dc2eb5_1a09b8fa6f0_-c72",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.71994705,
+              -7.30802485
+            ],
+            [
+              112.73735315,
+              -7.30802485
+            ],
+            [
+              112.73735315,
+              -7.29938146
+            ],
+            [
+              112.71994705,
+              -7.29938146
+            ],
+            [
+              112.71994705,
+              -7.30802485
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.71994705,
+        -7.30802485,
+        112.73735315,
+        -7.29938146
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX1/JQlFpP2b97bZpxF7zRw3DlD7JPZXFn5qmwUeYzrd78zWsDdq2yzTRJRaFy/wEd8zkhHGAqrRF5g==",
+        "tipehak": "Kosong",
+        "luas": 78490,
+        "nib": null,
+        "akurasibidang": null,
+        "_station_id": "terminal_joyoboyo"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--72dc2eb5_1a09b8fa6f0_-c71",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.7482254,
+              -7.28770279
+            ],
+            [
+              112.74827475,
+              -7.28770279
+            ],
+            [
+              112.74827475,
+              -7.28760547
+            ],
+            [
+              112.7482254,
+              -7.28760547
+            ],
+            [
+              112.7482254,
+              -7.28770279
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.7482254,
+        -7.28770279,
+        112.74827475,
+        -7.28760547
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX1/2uMGDkNiS3Y7KGbtWGoFZgevK4oDYAwFpFzwcrfGGHPAzYbKBhsO+b/06or0PsIEJyK6tjCqGXA==",
+        "tipehak": "Kosong",
+        "luas": 36,
+        "nib": null,
+        "akurasibidang": null,
+        "_station_id": "ngagel"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--2f4fae0_1a09b911202_-5e28",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.74825857,
+              -7.28771267
+            ],
+            [
+              112.74833156,
+              -7.28771267
+            ],
+            [
+              112.74833156,
+              -7.28761148
+            ],
+            [
+              112.74825857,
+              -7.28761148
+            ],
+            [
+              112.74825857,
+              -7.28771267
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.74825857,
+        -7.28771267,
+        112.74833156,
+        -7.28761148
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX18JFLAst2jjRVnQPJEpsdbAMylSazRN0QKoODh/jW6LAY6nXCnWVURwcOwR+SBD54ejG/S/KpDPpQ==",
+        "tipehak": "Kosong",
+        "luas": 64,
+        "nib": null,
+        "akurasibidang": null,
+        "_station_id": "ngagel"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--2f4fae0_1a09b911202_-5e27",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.74822904,
+              -7.28782186
+            ],
+            [
+              112.74828542,
+              -7.28782186
+            ],
+            [
+              112.74828542,
+              -7.28771163
+            ],
+            [
+              112.74822904,
+              -7.28771163
+            ],
+            [
+              112.74822904,
+              -7.28782186
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.74822904,
+        -7.28782186,
+        112.74828542,
+        -7.28771163
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX1+xuogtXEH3TblU6bOBq08/lm7Xz6cM6LjXL/TsTarwVnGf7fVglXYSfC8VXTMAx31Ix5zIsK1l8g==",
+        "tipehak": "Kosong",
+        "luas": 51,
+        "nib": null,
+        "akurasibidang": null,
+        "_station_id": "ngagel"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--2f4fae0_1a09b911202_-5e26",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.7482683,
+              -7.28783178
+            ],
+            [
+              112.74834283,
+              -7.28783178
+            ],
+            [
+              112.74834283,
+              -7.28771824
+            ],
+            [
+              112.7482683,
+              -7.28771824
+            ],
+            [
+              112.7482683,
+              -7.28783178
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.7482683,
+        -7.28783178,
+        112.74834283,
+        -7.28771824
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX19uKOkm0XAyKMTmpj4fNBzXEjT2lTsySr0FE1BCj+1qYvbicN00+u57RiseOHChbVGmTaSagHoSnQ==",
+        "tipehak": "Kosong",
+        "luas": 75,
+        "nib": null,
+        "akurasibidang": null,
+        "_station_id": "ngagel"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--2f4fae0_1a09b911202_-5e25",
+      "geometry_name": "batas"
+    },
+    {
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.7482187,
+              -7.28804926
+            ],
+            [
+              112.74832132,
+              -7.28804926
+            ],
+            [
+              112.74832132,
+              -7.28782074
+            ],
+            [
+              112.7482187,
+              -7.28782074
+            ],
+            [
+              112.7482187,
+              -7.28804926
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.7482187,
+        -7.28804926,
+        112.74832132,
+        -7.28782074
+      ],
+      "properties": {
+        "persilpasifid": "U2FsdGVkX1/ZPBDjX6oNzrnTCFqqAqH8YI1mqH1ih44D+ev+h67qPwmWPdPiQamw4/Bs0eewx825cjsbkdi+XA==",
+        "tipehak": "Kosong",
+        "luas": 174,
+        "nib": null,
+        "akurasibidang": null,
+        "_station_id": "ngagel"
+      },
+      "type": "Feature",
+      "id": "Persil.fid--2f4fae0_1a09b911202_-5e24",
+      "geometry_name": "batas"
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_gubeng_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.7534313571648,
+              -7.26549708060218
+            ],
+            [
+              112.75386386596031,
+              -7.26549708060218
+            ],
+            [
+              112.75386386596031,
+              -7.2651301173807346
+            ],
+            [
+              112.7534313571648,
+              -7.2651301173807346
+            ],
+            [
+              112.7534313571648,
+              -7.26549708060218
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.7534313571648,
+        -7.26549708060218,
+        112.75386386596031,
+        -7.2651301173807346
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-GUBE-001",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 1953,
+        "nib": "02679",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "gubeng"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_gubeng_2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.75246190055847,
+              -7.2639918948471385
+            ],
+            [
+              112.75293847710438,
+              -7.2639918948471385
+            ],
+            [
+              112.75293847710438,
+              -7.263682955681307
+            ],
+            [
+              112.75246190055847,
+              -7.263682955681307
+            ],
+            [
+              112.75246190055847,
+              -7.2639918948471385
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.75246190055847,
+        -7.2639918948471385,
+        112.75293847710438,
+        -7.263682955681307
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-GUBE-002",
+        "tipehak": "Hak Milik",
+        "luas": 1812,
+        "nib": "04582",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "gubeng"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_gubeng_3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.75041478968849,
+              -7.263439440197779
+            ],
+            [
+              112.75097959557236,
+              -7.263439440197779
+            ],
+            [
+              112.75097959557236,
+              -7.262929042705702
+            ],
+            [
+              112.75041478968849,
+              -7.262929042705702
+            ],
+            [
+              112.75041478968849,
+              -7.263439440197779
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.75041478968849,
+        -7.263439440197779,
+        112.75097959557236,
+        -7.262929042705702
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-GUBE-003",
+        "tipehak": "Hak Milik",
+        "luas": 3547,
+        "nib": "07873",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "gubeng"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_pasar_turi_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73354089813351,
+              -7.247959533648793
+            ],
+            [
+              112.73389284776142,
+              -7.247959533648793
+            ],
+            [
+              112.73389284776142,
+              -7.2474177878732435
+            ],
+            [
+              112.73354089813351,
+              -7.2474177878732435
+            ],
+            [
+              112.73354089813351,
+              -7.247959533648793
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73354089813351,
+        -7.247959533648793,
+        112.73389284776142,
+        -7.2474177878732435
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-PASA-001",
+        "tipehak": "Hak Milik",
+        "luas": 2346,
+        "nib": "07924",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "pasar_turi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_pasar_turi_2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73247174608801,
+              -7.2452694898385195
+            ],
+            [
+              112.73292272445156,
+              -7.2452694898385195
+            ],
+            [
+              112.73292272445156,
+              -7.244941666085505
+            ],
+            [
+              112.73247174608801,
+              -7.244941666085505
+            ],
+            [
+              112.73247174608801,
+              -7.2452694898385195
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73247174608801,
+        -7.2452694898385195,
+        112.73292272445156,
+        -7.244941666085505
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-PASA-002",
+        "tipehak": "Hak Milik",
+        "luas": 1819,
+        "nib": "02584",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "pasar_turi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_pasar_turi_3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.72951554649886,
+              -7.246201850976307
+            ],
+            [
+              112.72987858163172,
+              -7.246201850976307
+            ],
+            [
+              112.72987858163172,
+              -7.245764023512406
+            ],
+            [
+              112.72951554649886,
+              -7.245764023512406
+            ],
+            [
+              112.72951554649886,
+              -7.246201850976307
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.72951554649886,
+        -7.246201850976307,
+        112.72987858163172,
+        -7.245764023512406
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-PASA-003",
+        "tipehak": "Hak Pakai",
+        "luas": 1956,
+        "nib": "03045",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "pasar_turi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_pasar_turi_4",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.72769958106106,
+              -7.247916305194719
+            ],
+            [
+              112.72829840246034,
+              -7.247916305194719
+            ],
+            [
+              112.72829840246034,
+              -7.247430749269011
+            ],
+            [
+              112.72769958106106,
+              -7.247430749269011
+            ],
+            [
+              112.72769958106106,
+              -7.247916305194719
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.72769958106106,
+        -7.247916305194719,
+        112.72829840246034,
+        -7.247430749269011
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-PASA-004",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 3578,
+        "nib": "06925",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "pasar_turi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_semut_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.74447713820499,
+              -7.237263310890993
+            ],
+            [
+              112.74489550768769,
+              -7.237263310890993
+            ],
+            [
+              112.74489550768769,
+              -7.236876494501912
+            ],
+            [
+              112.74447713820499,
+              -7.236876494501912
+            ],
+            [
+              112.74447713820499,
+              -7.237263310890993
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.74447713820499,
+        -7.237263310890993,
+        112.74489550768769,
+        -7.236876494501912
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-SEMU-001",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 1991,
+        "nib": "02307",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "semut"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_wonokromo_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.74029299835426,
+              -7.301344963770761
+            ],
+            [
+              112.74077902144496,
+              -7.301344963770761
+            ],
+            [
+              112.74077902144496,
+              -7.300794730642769
+            ],
+            [
+              112.74029299835426,
+              -7.300794730642769
+            ],
+            [
+              112.74029299835426,
+              -7.301344963770761
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.74029299835426,
+        -7.301344963770761,
+        112.74077902144496,
+        -7.300794730642769
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-WONO-001",
+        "tipehak": "Hak Milik",
+        "luas": 3291,
+        "nib": "03664",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "wonokromo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_wonokromo_2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.7391988379541,
+              -7.300015530310817
+            ],
+            [
+              112.73982983433042,
+              -7.300015530310817
+            ],
+            [
+              112.73982983433042,
+              -7.299521119695243
+            ],
+            [
+              112.7391988379541,
+              -7.299521119695243
+            ],
+            [
+              112.7391988379541,
+              -7.300015530310817
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.7391988379541,
+        -7.300015530310817,
+        112.73982983433042,
+        -7.299521119695243
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-WONO-002",
+        "tipehak": "Hak Milik",
+        "luas": 3839,
+        "nib": "03803",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "wonokromo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_wonokromo_3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73709251348355,
+              -7.299476514277561
+            ],
+            [
+              112.73752349783159,
+              -7.299476514277561
+            ],
+            [
+              112.73752349783159,
+              -7.298898896923674
+            ],
+            [
+              112.73709251348355,
+              -7.298898896923674
+            ],
+            [
+              112.73709251348355,
+              -7.299476514277561
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73709251348355,
+        -7.299476514277561,
+        112.73752349783159,
+        -7.298898896923674
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-WONO-003",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 3063,
+        "nib": "04598",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "wonokromo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_wonokromo_4",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.7350672983933,
+              -7.30197205787228
+            ],
+            [
+              112.73548601281489,
+              -7.30197205787228
+            ],
+            [
+              112.73548601281489,
+              -7.3016624277991085
+            ],
+            [
+              112.7350672983933,
+              -7.3016624277991085
+            ],
+            [
+              112.7350672983933,
+              -7.30197205787228
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.7350672983933,
+        -7.30197205787228,
+        112.73548601281489,
+        -7.3016624277991085
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-WONO-004",
+        "tipehak": "Hak Milik",
+        "luas": 1595,
+        "nib": "06168",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "wonokromo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_wonokromo_5",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73590440688396,
+              -7.304207914193528
+            ],
+            [
+              112.73642456089941,
+              -7.304207914193528
+            ],
+            [
+              112.73642456089941,
+              -7.303692539912312
+            ],
+            [
+              112.73590440688396,
+              -7.303692539912312
+            ],
+            [
+              112.73590440688396,
+              -7.304207914193528
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73590440688396,
+        -7.304207914193528,
+        112.73642456089941,
+        -7.303692539912312
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-WONO-005",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 3299,
+        "nib": "04483",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "wonokromo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_waru_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73338236679606,
+              -7.354528672192567
+            ],
+            [
+              112.73387002235185,
+              -7.354528672192567
+            ],
+            [
+              112.73387002235185,
+              -7.354149208142617
+            ],
+            [
+              112.73338236679606,
+              -7.354149208142617
+            ],
+            [
+              112.73338236679606,
+              -7.354528672192567
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73338236679606,
+        -7.354528672192567,
+        112.73387002235185,
+        -7.354149208142617
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-WARU-001",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 2277,
+        "nib": "05040",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "waru"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_waru_2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.7315171426866,
+              -7.351821602217321
+            ],
+            [
+              112.7319956728348,
+              -7.351821602217321
+            ],
+            [
+              112.7319956728348,
+              -7.3513465423398365
+            ],
+            [
+              112.7315171426866,
+              -7.3513465423398365
+            ],
+            [
+              112.7315171426866,
+              -7.351821602217321
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.7315171426866,
+        -7.351821602217321,
+        112.7319956728348,
+        -7.3513465423398365
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-WARU-002",
+        "tipehak": "Hak Milik",
+        "luas": 2797,
+        "nib": "06930",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "waru"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_waru_3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.72844539445526,
+              -7.3524675773700725
+            ],
+            [
+              112.7288226672789,
+              -7.3524675773700725
+            ],
+            [
+              112.7288226672789,
+              -7.352153442457444
+            ],
+            [
+              112.72844539445526,
+              -7.352153442457444
+            ],
+            [
+              112.72844539445526,
+              -7.3524675773700725
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.72844539445526,
+        -7.3524675773700725,
+        112.7288226672789,
+        -7.352153442457444
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-WARU-003",
+        "tipehak": "Hak Milik",
+        "luas": 1458,
+        "nib": "02796",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "waru"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_waru_4",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.72720099643583,
+              -7.3540198021286844
+            ],
+            [
+              112.72772991914503,
+              -7.3540198021286844
+            ],
+            [
+              112.72772991914503,
+              -7.353604371935182
+            ],
+            [
+              112.72720099643583,
+              -7.353604371935182
+            ],
+            [
+              112.72720099643583,
+              -7.3540198021286844
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.72720099643583,
+        -7.3540198021286844,
+        112.72772991914503,
+        -7.353604371935182
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-WARU-004",
+        "tipehak": "Hak Milik",
+        "luas": 2704,
+        "nib": "08668",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "waru"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_terminal_joyoboyo_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.72438781333058,
+              -7.306454651424467
+            ],
+            [
+              112.72474125763715,
+              -7.306454651424467
+            ],
+            [
+              112.72474125763715,
+              -7.305938434878659
+            ],
+            [
+              112.72438781333058,
+              -7.305938434878659
+            ],
+            [
+              112.72438781333058,
+              -7.306454651424467
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.72438781333058,
+        -7.306454651424467,
+        112.72474125763715,
+        -7.305938434878659
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TERM-001",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 2245,
+        "nib": "09797",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "terminal_joyoboyo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_terminal_joyoboyo_2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.72206238302279,
+              -7.30497946938865
+            ],
+            [
+              112.72250043306137,
+              -7.30497946938865
+            ],
+            [
+              112.72250043306137,
+              -7.304632022062346
+            ],
+            [
+              112.72206238302279,
+              -7.304632022062346
+            ],
+            [
+              112.72206238302279,
+              -7.30497946938865
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.72206238302279,
+        -7.30497946938865,
+        112.72250043306137,
+        -7.304632022062346
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TERM-002",
+        "tipehak": "Hak Pakai",
+        "luas": 1873,
+        "nib": "01053",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "terminal_joyoboyo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_terminal_joyoboyo_3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.71988506193239,
+              -7.305393136338114
+            ],
+            [
+              112.7203852377663,
+              -7.305393136338114
+            ],
+            [
+              112.7203852377663,
+              -7.305039540773955
+            ],
+            [
+              112.71988506193239,
+              -7.305039540773955
+            ],
+            [
+              112.71988506193239,
+              -7.305393136338114
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.71988506193239,
+        -7.305393136338114,
+        112.7203852377663,
+        -7.305039540773955
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TERM-003",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 2176,
+        "nib": "02743",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "terminal_joyoboyo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_terminal_joyoboyo_4",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.71836477865054,
+              -7.306749208427724
+            ],
+            [
+              112.71889746971397,
+              -7.306749208427724
+            ],
+            [
+              112.71889746971397,
+              -7.3064033566471585
+            ],
+            [
+              112.71836477865054,
+              -7.3064033566471585
+            ],
+            [
+              112.71836477865054,
+              -7.306749208427724
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.71836477865054,
+        -7.306749208427724,
+        112.71889746971397,
+        -7.3064033566471585
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TERM-004",
+        "tipehak": "Hak Milik",
+        "luas": 2267,
+        "nib": "03646",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "terminal_joyoboyo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_terminal_purabaya_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.725969734442,
+              -7.351113821514527
+            ],
+            [
+              112.72631990601084,
+              -7.351113821514527
+            ],
+            [
+              112.72631990601084,
+              -7.350716574697426
+            ],
+            [
+              112.725969734442,
+              -7.350716574697426
+            ],
+            [
+              112.725969734442,
+              -7.351113821514527
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.725969734442,
+        -7.351113821514527,
+        112.72631990601084,
+        -7.350716574697426
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TERM-001",
+        "tipehak": "Hak Milik",
+        "luas": 1712,
+        "nib": "01319",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "terminal_purabaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_terminal_purabaya_2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.72520135055197,
+              -7.348479827606591
+            ],
+            [
+              112.7257933829934,
+              -7.348479827606591
+            ],
+            [
+              112.7257933829934,
+              -7.348107991913489
+            ],
+            [
+              112.72520135055197,
+              -7.348107991913489
+            ],
+            [
+              112.72520135055197,
+              -7.348479827606591
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.72520135055197,
+        -7.348479827606591,
+        112.7257933829934,
+        -7.348107991913489
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TERM-002",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 2709,
+        "nib": "04946",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "terminal_purabaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_terminal_purabaya_3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.72227237853862,
+              -7.350084660417358
+            ],
+            [
+              112.72276817567761,
+              -7.350084660417358
+            ],
+            [
+              112.72276817567761,
+              -7.349763896661817
+            ],
+            [
+              112.72227237853862,
+              -7.349763896661817
+            ],
+            [
+              112.72227237853862,
+              -7.350084660417358
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.72227237853862,
+        -7.350084660417358,
+        112.72276817567761,
+        -7.349763896661817
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TERM-003",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 1957,
+        "nib": "09727",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "terminal_purabaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_terminal_purabaya_4",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.72091898734286,
+              -7.3510268380815385
+            ],
+            [
+              112.72143392842091,
+              -7.3510268380815385
+            ],
+            [
+              112.72143392842091,
+              -7.350647321092857
+            ],
+            [
+              112.72091898734286,
+              -7.350647321092857
+            ],
+            [
+              112.72091898734286,
+              -7.3510268380815385
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.72091898734286,
+        -7.3510268380815385,
+        112.72143392842091,
+        -7.350647321092857
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TERM-004",
+        "tipehak": "Hak Pakai",
+        "luas": 2405,
+        "nib": "07932",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "terminal_purabaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_terminal_purabaya_5",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.72228346730746,
+              -7.354282847538419
+            ],
+            [
+              112.72284042759709,
+              -7.354282847538419
+            ],
+            [
+              112.72284042759709,
+              -7.3537689628465746
+            ],
+            [
+              112.72228346730746,
+              -7.3537689628465746
+            ],
+            [
+              112.72228346730746,
+              -7.354282847538419
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.72228346730746,
+        -7.354282847538419,
+        112.72284042759709,
+        -7.3537689628465746
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TERM-005",
+        "tipehak": "Hak Pakai",
+        "luas": 3522,
+        "nib": "07537",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "terminal_purabaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_terminal_purabaya_6",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.7246566259609,
+              -7.353351117943871
+            ],
+            [
+              112.72516189871322,
+              -7.353351117943871
+            ],
+            [
+              112.72516189871322,
+              -7.35301481668511
+            ],
+            [
+              112.7246566259609,
+              -7.35301481668511
+            ],
+            [
+              112.7246566259609,
+              -7.353351117943871
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.7246566259609,
+        -7.353351117943871,
+        112.72516189871322,
+        -7.35301481668511
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TERM-006",
+        "tipehak": "Hak Milik",
+        "luas": 2091,
+        "nib": "04681",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "terminal_purabaya"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_terminal_bratang_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.76239686240211,
+              -7.295147654726107
+            ],
+            [
+              112.76292339443643,
+              -7.295147654726107
+            ],
+            [
+              112.76292339443643,
+              -7.2948454974744115
+            ],
+            [
+              112.76239686240211,
+              -7.2948454974744115
+            ],
+            [
+              112.76239686240211,
+              -7.295147654726107
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.76239686240211,
+        -7.295147654726107,
+        112.76292339443643,
+        -7.2948454974744115
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TERM-001",
+        "tipehak": "Hak Milik",
+        "luas": 1958,
+        "nib": "01964",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "terminal_bratang"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_terminal_bratang_2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.76105274716396,
+              -7.291674421049991
+            ],
+            [
+              112.76142400436892,
+              -7.291674421049991
+            ],
+            [
+              112.76142400436892,
+              -7.29130301965968
+            ],
+            [
+              112.76105274716396,
+              -7.29130301965968
+            ],
+            [
+              112.76105274716396,
+              -7.291674421049991
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.76105274716396,
+        -7.291674421049991,
+        112.76142400436892,
+        -7.29130301965968
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TERM-002",
+        "tipehak": "Hak Milik",
+        "luas": 1697,
+        "nib": "08953",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "terminal_bratang"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_terminal_bratang_3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.75859985093047,
+              -7.291586017705313
+            ],
+            [
+              112.75912116385845,
+              -7.291586017705313
+            ],
+            [
+              112.75912116385845,
+              -7.29114421639742
+            ],
+            [
+              112.75859985093047,
+              -7.29114421639742
+            ],
+            [
+              112.75859985093047,
+              -7.291586017705313
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.75859985093047,
+        -7.291586017705313,
+        112.75912116385845,
+        -7.29114421639742
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TERM-003",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 2834,
+        "nib": "08749",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "terminal_bratang"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_terminal_bratang_4",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.7581794520965,
+              -7.294504311403005
+            ],
+            [
+              112.75865876745121,
+              -7.294504311403005
+            ],
+            [
+              112.75865876745121,
+              -7.294077237816099
+            ],
+            [
+              112.7581794520965,
+              -7.294077237816099
+            ],
+            [
+              112.7581794520965,
+              -7.294504311403005
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.7581794520965,
+        -7.294504311403005,
+        112.75865876745121,
+        -7.294077237816099
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TERM-004",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 2519,
+        "nib": "08651",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "terminal_bratang"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_terminal_bratang_5",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.75801567065677,
+              -7.296802441345618
+            ],
+            [
+              112.75855952458217,
+              -7.296802441345618
+            ],
+            [
+              112.75855952458217,
+              -7.296484257543395
+            ],
+            [
+              112.75801567065677,
+              -7.296484257543395
+            ],
+            [
+              112.75801567065677,
+              -7.296802441345618
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.75801567065677,
+        -7.296802441345618,
+        112.75855952458217,
+        -7.296484257543395
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TERM-005",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 2129,
+        "nib": "06559",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "terminal_bratang"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_terminal_bratang_6",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.7605208123911,
+              -7.296428595632563
+            ],
+            [
+              112.76103169811729,
+              -7.296428595632563
+            ],
+            [
+              112.76103169811729,
+              -7.296086540943436
+            ],
+            [
+              112.7605208123911,
+              -7.296086540943436
+            ],
+            [
+              112.7605208123911,
+              -7.296428595632563
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.7605208123911,
+        -7.296428595632563,
+        112.76103169811729,
+        -7.296086540943436
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TERM-006",
+        "tipehak": "Hak Milik",
+        "luas": 2150,
+        "nib": "04006",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "terminal_bratang"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_tandes_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.69648831699409,
+              -7.261813555805082
+            ],
+            [
+              112.6969712562176,
+              -7.261813555805082
+            ],
+            [
+              112.6969712562176,
+              -7.261255151073653
+            ],
+            [
+              112.69648831699409,
+              -7.261255151073653
+            ],
+            [
+              112.69648831699409,
+              -7.261813555805082
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.69648831699409,
+        -7.261813555805082,
+        112.6969712562176,
+        -7.261255151073653
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TAND-001",
+        "tipehak": "Hak Milik",
+        "luas": 3318,
+        "nib": "02604",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "tandes"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_tandes_2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.69408916569743,
+              -7.258481827981185
+            ],
+            [
+              112.69472986457463,
+              -7.258481827981185
+            ],
+            [
+              112.69472986457463,
+              -7.257903917886282
+            ],
+            [
+              112.69408916569743,
+              -7.257903917886282
+            ],
+            [
+              112.69408916569743,
+              -7.258481827981185
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.69408916569743,
+        -7.258481827981185,
+        112.69472986457463,
+        -7.257903917886282
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TAND-002",
+        "tipehak": "Hak Milik",
+        "luas": 4556,
+        "nib": "04872",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "tandes"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_tandes_3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.69221069997427,
+              -7.259684028254923
+            ],
+            [
+              112.69268101206204,
+              -7.259684028254923
+            ],
+            [
+              112.69268101206204,
+              -7.259366437634932
+            ],
+            [
+              112.69221069997427,
+              -7.259366437634932
+            ],
+            [
+              112.69221069997427,
+              -7.259684028254923
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.69221069997427,
+        -7.259684028254923,
+        112.69268101206204,
+        -7.259366437634932
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TAND-003",
+        "tipehak": "Hak Milik",
+        "luas": 1838,
+        "nib": "07209",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "tandes"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_tandes_4",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.68975741483108,
+              -7.261245866515425
+            ],
+            [
+              112.69034295363811,
+              -7.261245866515425
+            ],
+            [
+              112.69034295363811,
+              -7.2608602917467415
+            ],
+            [
+              112.68975741483108,
+              -7.2608602917467415
+            ],
+            [
+              112.68975741483108,
+              -7.261245866515425
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.68975741483108,
+        -7.261245866515425,
+        112.69034295363811,
+        -7.2608602917467415
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TAND-004",
+        "tipehak": "Hak Milik",
+        "luas": 2778,
+        "nib": "08973",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "tandes"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_tandes_5",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.69118328804393,
+              -7.264258778305396
+            ],
+            [
+              112.69170704213118,
+              -7.264258778305396
+            ],
+            [
+              112.69170704213118,
+              -7.263796119744984
+            ],
+            [
+              112.69118328804393,
+              -7.263796119744984
+            ],
+            [
+              112.69118328804393,
+              -7.264258778305396
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.69118328804393,
+        -7.264258778305396,
+        112.69170704213118,
+        -7.263796119744984
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TAND-005",
+        "tipehak": "Hak Milik",
+        "luas": 2982,
+        "nib": "06138",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "tandes"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_tandes_6",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.69442228462754,
+              -7.263500208634081
+            ],
+            [
+              112.69502810059515,
+              -7.263500208634081
+            ],
+            [
+              112.69502810059515,
+              -7.2631529788156985
+            ],
+            [
+              112.69442228462754,
+              -7.2631529788156985
+            ],
+            [
+              112.69442228462754,
+              -7.263500208634081
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.69442228462754,
+        -7.263500208634081,
+        112.69502810059515,
+        -7.2631529788156985
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-TAND-006",
+        "tipehak": "Hak Milik",
+        "luas": 2589,
+        "nib": "09320",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "tandes"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kandangan_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.67109257419541,
+              -7.257322452621606
+            ],
+            [
+              112.6716451379615,
+              -7.257322452621606
+            ],
+            [
+              112.6716451379615,
+              -7.256951891453106
+            ],
+            [
+              112.67109257419541,
+              -7.256951891453106
+            ],
+            [
+              112.67109257419541,
+              -7.257322452621606
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.67109257419541,
+        -7.257322452621606,
+        112.6716451379615,
+        -7.256951891453106
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KAND-001",
+        "tipehak": "Hak Pakai",
+        "luas": 2520,
+        "nib": "02964",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kandangan"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kandangan_2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.66978329973112,
+              -7.254624403668299
+            ],
+            [
+              112.6701452222298,
+              -7.254624403668299
+            ],
+            [
+              112.6701452222298,
+              -7.254299808646651
+            ],
+            [
+              112.66978329973112,
+              -7.254299808646651
+            ],
+            [
+              112.66978329973112,
+              -7.254624403668299
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.66978329973112,
+        -7.254624403668299,
+        112.6701452222298,
+        -7.254299808646651
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KAND-002",
+        "tipehak": "Hak Milik",
+        "luas": 1446,
+        "nib": "09565",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kandangan"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kandangan_3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.66729959738325,
+              -7.254406403516846
+            ],
+            [
+              112.66774385254209,
+              -7.254406403516846
+            ],
+            [
+              112.66774385254209,
+              -7.254026719163086
+            ],
+            [
+              112.66729959738325,
+              -7.254026719163086
+            ],
+            [
+              112.66729959738325,
+              -7.254406403516846
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.66729959738325,
+        -7.254406403516846,
+        112.66774385254209,
+        -7.254026719163086
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KAND-003",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 2076,
+        "nib": "03144",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kandangan"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kandangan_4",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.66628668602826,
+              -7.256790472535665
+            ],
+            [
+              112.666862245376,
+              -7.256790472535665
+            ],
+            [
+              112.666862245376,
+              -7.256468709601317
+            ],
+            [
+              112.66628668602826,
+              -7.256468709601317
+            ],
+            [
+              112.66628668602826,
+              -7.256790472535665
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.66628668602826,
+        -7.256790472535665,
+        112.666862245376,
+        -7.256468709601317
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KAND-004",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 2279,
+        "nib": "08508",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kandangan"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kandangan_5",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.66763173545034,
+              -7.258519041176155
+            ],
+            [
+              112.66814302577158,
+              -7.258519041176155
+            ],
+            [
+              112.66814302577158,
+              -7.25806727576794
+            ],
+            [
+              112.66763173545034,
+              -7.25806727576794
+            ],
+            [
+              112.66763173545034,
+              -7.258519041176155
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.66763173545034,
+        -7.258519041176155,
+        112.66814302577158,
+        -7.25806727576794
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KAND-005",
+        "tipehak": "Hak Pakai",
+        "luas": 2842,
+        "nib": "03170",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kandangan"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kandangan_6",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.6705082258691,
+              -7.259515702968416
+            ],
+            [
+              112.67096908399571,
+              -7.259515702968416
+            ],
+            [
+              112.67096908399571,
+              -7.259168378918709
+            ],
+            [
+              112.6705082258691,
+              -7.259168378918709
+            ],
+            [
+              112.6705082258691,
+              -7.259515702968416
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.6705082258691,
+        -7.259515702968416,
+        112.67096908399571,
+        -7.259168378918709
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KAND-006",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 1970,
+        "nib": "09900",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kandangan"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_benowo_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.63159790359403,
+              -7.238396016835125
+            ],
+            [
+              112.63214409648934,
+              -7.238396016835125
+            ],
+            [
+              112.63214409648934,
+              -7.23809366990298
+            ],
+            [
+              112.63159790359403,
+              -7.23809366990298
+            ],
+            [
+              112.63159790359403,
+              -7.238396016835125
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.63159790359403,
+        -7.238396016835125,
+        112.63214409648934,
+        -7.23809366990298
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-BENO-001",
+        "tipehak": "Hak Pakai",
+        "luas": 2032,
+        "nib": "05905",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "benowo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_benowo_2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.63023831470305,
+              -7.236155919779861
+            ],
+            [
+              112.6306676544795,
+              -7.236155919779861
+            ],
+            [
+              112.6306676544795,
+              -7.235589005967759
+            ],
+            [
+              112.63023831470305,
+              -7.235589005967759
+            ],
+            [
+              112.63023831470305,
+              -7.236155919779861
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.63023831470305,
+        -7.236155919779861,
+        112.6306676544795,
+        -7.235589005967759
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-BENO-002",
+        "tipehak": "Hak Milik",
+        "luas": 2995,
+        "nib": "03546",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "benowo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_benowo_3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.62662157941953,
+              -7.23616691303662
+            ],
+            [
+              112.62703265861323,
+              -7.23616691303662
+            ],
+            [
+              112.62703265861323,
+              -7.235676641648955
+            ],
+            [
+              112.62662157941953,
+              -7.235676641648955
+            ],
+            [
+              112.62662157941953,
+              -7.23616691303662
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.62662157941953,
+        -7.23616691303662,
+        112.62703265861323,
+        -7.235676641648955
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-BENO-003",
+        "tipehak": "Hak Milik",
+        "luas": 2480,
+        "nib": "05325",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "benowo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_benowo_4",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.6249174816931,
+              -7.238315543275239
+            ],
+            [
+              112.6252827213612,
+              -7.238315543275239
+            ],
+            [
+              112.6252827213612,
+              -7.237825257941046
+            ],
+            [
+              112.6249174816931,
+              -7.237825257941046
+            ],
+            [
+              112.6249174816931,
+              -7.238315543275239
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.6249174816931,
+        -7.238315543275239,
+        112.6252827213612,
+        -7.237825257941046
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-BENO-004",
+        "tipehak": "Hak Milik",
+        "luas": 2204,
+        "nib": "05533",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "benowo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_benowo_5",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.6270976650009,
+              -7.240037882391904
+            ],
+            [
+              112.62774160438705,
+              -7.240037882391904
+            ],
+            [
+              112.62774160438705,
+              -7.239689407799021
+            ],
+            [
+              112.6270976650009,
+              -7.239689407799021
+            ],
+            [
+              112.6270976650009,
+              -7.240037882391904
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.6270976650009,
+        -7.240037882391904,
+        112.62774160438705,
+        -7.239689407799021
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-BENO-005",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 2761,
+        "nib": "08239",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "benowo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_benowo_6",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.62893501122286,
+              -7.240019672633759
+            ],
+            [
+              112.62930758438088,
+              -7.240019672633759
+            ],
+            [
+              112.62930758438088,
+              -7.239454740715768
+            ],
+            [
+              112.62893501122286,
+              -7.239454740715768
+            ],
+            [
+              112.62893501122286,
+              -7.240019672633759
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.62893501122286,
+        -7.240019672633759,
+        112.62930758438088,
+        -7.239454740715768
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-BENO-006",
+        "tipehak": "Hak Milik",
+        "luas": 2590,
+        "nib": "03442",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "benowo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_ngagel_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.75064397194579,
+              -7.28751349987031
+            ],
+            [
+              112.75103840008147,
+              -7.28751349987031
+            ],
+            [
+              112.75103840008147,
+              -7.287175266214526
+            ],
+            [
+              112.75064397194579,
+              -7.287175266214526
+            ],
+            [
+              112.75064397194579,
+              -7.28751349987031
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.75064397194579,
+        -7.28751349987031,
+        112.75103840008147,
+        -7.287175266214526
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-NGAG-001",
+        "tipehak": "Hak Milik",
+        "luas": 1642,
+        "nib": "06050",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "ngagel"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_margorejo_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73941185356293,
+              -7.31710996135449
+            ],
+            [
+              112.73977382202636,
+              -7.31710996135449
+            ],
+            [
+              112.73977382202636,
+              -7.316702618584815
+            ],
+            [
+              112.73941185356293,
+              -7.316702618584815
+            ],
+            [
+              112.73941185356293,
+              -7.31710996135449
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73941185356293,
+        -7.31710996135449,
+        112.73977382202636,
+        -7.316702618584815
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-MARG-001",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 1814,
+        "nib": "05088",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "margorejo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_margorejo_2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73733414656459,
+              -7.31560779741583
+            ],
+            [
+              112.73794656038166,
+              -7.31560779741583
+            ],
+            [
+              112.73794656038166,
+              -7.31501564630904
+            ],
+            [
+              112.73733414656459,
+              -7.31501564630904
+            ],
+            [
+              112.73733414656459,
+              -7.31560779741583
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73733414656459,
+        -7.31560779741583,
+        112.73794656038166,
+        -7.31501564630904
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-MARG-002",
+        "tipehak": "Hak Pakai",
+        "luas": 4462,
+        "nib": "03532",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "margorejo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_margorejo_3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73516369710751,
+              -7.316008899977672
+            ],
+            [
+              112.73575366321649,
+              -7.316008899977672
+            ],
+            [
+              112.73575366321649,
+              -7.315655784266576
+            ],
+            [
+              112.73516369710751,
+              -7.315655784266576
+            ],
+            [
+              112.73516369710751,
+              -7.316008899977672
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73516369710751,
+        -7.316008899977672,
+        112.73575366321649,
+        -7.315655784266576
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-MARG-003",
+        "tipehak": "Hak Milik",
+        "luas": 2564,
+        "nib": "07755",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "margorejo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_margorejo_4",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73373068938487,
+              -7.3179748350753515
+            ],
+            [
+              112.73435993415067,
+              -7.3179748350753515
+            ],
+            [
+              112.73435993415067,
+              -7.31743416453367
+            ],
+            [
+              112.73373068938487,
+              -7.31743416453367
+            ],
+            [
+              112.73373068938487,
+              -7.3179748350753515
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73373068938487,
+        -7.3179748350753515,
+        112.73435993415067,
+        -7.31743416453367
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-MARG-004",
+        "tipehak": "Hak Milik",
+        "luas": 4186,
+        "nib": "05065",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "margorejo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_margorejo_5",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73521221222127,
+              -7.319353666509421
+            ],
+            [
+              112.73582386225614,
+              -7.319353666509421
+            ],
+            [
+              112.73582386225614,
+              -7.31879608853402
+            ],
+            [
+              112.73521221222127,
+              -7.31879608853402
+            ],
+            [
+              112.73521221222127,
+              -7.319353666509421
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73521221222127,
+        -7.319353666509421,
+        112.73582386225614,
+        -7.31879608853402
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-MARG-005",
+        "tipehak": "Hak Milik",
+        "luas": 4197,
+        "nib": "04644",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "margorejo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_margorejo_6",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73730352732396,
+              -7.31947554069871
+            ],
+            [
+              112.73789968823824,
+              -7.31947554069871
+            ],
+            [
+              112.73789968823824,
+              -7.318914143787951
+            ],
+            [
+              112.73730352732396,
+              -7.318914143787951
+            ],
+            [
+              112.73730352732396,
+              -7.31947554069871
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73730352732396,
+        -7.31947554069871,
+        112.73789968823824,
+        -7.318914143787951
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-MARG-006",
+        "tipehak": "Hak Milik",
+        "luas": 4118,
+        "nib": "04652",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "margorejo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_jemursari_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73663564507719,
+              -7.331759078311832
+            ],
+            [
+              112.7372449509598,
+              -7.331759078311832
+            ],
+            [
+              112.7372449509598,
+              -7.3311690115806165
+            ],
+            [
+              112.73663564507719,
+              -7.3311690115806165
+            ],
+            [
+              112.73663564507719,
+              -7.331759078311832
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73663564507719,
+        -7.331759078311832,
+        112.7372449509598,
+        -7.3311690115806165
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-JEMU-001",
+        "tipehak": "Hak Milik",
+        "luas": 4424,
+        "nib": "05573",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "jemursari"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_jemursari_2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73591864347512,
+              -7.328918313771601
+            ],
+            [
+              112.7365217418241,
+              -7.328918313771601
+            ],
+            [
+              112.7365217418241,
+              -7.328518968811138
+            ],
+            [
+              112.73591864347512,
+              -7.328518968811138
+            ],
+            [
+              112.73591864347512,
+              -7.328918313771601
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73591864347512,
+        -7.328918313771601,
+        112.7365217418241,
+        -7.328518968811138
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-JEMU-002",
+        "tipehak": "Hak Milik",
+        "luas": 2964,
+        "nib": "01452",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "jemursari"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_jemursari_3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73326760063408,
+              -7.329983570640666
+            ],
+            [
+              112.7339063609288,
+              -7.329983570640666
+            ],
+            [
+              112.7339063609288,
+              -7.329603930731908
+            ],
+            [
+              112.73326760063408,
+              -7.329603930731908
+            ],
+            [
+              112.73326760063408,
+              -7.329983570640666
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73326760063408,
+        -7.329983570640666,
+        112.7339063609288,
+        -7.329603930731908
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-JEMU-003",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 2984,
+        "nib": "02776",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "jemursari"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_jemursari_4",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73149253648606,
+              -7.331308083260451
+            ],
+            [
+              112.73197345465121,
+              -7.331308083260451
+            ],
+            [
+              112.73197345465121,
+              -7.330712812505656
+            ],
+            [
+              112.73149253648606,
+              -7.330712812505656
+            ],
+            [
+              112.73149253648606,
+              -7.331308083260451
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73149253648606,
+        -7.331308083260451,
+        112.73197345465121,
+        -7.330712812505656
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-JEMU-004",
+        "tipehak": "Hak Milik",
+        "luas": 3523,
+        "nib": "02894",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "jemursari"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_jemursari_5",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73356773513757,
+              -7.333120442644268
+            ],
+            [
+              112.73413037072271,
+              -7.333120442644268
+            ],
+            [
+              112.73413037072271,
+              -7.332819935260802
+            ],
+            [
+              112.73356773513757,
+              -7.332819935260802
+            ],
+            [
+              112.73356773513757,
+              -7.333120442644268
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73356773513757,
+        -7.333120442644268,
+        112.73413037072271,
+        -7.332819935260802
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-JEMU-005",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 2081,
+        "nib": "09821",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "jemursari"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_jemursari_6",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73651072335754,
+              -7.333689959910693
+            ],
+            [
+              112.73691983389627,
+              -7.333689959910693
+            ],
+            [
+              112.73691983389627,
+              -7.333260570690806
+            ],
+            [
+              112.73651072335754,
+              -7.333260570690806
+            ],
+            [
+              112.73651072335754,
+              -7.333689959910693
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73651072335754,
+        -7.333689959910693,
+        112.73691983389627,
+        -7.333260570690806
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-JEMU-006",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 2162,
+        "nib": "06409",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "jemursari"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kertomenanggal_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73283550917051,
+              -7.346911827483453
+            ],
+            [
+              112.73345552322104,
+              -7.346911827483453
+            ],
+            [
+              112.73345552322104,
+              -7.346459690732242
+            ],
+            [
+              112.73283550917051,
+              -7.346459690732242
+            ],
+            [
+              112.73283550917051,
+              -7.346911827483453
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73283550917051,
+        -7.346911827483453,
+        112.73345552322104,
+        -7.346459690732242
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KERT-001",
+        "tipehak": "Hak Milik",
+        "luas": 3450,
+        "nib": "07691",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kertomenanggal"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kertomenanggal_2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73231854306152,
+              -7.344694666690056
+            ],
+            [
+              112.73272609508942,
+              -7.344694666690056
+            ],
+            [
+              112.73272609508942,
+              -7.344195187859792
+            ],
+            [
+              112.73231854306152,
+              -7.344195187859792
+            ],
+            [
+              112.73231854306152,
+              -7.344694666690056
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73231854306152,
+        -7.344694666690056,
+        112.73272609508942,
+        -7.344195187859792
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KERT-002",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 2505,
+        "nib": "07211",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kertomenanggal"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kertomenanggal_3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.72945259880495,
+              -7.3449167470639045
+            ],
+            [
+              112.72989288376732,
+              -7.3449167470639045
+            ],
+            [
+              112.72989288376732,
+              -7.344452365899964
+            ],
+            [
+              112.72945259880495,
+              -7.344452365899964
+            ],
+            [
+              112.72945259880495,
+              -7.3449167470639045
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.72945259880495,
+        -7.3449167470639045,
+        112.72989288376732,
+        -7.344452365899964
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KERT-003",
+        "tipehak": "Hak Milik",
+        "luas": 2516,
+        "nib": "01006",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kertomenanggal"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kertomenanggal_4",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.72808309914863,
+              -7.346643062792817
+            ],
+            [
+              112.72861509761977,
+              -7.346643062792817
+            ],
+            [
+              112.72861509761977,
+              -7.346246388023897
+            ],
+            [
+              112.72808309914863,
+              -7.346246388023897
+            ],
+            [
+              112.72808309914863,
+              -7.346643062792817
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.72808309914863,
+        -7.346643062792817,
+        112.72861509761977,
+        -7.346246388023897
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KERT-004",
+        "tipehak": "Hak Milik",
+        "luas": 2597,
+        "nib": "08238",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kertomenanggal"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kertomenanggal_5",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.72963255551731,
+              -7.349034374356695
+            ],
+            [
+              112.73025290976507,
+              -7.349034374356695
+            ],
+            [
+              112.73025290976507,
+              -7.348495566928657
+            ],
+            [
+              112.72963255551731,
+              -7.348495566928657
+            ],
+            [
+              112.72963255551731,
+              -7.349034374356695
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.72963255551731,
+        -7.349034374356695,
+        112.73025290976507,
+        -7.348495566928657
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KERT-005",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 4113,
+        "nib": "03780",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kertomenanggal"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kertomenanggal_6",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73232915300493,
+              -7.349525847425272
+            ],
+            [
+              112.73286493124654,
+              -7.349525847425272
+            ],
+            [
+              112.73286493124654,
+              -7.34919783126525
+            ],
+            [
+              112.73232915300493,
+              -7.34919783126525
+            ],
+            [
+              112.73232915300493,
+              -7.349525847425272
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73232915300493,
+        -7.349525847425272,
+        112.73286493124654,
+        -7.34919783126525
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KERT-006",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 2163,
+        "nib": "04848",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kertomenanggal"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_sidotopo_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.75790809318882,
+              -7.233695385316721
+            ],
+            [
+              112.75826542080513,
+              -7.233695385316721
+            ],
+            [
+              112.75826542080513,
+              -7.233321932553497
+            ],
+            [
+              112.75790809318882,
+              -7.233321932553497
+            ],
+            [
+              112.75790809318882,
+              -7.233695385316721
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.75790809318882,
+        -7.233695385316721,
+        112.75826542080513,
+        -7.233321932553497
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-SIDO-001",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 1642,
+        "nib": "08784",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "sidotopo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_sidotopo_2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.75686675621887,
+              -7.231331329596736
+            ],
+            [
+              112.75748259729158,
+              -7.231331329596736
+            ],
+            [
+              112.75748259729158,
+              -7.230858628326913
+            ],
+            [
+              112.75686675621887,
+              -7.230858628326913
+            ],
+            [
+              112.75686675621887,
+              -7.231331329596736
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.75686675621887,
+        -7.231331329596736,
+        112.75748259729158,
+        -7.230858628326913
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-SIDO-002",
+        "tipehak": "Hak Milik",
+        "luas": 3582,
+        "nib": "07291",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "sidotopo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_sidotopo_3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.75487443726146,
+              -7.230996301920867
+            ],
+            [
+              112.75522610070689,
+              -7.230996301920867
+            ],
+            [
+              112.75522610070689,
+              -7.230471012577882
+            ],
+            [
+              112.75487443726146,
+              -7.230471012577882
+            ],
+            [
+              112.75487443726146,
+              -7.230996301920867
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.75487443726146,
+        -7.230996301920867,
+        112.75522610070689,
+        -7.230471012577882
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-SIDO-003",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 2273,
+        "nib": "02746",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "sidotopo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_sidotopo_4",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.75283202926958,
+              -7.233170857486782
+            ],
+            [
+              112.75339080280251,
+              -7.233170857486782
+            ],
+            [
+              112.75339080280251,
+              -7.232731492521411
+            ],
+            [
+              112.75283202926958,
+              -7.232731492521411
+            ],
+            [
+              112.75283202926958,
+              -7.233170857486782
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.75283202926958,
+        -7.233170857486782,
+        112.75339080280251,
+        -7.232731492521411
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-SIDO-004",
+        "tipehak": "Hak Pakai",
+        "luas": 3021,
+        "nib": "05082",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "sidotopo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_sidotopo_5",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.75485123471992,
+              -7.234908866650155
+            ],
+            [
+              112.75534062769117,
+              -7.234908866650155
+            ],
+            [
+              112.75534062769117,
+              -7.234449527084399
+            ],
+            [
+              112.75485123471992,
+              -7.234449527084399
+            ],
+            [
+              112.75485123471992,
+              -7.234908866650155
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.75485123471992,
+        -7.234908866650155,
+        112.75534062769117,
+        -7.234449527084399
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-SIDO-005",
+        "tipehak": "Hak Pakai",
+        "luas": 2766,
+        "nib": "06198",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "sidotopo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_sidotopo_6",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.75763111987168,
+              -7.235644549379713
+            ],
+            [
+              112.75819690206005,
+              -7.235644549379713
+            ],
+            [
+              112.75819690206005,
+              -7.235193115930266
+            ],
+            [
+              112.75763111987168,
+              -7.235193115930266
+            ],
+            [
+              112.75763111987168,
+              -7.235644549379713
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.75763111987168,
+        -7.235644549379713,
+        112.75819690206005,
+        -7.235193115930266
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-SIDO-006",
+        "tipehak": "Hak Milik",
+        "luas": 3143,
+        "nib": "09976",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "sidotopo"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kalimas_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73975057168806,
+              -7.21960081874063
+            ],
+            [
+              112.74023559261525,
+              -7.21960081874063
+            ],
+            [
+              112.74023559261525,
+              -7.2190752857046805
+            ],
+            [
+              112.73975057168806,
+              -7.2190752857046805
+            ],
+            [
+              112.73975057168806,
+              -7.21960081874063
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73975057168806,
+        -7.21960081874063,
+        112.74023559261525,
+        -7.2190752857046805
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KALI-001",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 3137,
+        "nib": "05543",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kalimas"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kalimas_2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73794019249907,
+              -7.216665381156712
+            ],
+            [
+              112.73837257173314,
+              -7.216665381156712
+            ],
+            [
+              112.73837257173314,
+              -7.216342136150553
+            ],
+            [
+              112.73794019249907,
+              -7.216342136150553
+            ],
+            [
+              112.73794019249907,
+              -7.216665381156712
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73794019249907,
+        -7.216665381156712,
+        112.73837257173314,
+        -7.216342136150553
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KALI-002",
+        "tipehak": "Hak Milik",
+        "luas": 1720,
+        "nib": "05681",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kalimas"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kalimas_3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73516015127318,
+              -7.2161251458392695
+            ],
+            [
+              112.73553432457048,
+              -7.2161251458392695
+            ],
+            [
+              112.73553432457048,
+              -7.215779896641866
+            ],
+            [
+              112.73516015127318,
+              -7.215779896641866
+            ],
+            [
+              112.73516015127318,
+              -7.2161251458392695
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73516015127318,
+        -7.2161251458392695,
+        112.73553432457048,
+        -7.215779896641866
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KALI-003",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 1590,
+        "nib": "07275",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kalimas"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kalimas_4",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73494095017861,
+              -7.219265696883558
+            ],
+            [
+              112.73541322998952,
+              -7.219265696883558
+            ],
+            [
+              112.73541322998952,
+              -7.218802913541407
+            ],
+            [
+              112.73494095017861,
+              -7.218802913541407
+            ],
+            [
+              112.73494095017861,
+              -7.219265696883558
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73494095017861,
+        -7.219265696883558,
+        112.73541322998952,
+        -7.218802913541407
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KALI-004",
+        "tipehak": "Hak Milik",
+        "luas": 2689,
+        "nib": "07812",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kalimas"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kalimas_5",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73564216664447,
+              -7.22129935072435
+            ],
+            [
+              112.73622310537617,
+              -7.22129935072435
+            ],
+            [
+              112.73622310537617,
+              -7.220715532114274
+            ],
+            [
+              112.73564216664447,
+              -7.220715532114274
+            ],
+            [
+              112.73564216664447,
+              -7.22129935072435
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73564216664447,
+        -7.22129935072435,
+        112.73622310537617,
+        -7.220715532114274
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KALI-005",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 4174,
+        "nib": "01320",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kalimas"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_kalimas_6",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73795573320382,
+              -7.220929739355551
+            ],
+            [
+              112.7383075020289,
+              -7.220929739355551
+            ],
+            [
+              112.7383075020289,
+              -7.22052421171475
+            ],
+            [
+              112.73795573320382,
+              -7.22052421171475
+            ],
+            [
+              112.73795573320382,
+              -7.220929739355551
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73795573320382,
+        -7.220929739355551,
+        112.7383075020289,
+        -7.22052421171475
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-KALI-006",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 1755,
+        "nib": "07389",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "kalimas"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_benteng_1",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.74321256456899,
+              -7.212210185198664
+            ],
+            [
+              112.74378681926969,
+              -7.212210185198664
+            ],
+            [
+              112.74378681926969,
+              -7.211746345505745
+            ],
+            [
+              112.74321256456899,
+              -7.211746345505745
+            ],
+            [
+              112.74321256456899,
+              -7.212210185198664
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.74321256456899,
+        -7.212210185198664,
+        112.74378681926969,
+        -7.211746345505745
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-BENT-001",
+        "tipehak": "Hak Milik",
+        "luas": 3278,
+        "nib": "04613",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "benteng"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_benteng_2",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.74239133821105,
+              -7.210631031887331
+            ],
+            [
+              112.74285799537203,
+              -7.210631031887331
+            ],
+            [
+              112.74285799537203,
+              -7.210130369801144
+            ],
+            [
+              112.74239133821105,
+              -7.210130369801144
+            ],
+            [
+              112.74239133821105,
+              -7.210631031887331
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.74239133821105,
+        -7.210631031887331,
+        112.74285799537203,
+        -7.210130369801144
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-BENT-002",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 2875,
+        "nib": "07624",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "benteng"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_benteng_3",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73883116836292,
+              -7.209991861456844
+            ],
+            [
+              112.73947538495618,
+              -7.209991861456844
+            ],
+            [
+              112.73947538495618,
+              -7.209531624367985
+            ],
+            [
+              112.73883116836292,
+              -7.209531624367985
+            ],
+            [
+              112.73883116836292,
+              -7.209991861456844
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73883116836292,
+        -7.209991861456844,
+        112.73947538495618,
+        -7.209531624367985
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-BENT-003",
+        "tipehak": "Hak Guna Bangunan",
+        "luas": 3648,
+        "nib": "07455",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "benteng"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_benteng_4",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73929635703799,
+              -7.212788697259099
+            ],
+            [
+              112.73977494086888,
+              -7.212788697259099
+            ],
+            [
+              112.73977494086888,
+              -7.212228641852421
+            ],
+            [
+              112.73929635703799,
+              -7.212228641852421
+            ],
+            [
+              112.73929635703799,
+              -7.212788697259099
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73929635703799,
+        -7.212788697259099,
+        112.73977494086888,
+        -7.212228641852421
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-BENT-004",
+        "tipehak": "Hak Milik",
+        "luas": 3298,
+        "nib": "03977",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "benteng"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_benteng_5",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.73993492046486,
+              -7.214281395437727
+            ],
+            [
+              112.74038297420631,
+              -7.214281395437727
+            ],
+            [
+              112.74038297420631,
+              -7.213753026525358
+            ],
+            [
+              112.73993492046486,
+              -7.213753026525358
+            ],
+            [
+              112.73993492046486,
+              -7.214281395437727
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.73993492046486,
+        -7.214281395437727,
+        112.74038297420631,
+        -7.213753026525358
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-BENT-005",
+        "tipehak": "Hak Milik",
+        "luas": 2913,
+        "nib": "07211",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "benteng"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "Persil.fid_benteng_6",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.74241654896906,
+              -7.214406496192082
+            ],
+            [
+              112.74301702224352,
+              -7.214406496192082
+            ],
+            [
+              112.74301702224352,
+              -7.213965404141219
+            ],
+            [
+              112.74241654896906,
+              -7.213965404141219
+            ],
+            [
+              112.74241654896906,
+              -7.214406496192082
+            ]
+          ]
+        ]
+      },
+      "bbox": [
+        112.74241654896906,
+        -7.214406496192082,
+        112.74301702224352,
+        -7.213965404141219
+      ],
+      "properties": {
+        "persilpasifid": "BHUMI-SUB-BENT-006",
+        "tipehak": "Hak Milik",
+        "luas": 3259,
+        "nib": "09837",
+        "akurasibidang": "Terpetakan",
+        "_station_id": "benteng"
+      }
+    }
+  ]
+}

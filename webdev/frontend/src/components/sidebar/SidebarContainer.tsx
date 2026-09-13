@@ -47,7 +47,11 @@ interface SidebarContainerProps {
   isOpen?: boolean;
   onClose?: () => void;
   isMobileMode?: boolean;
-  // ATR/BPN Layer Controls
+  // Layer Controls
+  showTransitRoutes?: boolean;
+  onToggleTransitRoutes?: () => void;
+  showEconomicPOI?: boolean;
+  onToggleEconomicPOI?: () => void;
   showGistaru?: boolean;
   onToggleGistaru?: () => void;
   showBhumi?: boolean;
@@ -156,6 +160,10 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
   isOpen = false,
   onClose,
   isMobileMode,
+  showTransitRoutes,
+  onToggleTransitRoutes,
+  showEconomicPOI,
+  onToggleEconomicPOI,
   showGistaru,
   onToggleGistaru,
   showBhumi,
@@ -168,7 +176,6 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
   const config = getPersonaConfig(activePersona);
 
   // General Layer States
-  const [showEconomicPOI, setShowEconomicPOI] = useState(true);
   const [showNJOPZone, setShowNJOPZone] = useState(true);
   const [showPropertiGo, setShowPropertiGo] = useState(false);
 
@@ -342,31 +349,35 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
         </div>
         <div className="space-y-1">
           <Toggle
+            active={showTransitRoutes ?? true}
+            onToggle={onToggleTransitRoutes ?? (() => {})}
+            label="Rute Feeder WiraWiri & Bus"
+            icon={<Bus className="w-4 h-4 text-emerald-400" />}
+          />
+          <Toggle
             active={showGistaru ?? false}
             onToggle={onToggleGistaru ?? (() => {})}
             label="Kawasan BWP (GISTARU)"
-            icon={<Map className="w-4 h-4" />}
+            icon={<Map className="w-4 h-4 text-amber-400" />}
           />
           <Toggle
             active={showBhumi ?? false}
             onToggle={onToggleBhumi ?? (() => {})}
             label="Persil Tanah (Bhumi ATR)"
-            icon={<ScrollText className="w-4 h-4" />}
+            icon={<ScrollText className="w-4 h-4 text-emerald-400" />}
           />
           <Toggle
             active={showSurveyPoints}
             onToggle={onToggleSurveyPoints}
             label="Opini Publik (Survei MAPID)"
-            icon={<BarChart2 className="w-4 h-4" />}
+            icon={<BarChart2 className="w-4 h-4 text-cyan-400" />}
           />
-          {isGovBiz && (
-            <Toggle
-              active={showEconomicPOI}
-              onToggle={() => setShowEconomicPOI(!showEconomicPOI)}
-              label="Economic POI"
-              icon={<Building2 className="w-4 h-4" />}
-            />
-          )}
+          <Toggle
+            active={showEconomicPOI ?? false}
+            onToggle={onToggleEconomicPOI ?? (() => {})}
+            label="Economic POI (Mall & Retail)"
+            icon={<Building2 className="w-4 h-4 text-amber-400" />}
+          />
         </div>
       </div>
 
