@@ -20,8 +20,8 @@ export const FALLBACK_BASEMAP_STYLES: Record<string, string> = {
   satellite: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
 };
 
-// User MAPID API Key from Environment
-const MAPID_KEY = process.env.NEXT_PUBLIC_MAPID_API_KEY;
+// MAPID API Key from Environment or Default Vercel Whitelisted Key
+const MAPID_KEY = process.env.NEXT_PUBLIC_MAPID_API_KEY || '6a96748353df37905b3a5f39';
 
 export const BASEMAP_STYLES: Record<string, string> = {
   // If MAPID_KEY is provided in .env, use official MAPID tiles; otherwise fallback to Carto GL
