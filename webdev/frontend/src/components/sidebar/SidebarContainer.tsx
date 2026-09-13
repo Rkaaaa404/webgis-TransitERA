@@ -23,7 +23,7 @@ import {
   Train as TrainIcon, Bus, MapPin, Settings, HelpCircle, MessageSquare, Video,
   ChevronRight, ChevronDown, Clock, AlertTriangle, Droplets, Wind, Thermometer,
   Eye, EyeOff, Star, Hexagon, ScrollText, BarChart2, CircleDollarSign, Building2,
-  Navigation, ExternalLink, Footprints
+  Navigation, ExternalLink, Footprints, Circle
 } from 'lucide-react';
 
 interface SidebarContainerProps {
@@ -163,7 +163,7 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
 }) => {
   const [govActiveTab, setGovActiveTab] = useState<'filter' | 'layers' | 'legends' | 'demographics' | 'environment'>('filter');
   const [bizActiveTab, setBizActiveTab] = useState<'filter' | 'layers' | 'legends' | 'competitors' | 'poilist'>('filter');
-  const [comActiveTab, setComActiveTab] = useState<'filter' | 'layers' | 'legends' | 'schedules' | 'routes' | 'tourist'>('filter');
+  const [comActiveTab, setComActiveTab] = useState<'filter' | 'layers' | 'legends' | 'schedules' | 'routes' | 'tourist'>('layers');
 
   const config = getPersonaConfig(activePersona);
 
@@ -275,40 +275,65 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
     <>
       <SectionHeader label="Lapisan Peta (Layers)" />
       <div className="px-3 pb-2">
-        {/* ── Lapisan Utama Tematik H3 (Pilih Salah Satu) ── */}
-        <div className="text-[10px] uppercase font-bold tracking-wider text-slate-400 px-1 pt-1 pb-1.5 flex items-center justify-between">
-          <span>Analisis Tematik H3</span>
-          <span className="text-[9px] text-brand-lime font-mono">Pilih Satu</span>
-        </div>
-        <div className="space-y-1">
-          <Toggle
-            active={choroplethMode === 'tod_score'}
-            onToggle={() => onChangeChoroplethMode('tod_score')}
-            label="H3 TOD Grid (5D)"
-            icon={<Hexagon className="w-4 h-4" />}
-          />
-          <Toggle
-            active={choroplethMode === 'njop_premium'}
-            onToggle={() => onChangeChoroplethMode('njop_premium')}
-            label="Zona Nilai Lahan (%ΔNJOP)"
-            icon={<CircleDollarSign className="w-4 h-4" />}
-          />
-          <Toggle
-            active={choroplethMode === 'typology'}
-            onToggle={() => onChangeChoroplethMode('typology')}
-            label="Tipologi Kawasan (Cluster)"
-            icon={<Star className="w-4 h-4" />}
-          />
-          <Toggle
-            active={choroplethMode === 'none'}
-            onToggle={() => onChangeChoroplethMode('none')}
-            label="Tanpa Grid H3 (Clean View)"
-            icon={<EyeOff className="w-4 h-4" />}
-          />
-        </div>
-
-        {/* ── Pemisah Garis ── */}
-        <div className="my-2.5 border-t border-slate-800" />
+        {activePersona !== 'commuter' ? (
+          <>
+            {/* ── Lapisan Utama Tematik H3 (Pilih Salah Satu) ── */}
+            <div className="text-[10px] uppercase font-bold tracking-wider text-slate-400 px-1 pt-1 pb-1.5 flex items-center justify-between">
+              <span>Analisis Tematik H3</span>
+              <span className="text-[9px] text-brand-lime font-mono">Pilih Satu</span>
+            </div>
+            <div className="space-y-1">
+              <Toggle
+                active={choroplethMode === 'tod_score'}
+                onToggle={() => onChangeChoroplethMode('tod_score')}
+                label="H3 TOD Grid (5D)"
+                icon={<Hexagon className="w-4 h-4" />}
+              />
+              <Toggle
+                active={choroplethMode === 'njop_premium'}
+                onToggle={() => onChangeChoroplethMode('njop_premium')}
+                label="Zona Nilai Lahan (%ΔNJOP)"
+                icon={<CircleDollarSign className="w-4 h-4" />}
+              />
+              <Toggle
+                active={choroplethMode === 'typology'}
+                onToggle={() => onChangeChoroplethMode('typology')}
+                label="Tipologi Kawasan (Cluster)"
+                icon={<Star className="w-4 h-4" />}
+              />
+              <Toggle
+                active={choroplethMode === 'none'}
+                onToggle={() => onChangeChoroplethMode('none')}
+                label="Tanpa Grid H3 (Clean View)"
+                icon={<EyeOff className="w-4 h-4" />}
+              />
+            </div>
+            {/* ── Pemisah Garis ── */}
+            <div className="my-2.5 border-t border-slate-800" />
+          </>
+        ) : (
+          <>
+            {/* ── Cakupan Perimeter Khusus Komuter (Radius 1 km) ── */}
+            <div className="text-[10px] uppercase font-bold tracking-wider text-cyan-400 px-1 pt-1 pb-1.5 flex items-center justify-between">
+              <span>Cakupan Area Transit</span>
+              <span className="text-[9px] text-cyan-400 font-mono">Buffer Stasiun</span>
+            </div>
+            <div className="p-2.5 rounded-lg bg-cyan-950/40 border border-cyan-500/30 flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <Circle className="w-4 h-4 text-cyan-400 shrink-0" />
+                <div className="flex flex-col">
+                  <span className="text-xs font-bold text-slate-100">Perimeter Radius 1 km</span>
+                  <span className="text-[9px] text-cyan-300">Zonasi buffer sirkular transit komuter</span>
+                </div>
+              </div>
+              <span className="text-[9px] font-bold text-cyan-300 bg-cyan-500/20 px-1.5 py-0.5 rounded border border-cyan-500/30">
+                Aktif
+              </span>
+            </div>
+            {/* ── Pemisah Garis ── */}
+            <div className="my-2.5 border-t border-slate-800" />
+          </>
+        )}
 
         {/* ── Lapisan Tambahan (Bisa Dinyalakan Bersamaan) ── */}
         <div className="text-[10px] uppercase font-bold tracking-wider text-slate-400 px-1 pb-1.5 flex items-center justify-between">
@@ -354,58 +379,79 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
       {/* Header Legenda Interaktif dengan Quick Selector */}
       <div className="flex items-center justify-between">
         <div className="text-[10px] font-bold text-cyan-400 uppercase tracking-wider">Legenda Simbologi Peta</div>
-        <div className="flex items-center gap-1">
-          <button
-            onClick={() => onChangeChoroplethMode('tod_score')}
-            title="Tampilkan Legenda & Layer TOD"
-            className={`px-1.5 py-0.5 rounded text-[9px] transition-colors ${
-              choroplethMode === 'tod_score'
-                ? 'bg-brand-lime text-slate-950 font-bold shadow-sm'
-                : 'bg-slate-800 text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            TOD
-          </button>
-          <button
-            onClick={() => onChangeChoroplethMode('njop_premium')}
-            title="Tampilkan Legenda & Layer NJOP"
-            className={`px-1.5 py-0.5 rounded text-[9px] transition-colors ${
-              choroplethMode === 'njop_premium'
-                ? 'bg-brand-lime text-slate-950 font-bold shadow-sm'
-                : 'bg-slate-800 text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            NJOP
-          </button>
-          <button
-            onClick={() => onChangeChoroplethMode('typology')}
-            title="Tampilkan Legenda & Layer Tipologi"
-            className={`px-1.5 py-0.5 rounded text-[9px] transition-colors ${
-              choroplethMode === 'typology'
-                ? 'bg-brand-lime text-slate-950 font-bold shadow-sm'
-                : 'bg-slate-800 text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            Tipologi
-          </button>
-          <button
-            onClick={() => onChangeChoroplethMode('none')}
-            title="Nonaktifkan Grid H3"
-            className={`px-1.5 py-0.5 rounded text-[9px] transition-colors ${
-              choroplethMode === 'none'
-                ? 'bg-brand-lime text-slate-950 font-bold shadow-sm'
-                : 'bg-slate-800 text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            Clean
-          </button>
-        </div>
+        {activePersona !== 'commuter' && (
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => onChangeChoroplethMode('tod_score')}
+              title="Tampilkan Legenda & Layer TOD"
+              className={`px-1.5 py-0.5 rounded text-[9px] transition-colors ${
+                choroplethMode === 'tod_score'
+                  ? 'bg-brand-lime text-slate-950 font-bold shadow-sm'
+                  : 'bg-slate-800 text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              TOD
+            </button>
+            <button
+              onClick={() => onChangeChoroplethMode('njop_premium')}
+              title="Tampilkan Legenda & Layer NJOP"
+              className={`px-1.5 py-0.5 rounded text-[9px] transition-colors ${
+                choroplethMode === 'njop_premium'
+                  ? 'bg-brand-lime text-slate-950 font-bold shadow-sm'
+                  : 'bg-slate-800 text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              NJOP
+            </button>
+            <button
+              onClick={() => onChangeChoroplethMode('typology')}
+              title="Tampilkan Legenda & Layer Tipologi"
+              className={`px-1.5 py-0.5 rounded text-[9px] transition-colors ${
+                choroplethMode === 'typology'
+                  ? 'bg-brand-lime text-slate-950 font-bold shadow-sm'
+                  : 'bg-slate-800 text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              Tipologi
+            </button>
+            <button
+              onClick={() => onChangeChoroplethMode('none')}
+              title="Nonaktifkan Grid H3"
+              className={`px-1.5 py-0.5 rounded text-[9px] transition-colors ${
+                choroplethMode === 'none'
+                  ? 'bg-brand-lime text-slate-950 font-bold shadow-sm'
+                  : 'bg-slate-800 text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              Clean
+            </button>
+          </div>
+        )}
       </div>
 
-      {/* Mode Bersih - Muncul saat mode none aktif */}
-      {choroplethMode === 'none' && (
+      {/* Legenda Khusus Komuter */}
+      {activePersona === 'commuter' && (
+        <div className="space-y-2 p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
+          <div className="text-[10px] font-bold text-slate-200 mb-1">Legenda Khusus Komuter</div>
+          <div className="flex items-center gap-2 text-[10px] text-slate-300">
+            <span className="w-3.5 h-3.5 rounded-full border-2 border-dashed border-cyan-400 bg-cyan-500/20 shrink-0" />
+            <span>Perimeter Radius 1 km (Buffer Transit)</span>
+          </div>
+          <div className="flex items-center gap-2 text-[10px] text-slate-300">
+            <span className="w-4 h-1 bg-brand-lime rounded-full shrink-0" />
+            <span>Koridor Feeder WiraWiri &amp; Suroboyo Bus</span>
+          </div>
+          <div className="flex items-center gap-2 text-[10px] text-slate-300">
+            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 ring-2 ring-cyan-500/40 shrink-0" />
+            <span>Simpul Stasiun / Terminal Terpilih</span>
+          </div>
+        </div>
+      )}
+
+      {/* Mode Bersih - Muncul saat mode none aktif pada non-komuter */}
+      {activePersona !== 'commuter' && choroplethMode === 'none' && (
         <div className="p-2.5 rounded-lg bg-slate-800/40 border border-slate-700/50 text-[10px] text-slate-400 text-center">
-          Grid H3 dinonaktifkan (Peta Bersih Komuter &amp; Rute Transit).
+          Grid H3 dinonaktifkan (Peta Bersih).
         </div>
       )}
       
@@ -660,7 +706,6 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
           <>
             <SectionHeader label="Commuter Transit" />
             <div className="px-2 space-y-0.5">
-              <NavItem icon={SlidersHorizontal} label="Filter Area" active={comActiveTab === 'filter'} onClick={() => setComActiveTab('filter')} badge={h3ScoreRange[0] > 0 || h3ScoreRange[1] < 100 || h3RingFilter < 5 ? 'Aktif' : undefined} />
               <NavItem icon={Layers} label="Lapisan Peta" active={comActiveTab === 'layers'} onClick={() => setComActiveTab('layers')} />
               <NavItem icon={Map} label="Legenda" active={comActiveTab === 'legends'} onClick={() => setComActiveTab('legends')} />
               <div className="my-1 border-t border-slate-800/80" />
@@ -669,7 +714,6 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
               <NavItem icon={MapPin} label="Destinasi Wisata" active={comActiveTab === 'tourist'} onClick={() => setComActiveTab('tourist')} />
             </div>
 
-            {comActiveTab === 'filter' && renderFilterTab()}
             {comActiveTab === 'layers' && renderLayersTab(false)}
             {comActiveTab === 'legends' && renderLegendsTab()}
 
@@ -1000,7 +1044,6 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
           <>
             <SectionHeader label="Navigation" />
             <div className="px-2 space-y-0.5">
-              <NavItem icon={SlidersHorizontal} label="Filter Spasial" active={comActiveTab === 'filter'} onClick={() => setComActiveTab('filter')} badge={h3ScoreRange[0] > 0 || h3ScoreRange[1] < 100 || h3RingFilter < 5 || njopRange[0] > 0 || njopRange[1] < 25 ? 'Aktif' : undefined} />
               <NavItem icon={Layers} label="Lapisan Peta (Layers)" active={comActiveTab === 'layers'} onClick={() => setComActiveTab('layers')} />
               <NavItem icon={Map} label="Legenda (Legends)" active={comActiveTab === 'legends'} onClick={() => setComActiveTab('legends')} />
                 <div className="my-1 border-t border-slate-800/80" />
@@ -1009,7 +1052,6 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
             </div>
 
             {/* General Features Rendering */}
-            {comActiveTab === 'filter' && renderFilterTab()}
             {comActiveTab === 'layers' && renderLayersTab(false)}
             {comActiveTab === 'legends' && renderLegendsTab()}
 

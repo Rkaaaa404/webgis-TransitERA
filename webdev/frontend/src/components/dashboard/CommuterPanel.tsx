@@ -287,7 +287,7 @@ export const CommuterPanel: React.FC<CommuterPanelProps> = ({
           {/* Status Perimeter 1 km Aktif */}
           <div className="flex items-center gap-1.5 mt-1 text-[10px] text-cyan-300 bg-cyan-950/50 border border-cyan-500/30 px-2 py-1 rounded-md">
             <Circle className="w-3 h-3 text-cyan-400 animate-pulse shrink-0" />
-            <span className="truncate">Perimeter 1 km Aktif di Peta (Radius Jalan Kaki 10–15 Mnt)</span>
+            <span className="truncate">Perimeter Radius 1 km Aktif di Peta</span>
           </div>
         </div>
 

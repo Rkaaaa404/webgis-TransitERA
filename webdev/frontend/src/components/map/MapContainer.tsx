@@ -88,6 +88,13 @@ export const MapContainer: React.FC<MapContainerProps> = ({
     fetchMapidSurvey().then((d) => setSurveyCount(d.features?.length ?? 100)).catch(() => setSurveyCount(100));
   }, []);
 
+  // Ensure isochrone street network is disabled for commuter persona (commuter uses 1 km circular perimeter)
+  useEffect(() => {
+    if (activePersona === 'commuter') {
+      setShowIsochrone(false);
+    }
+  }, [activePersona]);
+
   // 1. Initialize MapLibre GL Map Instance
   useEffect(() => {
     if (!mapContainerRef.current) return;
@@ -1077,6 +1084,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                   onChangeBasemapStyle={(style) => {
                     onChangeBasemapStyle(style);
                   }}
+                  activePersona={activePersona}
                   onClose={() => setIsLayerControlOpen(false)}
                 />
               </div>

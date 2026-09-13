@@ -18,8 +18,10 @@ import {
   Navigation,
   Car,
   Route,
+  Circle,
 } from 'lucide-react';
 import { IsochroneMode, IsochroneMinutes, IsochroneViewType } from './useIsochroneLayer';
+import { PersonaType } from '@/lib/persona';
 
 export type ChoroplethMode = 'tod_score' | 'njop_premium' | 'typology' | 'none';
 export type BasemapStyleKey = 'street' | 'street-2d' | 'dark' | 'light' | 'satellite';
@@ -55,6 +57,7 @@ interface LayerControlProps {
   ntlCount?: number | null;
   basemapStyle: BasemapStyleKey;
   onChangeBasemapStyle: (style: BasemapStyleKey) => void;
+  activePersona?: PersonaType;
   onClose?: () => void;
 }
 
@@ -63,6 +66,7 @@ export const LayerControl: React.FC<LayerControlProps> = ({
   onChangeChoroplethMode,
   showSurveyPoints,
   onToggleSurveyPoints,
+  activePersona,
   showTransitNodes = false,
   onToggleTransitNodes,
   showTransitRoutes = false,
@@ -141,73 +145,88 @@ export const LayerControl: React.FC<LayerControlProps> = ({
       </div>
 
       {/* ── 1. Mutually Exclusive Thematic H3 Overlay (Pilih Satu) ── */}
-      <div>
-        <div className="text-[10px] uppercase font-bold text-cyan-400 mb-1.5 flex items-center justify-between">
-          <span>Overlay Tematik H3</span>
-          <span className="text-[9px] text-brand-lime font-mono">Pilih Satu</span>
+      {activePersona !== 'commuter' ? (
+        <div>
+          <div className="text-[10px] uppercase font-bold text-cyan-400 mb-1.5 flex items-center justify-between">
+            <span>Overlay Tematik H3</span>
+            <span className="text-[9px] text-brand-lime font-mono">Pilih Satu</span>
+          </div>
+          <div className="space-y-1">
+            <button
+              onClick={() => onChangeChoroplethMode('tod_score')}
+              className={`w-full text-left py-1.5 px-2 rounded-lg text-[11px] font-medium flex items-center justify-between border transition-all ${
+                choroplethMode === 'tod_score'
+                  ? 'bg-brand-lime/15 border-brand-lime/50 text-brand-lime font-bold'
+                  : 'bg-slate-950/40 border-slate-800/80 text-slate-400 hover:text-slate-300'
+              }`}
+            >
+              <span className="flex items-center gap-1.5">
+                <Hexagon className="w-3.5 h-3.5" />
+                TOD Readiness Score (5D)
+              </span>
+              {choroplethMode === 'tod_score' && <Check className="w-3.5 h-3.5 text-brand-lime" />}
+            </button>
+
+            <button
+              onClick={() => onChangeChoroplethMode('njop_premium')}
+              className={`w-full text-left py-1.5 px-2 rounded-lg text-[11px] font-medium flex items-center justify-between border transition-all ${
+                choroplethMode === 'njop_premium'
+                  ? 'bg-brand-lime/15 border-brand-lime/50 text-brand-lime font-bold'
+                  : 'bg-slate-950/40 border-slate-800/80 text-slate-400 hover:text-slate-300'
+              }`}
+            >
+              <span className="flex items-center gap-1.5">
+                <CircleDollarSign className="w-3.5 h-3.5" />
+                Estimasi Nilai Lahan (%ΔNJOP)
+              </span>
+              {choroplethMode === 'njop_premium' && <Check className="w-3.5 h-3.5 text-brand-lime" />}
+            </button>
+
+            <button
+              onClick={() => onChangeChoroplethMode('typology')}
+              className={`w-full text-left py-1.5 px-2 rounded-lg text-[11px] font-medium flex items-center justify-between border transition-all ${
+                choroplethMode === 'typology'
+                  ? 'bg-brand-lime/15 border-brand-lime/50 text-brand-lime font-bold'
+                  : 'bg-slate-950/40 border-slate-800/80 text-slate-400 hover:text-slate-300'
+              }`}
+            >
+              <span className="flex items-center gap-1.5">
+                <Star className="w-3.5 h-3.5" />
+                Tipologi Kawasan (Cluster)
+              </span>
+              {choroplethMode === 'typology' && <Check className="w-3.5 h-3.5 text-brand-lime" />}
+            </button>
+
+            <button
+              onClick={() => onChangeChoroplethMode('none')}
+              className={`w-full text-left py-1.5 px-2 rounded-lg text-[11px] font-medium flex items-center justify-between border transition-all ${
+                choroplethMode === 'none'
+                  ? 'bg-brand-lime/15 border-brand-lime/50 text-brand-lime font-bold'
+                  : 'bg-slate-950/40 border-slate-800/80 text-slate-400 hover:text-slate-300'
+              }`}
+            >
+              <span className="flex items-center gap-1.5">
+                <EyeOff className="w-3.5 h-3.5" />
+                Tanpa Grid H3 (Clean View)
+              </span>
+              {choroplethMode === 'none' && <Check className="w-3.5 h-3.5 text-brand-lime" />}
+            </button>
+          </div>
         </div>
-        <div className="space-y-1">
-          <button
-            onClick={() => onChangeChoroplethMode('tod_score')}
-            className={`w-full text-left py-1.5 px-2 rounded-lg text-[11px] font-medium flex items-center justify-between border transition-all ${
-              choroplethMode === 'tod_score'
-                ? 'bg-brand-lime/15 border-brand-lime/50 text-brand-lime font-bold'
-                : 'bg-slate-950/40 border-slate-800/80 text-slate-400 hover:text-slate-300'
-            }`}
-          >
-            <span className="flex items-center gap-1.5">
-              <Hexagon className="w-3.5 h-3.5" />
-              TOD Readiness Score (5D)
-            </span>
-            {choroplethMode === 'tod_score' && <Check className="w-3.5 h-3.5 text-brand-lime" />}
-          </button>
-
-          <button
-            onClick={() => onChangeChoroplethMode('njop_premium')}
-            className={`w-full text-left py-1.5 px-2 rounded-lg text-[11px] font-medium flex items-center justify-between border transition-all ${
-              choroplethMode === 'njop_premium'
-                ? 'bg-brand-lime/15 border-brand-lime/50 text-brand-lime font-bold'
-                : 'bg-slate-950/40 border-slate-800/80 text-slate-400 hover:text-slate-300'
-            }`}
-          >
-            <span className="flex items-center gap-1.5">
-              <CircleDollarSign className="w-3.5 h-3.5" />
-              Estimasi Nilai Lahan (%ΔNJOP)
-            </span>
-            {choroplethMode === 'njop_premium' && <Check className="w-3.5 h-3.5 text-brand-lime" />}
-          </button>
-
-          <button
-            onClick={() => onChangeChoroplethMode('typology')}
-            className={`w-full text-left py-1.5 px-2 rounded-lg text-[11px] font-medium flex items-center justify-between border transition-all ${
-              choroplethMode === 'typology'
-                ? 'bg-brand-lime/15 border-brand-lime/50 text-brand-lime font-bold'
-                : 'bg-slate-950/40 border-slate-800/80 text-slate-400 hover:text-slate-300'
-            }`}
-          >
-            <span className="flex items-center gap-1.5">
-              <Star className="w-3.5 h-3.5" />
-              Tipologi Kawasan (Cluster)
-            </span>
-            {choroplethMode === 'typology' && <Check className="w-3.5 h-3.5 text-brand-lime" />}
-          </button>
-
-          <button
-            onClick={() => onChangeChoroplethMode('none')}
-            className={`w-full text-left py-1.5 px-2 rounded-lg text-[11px] font-medium flex items-center justify-between border transition-all ${
-              choroplethMode === 'none'
-                ? 'bg-brand-lime/15 border-brand-lime/50 text-brand-lime font-bold'
-                : 'bg-slate-950/40 border-slate-800/80 text-slate-400 hover:text-slate-300'
-            }`}
-          >
-            <span className="flex items-center gap-1.5">
-              <EyeOff className="w-3.5 h-3.5" />
-              Tanpa Grid H3 (Clean View)
-            </span>
-            {choroplethMode === 'none' && <Check className="w-3.5 h-3.5 text-brand-lime" />}
-          </button>
+      ) : (
+        <div className="p-2.5 rounded-lg bg-cyan-950/40 border border-cyan-500/30 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Circle className="w-4 h-4 text-cyan-400 shrink-0" />
+            <div className="flex flex-col">
+              <span className="text-xs font-bold text-slate-100">Perimeter Radius 1 km</span>
+              <span className="text-[9px] text-cyan-300">Buffer sirkular transit aktif di peta</span>
+            </div>
+          </div>
+          <span className="text-[9px] font-bold text-cyan-300 bg-cyan-500/20 px-1.5 py-0.5 rounded border border-cyan-500/30">
+            Aktif
+          </span>
         </div>
-      </div>
+      )}
 
       {/* ── Pemisah Garis Tegas ── */}
       <div className="my-2.5 border-t border-slate-800" />
@@ -331,7 +350,7 @@ export const LayerControl: React.FC<LayerControlProps> = ({
           </button>
         )}
 
-        {onToggleIsochrone && (
+        {activePersona !== 'commuter' && onToggleIsochrone && (
           <div className="space-y-1.5 pt-1 border-t border-slate-800/60">
             <button
               onClick={onToggleIsochrone}

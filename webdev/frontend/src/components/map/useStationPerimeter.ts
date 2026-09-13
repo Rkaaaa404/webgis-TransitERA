@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as maplibregl from 'maplibre-gl';
 import { StationId } from '@/types';
 import { FALLBACK_STATIONS } from '@/lib/api';
+import { bringStationMarkersToFront } from './useStationMarkers';
 
 /**
  * Menghasilkan GeoJSON Polygon lingkaran beradius radiusKm (default 1 km)
@@ -85,6 +86,8 @@ export function useStationPerimeter(
       (map.getSource(sourceId) as maplibregl.GeoJSONSource).setData(circleData);
     }
 
+    const beforeLayer = map.getLayer('station-points-halo') ? 'station-points-halo' : undefined;
+
     // 2. Tambah / Tampilkan Layer Fill
     if (!map.getLayer(fillLayerId)) {
       map.addLayer({
@@ -98,7 +101,7 @@ export function useStationPerimeter(
           'fill-color': '#06b6d4',
           'fill-opacity': 0.12,
         },
-      });
+      }, beforeLayer);
     } else {
       map.setLayoutProperty(fillLayerId, 'visibility', 'visible');
     }
@@ -120,10 +123,13 @@ export function useStationPerimeter(
           'line-dasharray': [3, 2],
           'line-opacity': 0.85,
         },
-      });
+      }, beforeLayer);
     } else {
       map.setLayoutProperty(lineLayerId, 'visibility', 'visible');
     }
+
+    // Pastikan titik stasiun selalu berada paling atas
+    bringStationMarkersToFront(map);
 
     // 4. Tambahkan Floating Label Marker di Puncak Utara Lingkaran 1 km
     const distanceY = 1.0 / 110.574;
@@ -150,7 +156,7 @@ export function useStationPerimeter(
         transform: translate(-50%, -50%);
       ">
         <span style="width: 6px; height: 6px; border-radius: 50%; background: #22d3ee; box-shadow: 0 0 6px #22d3ee;"></span>
-        <span>Perimeter 1 km • Radius 10–15 Mnt Jalan Kaki</span>
+        <span>Perimeter Radius 1 km</span>
       </div>
     `;
 
