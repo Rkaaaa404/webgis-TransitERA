@@ -50,7 +50,9 @@ export default function WebGISPage() {
   const [activeRouteIds, setActiveRouteIds] = useState<string[]>([]);
   const [activeRoutePlan, setActiveRoutePlan] = useState<RoutePlan | null>(null);
 
-  // ATR/BPN Layer states (managed here so MapContainer and SidebarContainer stay in sync)
+  // Layer states (managed here so MapContainer and SidebarContainer stay in sync)
+  const [showTransitRoutes, setShowTransitRoutes] = useState(true);
+  const [showEconomicPOI, setShowEconomicPOI] = useState(false);
   const [showGistaru, setShowGistaru] = useState(false);
   const [showBhumi, setShowBhumi] = useState(false);
 
@@ -126,6 +128,10 @@ export default function WebGISPage() {
           onOpenFeedback={() => setFeedbackOpen(true)}
           isOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
+          showTransitRoutes={showTransitRoutes}
+          onToggleTransitRoutes={() => setShowTransitRoutes((v) => !v)}
+          showEconomicPOI={showEconomicPOI}
+          onToggleEconomicPOI={() => setShowEconomicPOI((v) => !v)}
           showGistaru={showGistaru}
           onToggleGistaru={() => setShowGistaru((v) => !v)}
           showBhumi={showBhumi}
@@ -152,6 +158,8 @@ export default function WebGISPage() {
             mapActionTrigger={mapActionTrigger}
             activeRouteIds={activeRouteIds}
             activeRoutePlan={activeRoutePlan}
+            showTransitRoutes={showTransitRoutes}
+            showEconomicPOI={showEconomicPOI}
             showGistaru={showGistaru}
             showBhumi={showBhumi}
           />
@@ -223,6 +231,14 @@ export default function WebGISPage() {
                 onChangeH3ScoreRange={setH3ScoreRange}
                 h3RingFilter={h3RingFilter}
                 onChangeH3RingFilter={setH3RingFilter}
+                showTransitRoutes={showTransitRoutes}
+                onToggleTransitRoutes={() => setShowTransitRoutes((v) => !v)}
+                showEconomicPOI={showEconomicPOI}
+                onToggleEconomicPOI={() => setShowEconomicPOI((v) => !v)}
+                showGistaru={showGistaru}
+                onToggleGistaru={() => setShowGistaru((v) => !v)}
+                showBhumi={showBhumi}
+                onToggleBhumi={() => setShowBhumi((v) => !v)}
                 isMobileMode={true}
               />
             )}
