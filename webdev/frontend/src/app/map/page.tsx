@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { StationId, StationData } from '@/types';
+import { StationId, StationData, RoutePlan } from '@/types';
 import { FALLBACK_STATIONS } from '@/lib/api';
 import { PersonaType, getPersonaConfig } from '@/lib/persona';
 import { ChoroplethMode, BasemapStyleKey } from '@/components/map/LayerControl';
@@ -47,6 +47,12 @@ export default function WebGISPage() {
   
   const [mapActionTrigger, setMapActionTrigger] = useState<any>(null);
   const [highlightedH3Index, setHighlightedH3Index] = useState<string | null>(null);
+  const [activeRouteIds, setActiveRouteIds] = useState<string[]>([]);
+  const [activeRoutePlan, setActiveRoutePlan] = useState<RoutePlan | null>(null);
+
+  // ATR/BPN Layer states (managed here so MapContainer and SidebarContainer stay in sync)
+  const [showGistaru, setShowGistaru] = useState(false);
+  const [showBhumi, setShowBhumi] = useState(false);
 
   // Modal states (differentiated between Settings, Help, and Feedback)
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -120,6 +126,10 @@ export default function WebGISPage() {
           onOpenFeedback={() => setFeedbackOpen(true)}
           isOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
+          showGistaru={showGistaru}
+          onToggleGistaru={() => setShowGistaru((v) => !v)}
+          showBhumi={showBhumi}
+          onToggleBhumi={() => setShowBhumi((v) => !v)}
         />
         </div>
 
@@ -140,6 +150,10 @@ export default function WebGISPage() {
             highlightedH3Index={highlightedH3Index}
             onSelectH3Index={setSelectedH3Index}
             mapActionTrigger={mapActionTrigger}
+            activeRouteIds={activeRouteIds}
+            activeRoutePlan={activeRoutePlan}
+            showGistaru={showGistaru}
+            showBhumi={showBhumi}
           />
         </div>
 
@@ -168,6 +182,8 @@ export default function WebGISPage() {
               activeH3Index={selectedH3Index}
               onExecuteMapAction={handleExecuteMapAction}
               onSelectStation={(stId) => setActiveStation(stId)}
+              onHighlightRoute={setActiveRouteIds}
+              onSelectRoutePlan={setActiveRoutePlan}
             />
           )}
         </aside>
@@ -188,6 +204,8 @@ export default function WebGISPage() {
                 activeH3Index={selectedH3Index} 
                 onExecuteMapAction={handleExecuteMapAction} 
                 onSelectStation={(stId) => setActiveStation(stId)}
+                onHighlightRoute={setActiveRouteIds}
+                onSelectRoutePlan={setActiveRoutePlan}
               />
             )}
             {mobileTab === 'filter' && (

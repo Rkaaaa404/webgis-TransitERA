@@ -9,6 +9,7 @@ from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
 from app.db.database import check_db_health
+from app.core.config import settings
 
 app = FastAPI(
     title="TransitERA API",
@@ -30,7 +31,8 @@ app.add_middleware(
         "http://127.0.0.1:3000",
         "http://127.0.0.1:3030",
         "https://transitera.mapid.io",
-    ],
+    ] + [o for o in settings.CORS_ORIGINS if "*" not in o],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -83,3 +83,51 @@ async def test_ai_query_default_fallback(client):
     data = response.json()
     assert data["status"] == "success"
     assert len(data["data"]["text_response"]) > 20
+
+
+@pytest.mark.asyncio
+async def test_ai_query_economic_survey_wonokromo(client):
+    """Kueri spesifik info ekonomi Wonokromo berbasis survei MAPID wajib memanggil get_survey_data."""
+    response = await client.post(
+        "/api/ai/query",
+        json={"prompt": "info ekonomi sekitar wonokromo based data survei mapid"}
+    )
+    assert response.status_code == 200
+    res = response.json()
+    assert res["status"] == "success"
+    ai_data = res["data"]
+    assert ai_data["action"] == "highlight_and_zoom"
+    assert ai_data["target_station"] == "wonokromo"
+    assert ai_data["function_called"] == "get_survey_data"
+    assert "wonokromo" in ai_data["text_response"].lower()
+
+
+@pytest.mark.asyncio
+async def test_ai_query_multimodal_route(client):
+    """Kueri rute perjalanan antar-stasiun wajib memanggil get_route."""
+    response = await client.post(
+        "/api/ai/query",
+        json={"prompt": "rute perjalanan dari gubeng ke benowo naik apa"}
+    )
+    assert response.status_code == 200
+    res = response.json()
+    assert res["status"] == "success"
+    ai_data = res["data"]
+    assert ai_data["action"] == "show_route"
+    assert ai_data["function_called"] == "get_route"
+
+
+@pytest.mark.asyncio
+async def test_ai_query_walkability_score(client):
+    """Kueri indeks walkability dan trotoar wajib memanggil get_area_score."""
+    response = await client.post(
+        "/api/ai/query",
+        json={"prompt": "bagaimana indeks walkability dan trotoar pejalan kaki di stasiun gubeng"}
+    )
+    assert response.status_code == 200
+    res = response.json()
+    assert res["status"] == "success"
+    ai_data = res["data"]
+    assert ai_data["function_called"] == "get_area_score"
+    assert ai_data["target_station"] == "gubeng"
+

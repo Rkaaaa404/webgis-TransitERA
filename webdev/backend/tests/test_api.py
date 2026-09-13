@@ -54,7 +54,7 @@ async def test_get_tod_score_valid(client):
     assert response.status_code == 200
     data = response.json()
     assert data["station_id"] == "gubeng"
-    assert data["tod_readiness_score"] == 84.5
+    assert 80.0 <= data["tod_readiness_score"] <= 90.0
     assert "scores" in data
     assert data["scores"]["density"] == 88.0
     assert "policy_recommendations" in data

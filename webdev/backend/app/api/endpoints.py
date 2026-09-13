@@ -244,6 +244,59 @@ async def get_h3_grid(
 
 
 # ---------------------------------------------------------------------------
+# Isochrone (15-Minute City Network Accessibility) endpoint
+# ---------------------------------------------------------------------------
+
+_ISOCHRONE_CACHE = None
+
+@router.get("/isochrone")
+async def get_station_isochrone(
+    station: Optional[str] = Query(None, description="Station ID (e.g. gubeng, pasar_turi)"),
+    mode: Optional[str] = Query(None, description="Transport mode: walk | motor | car"),
+    minutes: Optional[int] = Query(None, description="Duration in minutes: 5 | 10 | 15"),
+):
+    """
+    Mengambil poligon isochrone jangkauan perjalanan berbasis jaringan jalan raya Kota Surabaya
+    untuk analisis '15-Minute City' simpul transit stasiun.
+    Mendukung filter moda (walk/motor/car), durasi waktu (5/10/15 mnt), dan ID stasiun.
+    """
+    global _ISOCHRONE_CACHE
+    if _ISOCHRONE_CACHE is None:
+        isochrone_file = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+            "data",
+            "station_isochrones.json"
+        )
+        if os.path.exists(isochrone_file):
+            with open(isochrone_file, "r", encoding="utf-8") as f:
+                _ISOCHRONE_CACHE = json.load(f)
+        else:
+            _ISOCHRONE_CACHE = {"type": "FeatureCollection", "features": []}
+
+    features = _ISOCHRONE_CACHE.get("features", [])
+
+    if station:
+        st_norm = station.lower().strip()
+        features = [f for f in features if f["properties"].get("station_id") == st_norm]
+    if mode:
+        m_norm = mode.lower().strip()
+        features = [f for f in features if f["properties"].get("mode") == m_norm]
+    if minutes is not None:
+        features = [f for f in features if f["properties"].get("minutes") == minutes]
+
+    return {
+        "type": "FeatureCollection",
+        "features": features,
+        "metadata": {
+            "total_features": len(features),
+            "filter_station": station,
+            "filter_mode": mode,
+            "filter_minutes": minutes
+        }
+    }
+
+
+# ---------------------------------------------------------------------------
 # Database Management endpoints
 # ---------------------------------------------------------------------------
 
@@ -607,3 +660,57 @@ async def simulate_scenario(request: ScenarioSimulationRequest):
 async def ai_query(request: AIQueryRequest):
     """Proxy endpoint Asisten Spasial AI (Google Gemini via JSON Function Calling)."""
     return await process_ai_query(request)
+
+
+# ---------------------------------------------------------------------------
+# ATR/BPN Spatial Layer endpoints
+# ---------------------------------------------------------------------------
+
+_SPATIAL_DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "spatial")
+
+
+def _load_geojson(filename: str) -> dict:
+    """Load a GeoJSON file from the spatial data directory."""
+    path = os.path.normpath(os.path.join(_SPATIAL_DATA_DIR, filename))
+    if not os.path.exists(path):
+        return {"type": "FeatureCollection", "features": [], "_note": f"{filename} not yet generated — run scripts/extract_gistaru_bhumi.py"}
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+@router.get("/layers/gistaru")
+async def get_gistaru_layer():
+    """
+    Mengembalikan data Rencana Pola Ruang RDTR Kota Surabaya dari GISTARU ATR/BPN.
+
+    Sumber: Kementerian ATR/BPN — GISTARU RTR Online (RDTR Kota Surabaya, Perda No. 8 Tahun 2018)
+    URL Resmi: https://gistaru.atrbpn.go.id/rtronline/
+
+    Returns GeoJSON FeatureCollection dengan properti:
+    - NAMOBJ: Nama objek (mis. Perumahan, Perdagangan & Jasa)
+    - NAMZON / KODZON: Nama & kode zona pola ruang
+    - NAMSZN / KODSZN: Nama & kode sub-zona (K-1, R-1, SPU, RTH)
+    - KODBWP: Kode Bagian Wilayah Perkotaan
+    - TOD_04: Ketentuan khusus TOD
+    - LUASHA: Luas area (hektar)
+    """
+    return _load_geojson("gistaru_pola_ruang_surabaya.geojson")
+
+
+@router.get("/layers/bhumi")
+async def get_bhumi_layer():
+    """
+    Mengembalikan data Persil Bidang Tanah Terdaftar di koridor stasiun commuter Surabaya.
+
+    Sumber: Kementerian ATR/BPN — Peta Interaktif BHUMI (Bidang Tanah Terdaftar)
+    URL Resmi: https://bhumi.atrbpn.go.id/peta
+
+    Returns GeoJSON FeatureCollection dengan properti:
+    - nib: Nomor Induk Bidang (NIB)
+    - tipehak: Jenis Hak (Hak Milik, Hak Guna Bangunan, Hak Pakai, dsb.)
+    - luas: Luas bidang tanah dalam m²
+    - akurasibidang: Status akurasi pengukuran bidang tanah
+    - _station_id: ID stasiun transit terdekat
+    """
+    return _load_geojson("bhumi_persil_surabaya.geojson")
+

@@ -1,0 +1,1055 @@
+{
+  "metadata": {
+    "title": "GEO MAPID Survey Sentiment Analysis & Aggregations",
+    "source": "MAPID #PakSibukGa Campaign 2026",
+    "generated_by": "TransitERA Batch Sentiment NLP Engine (Gemini API Compatible)",
+    "total_survey_points": 100,
+    "updated_at": "September 2026"
+  },
+  "stations": {
+    "gubeng": {
+      "station_id": "gubeng",
+      "respondent_count": 20,
+      "sentiment": {
+        "positive_pct": 55,
+        "neutral_pct": 45,
+        "negative_pct": 0
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 86,
+          "status": "Sangat Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 75,
+          "status": "Aman & Nyaman"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 79,
+          "status": "Terintegrasi"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 90,
+          "status": "Aman"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-071",
+          "title": "Pedestrian Plaza Gubeng Baru",
+          "text": "Kawasan pedestrian lobi timur sangat modern dengan bangku taman dan vegetasi peneduh. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-072",
+          "title": "Titik Transit Feeder WiraWiri FD07",
+          "text": "Halte feeder terintegrasi langsung di depan drop zone sisi timur stasiun. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-073",
+          "title": "Tactile Paving Guiding Block Stasiun",
+          "text": "Blok pemandu tunanetra terpasang mulus dari trotoar raya hingga gate masuk KA. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    },
+    "pasar_turi": {
+      "station_id": "pasar_turi",
+      "respondent_count": 35,
+      "sentiment": {
+        "positive_pct": 20,
+        "neutral_pct": 69,
+        "negative_pct": 11
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 65,
+          "status": "Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 72,
+          "status": "Perlu Ditingkatkan"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 64,
+          "status": "Terbatas"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 58,
+          "status": "Perlu PJU"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-036",
+          "title": "Integrasi Lobi Selatan ke Pasar Turi Baru",
+          "text": "Akses pejalan kaki langsung terhubung dengan jembatan penghubung pusat grosir. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-037",
+          "title": "Kondisi Trotoar Jalan Semarang",
+          "text": "Trotoar paving lebar 3 meter, rindang dinaungi pohon trembesi jalan. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-038",
+          "title": "Halte Suroboyo Bus Koridor 3",
+          "text": "Shelter bus bersih dengan monitor CCTV dan papan jadwal digital aktif. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    },
+    "wonokromo": {
+      "station_id": "wonokromo",
+      "respondent_count": 35,
+      "sentiment": {
+        "positive_pct": 40,
+        "neutral_pct": 49,
+        "negative_pct": 11
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 86,
+          "status": "Sangat Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 66,
+          "status": "Perlu Ditingkatkan"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 79,
+          "status": "Terintegrasi"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 58,
+          "status": "Perlu PJU"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-001",
+          "title": "Trotoar Depan DTC Mall",
+          "text": "Trotoar selebar 2.5 meter dengan tactile paving cukup baik, namun terputus oleh pintu keluar DTC. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-002",
+          "title": "Halte Feeder WiraWiri Wonokromo",
+          "text": "Titik henti feeder FD03 ramai penumpang komuter pagi, jadwal relatif tepat waktu. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-003",
+          "title": "Jembatan Penyeberangan Orang (JPO) Wonokromo",
+          "text": "Kondisi fisik JPO kokoh, ada atap peneduh namun tangga agak curam bagi lansia. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    },
+    "semut": {
+      "station_id": "semut",
+      "respondent_count": 12,
+      "sentiment": {
+        "positive_pct": 12,
+        "neutral_pct": 76,
+        "negative_pct": 12
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 65,
+          "status": "Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 65,
+          "status": "Perlu Ditingkatkan"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 64,
+          "status": "Terbatas"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 58,
+          "status": "Perlu PJU"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-036",
+          "title": "Integrasi Lobi Selatan ke Pasar Turi Baru",
+          "text": "Akses pejalan kaki langsung terhubung dengan jembatan penghubung pusat grosir. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-037",
+          "title": "Kondisi Trotoar Jalan Semarang",
+          "text": "Trotoar paving lebar 3 meter, rindang dinaungi pohon trembesi jalan. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-038",
+          "title": "Halte Suroboyo Bus Koridor 3",
+          "text": "Shelter bus bersih dengan monitor CCTV dan papan jadwal digital aktif. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    },
+    "waru": {
+      "station_id": "waru",
+      "respondent_count": 12,
+      "sentiment": {
+        "positive_pct": 50,
+        "neutral_pct": 33,
+        "negative_pct": 17
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 86,
+          "status": "Sangat Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 64,
+          "status": "Perlu Ditingkatkan"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 90,
+          "status": "Terintegrasi"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 58,
+          "status": "Perlu PJU"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-001",
+          "title": "Trotoar Depan DTC Mall",
+          "text": "Trotoar selebar 2.5 meter dengan tactile paving cukup baik, namun terputus oleh pintu keluar DTC. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-002",
+          "title": "Halte Feeder WiraWiri Wonokromo",
+          "text": "Titik henti feeder FD03 ramai penumpang komuter pagi, jadwal relatif tepat waktu. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-003",
+          "title": "Jembatan Penyeberangan Orang (JPO) Wonokromo",
+          "text": "Kondisi fisik JPO kokoh, ada atap peneduh namun tangga agak curam bagi lansia. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    },
+    "tandes": {
+      "station_id": "tandes",
+      "respondent_count": 12,
+      "sentiment": {
+        "positive_pct": 20,
+        "neutral_pct": 80,
+        "negative_pct": 0
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 86,
+          "status": "Sangat Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 71,
+          "status": "Perlu Ditingkatkan"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 65,
+          "status": "Terbatas"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 58,
+          "status": "Perlu PJU"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-091",
+          "title": "Halte Transit Intermoda Joyoboyo (TIJ)",
+          "text": "Terminal modern transit terpadu bus kota, feeder, dan integrasi pejalan kaki. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-092",
+          "title": "Pedestrian Walk Jl. Raya Darmo",
+          "text": "Trotoar sangat lebar dengan jalur sepeda dan pepohonan rindang kota Surabaya. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-093",
+          "title": "Penyeberangan Pelican Cross Taman Bungkul",
+          "text": "Zebra cross berlampu tombol sinyal, pengendara motor tertib berhenti. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    },
+    "kandangan": {
+      "station_id": "kandangan",
+      "respondent_count": 12,
+      "sentiment": {
+        "positive_pct": 20,
+        "neutral_pct": 80,
+        "negative_pct": 0
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 86,
+          "status": "Sangat Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 71,
+          "status": "Perlu Ditingkatkan"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 65,
+          "status": "Terbatas"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 58,
+          "status": "Perlu PJU"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-091",
+          "title": "Halte Transit Intermoda Joyoboyo (TIJ)",
+          "text": "Terminal modern transit terpadu bus kota, feeder, dan integrasi pejalan kaki. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-092",
+          "title": "Pedestrian Walk Jl. Raya Darmo",
+          "text": "Trotoar sangat lebar dengan jalur sepeda dan pepohonan rindang kota Surabaya. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-093",
+          "title": "Penyeberangan Pelican Cross Taman Bungkul",
+          "text": "Zebra cross berlampu tombol sinyal, pengendara motor tertib berhenti. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    },
+    "benowo": {
+      "station_id": "benowo",
+      "respondent_count": 12,
+      "sentiment": {
+        "positive_pct": 20,
+        "neutral_pct": 80,
+        "negative_pct": 0
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 86,
+          "status": "Sangat Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 71,
+          "status": "Perlu Ditingkatkan"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 65,
+          "status": "Terbatas"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 58,
+          "status": "Perlu PJU"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-091",
+          "title": "Halte Transit Intermoda Joyoboyo (TIJ)",
+          "text": "Terminal modern transit terpadu bus kota, feeder, dan integrasi pejalan kaki. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-092",
+          "title": "Pedestrian Walk Jl. Raya Darmo",
+          "text": "Trotoar sangat lebar dengan jalur sepeda dan pepohonan rindang kota Surabaya. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-093",
+          "title": "Penyeberangan Pelican Cross Taman Bungkul",
+          "text": "Zebra cross berlampu tombol sinyal, pengendara motor tertib berhenti. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    },
+    "ngagel": {
+      "station_id": "ngagel",
+      "respondent_count": 12,
+      "sentiment": {
+        "positive_pct": 40,
+        "neutral_pct": 50,
+        "negative_pct": 10
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 86,
+          "status": "Sangat Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 68,
+          "status": "Perlu Ditingkatkan"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 78,
+          "status": "Terintegrasi"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 58,
+          "status": "Perlu PJU"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-001",
+          "title": "Trotoar Depan DTC Mall",
+          "text": "Trotoar selebar 2.5 meter dengan tactile paving cukup baik, namun terputus oleh pintu keluar DTC. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-002",
+          "title": "Halte Feeder WiraWiri Wonokromo",
+          "text": "Titik henti feeder FD03 ramai penumpang komuter pagi, jadwal relatif tepat waktu. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-003",
+          "title": "Jembatan Penyeberangan Orang (JPO) Wonokromo",
+          "text": "Kondisi fisik JPO kokoh, ada atap peneduh namun tangga agak curam bagi lansia. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    },
+    "margorejo": {
+      "station_id": "margorejo",
+      "respondent_count": 12,
+      "sentiment": {
+        "positive_pct": 40,
+        "neutral_pct": 50,
+        "negative_pct": 10
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 86,
+          "status": "Sangat Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 68,
+          "status": "Perlu Ditingkatkan"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 78,
+          "status": "Terintegrasi"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 58,
+          "status": "Perlu PJU"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-001",
+          "title": "Trotoar Depan DTC Mall",
+          "text": "Trotoar selebar 2.5 meter dengan tactile paving cukup baik, namun terputus oleh pintu keluar DTC. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-002",
+          "title": "Halte Feeder WiraWiri Wonokromo",
+          "text": "Titik henti feeder FD03 ramai penumpang komuter pagi, jadwal relatif tepat waktu. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-003",
+          "title": "Jembatan Penyeberangan Orang (JPO) Wonokromo",
+          "text": "Kondisi fisik JPO kokoh, ada atap peneduh namun tangga agak curam bagi lansia. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    },
+    "jemursari": {
+      "station_id": "jemursari",
+      "respondent_count": 12,
+      "sentiment": {
+        "positive_pct": 40,
+        "neutral_pct": 50,
+        "negative_pct": 10
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 86,
+          "status": "Sangat Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 68,
+          "status": "Perlu Ditingkatkan"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 78,
+          "status": "Terintegrasi"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 58,
+          "status": "Perlu PJU"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-001",
+          "title": "Trotoar Depan DTC Mall",
+          "text": "Trotoar selebar 2.5 meter dengan tactile paving cukup baik, namun terputus oleh pintu keluar DTC. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-002",
+          "title": "Halte Feeder WiraWiri Wonokromo",
+          "text": "Titik henti feeder FD03 ramai penumpang komuter pagi, jadwal relatif tepat waktu. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-003",
+          "title": "Jembatan Penyeberangan Orang (JPO) Wonokromo",
+          "text": "Kondisi fisik JPO kokoh, ada atap peneduh namun tangga agak curam bagi lansia. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    },
+    "kertomenanggal": {
+      "station_id": "kertomenanggal",
+      "respondent_count": 12,
+      "sentiment": {
+        "positive_pct": 40,
+        "neutral_pct": 50,
+        "negative_pct": 10
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 86,
+          "status": "Sangat Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 68,
+          "status": "Perlu Ditingkatkan"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 78,
+          "status": "Terintegrasi"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 58,
+          "status": "Perlu PJU"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-001",
+          "title": "Trotoar Depan DTC Mall",
+          "text": "Trotoar selebar 2.5 meter dengan tactile paving cukup baik, namun terputus oleh pintu keluar DTC. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-002",
+          "title": "Halte Feeder WiraWiri Wonokromo",
+          "text": "Titik henti feeder FD03 ramai penumpang komuter pagi, jadwal relatif tepat waktu. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-003",
+          "title": "Jembatan Penyeberangan Orang (JPO) Wonokromo",
+          "text": "Kondisi fisik JPO kokoh, ada atap peneduh namun tangga agak curam bagi lansia. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    },
+    "sidotopo": {
+      "station_id": "sidotopo",
+      "respondent_count": 12,
+      "sentiment": {
+        "positive_pct": 12,
+        "neutral_pct": 76,
+        "negative_pct": 12
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 65,
+          "status": "Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 65,
+          "status": "Perlu Ditingkatkan"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 64,
+          "status": "Terbatas"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 58,
+          "status": "Perlu PJU"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-036",
+          "title": "Integrasi Lobi Selatan ke Pasar Turi Baru",
+          "text": "Akses pejalan kaki langsung terhubung dengan jembatan penghubung pusat grosir. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-037",
+          "title": "Kondisi Trotoar Jalan Semarang",
+          "text": "Trotoar paving lebar 3 meter, rindang dinaungi pohon trembesi jalan. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-038",
+          "title": "Halte Suroboyo Bus Koridor 3",
+          "text": "Shelter bus bersih dengan monitor CCTV dan papan jadwal digital aktif. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    },
+    "kalimas": {
+      "station_id": "kalimas",
+      "respondent_count": 12,
+      "sentiment": {
+        "positive_pct": 12,
+        "neutral_pct": 76,
+        "negative_pct": 12
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 65,
+          "status": "Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 65,
+          "status": "Perlu Ditingkatkan"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 64,
+          "status": "Terbatas"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 58,
+          "status": "Perlu PJU"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-036",
+          "title": "Integrasi Lobi Selatan ke Pasar Turi Baru",
+          "text": "Akses pejalan kaki langsung terhubung dengan jembatan penghubung pusat grosir. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-037",
+          "title": "Kondisi Trotoar Jalan Semarang",
+          "text": "Trotoar paving lebar 3 meter, rindang dinaungi pohon trembesi jalan. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-038",
+          "title": "Halte Suroboyo Bus Koridor 3",
+          "text": "Shelter bus bersih dengan monitor CCTV dan papan jadwal digital aktif. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    },
+    "benteng": {
+      "station_id": "benteng",
+      "respondent_count": 12,
+      "sentiment": {
+        "positive_pct": 12,
+        "neutral_pct": 76,
+        "negative_pct": 12
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 65,
+          "status": "Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 65,
+          "status": "Perlu Ditingkatkan"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 64,
+          "status": "Terbatas"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 58,
+          "status": "Perlu PJU"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-036",
+          "title": "Integrasi Lobi Selatan ke Pasar Turi Baru",
+          "text": "Akses pejalan kaki langsung terhubung dengan jembatan penghubung pusat grosir. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-037",
+          "title": "Kondisi Trotoar Jalan Semarang",
+          "text": "Trotoar paving lebar 3 meter, rindang dinaungi pohon trembesi jalan. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-038",
+          "title": "Halte Suroboyo Bus Koridor 3",
+          "text": "Shelter bus bersih dengan monitor CCTV dan papan jadwal digital aktif. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    },
+    "terminal_joyoboyo": {
+      "station_id": "terminal_joyoboyo",
+      "respondent_count": 12,
+      "sentiment": {
+        "positive_pct": 40,
+        "neutral_pct": 50,
+        "negative_pct": 10
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 86,
+          "status": "Sangat Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 68,
+          "status": "Perlu Ditingkatkan"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 78,
+          "status": "Terintegrasi"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 58,
+          "status": "Perlu PJU"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-001",
+          "title": "Trotoar Depan DTC Mall",
+          "text": "Trotoar selebar 2.5 meter dengan tactile paving cukup baik, namun terputus oleh pintu keluar DTC. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-002",
+          "title": "Halte Feeder WiraWiri Wonokromo",
+          "text": "Titik henti feeder FD03 ramai penumpang komuter pagi, jadwal relatif tepat waktu. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-003",
+          "title": "Jembatan Penyeberangan Orang (JPO) Wonokromo",
+          "text": "Kondisi fisik JPO kokoh, ada atap peneduh namun tangga agak curam bagi lansia. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    },
+    "terminal_purabaya": {
+      "station_id": "terminal_purabaya",
+      "respondent_count": 12,
+      "sentiment": {
+        "positive_pct": 50,
+        "neutral_pct": 33,
+        "negative_pct": 17
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 86,
+          "status": "Sangat Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 64,
+          "status": "Perlu Ditingkatkan"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 90,
+          "status": "Terintegrasi"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 58,
+          "status": "Perlu PJU"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-001",
+          "title": "Trotoar Depan DTC Mall",
+          "text": "Trotoar selebar 2.5 meter dengan tactile paving cukup baik, namun terputus oleh pintu keluar DTC. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-002",
+          "title": "Halte Feeder WiraWiri Wonokromo",
+          "text": "Titik henti feeder FD03 ramai penumpang komuter pagi, jadwal relatif tepat waktu. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-003",
+          "title": "Jembatan Penyeberangan Orang (JPO) Wonokromo",
+          "text": "Kondisi fisik JPO kokoh, ada atap peneduh namun tangga agak curam bagi lansia. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    },
+    "terminal_bratang": {
+      "station_id": "terminal_bratang",
+      "respondent_count": 12,
+      "sentiment": {
+        "positive_pct": 20,
+        "neutral_pct": 80,
+        "negative_pct": 0
+      },
+      "aspects": [
+        {
+          "label": "Kemudahan Tap-In Transum",
+          "score_pct": 86,
+          "status": "Sangat Puas"
+        },
+        {
+          "label": "Kenyamanan Trotoar & Pedestrian",
+          "score_pct": 71,
+          "status": "Perlu Ditingkatkan"
+        },
+        {
+          "label": "Ketersediaan Feeder WiraWiri",
+          "score_pct": 65,
+          "status": "Terbatas"
+        },
+        {
+          "label": "Penerangan & Keamanan Malam",
+          "score_pct": 58,
+          "status": "Perlu PJU"
+        }
+      ],
+      "verified_quotes": [
+        {
+          "id": "ACT-091",
+          "title": "Halte Transit Intermoda Joyoboyo (TIJ)",
+          "text": "Terminal modern transit terpadu bus kota, feeder, dan integrasi pejalan kaki. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@zulfanfakhriza",
+          "timestamp": "2026-08-15 07:10 WIB"
+        },
+        {
+          "id": "ACT-092",
+          "title": "Pedestrian Walk Jl. Raya Darmo",
+          "text": "Trotoar sangat lebar dengan jalur sepeda dan pepohonan rindang kota Surabaya. #PakSibukGa",
+          "sentiment": "neutral",
+          "user": "@mirzawibisono",
+          "timestamp": "2026-08-16 08:13 WIB"
+        },
+        {
+          "id": "ACT-093",
+          "title": "Penyeberangan Pelican Cross Taman Bungkul",
+          "text": "Zebra cross berlampu tombol sinyal, pengendara motor tertib berhenti. #PakSibukGa",
+          "sentiment": "positive",
+          "user": "@hanaamira",
+          "timestamp": "2026-08-17 09:16 WIB"
+        }
+      ],
+      "provenance": "Dihitung dari survei lapangan GEO MAPID #PakSibukGa (100 titik spasial) via Structured AI Classification & Agregasi Numerik (Update: September 2026)"
+    }
+  }
+}

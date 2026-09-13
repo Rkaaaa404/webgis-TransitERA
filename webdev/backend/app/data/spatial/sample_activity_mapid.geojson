@@ -1,0 +1,3512 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "title": "GEO MAPID Survey Activities #PakSibukGa Surabaya",
+    "total_features": 100,
+    "source": "GEO MAPID Competition 2026",
+    "city": "Surabaya",
+    "crs": "urn:ogc:def:crs:OGC:1.3:CRS84"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.74262,
+          -7.301258
+        ]
+      },
+      "properties": {
+        "id": "ACT-001",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Trotoar Depan DTC Mall",
+        "name": "Trotoar Depan DTC Mall",
+        "description": "Trotoar selebar 2.5 meter dengan tactile paving cukup baik, namun terputus oleh pintu keluar DTC. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 495,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-15 07:10 WIB",
+        "surveyed_at": "2026-08-15 07:10 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.738979,
+          -7.300188
+        ]
+      },
+      "properties": {
+        "id": "ACT-002",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Halte Feeder WiraWiri Wonokromo",
+        "name": "Halte Feeder WiraWiri Wonokromo",
+        "description": "Titik henti feeder FD03 ramai penumpang komuter pagi, jadwal relatif tepat waktu. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 209,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-16 08:13 WIB",
+        "surveyed_at": "2026-08-16 08:13 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.741517,
+          -7.298634
+        ]
+      },
+      "properties": {
+        "id": "ACT-003",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Jembatan Penyeberangan Orang (JPO) Wonokromo",
+        "name": "Jembatan Penyeberangan Orang (JPO) Wonokromo",
+        "description": "Kondisi fisik JPO kokoh, ada atap peneduh namun tangga agak curam bagi lansia. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 664,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "timestamp": "2026-08-17 09:16 WIB",
+        "surveyed_at": "2026-08-17 09:16 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.73967,
+          -7.304521
+        ]
+      },
+      "properties": {
+        "id": "ACT-004",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Pangkalan Ojek Online Bawah Flyover Mayangkara",
+        "name": "Pangkalan Ojek Online Bawah Flyover Mayangkara",
+        "description": "Kumpulan ojol mangkal tertib di sisi barat flyover, tidak mengganggu flow utama pejalan. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 498,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "timestamp": "2026-08-18 10:19 WIB",
+        "surveyed_at": "2026-08-18 10:19 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.742077,
+          -7.302004
+        ]
+      },
+      "properties": {
+        "id": "ACT-005",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Hambatan PKL Siang Hari",
+        "name": "Hambatan PKL Siang Hari",
+        "description": "Pedagang minuman dan gorengan memakan 1 meter bahu trotoar Jl. Stasiun Wonokromo. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Hambatan & Disamenity",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 486,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg",
+        "timestamp": "2026-08-19 11:22 WIB",
+        "surveyed_at": "2026-08-19 11:22 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.735318,
+          -7.304877
+        ]
+      },
+      "properties": {
+        "id": "ACT-006",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Akses Menuju Terminal Joyoboyo (TIJ)",
+        "name": "Akses Menuju Terminal Joyoboyo (TIJ)",
+        "description": "Jalur pedestrian penghubung stasiun ke TIJ nyaman, ada guiding block warna kuning. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 716,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg",
+        "timestamp": "2026-08-20 12:25 WIB",
+        "surveyed_at": "2026-08-20 12:25 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.744296,
+          -7.297738
+        ]
+      },
+      "properties": {
+        "id": "ACT-007",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Titik Genangan Saat Hujan Deras",
+        "name": "Titik Genangan Saat Hujan Deras",
+        "description": "Saluran air dekat perlintasan rel KA sempat meluap setinggi mata kaki saat hujan lebat. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Hambatan & Disamenity",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 1071,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-21 13:28 WIB",
+        "surveyed_at": "2026-08-21 13:28 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.738989,
+          -7.303315
+        ]
+      },
+      "properties": {
+        "id": "ACT-008",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Parkir Liar Sepeda Motor Pinggir Jalan",
+        "name": "Parkir Liar Sepeda Motor Pinggir Jalan",
+        "description": "Deretan motor pengunjung ruko parkir di atas trotoar depan pertokoan elektronik. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Hambatan & Disamenity",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 289,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-22 14:31 WIB",
+        "surveyed_at": "2026-08-22 14:31 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.740748,
+          -7.296882
+        ]
+      },
+      "properties": {
+        "id": "ACT-009",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Zebra Cross Dekat Pintu Stasiun",
+        "name": "Zebra Cross Dekat Pintu Stasiun",
+        "description": "Marka zebra cross jelas dan dilengkapi lampu kedip kuning peringatan pengendara. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 773,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "timestamp": "2026-08-23 15:34 WIB",
+        "surveyed_at": "2026-08-23 15:34 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.736663,
+          -7.29887
+        ]
+      },
+      "properties": {
+        "id": "ACT-010",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Antrean Penumpang Jam Sibuk Sore",
+        "name": "Antrean Penumpang Jam Sibuk Sore",
+        "description": "Kepadatan komuter arah Sidoarjo dan Krian di ruang tunggu lobi barat stasiun. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "User Experience & Dinamika",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 462,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "timestamp": "2026-08-24 16:37 WIB",
+        "surveyed_at": "2026-08-24 16:37 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.738281,
+          -7.300371
+        ]
+      },
+      "properties": {
+        "id": "ACT-011",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Trotoar Depan DTC Mall",
+        "name": "Trotoar Depan DTC Mall",
+        "description": "Trotoar selebar 2.5 meter dengan tactile paving cukup baik, namun terputus oleh pintu keluar DTC. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 116,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg",
+        "timestamp": "2026-08-25 07:40 WIB",
+        "surveyed_at": "2026-08-25 07:40 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.739502,
+          -7.298398
+        ]
+      },
+      "properties": {
+        "id": "ACT-012",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Halte Feeder WiraWiri Wonokromo",
+        "name": "Halte Feeder WiraWiri Wonokromo",
+        "description": "Titik henti feeder FD03 ramai penumpang komuter pagi, jadwal relatif tepat waktu. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 466,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg",
+        "timestamp": "2026-08-26 08:43 WIB",
+        "surveyed_at": "2026-08-26 08:43 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.73734,
+          -7.304296
+        ]
+      },
+      "properties": {
+        "id": "ACT-013",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Jembatan Penyeberangan Orang (JPO) Wonokromo",
+        "name": "Jembatan Penyeberangan Orang (JPO) Wonokromo",
+        "description": "Kondisi fisik JPO kokoh, ada atap peneduh namun tangga agak curam bagi lansia. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 428,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-27 09:46 WIB",
+        "surveyed_at": "2026-08-27 09:46 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.732605,
+          -7.301184
+        ]
+      },
+      "properties": {
+        "id": "ACT-014",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Pangkalan Ojek Online Bawah Flyover Mayangkara",
+        "name": "Pangkalan Ojek Online Bawah Flyover Mayangkara",
+        "description": "Kumpulan ojol mangkal tertib di sisi barat flyover, tidak mengganggu flow utama pejalan. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 656,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-28 10:49 WIB",
+        "surveyed_at": "2026-08-28 10:49 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.740756,
+          -7.306813
+        ]
+      },
+      "properties": {
+        "id": "ACT-015",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Hambatan PKL Siang Hari",
+        "name": "Hambatan PKL Siang Hari",
+        "description": "Pedagang minuman dan gorengan memakan 1 meter bahu trotoar Jl. Stasiun Wonokromo. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Hambatan & Disamenity",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 873,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "timestamp": "2026-08-15 11:52 WIB",
+        "surveyed_at": "2026-08-15 11:52 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.73794,
+          -7.299932
+        ]
+      },
+      "properties": {
+        "id": "ACT-016",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Akses Menuju Terminal Joyoboyo (TIJ)",
+        "name": "Akses Menuju Terminal Joyoboyo (TIJ)",
+        "description": "Jalur pedestrian penghubung stasiun ke TIJ nyaman, ada guiding block warna kuning. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 202,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "timestamp": "2026-08-16 12:55 WIB",
+        "surveyed_at": "2026-08-16 12:55 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.73982,
+          -7.296769
+        ]
+      },
+      "properties": {
+        "id": "ACT-017",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Titik Genangan Saat Hujan Deras",
+        "name": "Titik Genangan Saat Hujan Deras",
+        "description": "Saluran air dekat perlintasan rel KA sempat meluap setinggi mata kaki saat hujan lebat. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Hambatan & Disamenity",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 682,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg",
+        "timestamp": "2026-08-17 13:10 WIB",
+        "surveyed_at": "2026-08-17 13:10 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.744147,
+          -7.296246
+        ]
+      },
+      "properties": {
+        "id": "ACT-018",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Parkir Liar Sepeda Motor Pinggir Jalan",
+        "name": "Parkir Liar Sepeda Motor Pinggir Jalan",
+        "description": "Deretan motor pengunjung ruko parkir di atas trotoar depan pertokoan elektronik. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Hambatan & Disamenity",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 1221,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg",
+        "timestamp": "2026-08-18 14:13 WIB",
+        "surveyed_at": "2026-08-18 14:13 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.735992,
+          -7.299363
+        ]
+      },
+      "properties": {
+        "id": "ACT-019",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Zebra Cross Dekat Pintu Stasiun",
+        "name": "Zebra Cross Dekat Pintu Stasiun",
+        "description": "Marka zebra cross jelas dan dilengkapi lampu kedip kuning peringatan pengendara. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 482,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-19 15:16 WIB",
+        "surveyed_at": "2026-08-19 15:16 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.742913,
+          -7.301653
+        ]
+      },
+      "properties": {
+        "id": "ACT-020",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Antrean Penumpang Jam Sibuk Sore",
+        "name": "Antrean Penumpang Jam Sibuk Sore",
+        "description": "Kepadatan komuter arah Sidoarjo dan Krian di ruang tunggu lobi barat stasiun. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "User Experience & Dinamika",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 540,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-20 16:19 WIB",
+        "surveyed_at": "2026-08-20 16:19 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.732697,
+          -7.304172
+        ]
+      },
+      "properties": {
+        "id": "ACT-021",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Trotoar Depan DTC Mall",
+        "name": "Trotoar Depan DTC Mall",
+        "description": "Trotoar selebar 2.5 meter dengan tactile paving cukup baik, namun terputus oleh pintu keluar DTC. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 929,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "timestamp": "2026-08-21 07:22 WIB",
+        "surveyed_at": "2026-08-21 07:22 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.738575,
+          -7.301901
+        ]
+      },
+      "properties": {
+        "id": "ACT-022",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Halte Feeder WiraWiri Wonokromo",
+        "name": "Halte Feeder WiraWiri Wonokromo",
+        "description": "Titik henti feeder FD03 ramai penumpang komuter pagi, jadwal relatif tepat waktu. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 86,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "timestamp": "2026-08-22 08:25 WIB",
+        "surveyed_at": "2026-08-22 08:25 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.738127,
+          -7.304279
+        ]
+      },
+      "properties": {
+        "id": "ACT-023",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Jembatan Penyeberangan Orang (JPO) Wonokromo",
+        "name": "Jembatan Penyeberangan Orang (JPO) Wonokromo",
+        "description": "Kondisi fisik JPO kokoh, ada atap peneduh namun tangga agak curam bagi lansia. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 338,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg",
+        "timestamp": "2026-08-23 09:28 WIB",
+        "surveyed_at": "2026-08-23 09:28 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.738994,
+          -7.297704
+        ]
+      },
+      "properties": {
+        "id": "ACT-024",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Pangkalan Ojek Online Bawah Flyover Mayangkara",
+        "name": "Pangkalan Ojek Online Bawah Flyover Mayangkara",
+        "description": "Kumpulan ojol mangkal tertib di sisi barat flyover, tidak mengganggu flow utama pejalan. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 487,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg",
+        "timestamp": "2026-08-24 10:31 WIB",
+        "surveyed_at": "2026-08-24 10:31 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.743302,
+          -7.3036
+        ]
+      },
+      "properties": {
+        "id": "ACT-025",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Hambatan PKL Siang Hari",
+        "name": "Hambatan PKL Siang Hari",
+        "description": "Pedagang minuman dan gorengan memakan 1 meter bahu trotoar Jl. Stasiun Wonokromo. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Hambatan & Disamenity",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 799,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-25 11:34 WIB",
+        "surveyed_at": "2026-08-25 11:34 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.738482,
+          -7.297979
+        ]
+      },
+      "properties": {
+        "id": "ACT-026",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Akses Menuju Terminal Joyoboyo (TIJ)",
+        "name": "Akses Menuju Terminal Joyoboyo (TIJ)",
+        "description": "Jalur pedestrian penghubung stasiun ke TIJ nyaman, ada guiding block warna kuning. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 399,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-26 12:37 WIB",
+        "surveyed_at": "2026-08-26 12:37 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.742409,
+          -7.295793
+        ]
+      },
+      "properties": {
+        "id": "ACT-027",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Titik Genangan Saat Hujan Deras",
+        "name": "Titik Genangan Saat Hujan Deras",
+        "description": "Saluran air dekat perlintasan rel KA sempat meluap setinggi mata kaki saat hujan lebat. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Hambatan & Disamenity",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 1078,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "timestamp": "2026-08-27 13:40 WIB",
+        "surveyed_at": "2026-08-27 13:40 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.738281,
+          -7.304202
+        ]
+      },
+      "properties": {
+        "id": "ACT-028",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Parkir Liar Sepeda Motor Pinggir Jalan",
+        "name": "Parkir Liar Sepeda Motor Pinggir Jalan",
+        "description": "Deretan motor pengunjung ruko parkir di atas trotoar depan pertokoan elektronik. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Hambatan & Disamenity",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 313,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "timestamp": "2026-08-28 14:43 WIB",
+        "surveyed_at": "2026-08-28 14:43 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.737693,
+          -7.302464
+        ]
+      },
+      "properties": {
+        "id": "ACT-029",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Zebra Cross Dekat Pintu Stasiun",
+        "name": "Zebra Cross Dekat Pintu Stasiun",
+        "description": "Marka zebra cross jelas dan dilengkapi lampu kedip kuning peringatan pengendara. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 185,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg",
+        "timestamp": "2026-08-15 15:46 WIB",
+        "surveyed_at": "2026-08-15 15:46 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.743486,
+          -7.300432
+        ]
+      },
+      "properties": {
+        "id": "ACT-030",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Antrean Penumpang Jam Sibuk Sore",
+        "name": "Antrean Penumpang Jam Sibuk Sore",
+        "description": "Kepadatan komuter arah Sidoarjo dan Krian di ruang tunggu lobi barat stasiun. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "User Experience & Dinamika",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 683,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg",
+        "timestamp": "2026-08-16 16:49 WIB",
+        "surveyed_at": "2026-08-16 16:49 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.739753,
+          -7.304426
+        ]
+      },
+      "properties": {
+        "id": "ACT-031",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Trotoar Depan DTC Mall",
+        "name": "Trotoar Depan DTC Mall",
+        "description": "Trotoar selebar 2.5 meter dengan tactile paving cukup baik, namun terputus oleh pintu keluar DTC. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 497,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-17 07:52 WIB",
+        "surveyed_at": "2026-08-17 07:52 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.739925,
+          -7.299378
+        ]
+      },
+      "properties": {
+        "id": "ACT-032",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Halte Feeder WiraWiri Wonokromo",
+        "name": "Halte Feeder WiraWiri Wonokromo",
+        "description": "Titik henti feeder FD03 ramai penumpang komuter pagi, jadwal relatif tepat waktu. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 404,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-18 08:55 WIB",
+        "surveyed_at": "2026-08-18 08:55 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.741534,
+          -7.300403
+        ]
+      },
+      "properties": {
+        "id": "ACT-033",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Jembatan Penyeberangan Orang (JPO) Wonokromo",
+        "name": "Jembatan Penyeberangan Orang (JPO) Wonokromo",
+        "description": "Kondisi fisik JPO kokoh, ada atap peneduh namun tangga agak curam bagi lansia. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 469,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "timestamp": "2026-08-19 09:10 WIB",
+        "surveyed_at": "2026-08-19 09:10 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.733918,
+          -7.298754
+        ]
+      },
+      "properties": {
+        "id": "ACT-034",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Pangkalan Ojek Online Bawah Flyover Mayangkara",
+        "name": "Pangkalan Ojek Online Bawah Flyover Mayangkara",
+        "description": "Kumpulan ojol mangkal tertib di sisi barat flyover, tidak mengganggu flow utama pejalan. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 780,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "timestamp": "2026-08-20 10:13 WIB",
+        "surveyed_at": "2026-08-20 10:13 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.742812,
+          -7.295901
+        ]
+      },
+      "properties": {
+        "id": "ACT-035",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Hambatan PKL Siang Hari",
+        "name": "Hambatan PKL Siang Hari",
+        "description": "Pedagang minuman dan gorengan memakan 1 meter bahu trotoar Jl. Stasiun Wonokromo. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Hambatan & Disamenity",
+        "condition": "Sedang",
+        "station_cluster": "wonokromo",
+        "station_name": "Stasiun Wonokromo",
+        "distance_m": 1111,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg",
+        "timestamp": "2026-08-21 11:16 WIB",
+        "surveyed_at": "2026-08-21 11:16 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.735821,
+          -7.245777
+        ]
+      },
+      "properties": {
+        "id": "ACT-036",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Integrasi Lobi Selatan ke Pasar Turi Baru",
+        "name": "Integrasi Lobi Selatan ke Pasar Turi Baru",
+        "description": "Akses pejalan kaki langsung terhubung dengan jembatan penghubung pusat grosir. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 804,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-15 07:10 WIB",
+        "surveyed_at": "2026-08-15 07:10 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.729544,
+          -7.250128
+        ]
+      },
+      "properties": {
+        "id": "ACT-037",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Kondisi Trotoar Jalan Semarang",
+        "name": "Kondisi Trotoar Jalan Semarang",
+        "description": "Trotoar paving lebar 3 meter, rindang dinaungi pohon trembesi jalan. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 375,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-16 08:13 WIB",
+        "surveyed_at": "2026-08-16 08:13 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.72477,
+          -7.25144
+        ]
+      },
+      "properties": {
+        "id": "ACT-038",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Halte Suroboyo Bus Koridor 3",
+        "name": "Halte Suroboyo Bus Koridor 3",
+        "description": "Shelter bus bersih dengan monitor CCTV dan papan jadwal digital aktif. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 1051,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "timestamp": "2026-08-17 09:16 WIB",
+        "surveyed_at": "2026-08-17 09:16 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.728764,
+          -7.253183
+        ]
+      },
+      "properties": {
+        "id": "ACT-039",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Parkir Liar Truk Angkutan Barang",
+        "name": "Parkir Liar Truk Angkutan Barang",
+        "description": "Truk bongkar muatan ekspedisi sering memakan lajur jalan depan ruko. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Hambatan & Disamenity",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 801,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "timestamp": "2026-08-18 10:19 WIB",
+        "surveyed_at": "2026-08-18 10:19 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.730725,
+          -7.253491
+        ]
+      },
+      "properties": {
+        "id": "ACT-040",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Akses Disabilitas Ramp Kursi Roda",
+        "name": "Akses Disabilitas Ramp Kursi Roda",
+        "description": "Tersedia jalur landai (ramp) dengan kemiringan 8 derajat menuju pintu masuk tiket. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 645,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg",
+        "timestamp": "2026-08-19 11:22 WIB",
+        "surveyed_at": "2026-08-19 11:22 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.726056,
+          -7.249887
+        ]
+      },
+      "properties": {
+        "id": "ACT-041",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Kepadatan Becak dan Angkot",
+        "name": "Kepadatan Becak dan Angkot",
+        "description": "Antrean becak tradisional mangkal di dekat pintu keluar utara Jl. Dupak. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 736,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg",
+        "timestamp": "2026-08-20 12:25 WIB",
+        "surveyed_at": "2026-08-20 12:25 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.726447,
+          -7.244141
+        ]
+      },
+      "properties": {
+        "id": "ACT-042",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Trotoar Rusak Bekas Galian Pipa",
+        "name": "Trotoar Rusak Bekas Galian Pipa",
+        "description": "Paving belum tertutup sempurna setelah proyek drainase kota, perlu kehati-hatian. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Hambatan & Disamenity",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 867,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-21 13:28 WIB",
+        "surveyed_at": "2026-08-21 13:28 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.731779,
+          -7.249763
+        ]
+      },
+      "properties": {
+        "id": "ACT-043",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Drop-off Zone Taksi & Mobil Pribadi",
+        "name": "Drop-off Zone Taksi & Mobil Pribadi",
+        "description": "Sirkulasi kendaraan drop-off lancar berkat pemisahan barrier beton. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 348,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-22 14:31 WIB",
+        "surveyed_at": "2026-08-22 14:31 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.726946,
+          -7.24901
+        ]
+      },
+      "properties": {
+        "id": "ACT-044",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Penerangan Jalan Umum (PJU) Malam Hari",
+        "name": "Penerangan Jalan Umum (PJU) Malam Hari",
+        "description": "Lampu jalan LED terang benderang, aman untuk pejalan kaki komuter malam. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 539,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "timestamp": "2026-08-23 15:34 WIB",
+        "surveyed_at": "2026-08-23 15:34 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.734668,
+          -7.247263
+        ]
+      },
+      "properties": {
+        "id": "ACT-045",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Aktivitas UMKM Kuliner Pagi",
+        "name": "Aktivitas UMKM Kuliner Pagi",
+        "description": "Warung soto dan lontong balap tertata rapi di sentra PKL binaan dinas. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "User Experience & Dinamika",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 511,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "timestamp": "2026-08-24 16:37 WIB",
+        "surveyed_at": "2026-08-24 16:37 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.733131,
+          -7.251538
+        ]
+      },
+      "properties": {
+        "id": "ACT-046",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Integrasi Lobi Selatan ke Pasar Turi Baru",
+        "name": "Integrasi Lobi Selatan ke Pasar Turi Baru",
+        "description": "Akses pejalan kaki langsung terhubung dengan jembatan penghubung pusat grosir. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 695,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg",
+        "timestamp": "2026-08-25 07:40 WIB",
+        "surveyed_at": "2026-08-25 07:40 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.734025,
+          -7.247441
+        ]
+      },
+      "properties": {
+        "id": "ACT-047",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Kondisi Trotoar Jalan Semarang",
+        "name": "Kondisi Trotoar Jalan Semarang",
+        "description": "Trotoar paving lebar 3 meter, rindang dinaungi pohon trembesi jalan. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 420,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg",
+        "timestamp": "2026-08-26 08:43 WIB",
+        "surveyed_at": "2026-08-26 08:43 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.734732,
+          -7.251875
+        ]
+      },
+      "properties": {
+        "id": "ACT-048",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Halte Suroboyo Bus Koridor 3",
+        "name": "Halte Suroboyo Bus Koridor 3",
+        "description": "Shelter bus bersih dengan monitor CCTV dan papan jadwal digital aktif. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 911,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-27 09:46 WIB",
+        "surveyed_at": "2026-08-27 09:46 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.725544,
+          -7.248831
+        ]
+      },
+      "properties": {
+        "id": "ACT-049",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Parkir Liar Truk Angkutan Barang",
+        "name": "Parkir Liar Truk Angkutan Barang",
+        "description": "Truk bongkar muatan ekspedisi sering memakan lajur jalan depan ruko. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Hambatan & Disamenity",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 675,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-28 10:49 WIB",
+        "surveyed_at": "2026-08-28 10:49 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.730571,
+          -7.250639
+        ]
+      },
+      "properties": {
+        "id": "ACT-050",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Akses Disabilitas Ramp Kursi Roda",
+        "name": "Akses Disabilitas Ramp Kursi Roda",
+        "description": "Tersedia jalur landai (ramp) dengan kemiringan 8 derajat menuju pintu masuk tiket. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 318,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "timestamp": "2026-08-15 11:52 WIB",
+        "surveyed_at": "2026-08-15 11:52 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.728509,
+          -7.248188
+        ]
+      },
+      "properties": {
+        "id": "ACT-051",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Kepadatan Becak dan Angkot",
+        "name": "Kepadatan Becak dan Angkot",
+        "description": "Antrean becak tradisional mangkal di dekat pintu keluar utara Jl. Dupak. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 275,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "timestamp": "2026-08-16 12:55 WIB",
+        "surveyed_at": "2026-08-16 12:55 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.734161,
+          -7.244241
+        ]
+      },
+      "properties": {
+        "id": "ACT-052",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Trotoar Rusak Bekas Galian Pipa",
+        "name": "Trotoar Rusak Bekas Galian Pipa",
+        "description": "Paving belum tertutup sempurna setelah proyek drainase kota, perlu kehati-hatian. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Hambatan & Disamenity",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 790,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg",
+        "timestamp": "2026-08-17 13:10 WIB",
+        "surveyed_at": "2026-08-17 13:10 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.736044,
+          -7.251024
+        ]
+      },
+      "properties": {
+        "id": "ACT-053",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Drop-off Zone Taksi & Mobil Pribadi",
+        "name": "Drop-off Zone Taksi & Mobil Pribadi",
+        "description": "Sirkulasi kendaraan drop-off lancar berkat pemisahan barrier beton. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 962,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg",
+        "timestamp": "2026-08-18 14:13 WIB",
+        "surveyed_at": "2026-08-18 14:13 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.734,
+          -7.248904
+        ]
+      },
+      "properties": {
+        "id": "ACT-054",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Penerangan Jalan Umum (PJU) Malam Hari",
+        "name": "Penerangan Jalan Umum (PJU) Malam Hari",
+        "description": "Lampu jalan LED terang benderang, aman untuk pejalan kaki komuter malam. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 499,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-19 15:16 WIB",
+        "surveyed_at": "2026-08-19 15:16 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.728823,
+          -7.242266
+        ]
+      },
+      "properties": {
+        "id": "ACT-055",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Aktivitas UMKM Kuliner Pagi",
+        "name": "Aktivitas UMKM Kuliner Pagi",
+        "description": "Warung soto dan lontong balap tertata rapi di sentra PKL binaan dinas. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "User Experience & Dinamika",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 811,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-20 16:19 WIB",
+        "surveyed_at": "2026-08-20 16:19 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.731061,
+          -7.246932
+        ]
+      },
+      "properties": {
+        "id": "ACT-056",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Integrasi Lobi Selatan ke Pasar Turi Baru",
+        "name": "Integrasi Lobi Selatan ke Pasar Turi Baru",
+        "description": "Akses pejalan kaki langsung terhubung dengan jembatan penghubung pusat grosir. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 147,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "timestamp": "2026-08-21 07:22 WIB",
+        "surveyed_at": "2026-08-21 07:22 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.731416,
+          -7.24713
+        ]
+      },
+      "properties": {
+        "id": "ACT-057",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Kondisi Trotoar Jalan Semarang",
+        "name": "Kondisi Trotoar Jalan Semarang",
+        "description": "Trotoar paving lebar 3 meter, rindang dinaungi pohon trembesi jalan. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 164,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "timestamp": "2026-08-22 08:25 WIB",
+        "surveyed_at": "2026-08-22 08:25 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.731269,
+          -7.250583
+        ]
+      },
+      "properties": {
+        "id": "ACT-058",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Halte Suroboyo Bus Koridor 3",
+        "name": "Halte Suroboyo Bus Koridor 3",
+        "description": "Shelter bus bersih dengan monitor CCTV dan papan jadwal digital aktif. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 383,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg",
+        "timestamp": "2026-08-23 09:28 WIB",
+        "surveyed_at": "2026-08-23 09:28 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.726655,
+          -7.242341
+        ]
+      },
+      "properties": {
+        "id": "ACT-059",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Parkir Liar Truk Angkutan Barang",
+        "name": "Parkir Liar Truk Angkutan Barang",
+        "description": "Truk bongkar muatan ekspedisi sering memakan lajur jalan depan ruko. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Hambatan & Disamenity",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 1043,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg",
+        "timestamp": "2026-08-24 10:31 WIB",
+        "surveyed_at": "2026-08-24 10:31 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.726826,
+          -7.245132
+        ]
+      },
+      "properties": {
+        "id": "ACT-060",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Akses Disabilitas Ramp Kursi Roda",
+        "name": "Akses Disabilitas Ramp Kursi Roda",
+        "description": "Tersedia jalur landai (ramp) dengan kemiringan 8 derajat menuju pintu masuk tiket. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 715,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-25 11:34 WIB",
+        "surveyed_at": "2026-08-25 11:34 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.734649,
+          -7.250479
+        ]
+      },
+      "properties": {
+        "id": "ACT-061",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Kepadatan Becak dan Angkot",
+        "name": "Kepadatan Becak dan Angkot",
+        "description": "Antrean becak tradisional mangkal di dekat pintu keluar utara Jl. Dupak. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 746,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-26 12:37 WIB",
+        "surveyed_at": "2026-08-26 12:37 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.725355,
+          -7.25067
+        ]
+      },
+      "properties": {
+        "id": "ACT-062",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Trotoar Rusak Bekas Galian Pipa",
+        "name": "Trotoar Rusak Bekas Galian Pipa",
+        "description": "Paving belum tertutup sempurna setelah proyek drainase kota, perlu kehati-hatian. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Hambatan & Disamenity",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 900,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "timestamp": "2026-08-27 13:40 WIB",
+        "surveyed_at": "2026-08-27 13:40 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.729574,
+          -7.244479
+        ]
+      },
+      "properties": {
+        "id": "ACT-063",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Drop-off Zone Taksi & Mobil Pribadi",
+        "name": "Drop-off Zone Taksi & Mobil Pribadi",
+        "description": "Sirkulasi kendaraan drop-off lancar berkat pemisahan barrier beton. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 482,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "timestamp": "2026-08-28 14:43 WIB",
+        "surveyed_at": "2026-08-28 14:43 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.726076,
+          -7.253524
+        ]
+      },
+      "properties": {
+        "id": "ACT-064",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Penerangan Jalan Umum (PJU) Malam Hari",
+        "name": "Penerangan Jalan Umum (PJU) Malam Hari",
+        "description": "Lampu jalan LED terang benderang, aman untuk pejalan kaki komuter malam. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 1137,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg",
+        "timestamp": "2026-08-15 15:46 WIB",
+        "surveyed_at": "2026-08-15 15:46 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.728804,
+          -7.242567
+        ]
+      },
+      "properties": {
+        "id": "ACT-065",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Aktivitas UMKM Kuliner Pagi",
+        "name": "Aktivitas UMKM Kuliner Pagi",
+        "description": "Warung soto dan lontong balap tertata rapi di sentra PKL binaan dinas. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "User Experience & Dinamika",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 780,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg",
+        "timestamp": "2026-08-16 16:49 WIB",
+        "surveyed_at": "2026-08-16 16:49 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.731982,
+          -7.245943
+        ]
+      },
+      "properties": {
+        "id": "ACT-066",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Integrasi Lobi Selatan ke Pasar Turi Baru",
+        "name": "Integrasi Lobi Selatan ke Pasar Turi Baru",
+        "description": "Akses pejalan kaki langsung terhubung dengan jembatan penghubung pusat grosir. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 359,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-17 07:52 WIB",
+        "surveyed_at": "2026-08-17 07:52 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.730152,
+          -7.251212
+        ]
+      },
+      "properties": {
+        "id": "ACT-067",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Kondisi Trotoar Jalan Semarang",
+        "name": "Kondisi Trotoar Jalan Semarang",
+        "description": "Trotoar paving lebar 3 meter, rindang dinaungi pohon trembesi jalan. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 428,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-18 08:55 WIB",
+        "surveyed_at": "2026-08-18 08:55 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.734936,
+          -7.245562
+        ]
+      },
+      "properties": {
+        "id": "ACT-068",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Halte Suroboyo Bus Koridor 3",
+        "name": "Halte Suroboyo Bus Koridor 3",
+        "description": "Shelter bus bersih dengan monitor CCTV dan papan jadwal digital aktif. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 729,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "timestamp": "2026-08-19 09:10 WIB",
+        "surveyed_at": "2026-08-19 09:10 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.735965,
+          -7.249131
+        ]
+      },
+      "properties": {
+        "id": "ACT-069",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Parkir Liar Truk Angkutan Barang",
+        "name": "Parkir Liar Truk Angkutan Barang",
+        "description": "Truk bongkar muatan ekspedisi sering memakan lajur jalan depan ruko. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Hambatan & Disamenity",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 743,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "timestamp": "2026-08-20 10:13 WIB",
+        "surveyed_at": "2026-08-20 10:13 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.724884,
+          -7.248559
+        ]
+      },
+      "properties": {
+        "id": "ACT-070",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Akses Disabilitas Ramp Kursi Roda",
+        "name": "Akses Disabilitas Ramp Kursi Roda",
+        "description": "Tersedia jalur landai (ramp) dengan kemiringan 8 derajat menuju pintu masuk tiket. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "pasar_turi",
+        "station_name": "Stasiun Pasar Turi",
+        "distance_m": 718,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg",
+        "timestamp": "2026-08-21 11:16 WIB",
+        "surveyed_at": "2026-08-21 11:16 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.755698,
+          -7.259901
+        ]
+      },
+      "properties": {
+        "id": "ACT-071",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Pedestrian Plaza Gubeng Baru",
+        "name": "Pedestrian Plaza Gubeng Baru",
+        "description": "Kawasan pedestrian lobi timur sangat modern dengan bangku taman dan vegetasi peneduh. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 1009,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-15 07:10 WIB",
+        "surveyed_at": "2026-08-15 07:10 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.756936,
+          -7.267573
+        ]
+      },
+      "properties": {
+        "id": "ACT-072",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Titik Transit Feeder WiraWiri FD07",
+        "name": "Titik Transit Feeder WiraWiri FD07",
+        "description": "Halte feeder terintegrasi langsung di depan drop zone sisi timur stasiun. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 777,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-16 08:13 WIB",
+        "surveyed_at": "2026-08-16 08:13 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.75476,
+          -7.26467
+        ]
+      },
+      "properties": {
+        "id": "ACT-073",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Tactile Paving Guiding Block Stasiun",
+        "name": "Tactile Paving Guiding Block Stasiun",
+        "description": "Blok pemandu tunanetra terpasang mulus dari trotoar raya hingga gate masuk KA. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 376,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "timestamp": "2026-08-17 09:16 WIB",
+        "surveyed_at": "2026-08-17 09:16 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.747608,
+          -7.269981
+        ]
+      },
+      "properties": {
+        "id": "ACT-074",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Pangkalan Ojol Terpadu Gubeng Pojok",
+        "name": "Pangkalan Ojol Terpadu Gubeng Pojok",
+        "description": "Area khusus penjemputan penumpang ojol terkoordinasi dengan petugas keamanan. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 1007,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "timestamp": "2026-08-18 10:19 WIB",
+        "surveyed_at": "2026-08-18 10:19 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.746446,
+          -7.26353
+        ]
+      },
+      "properties": {
+        "id": "ACT-075",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Penyeberangan Pejalan Kaki Jl. Gubeng Masjid",
+        "name": "Penyeberangan Pejalan Kaki Jl. Gubeng Masjid",
+        "description": "Zebra cross berjarak 50 meter dari gerbang keluar, arus lalu lintas cukup padat. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 835,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg",
+        "timestamp": "2026-08-19 11:22 WIB",
+        "surveyed_at": "2026-08-19 11:22 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.748972,
+          -7.266791
+        ]
+      },
+      "properties": {
+        "id": "ACT-076",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Integrasi Jalur Sepeda Kota",
+        "name": "Integrasi Jalur Sepeda Kota",
+        "description": "Marka jalur sepeda berwarna hijau terhubung dari arah Balai Kota ke stasiun. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 501,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg",
+        "timestamp": "2026-08-20 12:25 WIB",
+        "surveyed_at": "2026-08-20 12:25 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.752615,
+          -7.269898
+        ]
+      },
+      "properties": {
+        "id": "ACT-077",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Pedestrian Plaza Gubeng Baru",
+        "name": "Pedestrian Plaza Gubeng Baru",
+        "description": "Kawasan pedestrian lobi timur sangat modern dengan bangku taman dan vegetasi peneduh. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 556,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-21 13:28 WIB",
+        "surveyed_at": "2026-08-21 13:28 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.750862,
+          -7.263195
+        ]
+      },
+      "properties": {
+        "id": "ACT-078",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Titik Transit Feeder WiraWiri FD07",
+        "name": "Titik Transit Feeder WiraWiri FD07",
+        "description": "Halte feeder terintegrasi langsung di depan drop zone sisi timur stasiun. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 382,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-22 14:31 WIB",
+        "surveyed_at": "2026-08-22 14:31 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.749422,
+          -7.27112
+        ]
+      },
+      "properties": {
+        "id": "ACT-079",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Tactile Paving Guiding Block Stasiun",
+        "name": "Tactile Paving Guiding Block Stasiun",
+        "description": "Blok pemandu tunanetra terpasang mulus dari trotoar raya hingga gate masuk KA. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 932,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "timestamp": "2026-08-23 15:34 WIB",
+        "surveyed_at": "2026-08-23 15:34 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.757431,
+          -7.267623
+        ]
+      },
+      "properties": {
+        "id": "ACT-080",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Pangkalan Ojol Terpadu Gubeng Pojok",
+        "name": "Pangkalan Ojol Terpadu Gubeng Pojok",
+        "description": "Area khusus penjemputan penumpang ojol terkoordinasi dengan petugas keamanan. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 838,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "timestamp": "2026-08-24 16:37 WIB",
+        "surveyed_at": "2026-08-24 16:37 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.753903,
+          -7.264764
+        ]
+      },
+      "properties": {
+        "id": "ACT-081",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Penyeberangan Pejalan Kaki Jl. Gubeng Masjid",
+        "name": "Penyeberangan Pejalan Kaki Jl. Gubeng Masjid",
+        "description": "Zebra cross berjarak 50 meter dari gerbang keluar, arus lalu lintas cukup padat. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 270,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg",
+        "timestamp": "2026-08-25 07:40 WIB",
+        "surveyed_at": "2026-08-25 07:40 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.753696,
+          -7.268217
+        ]
+      },
+      "properties": {
+        "id": "ACT-082",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Integrasi Jalur Sepeda Kota",
+        "name": "Integrasi Jalur Sepeda Kota",
+        "description": "Marka jalur sepeda berwarna hijau terhubung dari arah Balai Kota ke stasiun. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 489,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg",
+        "timestamp": "2026-08-26 08:43 WIB",
+        "surveyed_at": "2026-08-26 08:43 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.746237,
+          -7.263506
+        ]
+      },
+      "properties": {
+        "id": "ACT-083",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Pedestrian Plaza Gubeng Baru",
+        "name": "Pedestrian Plaza Gubeng Baru",
+        "description": "Kawasan pedestrian lobi timur sangat modern dengan bangku taman dan vegetasi peneduh. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 861,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-27 09:46 WIB",
+        "surveyed_at": "2026-08-27 09:46 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.75425,
+          -7.259758
+        ]
+      },
+      "properties": {
+        "id": "ACT-084",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Titik Transit Feeder WiraWiri FD07",
+        "name": "Titik Transit Feeder WiraWiri FD07",
+        "description": "Halte feeder terintegrasi langsung di depan drop zone sisi timur stasiun. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 864,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-28 10:49 WIB",
+        "surveyed_at": "2026-08-28 10:49 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.750889,
+          -7.260527
+        ]
+      },
+      "properties": {
+        "id": "ACT-085",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Tactile Paving Guiding Block Stasiun",
+        "name": "Tactile Paving Guiding Block Stasiun",
+        "description": "Blok pemandu tunanetra terpasang mulus dari trotoar raya hingga gate masuk KA. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 675,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "timestamp": "2026-08-15 11:52 WIB",
+        "surveyed_at": "2026-08-15 11:52 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.756049,
+          -7.26861
+        ]
+      },
+      "properties": {
+        "id": "ACT-086",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Pangkalan Ojol Terpadu Gubeng Pojok",
+        "name": "Pangkalan Ojol Terpadu Gubeng Pojok",
+        "description": "Area khusus penjemputan penumpang ojol terkoordinasi dengan petugas keamanan. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 794,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "timestamp": "2026-08-16 12:55 WIB",
+        "surveyed_at": "2026-08-16 12:55 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.753744,
+          -7.267091
+        ]
+      },
+      "properties": {
+        "id": "ACT-087",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Penyeberangan Pejalan Kaki Jl. Gubeng Masjid",
+        "name": "Penyeberangan Pejalan Kaki Jl. Gubeng Masjid",
+        "description": "Zebra cross berjarak 50 meter dari gerbang keluar, arus lalu lintas cukup padat. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 370,
+        "zone": "Core Pedestrian Zone (0-400m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg",
+        "timestamp": "2026-08-17 13:10 WIB",
+        "surveyed_at": "2026-08-17 13:10 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.753067,
+          -7.261936
+        ]
+      },
+      "properties": {
+        "id": "ACT-088",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Integrasi Jalur Sepeda Kota",
+        "name": "Integrasi Jalur Sepeda Kota",
+        "description": "Marka jalur sepeda berwarna hijau terhubung dari arah Balai Kota ke stasiun. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 491,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg",
+        "timestamp": "2026-08-18 14:13 WIB",
+        "surveyed_at": "2026-08-18 14:13 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.756826,
+          -7.269555
+        ]
+      },
+      "properties": {
+        "id": "ACT-089",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Pedestrian Plaza Gubeng Baru",
+        "name": "Pedestrian Plaza Gubeng Baru",
+        "description": "Kawasan pedestrian lobi timur sangat modern dengan bangku taman dan vegetasi peneduh. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 985,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-19 15:16 WIB",
+        "surveyed_at": "2026-08-19 15:16 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.754528,
+          -7.261379
+        ]
+      },
+      "properties": {
+        "id": "ACT-090",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Titik Transit Feeder WiraWiri FD07",
+        "name": "Titik Transit Feeder WiraWiri FD07",
+        "description": "Halte feeder terintegrasi langsung di depan drop zone sisi timur stasiun. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "gubeng",
+        "station_name": "Stasiun Surabaya Gubeng",
+        "distance_m": 715,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-20 16:19 WIB",
+        "surveyed_at": "2026-08-20 16:19 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.736474,
+          -7.28999
+        ]
+      },
+      "properties": {
+        "id": "ACT-091",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Halte Transit Intermoda Joyoboyo (TIJ)",
+        "name": "Halte Transit Intermoda Joyoboyo (TIJ)",
+        "description": "Terminal modern transit terpadu bus kota, feeder, dan integrasi pejalan kaki. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "koridor_transit",
+        "station_name": "Koridor Transit Surabaya",
+        "distance_m": 723,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-15 07:10 WIB",
+        "surveyed_at": "2026-08-15 07:10 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.743986,
+          -7.282126
+        ]
+      },
+      "properties": {
+        "id": "ACT-092",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Pedestrian Walk Jl. Raya Darmo",
+        "name": "Pedestrian Walk Jl. Raya Darmo",
+        "description": "Trotoar sangat lebar dengan jalur sepeda dan pepohonan rindang kota Surabaya. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "koridor_transit",
+        "station_name": "Koridor Transit Surabaya",
+        "distance_m": 983,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-16 08:13 WIB",
+        "surveyed_at": "2026-08-16 08:13 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.738989,
+          -7.280815
+        ]
+      },
+      "properties": {
+        "id": "ACT-093",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Penyeberangan Pelican Cross Taman Bungkul",
+        "name": "Penyeberangan Pelican Cross Taman Bungkul",
+        "description": "Zebra cross berlampu tombol sinyal, pengendara motor tertib berhenti. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "koridor_transit",
+        "station_name": "Koridor Transit Surabaya",
+        "distance_m": 574,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "timestamp": "2026-08-17 09:16 WIB",
+        "surveyed_at": "2026-08-17 09:16 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.743558,
+          -7.286433
+        ]
+      },
+      "properties": {
+        "id": "ACT-094",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Halte Bus Basuki Rahmat Pusat Bisnis",
+        "name": "Halte Bus Basuki Rahmat Pusat Bisnis",
+        "description": "Pemberhentian komuter kantor pusat kota dengan informasi rute digital. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "koridor_transit",
+        "station_name": "Koridor Transit Surabaya",
+        "distance_m": 775,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "timestamp": "2026-08-18 10:19 WIB",
+        "surveyed_at": "2026-08-18 10:19 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.738105,
+          -7.289103
+        ]
+      },
+      "properties": {
+        "id": "ACT-095",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Halte Transit Intermoda Joyoboyo (TIJ)",
+        "name": "Halte Transit Intermoda Joyoboyo (TIJ)",
+        "description": "Terminal modern transit terpadu bus kota, feeder, dan integrasi pejalan kaki. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "koridor_transit",
+        "station_name": "Koridor Transit Surabaya",
+        "distance_m": 467,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1780534010331_scaled_1000544815.jpg",
+        "timestamp": "2026-08-19 11:22 WIB",
+        "surveyed_at": "2026-08-19 11:22 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.735137,
+          -7.286997
+        ]
+      },
+      "properties": {
+        "id": "ACT-096",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Pedestrian Walk Jl. Raya Darmo",
+        "name": "Pedestrian Walk Jl. Raya Darmo",
+        "description": "Trotoar sangat lebar dengan jalur sepeda dan pepohonan rindang kota Surabaya. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "koridor_transit",
+        "station_name": "Koridor Transit Surabaya",
+        "distance_m": 539,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@zulfanfakhriza",
+        "user_name": "@zulfanfakhriza",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/bagusid/1780920258917_stamped_1780920256442.jpg",
+        "timestamp": "2026-08-20 12:25 WIB",
+        "surveyed_at": "2026-08-20 12:25 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.733947,
+          -7.281553
+        ]
+      },
+      "properties": {
+        "id": "ACT-097",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Penyeberangan Pelican Cross Taman Bungkul",
+        "name": "Penyeberangan Pelican Cross Taman Bungkul",
+        "description": "Zebra cross berlampu tombol sinyal, pengendara motor tertib berhenti. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "koridor_transit",
+        "station_name": "Koridor Transit Surabaya",
+        "distance_m": 832,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@mirzawibisono",
+        "user_name": "@mirzawibisono",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/5c7e0e80-7375-4f2b-80de-d4bf33ef89a4_1780968994582.jpg",
+        "timestamp": "2026-08-21 13:28 WIB",
+        "surveyed_at": "2026-08-21 13:28 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.743673,
+          -7.286713
+        ]
+      },
+      "properties": {
+        "id": "ACT-098",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Halte Bus Basuki Rahmat Pusat Bisnis",
+        "name": "Halte Bus Basuki Rahmat Pusat Bisnis",
+        "description": "Pemberhentian komuter kantor pusat kota dengan informasi rute digital. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "koridor_transit",
+        "station_name": "Koridor Transit Surabaya",
+        "distance_m": 819,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@hanaamira",
+        "user_name": "@hanaamira",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/2b1cc5dc-23fd-4246-8cca-ce779b40b29a_JU7A62qmWX.png",
+        "timestamp": "2026-08-22 14:31 WIB",
+        "surveyed_at": "2026-08-22 14:31 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.739271,
+          -7.290887
+        ]
+      },
+      "properties": {
+        "id": "ACT-099",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Halte Transit Intermoda Joyoboyo (TIJ)",
+        "name": "Halte Transit Intermoda Joyoboyo (TIJ)",
+        "description": "Terminal modern transit terpadu bus kota, feeder, dan integrasi pejalan kaki. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Transit Multimodal",
+        "condition": "Sedang",
+        "station_cluster": "koridor_transit",
+        "station_name": "Koridor Transit Surabaya",
+        "distance_m": 794,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@rayhanagnan",
+        "user_name": "@rayhanagnan",
+        "images": [
+          "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg"
+        ],
+        "photo_url": "https://mapid-app-chat.cdn.mapid.io/692d03413a0cf54ea6633e89/e7637b66-5a20-4730-96ba-f2160b0972bc_1780798855593.jpg",
+        "timestamp": "2026-08-23 15:34 WIB",
+        "surveyed_at": "2026-08-23 15:34 WIB"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.742826,
+          -7.281254
+        ]
+      },
+      "properties": {
+        "id": "ACT-100",
+        "hashtag": [
+          "PakSibukGa"
+        ],
+        "title": "Pedestrian Walk Jl. Raya Darmo",
+        "name": "Pedestrian Walk Jl. Raya Darmo",
+        "description": "Trotoar sangat lebar dengan jalur sepeda dan pepohonan rindang kota Surabaya. #PakSibukGa",
+        "survey_type": "activity",
+        "mission_subtype": null,
+        "category": "Pedestrian & Walkability",
+        "condition": "Sedang",
+        "station_cluster": "koridor_transit",
+        "station_name": "Koridor Transit Surabaya",
+        "distance_m": 951,
+        "zone": "Primary Catchment (400-800m)",
+        "user": "@raykadharma",
+        "user_name": "@raykadharma",
+        "images": [
+          "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg"
+        ],
+        "photo_url": "https://mapidstorage.s3.ap-southeast-1.amazonaws.com/general_image/undefined/1781057981037_stamped_1781057962886.jpg",
+        "timestamp": "2026-08-24 16:37 WIB",
+        "surveyed_at": "2026-08-24 16:37 WIB"
+      }
+    }
+  ]
+}

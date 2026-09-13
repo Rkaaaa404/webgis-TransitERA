@@ -124,5 +124,70 @@ SPATIAL_TOOLS = [
             },
             "required": ["business_type"]
         }
+    },
+    {
+        "name": "get_survey_data",
+        "description": "Mengambil dan memfilter data survei aktivitas warga MAPID (#PakSibukGa), profil ekonomi komersial (Menu Go, Struk Go), daya beli/SES, atau kondisi fasilitas di sekitar stasiun tertentu.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "station_id": {
+                    "type": "string",
+                    "enum": ALL_STATION_ENUM,
+                    "description": "ID simpul stasiun transit (contoh: wonokromo, gubeng, pasar_turi)."
+                },
+                "category": {
+                    "type": "string",
+                    "enum": ["economy", "pedestrian", "transit", "disamenity", "all"],
+                    "description": "Kategori data survei yang ingin diambil (economy: belanja/transaksi/kuliner/bisnis, pedestrian: trotoar/zebra cross, transit: feeder/halte, disamenity: hambatan/banjir, all: semua data)."
+                }
+            },
+            "required": ["station_id"]
+        }
+    },
+    {
+        "name": "get_area_score",
+        "description": "Mengambil skor indikator kesiapan TOD 5D (Density, Diversity, Design/Walkability, Destination, Distance to Transit) atau metrik walkability spasial riil pada stasiun.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "station_id": {
+                    "type": "string",
+                    "enum": ALL_STATION_ENUM,
+                    "description": "ID simpul stasiun transit."
+                },
+                "metric": {
+                    "type": "string",
+                    "enum": ["all_5d", "walkability", "density", "diversity", "destination", "distance"],
+                    "description": "Metrik spasial spesifik yang diminta."
+                }
+            },
+            "required": ["station_id"]
+        }
+    },
+    {
+        "name": "get_route",
+        "description": "Merencanakan dan merekomendasikan rute perjalanan transit multimoda (jalan kaki, kereta komuter, bus feeder WiraWiri / Suroboyo Bus) antara stasiun asal dan stasiun tujuan.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "origin": {
+                    "type": "string",
+                    "enum": ALL_STATION_ENUM,
+                    "description": "ID stasiun titik awal keberangkatan."
+                },
+                "destination": {
+                    "type": "string",
+                    "enum": ALL_STATION_ENUM,
+                    "description": "ID stasiun titik tujuan."
+                },
+                "modes": {
+                    "type": "array",
+                    "items": {"type": "string", "enum": ["train", "bus", "feeder", "walk"]},
+                    "description": "Pilihan moda perjalanan."
+                }
+            },
+            "required": ["origin", "destination"]
+        }
     }
 ]

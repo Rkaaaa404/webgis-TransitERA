@@ -22,7 +22,7 @@ import {
   Store, Landmark, DollarSign, Home,
   Train as TrainIcon, Bus, MapPin, Settings, HelpCircle, MessageSquare, Video,
   ChevronRight, ChevronDown, Clock, AlertTriangle, Droplets, Wind, Thermometer,
-  Eye, EyeOff, Star, Hexagon, ScrollText, BarChart2, CircleDollarSign, Building2, Car,
+  Eye, EyeOff, Star, Hexagon, ScrollText, BarChart2, CircleDollarSign, Building2,
   Navigation, ExternalLink, Footprints
 } from 'lucide-react';
 
@@ -47,6 +47,11 @@ interface SidebarContainerProps {
   isOpen?: boolean;
   onClose?: () => void;
   isMobileMode?: boolean;
+  // ATR/BPN Layer Controls
+  showGistaru?: boolean;
+  onToggleGistaru?: () => void;
+  showBhumi?: boolean;
+  onToggleBhumi?: () => void;
 }
 
 /* ── Orange Toggle ── */
@@ -150,7 +155,11 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
   onOpenVideoTutorial,
   isOpen = false,
   onClose,
-  isMobileMode
+  isMobileMode,
+  showGistaru,
+  onToggleGistaru,
+  showBhumi,
+  onToggleBhumi,
 }) => {
   const [govActiveTab, setGovActiveTab] = useState<'filter' | 'layers' | 'legends' | 'demographics' | 'environment'>('filter');
   const [bizActiveTab, setBizActiveTab] = useState<'filter' | 'layers' | 'legends' | 'competitors' | 'poilist'>('filter');
@@ -162,9 +171,6 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
   const [showEconomicPOI, setShowEconomicPOI] = useState(true);
   const [showNJOPZone, setShowNJOPZone] = useState(true);
   const [showPropertiGo, setShowPropertiGo] = useState(false);
-  const [showGistaru, setShowGistaru] = useState(false);
-  const [showBhumi, setShowBhumi] = useState(false);
-  const [showTraffic, setShowTraffic] = useState(false);
 
   // Business Specific State
   const [njopRange, setNjopRange] = useState<[number, number]>([10, 50]);
@@ -291,14 +297,14 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
         </div>
         <div className="space-y-1">
           <Toggle
-            active={showGistaru}
-            onToggle={() => setShowGistaru(!showGistaru)}
+            active={showGistaru ?? false}
+            onToggle={onToggleGistaru ?? (() => {})}
             label="Kawasan BWP (GISTARU)"
             icon={<Map className="w-4 h-4" />}
           />
           <Toggle
-            active={showBhumi}
-            onToggle={() => setShowBhumi(!showBhumi)}
+            active={showBhumi ?? false}
+            onToggle={onToggleBhumi ?? (() => {})}
             label="Persil Tanah (Bhumi ATR)"
             icon={<ScrollText className="w-4 h-4" />}
           />
@@ -316,12 +322,6 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
               icon={<Building2 className="w-4 h-4" />}
             />
           )}
-          <Toggle
-            active={showTraffic}
-            onToggle={() => setShowTraffic(!showTraffic)}
-            label="Traffic Real-Time"
-            icon={<Car className="w-4 h-4" />}
-          />
         </div>
       </div>
 

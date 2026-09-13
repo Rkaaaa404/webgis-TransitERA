@@ -1,5 +1,25 @@
 import React from 'react';
-import { Layers, Eye, Map, Check, X, Bus, CloudRain, Sparkles, Hexagon, CircleDollarSign, Star, EyeOff, Building2 } from 'lucide-react';
+import {
+  Layers,
+  Eye,
+  Map,
+  Check,
+  X,
+  Bus,
+  CloudRain,
+  Sparkles,
+  Hexagon,
+  CircleDollarSign,
+  Star,
+  EyeOff,
+  Building2,
+  Clock,
+  Footprints,
+  Navigation,
+  Car,
+  Route,
+} from 'lucide-react';
+import { IsochroneMode, IsochroneMinutes, IsochroneViewType } from './useIsochroneLayer';
 
 export type ChoroplethMode = 'tod_score' | 'njop_premium' | 'typology' | 'none';
 export type BasemapStyleKey = 'street' | 'street-2d' | 'dark' | 'light' | 'satellite';
@@ -19,6 +39,14 @@ interface LayerControlProps {
   onToggleFloodHazard?: () => void;
   showNighttimeLight?: boolean;
   onToggleNighttimeLight?: () => void;
+  showIsochrone?: boolean;
+  onToggleIsochrone?: () => void;
+  isochroneMode?: IsochroneMode;
+  onChangeIsochroneMode?: (mode: IsochroneMode) => void;
+  isochroneMinutes?: IsochroneMinutes;
+  onChangeIsochroneMinutes?: (mins: IsochroneMinutes) => void;
+  isochroneViewType?: IsochroneViewType;
+  onChangeIsochroneViewType?: (type: IsochroneViewType) => void;
   surveyCount?: number | null;
   transitCount?: number | null;
   routesCount?: number | null;
@@ -45,6 +73,14 @@ export const LayerControl: React.FC<LayerControlProps> = ({
   onToggleFloodHazard,
   showNighttimeLight = false,
   onToggleNighttimeLight,
+  showIsochrone = false,
+  onToggleIsochrone,
+  isochroneMode = 'walk',
+  onChangeIsochroneMode,
+  isochroneMinutes = 15,
+  onChangeIsochroneMinutes,
+  isochroneViewType = 'network',
+  onChangeIsochroneViewType,
   surveyCount,
   transitCount,
   routesCount,
@@ -294,6 +330,117 @@ export const LayerControl: React.FC<LayerControlProps> = ({
             </span>
           </button>
         )}
+
+        {onToggleIsochrone && (
+          <div className="space-y-1.5 pt-1 border-t border-slate-800/60">
+            <button
+              onClick={onToggleIsochrone}
+              className={`w-full py-1.5 px-2 rounded-lg text-[11px] font-medium flex items-center justify-between border transition-all ${
+                showIsochrone
+                  ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300 font-bold'
+                  : 'bg-slate-950/40 border-slate-800 text-slate-400 hover:text-slate-300'
+              }`}
+            >
+              <span className="flex items-center gap-1.5">
+                <Clock className="w-3.5 h-3.5" />
+                15-Minute City (Isochrone)
+              </span>
+              <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-800 text-slate-300">
+                {isochroneMinutes} Mnt
+              </span>
+            </button>
+
+            {showIsochrone && (
+              <div className="p-2 rounded-lg bg-slate-950/70 border border-slate-800 space-y-2 animate-in fade-in duration-200">
+                {/* Mode Selector */}
+                <div>
+                  <div className="text-[9px] uppercase font-bold text-slate-400 mb-1 flex items-center justify-between">
+                    <span>Moda Jaringan Jalan</span>
+                    <span className="text-[8.5px] font-mono text-cyan-400">Street Network</span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-1">
+                    {(
+                      [
+                        { key: 'walk', label: 'Jalan Kaki', icon: Footprints, color: 'text-emerald-400' },
+                        { key: 'motor', label: 'Motor', icon: Navigation, color: 'text-cyan-400' },
+                        { key: 'car', label: 'Mobil', icon: Car, color: 'text-indigo-400' },
+                      ] as const
+                    ).map(({ key, label, icon: Icon, color }) => (
+                      <button
+                        key={key}
+                        onClick={() => onChangeIsochroneMode && onChangeIsochroneMode(key)}
+                        className={`py-1 px-1 rounded-md text-[9.5px] font-bold border flex items-center justify-center gap-1 transition-all ${
+                          isochroneMode === key
+                            ? 'bg-slate-800 border-slate-600 text-white shadow-sm'
+                            : 'bg-slate-950/40 border-slate-800/80 text-slate-400 hover:text-slate-200'
+                        }`}
+                      >
+                        <Icon className={`w-3 h-3 ${color}`} />
+                        <span>{label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Duration Selector */}
+                <div>
+                  <div className="text-[9px] uppercase font-bold text-slate-400 mb-1">
+                    Waktu Tempuh (Menit)
+                  </div>
+                  <div className="grid grid-cols-3 gap-1">
+                    {([5, 10, 15] as const).map((mins) => (
+                      <button
+                        key={mins}
+                        onClick={() => onChangeIsochroneMinutes && onChangeIsochroneMinutes(mins)}
+                        className={`py-1 px-1 rounded-md text-[10px] font-mono font-bold border transition-all text-center ${
+                          isochroneMinutes === mins
+                            ? 'bg-brand-lime text-slate-950 border-brand-lime shadow-sm'
+                            : 'bg-slate-950/40 border-slate-800/80 text-slate-400 hover:text-slate-200'
+                        }`}
+                      >
+                        {mins} Mnt
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Format Tampilan (Rute Jalan vs Area Poligon) */}
+                <div>
+                  <div className="text-[9px] uppercase font-bold text-slate-400 mb-1 flex items-center justify-between">
+                    <span>Tampilan Jangkauan</span>
+                    <span className="text-[8px] font-mono text-brand-lime font-bold">Rute Jalan Nyata</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-1">
+                    <button
+                      onClick={() => onChangeIsochroneViewType && onChangeIsochroneViewType('network')}
+                      className={`py-1 px-1 rounded-md text-[9.5px] font-bold border flex items-center justify-center gap-1 transition-all ${
+                        isochroneViewType === 'network'
+                          ? 'bg-brand-lime text-slate-950 border-brand-lime shadow-sm'
+                          : 'bg-slate-950/40 border-slate-800/80 text-slate-400 hover:text-slate-200'
+                      }`}
+                      title="Menampilkan rute jalan kaki mengikuti koridor jalan nyata"
+                    >
+                      <Route className="w-3 h-3" />
+                      <span>Rute Jalan</span>
+                    </button>
+                    <button
+                      onClick={() => onChangeIsochroneViewType && onChangeIsochroneViewType('polygon')}
+                      className={`py-1 px-1 rounded-md text-[9.5px] font-bold border flex items-center justify-center gap-1 transition-all ${
+                        isochroneViewType === 'polygon'
+                          ? 'bg-brand-lime text-slate-950 border-brand-lime shadow-sm'
+                          : 'bg-slate-950/40 border-slate-800/80 text-slate-400 hover:text-slate-200'
+                      }`}
+                      title="Menampilkan batas luar cakupan area poligon"
+                    >
+                      <Hexagon className="w-3 h-3" />
+                      <span>Area Poligon</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* ── 3. Dynamic Reactive Legend (Hanya Merender Layer Aktif) ── */}
@@ -403,6 +550,49 @@ export const LayerControl: React.FC<LayerControlProps> = ({
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded bg-amber-400/80 border border-amber-300 shrink-0" />
               <span className="text-slate-300">Cahaya Malam (Aktivitas NTL)</span>
+            </div>
+          )}
+
+          {showIsochrone && (
+            <div className="pt-1.5 border-t border-slate-800/60 space-y-1">
+              <div className="flex items-center justify-between text-[10px]">
+                <span className="text-slate-200 font-semibold flex items-center gap-1">
+                  {isochroneViewType === 'network' ? (
+                    <Route className="w-3 h-3 text-brand-lime" />
+                  ) : (
+                    <Hexagon className="w-3 h-3 text-brand-lime" />
+                  )}
+                  <span>
+                    {isochroneViewType === 'network' ? 'Rute Jaringan Jalan' : 'Batas Area'}{' '}
+                    ({isochroneMinutes} Mnt)
+                  </span>
+                </span>
+                <span className="text-[9px] font-mono text-cyan-400 font-bold">
+                  {isochroneMode === 'walk' ? '4.5 km/h' : isochroneMode === 'motor' ? '24 km/h' : '18.5 km/h'}
+                </span>
+              </div>
+
+              {isochroneViewType === 'network' ? (
+                <div className="grid grid-cols-3 gap-1 pt-0.5 text-[8.5px] font-mono">
+                  <div className="flex items-center gap-1 text-emerald-400">
+                    <span className="w-2.5 h-1 bg-emerald-400 rounded-full shrink-0" />
+                    <span>5 Mnt (~380m)</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-cyan-400">
+                    <span className="w-2.5 h-1 bg-cyan-400 rounded-full shrink-0" />
+                    <span>10 Mnt (~750m)</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-amber-400">
+                    <span className="w-2.5 h-1 bg-amber-400 rounded-full shrink-0" />
+                    <span>15 Mnt (~1.15km)</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center gap-1.5 text-[8.5px] text-slate-400">
+                  <span className="w-2.5 h-2.5 rounded bg-emerald-500/30 border border-emerald-400 shrink-0" />
+                  <span>Batas poligon luar jangkauan {isochroneMinutes} menit</span>
+                </div>
+              )}
             </div>
           )}
         </div>

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as maplibregl from 'maplibre-gl';
-import { StationId } from '@/types';
+import { StationId, RoutePlan } from '@/types';
 import { BASEMAP_STYLES, FALLBACK_BASEMAP_STYLES, SURABAYA_DEFAULT_ZOOM } from '@/lib/mapid';
 import { FALLBACK_STATIONS, fetchMapidSurvey, fetchTransitNodes, fetchTransitRoutes, fetchFloodHazard, fetchNighttimeLight, fetchShoppingCenters } from '@/lib/api';
 import { ChoroplethMode, BasemapStyleKey, LayerControl } from './LayerControl';
@@ -12,6 +12,8 @@ import { Layers } from 'lucide-react';
 import { useH3Layer } from './useH3Layer';
 import { useStationMarkers } from './useStationMarkers';
 import { useStationPerimeter } from './useStationPerimeter';
+import { useTransitRoute } from './useTransitRoute';
+import { useIsochroneLayer, IsochroneMode, IsochroneMinutes, IsochroneViewType } from './useIsochroneLayer';
 
 interface MapContainerProps {
   activeStation: StationId;
@@ -28,6 +30,11 @@ interface MapContainerProps {
   highlightedH3Index?: string | null;
   onSelectH3Index?: (index: string | null) => void;
   mapActionTrigger?: any;
+  activeRouteIds?: string[];
+  activeRoutePlan?: RoutePlan | null;
+  // ATR/BPN Layer Controls
+  showGistaru?: boolean;
+  showBhumi?: boolean;
 }
 
 export const MapContainer: React.FC<MapContainerProps> = ({
@@ -44,7 +51,11 @@ export const MapContainer: React.FC<MapContainerProps> = ({
   h3RingFilter,
   highlightedH3Index,
   onSelectH3Index,
-  mapActionTrigger
+  mapActionTrigger,
+  activeRouteIds = [],
+  activeRoutePlan = null,
+  showGistaru = false,
+  showBhumi = false,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
@@ -55,6 +66,10 @@ export const MapContainer: React.FC<MapContainerProps> = ({
   const [showFloodHazard, setShowFloodHazard] = useState(false);
   const [showNighttimeLight, setShowNighttimeLight] = useState(false);
   const [showShoppingCenters, setShowShoppingCenters] = useState(false);
+  const [showIsochrone, setShowIsochrone] = useState(false);
+  const [isochroneMode, setIsochroneMode] = useState<IsochroneMode>('walk');
+  const [isochroneMinutes, setIsochroneMinutes] = useState<IsochroneMinutes>(15);
+  const [isochroneViewType, setIsochroneViewType] = useState<IsochroneViewType>('network');
   const [surveyCount, setSurveyCount] = useState<number | null>(null);
   const [transitCount, setTransitCount] = useState<number | null>(null);
   const [routesCount, setRoutesCount] = useState<number | null>(null);
@@ -85,11 +100,23 @@ export const MapContainer: React.FC<MapContainerProps> = ({
       center: [currentStation.longitude, currentStation.latitude],
       zoom: SURABAYA_DEFAULT_ZOOM,
       pitch: 30,
-      bearing: 0
+      bearing: 0,
+      attributionControl: false // Configured with custom MAPID attribution below
     });
 
     map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'top-right');
     map.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-left');
+
+    // Official Attribution: MAPID Basemaps & Spatial Data + CARTO / OpenStreetMap
+    map.addControl(
+      new maplibregl.AttributionControl({
+        compact: true,
+        customAttribution: [
+          '<a href="https://mapid.io" target="_blank" rel="noopener noreferrer" style="color: #67e8f9; font-weight: 600;">Basemap by MAPID</a>',
+        ],
+      }),
+      'bottom-right'
+    );
 
     map.on('error', (e) => {
       console.error('MAPLIBRE ERROR:', e.error || e);
@@ -138,6 +165,8 @@ export const MapContainer: React.FC<MapContainerProps> = ({
   useH3Layer(mapRef.current, isMapLoaded, choroplethMode, onSelectH3Index, h3ScoreRange, h3RingFilter, activePersona);
   useStationMarkers(mapRef.current, isMapLoaded, onSelectStation, activeStation, activePersona);
   useStationPerimeter(mapRef.current, isMapLoaded, activeStation, activePersona);
+  useIsochroneLayer(mapRef.current, isMapLoaded, showIsochrone, activeStation, isochroneMode, isochroneMinutes, isochroneViewType);
+  useTransitRoute(mapRef.current, isMapLoaded, activeRoutePlan, activeRouteIds);
 
   // 1.5 Add Real Transit Routes layer (16 trayek Suroboyo Bus & Feeder WiraWiri)
   useEffect(() => {
@@ -752,6 +781,203 @@ export const MapContainer: React.FC<MapContainerProps> = ({
     }
   }, [mapActionTrigger, isMapLoaded]);
 
+  // 6. GISTARU — Rencana Pola Ruang RDTR Surabaya (ATR/BPN)
+  useEffect(() => {
+    let isMounted = true;
+    if (!mapRef.current || !isMapLoaded) return;
+    const map = mapRef.current;
+    const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
+    if (showGistaru) {
+      fetch(`${API_BASE}/api/layers/gistaru`)
+        .then((r) => r.json())
+        .then((data) => {
+          if (!isMounted || !mapRef.current) return;
+          const m = mapRef.current;
+          if (!m.getStyle()) return;
+
+          // Zone-code color palette (RDTR Surabaya sub-zones)
+          const ZONA_COLORS: Record<string, string> = {
+            'R': '#6366f1',   // Perumahan – Indigo
+            'K': '#f59e0b',   // Perdagangan & Jasa – Amber
+            'P': '#10b981',   // Perkantoran – Emerald
+            'W': '#3b82f6',   // Kawasan Industri – Blue
+            'I': '#64748b',   // Industri – Slate
+            'RTH': '#22c55e', // Ruang Terbuka Hijau – Green
+            'SPU': '#8b5cf6', // Sarana Pelayanan Umum – Violet
+            'KT': '#ec4899',  // Kawasan TOD – Pink
+            'default': '#94a3b8',
+          };
+
+          if (!m.getSource('gistaru-source')) {
+            m.addSource('gistaru-source', { type: 'geojson', data });
+
+            // Polygon fill
+            m.addLayer({
+              id: 'gistaru-fill',
+              type: 'fill',
+              source: 'gistaru-source',
+              paint: {
+                'fill-color': [
+                  'match',
+                  ['slice', ['coalesce', ['get', 'KODZON'], ['get', 'KODSZN'], 'default'], 0, 1],
+                  'R', ZONA_COLORS['R'],
+                  'K', ZONA_COLORS['K'],
+                  'P', ZONA_COLORS['P'],
+                  'W', ZONA_COLORS['W'],
+                  'I', ZONA_COLORS['I'],
+                  ZONA_COLORS['default'],
+                ],
+                'fill-opacity': 0.25,
+              },
+            });
+
+            // Polygon border
+            m.addLayer({
+              id: 'gistaru-line',
+              type: 'line',
+              source: 'gistaru-source',
+              paint: {
+                'line-color': '#f59e0b',
+                'line-width': 0.8,
+                'line-opacity': 0.6,
+              },
+            });
+
+            // Click popup
+            m.on('click', 'gistaru-fill', (e) => {
+              const p = e.features?.[0]?.properties;
+              if (!p) return;
+              new maplibregl.Popup({ maxWidth: '280px' })
+                .setLngLat(e.lngLat)
+                .setHTML(`
+                  <div style="font-family:system-ui,sans-serif;font-size:12px;color:#0f172a;padding:6px 4px">
+                    <div style="font-weight:700;font-size:13px;margin-bottom:4px">${p.NAMOBJ || p.NAMZON || 'Pola Ruang'}</div>
+                    <div style="color:#475569;margin-bottom:3px">
+                      Zona: <strong>${p.NAMZON || '–'}</strong> (${p.KODZON || '–'})<br/>
+                      Sub-Zona: <strong>${p.NAMSZN || '–'}</strong> (${p.KODSZN || '–'})<br/>
+                      BWP: <strong>${p.KODBWP || '–'}${p.KOSBWP ? '-' + p.KOSBWP : ''}</strong><br/>
+                      Kelurahan: <strong>${p.WADMKD || '–'}</strong>, ${p.WADMKC || ''}<br/>
+                      Luas: <strong>${p.LUASHA ? p.LUASHA.toFixed(2) + ' ha' : '–'}</strong><br/>
+                      TOD: <strong>${p.TOD_04 || '–'}</strong>
+                    </div>
+                    <div style="font-size:9px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:4px;margin-top:4px">
+                      Sumber: GISTARU ATR/BPN — RDTR Kota Surabaya Perda No. 8 Tahun 2018
+                    </div>
+                  </div>
+                `)
+                .addTo(m);
+            });
+            m.on('mouseenter', 'gistaru-fill', () => { if (m.getCanvas()) m.getCanvas().style.cursor = 'pointer'; });
+            m.on('mouseleave', 'gistaru-fill', () => { if (m.getCanvas()) m.getCanvas().style.cursor = ''; });
+          } else {
+            const src = m.getSource('gistaru-source') as maplibregl.GeoJSONSource | undefined;
+            if (src) src.setData(data);
+          }
+
+          if (m.getLayer('gistaru-fill')) m.setLayoutProperty('gistaru-fill', 'visibility', 'visible');
+          if (m.getLayer('gistaru-line')) m.setLayoutProperty('gistaru-line', 'visibility', 'visible');
+        })
+        .catch(() => {});
+    } else {
+      const m = mapRef.current;
+      if (m?.getLayer('gistaru-fill')) m.setLayoutProperty('gistaru-fill', 'visibility', 'none');
+      if (m?.getLayer('gistaru-line')) m.setLayoutProperty('gistaru-line', 'visibility', 'none');
+    }
+    return () => { isMounted = false; };
+  }, [showGistaru, isMapLoaded]);
+
+  // 7. BHUMI — Persil Bidang Tanah (ATR/BPN)
+  useEffect(() => {
+    let isMounted = true;
+    if (!mapRef.current || !isMapLoaded) return;
+    const map = mapRef.current;
+    const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
+    if (showBhumi) {
+      fetch(`${API_BASE}/api/layers/bhumi`)
+        .then((r) => r.json())
+        .then((data) => {
+          if (!isMounted || !mapRef.current) return;
+          const m = mapRef.current;
+          if (!m.getStyle()) return;
+
+          if (!m.getSource('bhumi-source')) {
+            m.addSource('bhumi-source', { type: 'geojson', data });
+
+            // Fill by tipe hak
+            m.addLayer({
+              id: 'bhumi-fill',
+              type: 'fill',
+              source: 'bhumi-source',
+              paint: {
+                'fill-color': [
+                  'match',
+                  ['coalesce', ['get', 'tipehak'], 'HGB'],
+                  'Hak Milik', '#22c55e',
+                  'Hak Guna Bangunan', '#3b82f6',
+                  'Hak Pakai', '#f59e0b',
+                  'Hak Guna Usaha', '#ef4444',
+                  '#94a3b8',
+                ],
+                'fill-opacity': 0.3,
+              },
+            });
+
+            // Border
+            m.addLayer({
+              id: 'bhumi-line',
+              type: 'line',
+              source: 'bhumi-source',
+              paint: {
+                'line-color': '#22c55e',
+                'line-width': 1.0,
+                'line-opacity': 0.8,
+              },
+            });
+
+            // Click popup
+            m.on('click', 'bhumi-fill', (e) => {
+              const p = e.features?.[0]?.properties;
+              if (!p) return;
+              new maplibregl.Popup({ maxWidth: '280px' })
+                .setLngLat(e.lngLat)
+                .setHTML(`
+                  <div style="font-family:system-ui,sans-serif;font-size:12px;color:#0f172a;padding:6px 4px">
+                    <div style="font-weight:700;font-size:13px;margin-bottom:4px">Bidang Tanah</div>
+                    <div style="color:#475569;margin-bottom:3px">
+                      NIB: <strong>${p.nib || p.persilpasifid || '–'}</strong><br/>
+                      Tipe Hak: <strong>${p.tipehak || '–'}</strong><br/>
+                      Luas: <strong>${p.luas ? Math.round(p.luas) + ' m²' : '–'}</strong><br/>
+                      Akurasi: <strong>${p.akurasibidang || '–'}</strong><br/>
+                      Stasiun Terdekat: <strong>${(p._station_id || '–').replace(/_/g, ' ')}</strong>
+                    </div>
+                    <div style="font-size:9px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:4px;margin-top:4px">
+                      Sumber: BHUMI ATR/BPN — Bidang Tanah Terdaftar
+                    </div>
+                  </div>
+                `)
+                .addTo(m);
+            });
+            m.on('mouseenter', 'bhumi-fill', () => { if (m.getCanvas()) m.getCanvas().style.cursor = 'pointer'; });
+            m.on('mouseleave', 'bhumi-fill', () => { if (m.getCanvas()) m.getCanvas().style.cursor = ''; });
+          } else {
+            const src = m.getSource('bhumi-source') as maplibregl.GeoJSONSource | undefined;
+            if (src) src.setData(data);
+          }
+
+          if (m.getLayer('bhumi-fill')) m.setLayoutProperty('bhumi-fill', 'visibility', 'visible');
+          if (m.getLayer('bhumi-line')) m.setLayoutProperty('bhumi-line', 'visibility', 'visible');
+        })
+        .catch(() => {});
+    } else {
+      const m = mapRef.current;
+      if (m?.getLayer('bhumi-fill')) m.setLayoutProperty('bhumi-fill', 'visibility', 'none');
+      if (m?.getLayer('bhumi-line')) m.setLayoutProperty('bhumi-line', 'visibility', 'none');
+    }
+    return () => { isMounted = false; };
+  }, [showBhumi, isMapLoaded]);
+
   return (
     <div className="relative w-full h-full">
       <div ref={mapContainerRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
@@ -807,6 +1033,14 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                   onToggleFloodHazard={() => setShowFloodHazard((prev) => !prev)}
                   showNighttimeLight={showNighttimeLight}
                   onToggleNighttimeLight={() => setShowNighttimeLight((prev) => !prev)}
+                  showIsochrone={showIsochrone}
+                  onToggleIsochrone={() => setShowIsochrone((prev) => !prev)}
+                  isochroneMode={isochroneMode}
+                  onChangeIsochroneMode={(mode) => setIsochroneMode(mode)}
+                  isochroneMinutes={isochroneMinutes}
+                  onChangeIsochroneMinutes={(mins) => setIsochroneMinutes(mins)}
+                  isochroneViewType={isochroneViewType}
+                  onChangeIsochroneViewType={(type) => setIsochroneViewType(type)}
                   surveyCount={surveyCount}
                   transitCount={transitCount}
                   floodCount={floodCount}

@@ -1256,6 +1256,49 @@ export async function fetchMapidSurvey(surveyType?: string, missionSubtype?: str
   return { type: 'FeatureCollection', features: [] };
 }
 
+export async function fetchStationIsochrone(
+  stationId?: StationId,
+  mode?: 'walk' | 'motor' | 'car',
+  minutes?: number
+): Promise<any> {
+  try {
+    const params = new URLSearchParams();
+    if (stationId) params.append('station', stationId);
+    if (mode) params.append('mode', mode);
+    if (minutes !== undefined) params.append('minutes', String(minutes));
+
+    const res = await fetch(`${API_BASE_URL}/isochrone?${params.toString()}`);
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch (err) {
+    console.warn('Backend /isochrone offline, loading pre-computed client isochrone dataset:', err);
+  }
+
+  // Load client-side pre-computed isochrone features
+  try {
+    const res = await fetch('/data/station_isochrones.json');
+    if (res.ok) {
+      const allData = await res.json();
+      let features = allData.features || [];
+      if (stationId) {
+        features = features.filter((f: any) => f.properties?.station_id === stationId);
+      }
+      if (mode) {
+        features = features.filter((f: any) => f.properties?.mode === mode);
+      }
+      if (minutes !== undefined) {
+        features = features.filter((f: any) => f.properties?.minutes === minutes);
+      }
+      return { type: 'FeatureCollection', features };
+    }
+  } catch (e) {
+    console.warn('Failed to load local station_isochrones.json:', e);
+  }
+
+  return { type: 'FeatureCollection', features: [] };
+}
+
 export async function queryAI(prompt: string, activeStation?: StationId): Promise<any> {
   try {
     const res = await fetch(`${API_BASE_URL}/ai/query`, {
@@ -1383,12 +1426,14 @@ function generateClientH3Grid(stationId?: StationId) {
     ? FALLBACK_STATIONS.filter(s => s.id === stationId)
     : FALLBACK_STATIONS;
 
-  const features: any[] = [];
+  const cellMap = new Map<string, any>();
+
   targetStations.forEach(s => {
     const hexRadiusKm = 0.18;
     // Center cell
     const centerFeature = createHexFeature(s.id, s.name, s.longitude, s.latitude, s.tod_readiness_score, s.njop_premium.avg_njop_premium_pct, s.typology, 0, 0);
-    features.push(centerFeature);
+    const centerKey = `${Math.round(s.latitude * 350)},${Math.round(s.longitude * 350)}`;
+    cellMap.set(centerKey, centerFeature);
 
     // 37 cells total per station (Center + 3 hexagonal rings = ~1.000m TOD catchment)
     for (let r = 1; r <= 3; r++) {
@@ -1408,13 +1453,39 @@ function generateClientH3Grid(stationId?: StationId) {
           const cellScore = +(s.tod_readiness_score * decay).toFixed(1);
           const cellNjop = +(s.njop_premium.avg_njop_premium_pct * decay).toFixed(1);
           
-          features.push(createHexFeature(s.id, s.name, cellLon, cellLat, cellScore, cellNjop, s.typology, r, features.length));
+          const spatialKey = `${Math.round(cellLat * 350)},${Math.round(cellLon * 350)}`;
+          const existing = cellMap.get(spatialKey);
+
+          const newFeature = createHexFeature(s.id, s.name, cellLon, cellLat, cellScore, cellNjop, s.typology, r, cellMap.size + 1);
+
+          if (!existing) {
+            cellMap.set(spatialKey, newFeature);
+          } else {
+            // Spatial Tie-Breaking:
+            // Prefer the closer station (lower ring distance)
+            const existingRing = existing.properties.ring_distance;
+            const existingScore = existing.properties.tod_readiness_score;
+
+            if (!existing.properties.overlapping_stations) {
+              existing.properties.overlapping_stations = [existing.properties.station_cluster];
+            }
+            if (!existing.properties.overlapping_stations.includes(s.id)) {
+              existing.properties.overlapping_stations.push(s.id);
+            }
+            existing.properties.is_shared_catchment = true;
+
+            if (r < existingRing || (r === existingRing && cellScore > existingScore)) {
+              newFeature.properties.overlapping_stations = existing.properties.overlapping_stations;
+              newFeature.properties.is_shared_catchment = true;
+              cellMap.set(spatialKey, newFeature);
+            }
+          }
         }
       }
     }
   });
 
-  return { type: 'FeatureCollection', features };
+  return { type: 'FeatureCollection', features: Array.from(cellMap.values()) };
 }
 
 function createHexFeature(stId: string, stName: string, lon: number, lat: number, score: number, njop: number, typology: string, ring: number, idx: number) {
@@ -1466,7 +1537,9 @@ function createHexFeature(stId: string, stName: string, lon: number, lat: number
       predicted_njop_premium_pct: njop,
       ci_lower_pct: +(njop * 0.75).toFixed(1),
       ci_upper_pct: +(njop * 1.25).toFixed(1),
-      njop_m2: Math.round(8500000 * (1 + njop / 100))
+      njop_m2: Math.round(8500000 * (1 + njop / 100)),
+      overlapping_stations: [stId],
+      is_shared_catchment: false
     },
     geometry: {
       type: 'Polygon',

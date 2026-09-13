@@ -93,6 +93,21 @@ export interface StationData {
     spillover_effect_pct: number;
   };
   policy_recommendations: string[];
+  walkability?: {
+    score: number;
+    label: string;
+    pedestrian_poi_count?: number;
+    feeder_count_500m?: number;
+    disamenity_count?: number;
+    flood_risk_penalty?: number;
+    provenance?: string;
+  };
+  provenance?: {
+    tod_score?: string;
+    walkability?: string;
+    njop_premium?: string;
+    last_updated?: string;
+  };
   menu_go_recommendations?: MenuGoItem[];
   tenant_mix?: TenantMixItem[];
   travel_estimates?: TravelEstimateItem[];
@@ -144,4 +159,27 @@ export interface AIChatMessage {
   targetStation?: StationId;
   timestamp: string;
   chartPayload?: any;
+}
+
+export interface RouteStep {
+  mode: 'walk' | 'bus' | 'train' | 'feeder';
+  route_id?: string;
+  route_name?: string;
+  line_code?: string;
+  line_color?: string;
+  from_station: string;
+  to_station: string;
+  duration_min: number;
+  desc: string;
+  coordinates?: [number, number][];
+}
+
+export interface RoutePlan {
+  from: StationId;
+  to: StationId;
+  steps: RouteStep[];
+  total_min: number;
+  route_ids: string[];
+  has_transfer: boolean;
+  geometry?: [number, number][];
 }
