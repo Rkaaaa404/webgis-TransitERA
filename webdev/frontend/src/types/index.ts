@@ -4,6 +4,9 @@ export type StationId =
   | 'semut'
   | 'wonokromo'
   | 'waru'
+  | 'terminal_joyoboyo'
+  | 'terminal_purabaya'
+  | 'terminal_bratang'
   | 'tandes'
   | 'kandangan'
   | 'benowo'
@@ -69,6 +72,7 @@ export interface TravelEstimateItem {
 export interface StationData {
   id: StationId;
   name: string;
+  kecamatan?: string;
   latitude: number;
   longitude: number;
   tod_readiness_score: number;

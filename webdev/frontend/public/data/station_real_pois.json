@@ -1,0 +1,1910 @@
+{
+  "gubeng": [
+    {
+      "name": "Halte Smp - Sma Gracia",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 74,
+      "walkMinutes": 1,
+      "notes": "Koneksi transit PACARKELING, TAMBAKSARI",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Moestopo",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 251,
+      "walkMinutes": 3,
+      "notes": "Koneksi transit PACARKELING, TAMBAKSARI",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Banda A",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 286,
+      "walkMinutes": 4,
+      "notes": "Koneksi transit GUBENG, GUBENG",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Banda B",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 293,
+      "walkMinutes": 4,
+      "notes": "Koneksi transit GUBENG, GUBENG",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "PLAZA SURABAYA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 349,
+      "walkMinutes": 4,
+      "notes": "JI. PEMUDA NO.33-37, EMBONG KALIASIN, KEC. GE...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "GRAND CITY MALL SURABAYA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 447,
+      "walkMinutes": 6,
+      "notes": "JL. WALIKOTA MUSTAJAB NO.1, KETABANG, KEC. GE...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sate Klopo Ondomohen Bu Asih",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 564,
+      "walkMinutes": 7,
+      "notes": "Menu: Sate Klopo Daging Sapi & Kelapa Parut Gurih (Rp 32,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Zangrandi Ice Cream Heritage",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 668,
+      "walkMinutes": 8,
+      "notes": "Menu: Banana Split & Tutti Frutti Sejak 1930 (Rp 42,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Bebek Sinjay Dharmahusada",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 843,
+      "walkMinutes": 11,
+      "notes": "Menu: Bebek Goreng Kremes Sambal Pencit (Rp 35,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "TUNJUNGAN PLAZA 5",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1276,
+      "walkMinutes": 16,
+      "notes": "JL. BASUKI RAHMAT NO.8-12, KEDUNGDORO, KEC. T...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "TUNJUNGAN PLAZA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1361,
+      "walkMinutes": 17,
+      "notes": "JL. JENDERAL BASUKI RACHMAT NO.8-12 2 LANTAI ...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Rujak Cingur Ahmad Jais",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 1615,
+      "walkMinutes": 20,
+      "notes": "Menu: Rujak Cingur Petis Hitam Madura (Rp 55,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    }
+  ],
+  "pasar_turi": [
+    {
+      "name": "Lontong Balap Pak Gendut Kranggan",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 184,
+      "walkMinutes": 2,
+      "notes": "Menu: Lontong Balap Komplit Lentho & Sate Kerang (Rp 22,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Halte Pasar Turi",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 661,
+      "walkMinutes": 8,
+      "notes": "Koneksi transit BUBUTAN, BUBUTAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Blauran",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 819,
+      "walkMinutes": 10,
+      "notes": "Koneksi transit BUBUTAN, BUBUTAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Bg. Junction Mall",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 820,
+      "walkMinutes": 10,
+      "notes": "Koneksi transit BUBUTAN, BUBUTAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "BG JUNCTION MALL",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 828,
+      "walkMinutes": 10,
+      "notes": "JL. BUBUTAN NO.1-7, BUBUTAN, KEC. BUBUTAN, SU...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Gemblongan",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 854,
+      "walkMinutes": 11,
+      "notes": "Koneksi transit ALUN-ALUN CONTONG, BUBUTAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "TUNJUNGAN ELECTRONIC CENTER",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1195,
+      "walkMinutes": 15,
+      "notes": "JL. TUNJUNGAN NO.5, GENTENG, SURABAYA, EAST J...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "TUNJUNGAN PLAZA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1272,
+      "walkMinutes": 16,
+      "notes": "JL. ARGOPURO NO.1-41, SAWAHAN, KEC. SAWAHAN, ...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Rawon Setan Embong Malang",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 1397,
+      "walkMinutes": 17,
+      "notes": "Menu: Rawon Daging Kuah Pekat Sambal Terasi (Rp 45,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Rujak Cingur Ahmad Jais",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 1423,
+      "walkMinutes": 18,
+      "notes": "Menu: Rujak Cingur Petis Hitam Madura (Rp 55,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Cakue Peneleh Pasar Atom",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 1474,
+      "walkMinutes": 18,
+      "notes": "Menu: Cakue Udang & Roti Goreng Peneleh (Rp 16,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "PASAR ATOM MALL",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1524,
+      "walkMinutes": 19,
+      "notes": "BLOK CC NO.26 LANTAI 4, BONGKARAN, PABEAN CAN...",
+      "source": "GEO MAPID Data Catalog 2025"
+    }
+  ],
+  "semut": [
+    {
+      "name": "SEMUT MEGAH PLAZA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 69,
+      "walkMinutes": 1,
+      "notes": "JL. BUNGURAN NO.45, BONGKARAN, PABEAN CANTIKA...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "PASAR ATOM MALL",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 106,
+      "walkMinutes": 1,
+      "notes": "BLOK CC NO.26 LANTAI 4, BONGKARAN, PABEAN CAN...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Cakue Peneleh Pasar Atom",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 237,
+      "walkMinutes": 3,
+      "notes": "Menu: Cakue Udang & Roti Goreng Peneleh (Rp 16,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Halte Tugu Pahlawan",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 686,
+      "walkMinutes": 9,
+      "notes": "Koneksi transit KREMBANGAN SELATAN, KREMBANGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Bca Veteran",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 711,
+      "walkMinutes": 9,
+      "notes": "Koneksi transit KREMBANGAN SELATAN, KREMBANGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Kebonrojo",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 782,
+      "walkMinutes": 10,
+      "notes": "Koneksi transit KREMBANGAN SELATAN, KREMBANGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Pasar Turi",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 940,
+      "walkMinutes": 12,
+      "notes": "Koneksi transit BUBUTAN, BUBUTAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "JEMBATAN MERAH PLAZA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 956,
+      "walkMinutes": 12,
+      "notes": "JL. TAMAN JAYENGRONO NO.2, KREMBANGAN SEL., K...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Kuliner Kebuli & Roti Canai Ampel",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 1346,
+      "walkMinutes": 17,
+      "notes": "Menu: Nasi Kebuli Kambing, Roti Maryam, Kopi Rempah (Rp 38,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "HI - TECH MALL SURABAYA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1367,
+      "walkMinutes": 17,
+      "notes": "JL. KUSUMA BANGSA, TAMBAKSARI, KEC. TAMBAKSAR...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Rujak Cingur Ahmad Jais",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 1407,
+      "walkMinutes": 18,
+      "notes": "Menu: Rujak Cingur Petis Hitam Madura (Rp 55,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Lontong Balap Pak Gendut Kranggan",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 1512,
+      "walkMinutes": 19,
+      "notes": "Menu: Lontong Balap Komplit Lentho & Sate Kerang (Rp 22,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    }
+  ],
+  "wonokromo": [
+    {
+      "name": "Sentra Niaga Wonokromo",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 178,
+      "walkMinutes": 2,
+      "notes": "Kel. JAGIR, Kec. WONOKROMO",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Sentra Kuliner Joyoboyo TIJ",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 283,
+      "walkMinutes": 4,
+      "notes": "Menu: Aneka Nasi Rames, Soto, dan Kopi Giras (Rp 18,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Tahu Tek Pintu Air Wonokromo",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 310,
+      "walkMinutes": 4,
+      "notes": "Menu: Tahu Telur Petis Gurih Bumbu Kacang",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Niaga Jalan A. Yani Surabaya",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 381,
+      "walkMinutes": 5,
+      "notes": "Kel. JAGIR, Kec. WONOKROMO",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Soto Jagalan Wonokromo",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 420,
+      "walkMinutes": 5,
+      "notes": "Menu: Soto Daging Sapi Madura",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Marmoyo",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 599,
+      "walkMinutes": 7,
+      "notes": "Koneksi transit DARMO, WONOKROMO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Kebun Binatang Surabaya",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 669,
+      "walkMinutes": 8,
+      "notes": "Koneksi transit DARMO, WONOKROMO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Pendidikan Bank Indonesia Darmo",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 779,
+      "walkMinutes": 10,
+      "notes": "Koneksi transit DARMO, WONOKROMO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 852,
+      "walkMinutes": 11,
+      "notes": "Koneksi transit WONOKROMO, WONOKROMO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "ROYAL PLAZA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 918,
+      "walkMinutes": 11,
+      "notes": "JL. A YANI FRONTAGE BARAT NO.16-18, WONOKROMO...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Rawon Kalkulator Taman Bungkul",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 1136,
+      "walkMinutes": 14,
+      "notes": "Menu: Rawon Daging Sapi & Perkedel (Rp 35,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "MARVELL CITY MALL",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1571,
+      "walkMinutes": 20,
+      "notes": "JL. NGAGEL NO.123, NGAGEL, KEC. WONOKROMO, SU...",
+      "source": "GEO MAPID Data Catalog 2025"
+    }
+  ],
+  "waru": [
+    {
+      "name": "Sop Kaki Sapi Bungurasih",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 380,
+      "walkMinutes": 5,
+      "notes": "Menu: Sop Kaki Sapi Kuah Susu Gurih",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Bebek Sinjay Waru",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 422,
+      "walkMinutes": 5,
+      "notes": "Menu: Bebek Goreng Sambal Mangga Muda (Rp 36,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Rawon Nguling Waru",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 460,
+      "walkMinutes": 6,
+      "notes": "Menu: Rawon Daging Dengkul & Paru Goreng",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Kuliner Bungurasih Purabaya",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 618,
+      "walkMinutes": 8,
+      "notes": "Menu: Nasi Pecel Madiun, Soto Daging, Ayam Penyet (Rp 20,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Sentra Niaga Apartment Aryaduta Residence",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 699,
+      "walkMinutes": 9,
+      "notes": "Kel. DUKUH MENANGGAL, Kec. GAYUNGAN",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Sentra Niaga Ahmad Yani",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 708,
+      "walkMinutes": 9,
+      "notes": "Kel. DUKUH MENANGGAL, Kec. GAYUNGAN",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "CITY OF TOMORROW MALL",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 770,
+      "walkMinutes": 10,
+      "notes": "JL. AHMAD YANI NO.288, DUKUH MENANGGAL, KEC. ...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Dukuh Menanggal",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 937,
+      "walkMinutes": 12,
+      "notes": "Koneksi transit MENANGGAL, GAYUNGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Dispenda Jawa Timur",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 1176,
+      "walkMinutes": 15,
+      "notes": "Koneksi transit MENANGGAL, GAYUNGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Bus Stop Jl. Mananggal 3",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 1225,
+      "walkMinutes": 15,
+      "notes": "Koneksi transit MENANGGAL, GAYUNGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "TRANS ICON MALL SURABAYA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1473,
+      "walkMinutes": 18,
+      "notes": "MENANGGAL, KEC. GAYUNGAN, SURABAYA, JAWA TIMU...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Siwalankerto",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 1684,
+      "walkMinutes": 21,
+      "notes": "Koneksi transit GAYUNGAN, GAYUNGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    }
+  ],
+  "terminal_joyoboyo": [
+    {
+      "name": "Sentra Kuliner Joyoboyo TIJ",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 63,
+      "walkMinutes": 1,
+      "notes": "Menu: Aneka Nasi Rames, Soto, dan Kopi Giras (Rp 18,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Sentra Niaga Wonokromo",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 354,
+      "walkMinutes": 4,
+      "notes": "Kel. JAGIR, Kec. WONOKROMO",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Sentra Niaga Patung Gedangan",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 437,
+      "walkMinutes": 5,
+      "notes": "Kel. DARMO, Kec. WONOKROMO",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Halte Marmoyo",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 477,
+      "walkMinutes": 6,
+      "notes": "Koneksi transit DARMO, WONOKROMO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Kebun Binatang Surabaya",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 497,
+      "walkMinutes": 6,
+      "notes": "Koneksi transit DARMO, WONOKROMO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Pendidikan Bank Indonesia Darmo",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 614,
+      "walkMinutes": 8,
+      "notes": "Koneksi transit DARMO, WONOKROMO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Rawon Kalkulator Taman Bungkul",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 949,
+      "walkMinutes": 12,
+      "notes": "Menu: Rawon Daging Sapi & Perkedel (Rp 35,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Halte Kutai 2",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 959,
+      "walkMinutes": 12,
+      "notes": "Koneksi transit DARMO, WONOKROMO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "ROYAL PLAZA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1070,
+      "walkMinutes": 13,
+      "notes": "JL. A YANI FRONTAGE BARAT NO.16-18, WONOKROMO...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "MARVELL CITY MALL",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1497,
+      "walkMinutes": 19,
+      "notes": "JL. NGAGEL NO.123, NGAGEL, KEC. WONOKROMO, SU...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Tahu Telur Pak Jayen Dinoyo",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 2116,
+      "walkMinutes": 26,
+      "notes": "Menu: Tahu Telur Bumbu Petis Kental & Kerupuk (Rp 20,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Sentra Kuliner Taman Bratang",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 2800,
+      "walkMinutes": 35,
+      "notes": "Menu: Tahu Campur, Rujak Soto, Es Degan (Rp 17,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    }
+  ],
+  "terminal_purabaya": [
+    {
+      "name": "Sentra Kuliner Bungurasih Purabaya",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 80,
+      "walkMinutes": 1,
+      "notes": "Menu: Nasi Pecel Madiun, Soto Daging, Ayam Penyet (Rp 20,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Sentra Niaga Jalan Raya Dukuh Menanggal Surabaya Selatan",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 600,
+      "walkMinutes": 7,
+      "notes": "Kel. DUKUH MENANGGAL, Kec. GAYUNGAN",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Bebek Sinjay Waru",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 611,
+      "walkMinutes": 8,
+      "notes": "Menu: Bebek Goreng Sambal Mangga Muda (Rp 36,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Sentra Niaga Jl. Dukuh Menanggal Xii",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 832,
+      "walkMinutes": 10,
+      "notes": "Kel. DUKUH MENANGGAL, Kec. GAYUNGAN",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "CITY OF TOMORROW MALL",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 920,
+      "walkMinutes": 12,
+      "notes": "JL. AHMAD YANI NO.288, DUKUH MENANGGAL, KEC. ...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Dukuh Menanggal",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 1174,
+      "walkMinutes": 15,
+      "notes": "Koneksi transit MENANGGAL, GAYUNGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Bus Stop Jl. Mananggal 3",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 1199,
+      "walkMinutes": 15,
+      "notes": "Koneksi transit MENANGGAL, GAYUNGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Dispenda Jawa Timur",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 1386,
+      "walkMinutes": 17,
+      "notes": "Koneksi transit MENANGGAL, GAYUNGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "TRANS ICON MALL SURABAYA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1651,
+      "walkMinutes": 21,
+      "notes": "MENANGGAL, KEC. GAYUNGAN, SURABAYA, JAWA TIMU...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Siwalankerto",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 1865,
+      "walkMinutes": 23,
+      "notes": "Koneksi transit GAYUNGAN, GAYUNGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    }
+  ],
+  "terminal_bratang": [
+    {
+      "name": "Sentra Kuliner Taman Bratang",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 74,
+      "walkMinutes": 1,
+      "notes": "Menu: Tahu Campur, Rujak Soto, Es Degan (Rp 17,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Sentra Niaga Jl Raya Ngagel Jaya Selatan Surabaya",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 93,
+      "walkMinutes": 1,
+      "notes": "Kel. BARATAJAYA, Kec. GUBENG",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Halte Maybank Bratang Binangun",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 157,
+      "walkMinutes": 2,
+      "notes": "Koneksi transit BARATAJAYA, GUBENG",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Niaga Bratang Binangun Baratajaya Gubeng Surabaya Timur",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 179,
+      "walkMinutes": 2,
+      "notes": "Kel. BARATAJAYA, Kec. GUBENG",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Halte Ruko Barata Jaya",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 370,
+      "walkMinutes": 5,
+      "notes": "Koneksi transit BARATAJAYA, GUBENG",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Ngagel Jaya Utara B",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 627,
+      "walkMinutes": 8,
+      "notes": "Koneksi transit BARATAJAYA, GUBENG",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Ngagel Jaya Utara A",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 629,
+      "walkMinutes": 8,
+      "notes": "Koneksi transit BARATAJAYA, GUBENG",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "MARVELL CITY MALL",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1842,
+      "walkMinutes": 23,
+      "notes": "JL. NGAGEL NO.123, NGAGEL, KEC. WONOKROMO, SU...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Tahu Telur Pak Jayen Dinoyo",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 1899,
+      "walkMinutes": 24,
+      "notes": "Menu: Tahu Telur Bumbu Petis Kental & Kerupuk (Rp 20,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "ITATS PLAZA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 2122,
+      "walkMinutes": 27,
+      "notes": "JL. DR. IR. H. SOEKARNO, KLAMPIS NGASEM, SUKO...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Rawon Kalkulator Taman Bungkul",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 2514,
+      "walkMinutes": 31,
+      "notes": "Menu: Rawon Daging Sapi & Perkedel (Rp 35,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Sentra Kuliner Joyoboyo TIJ",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 2679,
+      "walkMinutes": 33,
+      "notes": "Menu: Aneka Nasi Rames, Soto, dan Kopi Giras (Rp 18,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    }
+  ],
+  "tandes": [
+    {
+      "name": "Sentra Kuliner Manukan Tandes",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 144,
+      "walkMinutes": 2,
+      "notes": "Menu: Lontong Balap Manukan, Bakso Solo, Es Teler (Rp 16,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Sentra PKL Manukan Lor",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 220,
+      "walkMinutes": 3,
+      "notes": "Menu: Lontong Balap, Tahu Campur, Es Sinom",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Bayangan",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 305,
+      "walkMinutes": 4,
+      "notes": "Koneksi transit BALONGSARI, TANDES",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Niaga Jl. Raya Balongsari",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 329,
+      "walkMinutes": 4,
+      "notes": "Kel. BALONGSARI, Kec. TANDES",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Bakso Solo Rindu Malam Tandes",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 350,
+      "walkMinutes": 4,
+      "notes": "Menu: Bakso Urat & Es Teler",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Niaga Jl Sambi Kereb",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 459,
+      "walkMinutes": 6,
+      "notes": "Kel. LONTAR, Kec. SAMBIKEREP",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Depot Anda Tandes Barat",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 480,
+      "walkMinutes": 6,
+      "notes": "Menu: Nasi Rawon & Sop Buntut",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Margomulyo",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Feeder Terdekat",
+      "distanceM": 2727,
+      "walkMinutes": 34,
+      "notes": "Layanan feeder koneksi TAMBAK SARIOSO, ASEM ROWO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "LENMARC MALL",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 2735,
+      "walkMinutes": 34,
+      "notes": "JL. MAYJEND. JONOSEWOJO NO.9, PRADAHKALIKENDA...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "FAIRWAY NINE MALL",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 2765,
+      "walkMinutes": 35,
+      "notes": "JL. MAYJEND. JONOSEWOJO NO.9, PRADAHKALIKENDA...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Bus Pradah Kali Kendal",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Feeder Terdekat",
+      "distanceM": 2980,
+      "walkMinutes": 37,
+      "notes": "Layanan feeder koneksi PRADAH KALIKENDAL, DUKUH ",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Unesa",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Feeder Terdekat",
+      "distanceM": 4141,
+      "walkMinutes": 52,
+      "notes": "Layanan feeder koneksi BABATAN, WIYUNG",
+      "source": "GEO MAPID Data Catalog 2025"
+    }
+  ],
+  "kandangan": [
+    {
+      "name": "Sentra Niaga Lokasi Benowo Surabaya Barat",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 164,
+      "walkMinutes": 2,
+      "notes": "Kel. SEMEMI, Kec. BENOWO",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Sentra Niaga Jawar Benowo Surabaya Barat",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 164,
+      "walkMinutes": 2,
+      "notes": "Kel. SEMEMI, Kec. BENOWO",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Warkop Giras Cak Mat Kandangan",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 180,
+      "walkMinutes": 2,
+      "notes": "Menu: Kopi Ijo, Mie Rebus, Gorengan Hangat",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Kuliner Sememi Jaya",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 260,
+      "walkMinutes": 3,
+      "notes": "Menu: Ayam Geprek, Nasi Bebek, Kopi Giras",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Niaga Bandarejo",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 374,
+      "walkMinutes": 5,
+      "notes": "Kel. SEMEMI, Kec. BENOWO",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Warung Pecel Bu Sum Kandangan",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 410,
+      "walkMinutes": 5,
+      "notes": "Menu: Nasi Pecel Madiun Sambal Pedas",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Niaga Sememi Jaya",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 471,
+      "walkMinutes": 6,
+      "notes": "Kel. SEMEMI, Kec. BENOWO",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Halte Bayangan",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Feeder Terdekat",
+      "distanceM": 3592,
+      "walkMinutes": 45,
+      "notes": "Layanan feeder koneksi BALONGSARI, TANDES",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Margomulyo",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Feeder Terdekat",
+      "distanceM": 4201,
+      "walkMinutes": 53,
+      "notes": "Layanan feeder koneksi TAMBAK SARIOSO, ASEM ROWO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Jawar A",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Feeder Terdekat",
+      "distanceM": 4400,
+      "walkMinutes": 55,
+      "notes": "Layanan feeder koneksi SUMBER REJO, PAKAL",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Kauman Baru B",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Feeder Terdekat",
+      "distanceM": 4665,
+      "walkMinutes": 58,
+      "notes": "Layanan feeder koneksi BENOWO, PAKAL",
+      "source": "GEO MAPID Data Catalog 2025"
+    }
+  ],
+  "benowo": [
+    {
+      "name": "Depot Asri Terminal Benowo",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 280,
+      "walkMinutes": 4,
+      "notes": "Menu: Soto Daging Lamongan",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Kuliner Benowo GBT",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 320,
+      "walkMinutes": 4,
+      "notes": "Menu: Sate Ayam, Gule Kambing, Es Campur",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Bebek Goreng Pak Ndut Benowo",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 490,
+      "walkMinutes": 6,
+      "notes": "Menu: Bebek Bumbu Hitam Madura",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Niaga Benowo Pakal Samping Terminal Benowo",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 1639,
+      "walkMinutes": 20,
+      "notes": "Kel. BENOWO, Kec. PAKAL",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Sentra Niaga Sumberejo Pakal Surabaya",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 1640,
+      "walkMinutes": 20,
+      "notes": "Kel. SUMBER REJO, Kec. PAKAL",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Sentra Niaga Perumahan Griya Surabaya Asri",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 1688,
+      "walkMinutes": 21,
+      "notes": "Kel. SUMBER REJO, Kec. PAKAL",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Sentra Niaga Sumberejo Makmur",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 1896,
+      "walkMinutes": 24,
+      "notes": "Kel. SUMBER REJO, Kec. PAKAL",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Halte Kauman Baru B",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 1929,
+      "walkMinutes": 24,
+      "notes": "Koneksi transit BENOWO, PAKAL",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Polsek Pakal A",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 2106,
+      "walkMinutes": 26,
+      "notes": "Koneksi transit BENOWO, PAKAL",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Nu Jawar A",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 2452,
+      "walkMinutes": 31,
+      "notes": "Koneksi transit BENOWO, PAKAL",
+      "source": "GEO MAPID Data Catalog 2025"
+    }
+  ],
+  "ngagel": [
+    {
+      "name": "MARVELL CITY MALL",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 200,
+      "walkMinutes": 3,
+      "notes": "JL. NGAGEL NO.123, NGAGEL, KEC. WONOKROMO, SU...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Tahu Telur Pak Jayen Dinoyo",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 461,
+      "walkMinutes": 6,
+      "notes": "Menu: Tahu Telur Bumbu Petis Kental & Kerupuk (Rp 20,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Halte Rs Darmo",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 862,
+      "walkMinutes": 11,
+      "notes": "Koneksi transit DR. SOETOMO, TEGALSARI",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Rawon Kalkulator Taman Bungkul",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 974,
+      "walkMinutes": 12,
+      "notes": "Menu: Rawon Daging Sapi & Perkedel (Rp 35,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Halte Bengawan 2",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 1027,
+      "walkMinutes": 13,
+      "notes": "Koneksi transit DARMO, WONOKROMO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Pendidikan Bank Indonesia Darmo",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 1130,
+      "walkMinutes": 14,
+      "notes": "Koneksi transit DARMO, WONOKROMO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Marmoyo",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 1219,
+      "walkMinutes": 15,
+      "notes": "Koneksi transit DARMO, WONOKROMO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Kuliner Joyoboyo TIJ",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 1631,
+      "walkMinutes": 20,
+      "notes": "Menu: Aneka Nasi Rames, Soto, dan Kopi Giras (Rp 18,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Sentra Kuliner Taman Bratang",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 1794,
+      "walkMinutes": 22,
+      "notes": "Menu: Tahu Campur, Rujak Soto, Es Degan (Rp 17,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "PLAZA SURABAYA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 2550,
+      "walkMinutes": 32,
+      "notes": "JI. PEMUDA NO.33-37, EMBONG KALIASIN, KEC. GE...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "ROYAL PLAZA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 2670,
+      "walkMinutes": 33,
+      "notes": "JL. A YANI FRONTAGE BARAT NO.16-18, WONOKROMO...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "TUNJUNGAN PLAZA 5",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 2840,
+      "walkMinutes": 35,
+      "notes": "JL. BASUKI RAHMAT NO.8-12, KEDUNGDORO, KEC. T...",
+      "source": "GEO MAPID Data Catalog 2025"
+    }
+  ],
+  "margorejo": [
+    {
+      "name": "Halte Margorejo",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 241,
+      "walkMinutes": 3,
+      "notes": "Koneksi transit MARGOREJO, WONOCOLO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Kuliner Ahmad Yani",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 380,
+      "walkMinutes": 5,
+      "notes": "Menu: Aneka Makanan Nusantara & Kopi",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Ketintang",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 467,
+      "walkMinutes": 6,
+      "notes": "Koneksi transit WONOKROMO, WONOKROMO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Rawon Pak Pangat Wonokromo",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 540,
+      "walkMinutes": 7,
+      "notes": "Menu: Rawon Suwir Empal & Krengsengan",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "ROYAL PLAZA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 587,
+      "walkMinutes": 7,
+      "notes": "JL. A YANI FRONTAGE BARAT NO.16-18, WONOKROMO...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Bus Royal Plaza",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 619,
+      "walkMinutes": 8,
+      "notes": "Koneksi transit WONOKROMO, WONOKROMO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Ketintang Baru",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 619,
+      "walkMinutes": 8,
+      "notes": "Koneksi transit KETINTANG, GAYUNGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Bebek H. Slamet Frontage",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 620,
+      "walkMinutes": 8,
+      "notes": "Menu: Bebek Goreng Sambal Korek",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Kuliner Joyoboyo TIJ",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 1693,
+      "walkMinutes": 21,
+      "notes": "Menu: Aneka Nasi Rames, Soto, dan Kopi Giras (Rp 18,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "TRANS ICON MALL SURABAYA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 2815,
+      "walkMinutes": 35,
+      "notes": "MENANGGAL, KEC. GAYUNGAN, SURABAYA, JAWA TIMU...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "MARVELL CITY MALL",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 2999,
+      "walkMinutes": 37,
+      "notes": "JL. NGAGEL NO.123, NGAGEL, KEC. WONOKROMO, SU...",
+      "source": "GEO MAPID Data Catalog 2025"
+    }
+  ],
+  "jemursari": [
+    {
+      "name": "Halte Jemur Ngawinan",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 297,
+      "walkMinutes": 4,
+      "notes": "Koneksi transit JEMUR WONOSARI, WONOCOLO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Kuliner Jemur Wonosari",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 320,
+      "walkMinutes": 4,
+      "notes": "Menu: Pecel Lele, Tahu Tek, Es Degan",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Taman Pelangi",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 416,
+      "walkMinutes": 5,
+      "notes": "Koneksi transit GAYUNGAN, GAYUNGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Depot Slamet Jemursari",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 450,
+      "walkMinutes": 6,
+      "notes": "Menu: Chinese Food Halal & Nasi Goreng",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Komuter Jemursari",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 500,
+      "walkMinutes": 6,
+      "notes": "Koneksi transit JEMUR WONOSARI, WONOCOLO",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Kopi Titik Koma Jemursari",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 510,
+      "walkMinutes": 6,
+      "notes": "Menu: Es Kopi Susu Aren & Croissant",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Ubhara",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 697,
+      "walkMinutes": 9,
+      "notes": "Koneksi transit KETINTANG, GAYUNGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "TRANS ICON MALL SURABAYA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1378,
+      "walkMinutes": 17,
+      "notes": "MENANGGAL, KEC. GAYUNGAN, SURABAYA, JAWA TIMU...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "ROYAL PLAZA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 2066,
+      "walkMinutes": 26,
+      "notes": "JL. A YANI FRONTAGE BARAT NO.16-18, WONOKROMO...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "CITY OF TOMORROW MALL",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 2112,
+      "walkMinutes": 26,
+      "notes": "JL. AHMAD YANI NO.288, DUKUH MENANGGAL, KEC. ...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Bebek Sinjay Waru",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 2478,
+      "walkMinutes": 31,
+      "notes": "Menu: Bebek Goreng Sambal Mangga Muda (Rp 36,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    }
+  ],
+  "kertomenanggal": [
+    {
+      "name": "Sentra PKL Menanggal Asri",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 310,
+      "walkMinutes": 4,
+      "notes": "Menu: Nasi Campur Madura & Es Jeruk",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Niaga Dukuh Menanggal",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 350,
+      "walkMinutes": 4,
+      "notes": "Kel. DUKUH MENANGGAL, Kec. GAYUNGAN",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Halte Dispenda Jawa Timur",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 351,
+      "walkMinutes": 4,
+      "notes": "Koneksi transit MENANGGAL, GAYUNGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Soto Ayam Kampung Menanggal",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 420,
+      "walkMinutes": 5,
+      "notes": "Menu: Soto Ayam Koya Gurih",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Niaga Dukuh Menanggal",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 434,
+      "walkMinutes": 5,
+      "notes": "Kel. MENANGGAL, Kec. GAYUNGAN",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Halte Dukuh Menanggal",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 436,
+      "walkMinutes": 5,
+      "notes": "Koneksi transit MENANGGAL, GAYUNGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "TRANS ICON MALL SURABAYA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 465,
+      "walkMinutes": 6,
+      "notes": "MENANGGAL, KEC. GAYUNGAN, SURABAYA, JAWA TIMU...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Siwalankerto",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 594,
+      "walkMinutes": 7,
+      "notes": "Koneksi transit GAYUNGAN, GAYUNGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "CITY OF TOMORROW MALL",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 685,
+      "walkMinutes": 9,
+      "notes": "JL. AHMAD YANI NO.288, DUKUH MENANGGAL, KEC. ...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Warung Apung Rahmawati",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 750,
+      "walkMinutes": 9,
+      "notes": "Menu: Ayam Bakar Bumbu Rujak",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Bus Stop Jl. Mananggal 3",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 788,
+      "walkMinutes": 10,
+      "notes": "Koneksi transit MENANGGAL, GAYUNGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Bebek Sinjay Waru",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 986,
+      "walkMinutes": 12,
+      "notes": "Menu: Bebek Goreng Sambal Mangga Muda (Rp 36,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    }
+  ],
+  "sidotopo": [
+    {
+      "name": "Warkop Heritage Dipo KAI",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 140,
+      "walkMinutes": 2,
+      "notes": "Menu: Kopi Tubruk & Roti Bakar",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Nasi Kebuli Dipo Sidotopo",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 220,
+      "walkMinutes": 3,
+      "notes": "Menu: Nasi Kebuli Daging Kambing Rempah",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sate Madura Sidotopo Lor",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 340,
+      "walkMinutes": 4,
+      "notes": "Menu: Sate Ayam Bumbu Kacang Kental",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "PLAZA PKL POGOT",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1392,
+      "walkMinutes": 17,
+      "notes": "JL. POGOT NO.66-69, TANAH KALI KEDINDING, KEC...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "KAZA MALL",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1464,
+      "walkMinutes": 18,
+      "notes": "JL. KAPAS KRAMPUNG NO.45, TAMBAKREJO, KEC. SI...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "SEMUT MEGAH PLAZA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1542,
+      "walkMinutes": 19,
+      "notes": "JL. BUNGURAN NO.45, BONGKARAN, PABEAN CANTIKA...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "PASAR ATOM MALL",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1561,
+      "walkMinutes": 20,
+      "notes": "BLOK CC NO.26 LANTAI 4, BONGKARAN, PABEAN CAN...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Cakue Peneleh Pasar Atom",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 1641,
+      "walkMinutes": 21,
+      "notes": "Menu: Cakue Udang & Roti Goreng Peneleh (Rp 16,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Halte Kusuma Bangsa",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 1825,
+      "walkMinutes": 23,
+      "notes": "Koneksi transit KAPASARI, GENTENG",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Bca Veteran",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 2120,
+      "walkMinutes": 26,
+      "notes": "Koneksi transit KREMBANGAN SELATAN, KREMBANGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Tugu Pahlawan",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 2177,
+      "walkMinutes": 27,
+      "notes": "Koneksi transit KREMBANGAN SELATAN, KREMBANGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Kebonrojo",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 2263,
+      "walkMinutes": 28,
+      "notes": "Koneksi transit KREMBANGAN SELATAN, KREMBANGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    }
+  ],
+  "kalimas": [
+    {
+      "name": "Warkop Bahari Pelabuhan",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 250,
+      "walkMinutes": 3,
+      "notes": "Menu: Kopi Jahe Merah & Pisang Goreng",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Nasi Krawu Gresik Kalimas",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 380,
+      "walkMinutes": 5,
+      "notes": "Menu: Nasi Krawu Daging Suwir & Serundeng",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Perak Timur",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 559,
+      "walkMinutes": 7,
+      "notes": "Koneksi transit PERAK UTARA, PABEAN CANTIAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Kuliner Dermaga Perak",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 620,
+      "walkMinutes": 8,
+      "notes": "Menu: Ikan Bakar Laut & Sambal Pencit",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Kuliner Kebuli & Roti Canai Ampel",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 1360,
+      "walkMinutes": 17,
+      "notes": "Menu: Nasi Kebuli Kambing, Roti Maryam, Kopi Rempah (Rp 38,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "Halte Rajawali",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 1855,
+      "walkMinutes": 23,
+      "notes": "Koneksi transit KREMBANGAN SELATAN, KREMBANGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "JEMBATAN MERAH PLAZA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 1876,
+      "walkMinutes": 23,
+      "notes": "JL. TAMAN JAYENGRONO NO.2, KREMBANGAN SEL., K...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Jembatan Merah",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 1919,
+      "walkMinutes": 24,
+      "notes": "Koneksi transit KREMBANGAN SELATAN, KREMBANGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Bca Veteran",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 2468,
+      "walkMinutes": 31,
+      "notes": "Koneksi transit KREMBANGAN SELATAN, KREMBANGAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "SEMUT MEGAH PLAZA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 2729,
+      "walkMinutes": 34,
+      "notes": "JL. BUNGURAN NO.45, BONGKARAN, PABEAN CANTIKA...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "PASAR ATOM MALL",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 2764,
+      "walkMinutes": 35,
+      "notes": "BLOK CC NO.26 LANTAI 4, BONGKARAN, PABEAN CAN...",
+      "source": "GEO MAPID Data Catalog 2025"
+    }
+  ],
+  "benteng": [
+    {
+      "name": "Kopi Rempah Arabica Ampel",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 390,
+      "walkMinutes": 5,
+      "notes": "Menu: Kopi Arab Cardamom & Sambosa Daging",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Resto Yaman Ampel Kuliner",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 450,
+      "walkMinutes": 6,
+      "notes": "Menu: Nasi Mandhi Kambing & Roti Maryam",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Gule Maryam Pegirian",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 580,
+      "walkMinutes": 7,
+      "notes": "Menu: Gule Kacang Ijo & Roti Canai",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Perak Timur",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Bus & Feeder",
+      "distanceM": 1384,
+      "walkMinutes": 17,
+      "notes": "Koneksi transit PERAK UTARA, PABEAN CANTIAN",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Sentra Niaga Semampir",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 1768,
+      "walkMinutes": 22,
+      "notes": "Kel. WONOKUSUMO, Kec. SEMAMPIR",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Sentra Niaga Jl. Perak Timur",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 1881,
+      "walkMinutes": 24,
+      "notes": "Kel. PERAK TIMUR, Kec. PABEAN CANTIAN",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Sentra Niaga Wonosari Lor",
+      "category": "minimarket_atm",
+      "categoryLabel": "Area Komersial & Pertokoan",
+      "distanceM": 1892,
+      "walkMinutes": 24,
+      "notes": "Kel. WONOKUSUMO, Kec. SEMAMPIR",
+      "source": "GEO MAPID Survei Properti 2024"
+    },
+    {
+      "name": "Kuliner Kebuli & Roti Canai Ampel",
+      "category": "kuliner",
+      "categoryLabel": "Kuliner & Jajanan Khas",
+      "distanceM": 2363,
+      "walkMinutes": 30,
+      "notes": "Menu: Nasi Kebuli Kambing, Roti Maryam, Kopi Rempah (Rp 38,000)",
+      "source": "GEO MAPID Survei MenuGo 2026"
+    },
+    {
+      "name": "JEMBATAN MERAH PLAZA",
+      "category": "minimarket_atm",
+      "categoryLabel": "Pusat Perbelanjaan & Niaga",
+      "distanceM": 2923,
+      "walkMinutes": 37,
+      "notes": "JL. TAMAN JAYENGRONO NO.2, KREMBANGAN SEL., K...",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Jembatan Merah",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Feeder Terdekat",
+      "distanceM": 2958,
+      "walkMinutes": 37,
+      "notes": "Layanan feeder koneksi KREMBANGAN SELATAN, KREMB",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Bca Veteran",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Feeder Terdekat",
+      "distanceM": 3515,
+      "walkMinutes": 44,
+      "notes": "Layanan feeder koneksi KREMBANGAN SELATAN, KREMB",
+      "source": "GEO MAPID Data Catalog 2025"
+    },
+    {
+      "name": "Halte Gemblongan",
+      "category": "transit_layanan",
+      "categoryLabel": "Halte Feeder Terdekat",
+      "distanceM": 4968,
+      "walkMinutes": 62,
+      "notes": "Layanan feeder koneksi ALUN-ALUN CONTONG, BUBUTA",
+      "source": "GEO MAPID Data Catalog 2025"
+    }
+  ]
+}
