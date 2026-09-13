@@ -24,3 +24,7 @@ Before writing new code, stop at the first rung that holds:
 
 ## 4. Root-Cause Bug Fixes
 Always address root causes in shared functions/models rather than applying patches to every caller.
+
+## 5. Communication & Interaction Language
+- **User Language**: Respond to the user in Indonesian (or the user's preferred language) while keeping technical code, symbols, and architectural terms accurate.
+- **Skills & Rules**: Keep internal instruction documents (`SKILL.md`, `rules/`) in English for optimal token compression, maximum instruction fidelity, and zero semantic drift.

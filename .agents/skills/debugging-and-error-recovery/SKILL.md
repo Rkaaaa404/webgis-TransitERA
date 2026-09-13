@@ -5,157 +5,94 @@ description: "Systematic root-cause debugging for TransitERA WebGIS. Covers stru
 
 # Debugging and Error Recovery (TransitERA)
 
-Panduan debugging sistematis untuk **TransitERA WebGIS** — mengadaptasi prinsip dari [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) ke konteks error yang umum terjadi pada stack MapLibre + FastAPI + Gemini API + PostGIS.
+Systematic root-cause debugging protocols for **TransitERA WebGIS**, covering **MapLibre GL JS + FastAPI + Google Gemini API + PostGIS**.
 
 ---
 
 ## 1. The Stop-the-Line Rule
 
-Ketika terjadi sesuatu yang tidak diharapkan:
+When unexpected errors or broken states occur:
 
 ```
-1. STOP menambahkan fitur atau melakukan perubahan
-2. PRESERVE bukti (error output, log, langkah reproduksi)
-3. DIAGNOSE menggunakan triage checklist
-4. FIX root cause
-5. GUARD agar tidak terulang
-6. RESUME hanya setelah verifikasi lulus
+1. STOP adding features or expanding scope
+2. PRESERVE evidence (console logs, stack traces, reproduction inputs)
+3. LOCALIZE using the architectural triage checklist
+4. FIX root cause at the source
+5. GUARD with automated regression tests
+6. RESUME development only when tests pass
 ```
 
-**Jangan lewatkan test yang gagal atau build yang rusak untuk mengerjakan fitur berikutnya.** Error menumpuk.
+**Never push past a broken test or failing build.** Latent bugs compound exponentially.
 
 ---
 
-## 2. Triage Checklist (TransitERA Context)
-
-### Step 1: Reproduce
-
-Buat failure terjadi secara reliabel:
+## 2. TransitERA Architectural Triage Checklist
 
 ```
-Bisa reproduksi failure?
-├── YA → Lanjut ke Step 2
-└── TIDAK
-    ├── Kumpulkan konteks lebih (log, environment details)
-    ├── Coba reproduksi di environment minimal
-    └── Jika benar-benar non-reproducible, dokumentasikan & monitor
-```
-
-### Step 2: Localize
-
-Tentukan di MANA failure terjadi berdasarkan layer TransitERA:
-
-```
-Layer mana yang bermasalah?
-├── MapLibre / Frontend
-│   ├── Console error? → Cek browser DevTools Console
-│   ├── Peta blank/putih? → Cek MAPID API key, style URL, CORS
-│   ├── H3 cells tidak muncul? → Cek GeoJSON source, layer paint rules
-│   └── Animasi lag? → Cek WebGL memory, feature count
+Which layer exhibits the failure?
+├── MapLibre GL JS / Frontend
+│   ├── Browser Console errors? -> Inspect DevTools WebGL warnings
+│   ├── Blank/black map? -> Check MAPID API key, fallback style URL, CORS headers
+│   ├── H3 cells invisible? -> Inspect GeoJSON feature collections and fill paint opacity
+│   └── Frame drops? -> Check WebGL context count, unmount lingering map instances
 ├── FastAPI / Backend
-│   ├── 500 Internal Error? → Cek server logs, traceback
-│   ├── 422 Validation? → Cek Pydantic schema vs request body
-│   └── Timeout? → Cek PostGIS query performance, Gemini latency
-├── Gemini API
-│   ├── Function Call tidak terpanggil? → Cek tool definition schema
-│   ├── Hallucinated coordinates? → Cek bounding box guardrail
-│   ├── Rate limit 429? → Cek kuota harian free tier
-│   └── Response format salah? → Cek Strict JSON Schema enforcement
+│   ├── 500 Server Error? -> Inspect server tracebacks and unhandled exceptions
+│   ├── 422 Validation Error? -> Compare Pydantic schema constraints vs request payload
+│   └── Request Timeout? -> Check PostGIS query execution plan (EXPLAIN ANALYZE)
+├── Google Gemini API
+│   ├── Function Call not triggered? -> Verify tool schema definitions and few-shot examples
+│   ├── Out-of-bounds coordinates? -> Ensure Surabaya bounding box guardrail activates
+│   ├── 429 Rate Limited? -> Implement exponential backoff and cached responses
+│   └── Malformed response? -> Enforce structured response schema (response_mime_type="application/json")
 ├── PostGIS / Database
-│   ├── Query lambat? → Cek EXPLAIN ANALYZE, index GIST
-│   ├── H3 index mismatch? → Cek resolusi (8 vs 9), string format
-│   └── Data kosong? → Cek ETL pipeline, GEO MAPID API sync
-└── Test itu sendiri
-    └── Test benar menguji hal yang tepat? (false negative?)
-```
-
-### Step 3: Reduce
-
-Buat minimal failing case:
-
-- Hapus kode/config yang tidak terkait sampai hanya bug yang tersisa
-- Sederhanakan input ke contoh terkecil yang memicu failure
-- Strip test ke minimum yang mereproduksi masalah
-
-### Step 4: Fix the Root Cause
-
-Perbaiki masalah dasar, bukan gejala:
-
-```
-Gejala: "Peta menampilkan H3 cell di laut"
-
-Fix gejala (buruk):
-  → Filter out cells di frontend berdasarkan koordinat
-
-Fix root cause (baik):
-  → Perbaiki polygon intersect query di PostGIS yang tidak
-    mengecualikan area perairan dari spatial join
-```
-
-### Step 5: Guard
-
-Tambahkan test yang mencegah regresi:
-
-```python
-# Guard: Test bahwa H3 cells hanya di area daratan Surabaya
-def test_h3_cells_within_surabaya_boundary():
-    cells = get_all_h3_cells()
-    for cell in cells:
-        centroid = h3.h3_to_geo(cell["h3_index"])
-        assert validate_coordinates(centroid[1], centroid[0]), \
-            f"H3 cell {cell['h3_index']} berada di luar batas Surabaya"
+│   ├── Slow spatial joins? -> Verify GIST spatial index on geometry column
+│   ├── H3 cell mismatch? -> Check resolution consistency (res 8 vs res 9)
+│   └── Empty query results? -> Verify coordinate order (Longitude, Latitude)
+└── Test Infrastructure
+    └── Is the test asserting valid business invariants? (Eliminate false negatives)
 ```
 
 ---
 
-## 3. Error Patterns Spesifik TransitERA
+## 3. Fix the Root Cause, Not the Symptom
 
-### Gemini API Function Calling Errors
+```
+Symptom: "Map renders H3 hexagons over open water in the Madura Strait"
 
-```python
-# Pattern: Gemini tidak memanggil function yang diharapkan
-# Diagnosis: Cek apakah prompt cukup spesifik untuk trigger tool
-# Fix: Tambahkan contoh few-shot di system prompt
+Symptom Patch (BAD):
+  -> Filter out water coordinates on the client frontend before rendering.
 
-# Pattern: Gemini mengembalikan parameter yang salah
-# Diagnosis: Cek enum values di tool definition vs yang direturn
-# Fix: Gunakan Strict JSON Schema (response_mime_type="application/json")
+Root Cause Fix (GOOD):
+  -> Fix the PostGIS spatial intersection query to clip against the official
+     administrative land polygon before generating H3 hexagonal indexes.
 ```
 
-### MapLibre WebGL Context Lost
+---
 
-```typescript
-// Pattern: Peta blank setelah tab browser di-background lama
-// Diagnosis: WebGL context hilang saat tab tidak aktif
-// Fix: Tangani event 'webglcontextlost' dan re-initialize
+## 4. Specific Failure Patterns & Solutions
 
-map.getCanvas().addEventListener('webglcontextlost', (event) => {
-  event.preventDefault();
-  console.warn('WebGL context lost — reinitializing map...');
-  // Trigger re-render atau notify user
-});
-```
+### Gemini API Function Calling Drift
+- **Symptom**: Model hallucinates parameters or fails to invoke dispatch functions.
+- **Fix**: Use strict Pydantic schemas with descriptions and add targeted few-shot interaction pairs to the proxy system prompt.
+
+### MapLibre WebGL Context Loss
+- **Symptom**: Map canvas blanks out after the browser tab is kept in the background.
+- **Fix**: Register a listener on `webglcontextlost`, call `preventDefault()`, and trigger a clean re-initialization.
 
 ### PostGIS Spatial Join Timeout
-
-```sql
--- Pattern: Query H3 spatial join timeout pada dataset besar
--- Diagnosis: EXPLAIN ANALYZE menunjukkan sequential scan
--- Fix: Pastikan GIST index ada di kolom geometry
-
-CREATE INDEX IF NOT EXISTS idx_h3_geom ON h3_tod_analytics USING GIST(geom);
-ANALYZE h3_tod_analytics;
-```
+- **Symptom**: Sequential scans on large station/polygon datasets cause HTTP 504.
+- **Fix**: Ensure GIST spatial indexing and optimize with the bounding box `&&` operator:
+  ```sql
+  CREATE INDEX IF NOT EXISTS idx_h3_geom ON h3_tod_analytics USING GIST(geom);
+  ANALYZE h3_tod_analytics;
+  ```
 
 ---
 
-## 4. Bisection untuk Regression Bugs
-
+## 5. Git Bisection for Regression Bugs
 ```bash
-# Temukan commit mana yang memperkenalkan bug
 git bisect start
-git bisect bad                    # Commit saat ini rusak
-git bisect good <known-good-sha> # Commit ini masih berfungsi
-# Git akan checkout midpoint commits; jalankan test di setiap commit
-git bisect run pytest -k "failing_test"
+git bisect bad                    # Current broken commit
+git bisect good <known-good-sha> # Last known stable commit
+git bisect run pytest -k "test_spatial_regression"
 ```

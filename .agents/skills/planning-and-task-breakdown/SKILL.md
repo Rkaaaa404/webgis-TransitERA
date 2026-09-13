@@ -5,143 +5,97 @@ description: "Breaks TransitERA WebGIS work into ordered, verifiable tasks align
 
 # Planning and Task Breakdown (TransitERA)
 
-Panduan dekomposisi pekerjaan menjadi task kecil, terverifikasi, dan terurut untuk **TransitERA WebGIS** — mengadaptasi prinsip dari [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) ke timeline sprint **5,5 minggu (M1–M8)**.
+Work decomposition guidelines for **TransitERA WebGIS**, structured for vertical slicing and the **5.5-week (M1–M8) sprint cycle**.
 
 ---
 
-## 1. Prinsip Planning
+## 1. Planning Principles
 
 ### Enter Plan Mode First
+Before writing code, operate in read-only analysis mode:
+- Read specifications, PRDs, and relevant codebase modules.
+- Identify existing conventions and reuse opportunities.
+- Map component dependencies and interface boundaries.
+- Explicitly surface risks and unknowns.
 
-Sebelum menulis kode, operasikan dalam read-only mode:
-
-- Baca spec/PRD dan bagian codebase yang relevan
-- Identifikasi pola dan konvensi yang ada
-- Map dependensi antar komponen
-- Catat risiko dan unknowns
-
-**JANGAN menulis kode selama planning.** Output adalah plan document, bukan implementasi.
+**DO NOT write production code during planning.** Output a plan artifact, not an implementation.
 
 ---
 
-## 2. Dependency Graph TransitERA
+## 2. TransitERA Dependency Hierarchy
 
 ```
-PostgreSQL Schema (PostGIS)
+PostgreSQL / PostGIS Schema
     │
-    ├── Data Pipeline (ETL: GEO MAPID → PostGIS)
+    ├── Spatial Data Pipeline (ETL: GEO MAPID → PostGIS)
     │       │
-    │       ├── H3 Grid Indexing (h3-py)
+    │       ├── Uber H3 Grid Indexing (h3-py)
     │       │       │
-    │       │       ├── AHP 5D Scoring
+    │       │       ├── AHP 5D TOD Scoring
     │       │       │       │
-    │       │       │       └── SDM Regression
+    │       │       │       └── SDM Spatial Regression
     │       │       │
-    │       │       └── Typology Classification (HDBSCAN → XGBoost)
+    │       │       └── Typology Classification (PCA + Random Forest)
     │       │
-    │       └── Survey Data Sync
+    │       └── Survey Synchronization
     │
     ├── FastAPI Backend
     │       │
     │       ├── REST API Endpoints (/tod-score, /njop-premium)
     │       │       │
-    │       │       └── Next.js API Client
+    │       │       └── Next.js 16 API Client
     │       │               │
-    │       │               └── Frontend Components (MapLibre, Dashboard)
+    │       │               └── WebGIS Presentation (MapLibre, Radar Charts)
     │       │
-    │       └── Gemini AI Proxy (/ai/query)
+    │       └── Gemini Spatial AI Proxy (/ai/query)
     │               │
-    │               └── AI Chat Panel (Frontend)
+    │               └── Spatial AI Assistant Panel
     │
-    └── MAPID MAPS Basemap → MapLibre GL JS instance
+    └── MAPID MAPS Basemaps -> MapLibre GL JS Instance
 ```
-
-Implementasi mengikuti dependency graph **bottom-up**: bangun fondasi dulu.
 
 ---
 
-## 3. Slice Vertically (Bukan Horizontal)
+## 3. Vertical Slicing (Not Horizontal Layers)
 
-**Buruk (horizontal slicing):**
-```
-Task 1: Setup seluruh database schema
-Task 2: Build seluruh API endpoints
-Task 3: Build seluruh UI components
-Task 4: Connect semuanya
-```
+- **POOR (Horizontal Layer Slicing)**:
+  - Task 1: Create all DB tables
+  - Task 2: Build all API routes
+  - Task 3: Build all UI components
+  - Task 4: Attempt end-to-end connection (High risk, late failure)
 
-**Baik (vertical slicing):**
-```
-Task 1: Basemap MAPID MAPS + MapLibre render (schema → API → UI untuk peta dasar)
-Task 2: H3 choropleth TOD Score (H3 grid → scoring → API → layer render)
-Task 3: Dashboard scorecard (data per station → API → radar chart component)
-Task 4: AI Chat basic (prompt → Gemini proxy → response render)
-Task 5: Simulasi skenario (scenario model → API → UI comparison view)
-```
-
-Setiap vertical slice menghasilkan fungsionalitas yang bekerja dan testable.
+- **GOOD (Vertical Feature Slicing)**:
+  - Task 1: Basemap & Stasiun Marker (DB -> API -> MapLibre render)
+  - Task 2: H3 TOD Choropleth (H3 grid -> AHP score -> API -> MapLibre layer)
+  - Task 3: 5D Radar Scorecard (Station data -> API -> Recharts radar view)
+  - Task 4: Spatial AI Dispatcher (Query -> Gemini proxy -> Dual output render)
+  - Task 5: Scenario Simulator (What-if model -> API -> Slider delta view)
 
 ---
 
-## 4. Template Task
+## 4. Task Specification Format
 
 ```markdown
-## Task [N]: [Judul singkat deskriptif]
+## Task [N]: [Concise Title]
 
-**Deskripsi:** Satu paragraf menjelaskan apa yang dicapai task ini.
+**Description**: What this task achieves in one paragraph.
 
-**Acceptance criteria:**
-- [ ] [Kondisi spesifik, testable]
-- [ ] [Kondisi spesifik, testable]
+**Acceptance Criteria**:
+- [ ] [Concrete, testable invariant]
+- [ ] [Concrete, testable invariant]
 
-**Verifikasi:**
-- [ ] Tests pass: `pytest -k "test_name"` / `npx vitest run --grep "name"`
-- [ ] Build succeeds: `npm run build`
-- [ ] Manual check: [deskripsi apa yang diverifikasi]
+**Verification**:
+- [ ] Tests pass: `pytest -k "test_feature"` / `npm run build`
+- [ ] Manual verification: [Clear step-by-step check]
 
-**Dependencies:** [Nomor task yang jadi dependensi, atau "None"]
-
-**Files likely touched:**
-- `src/path/to/file.ts`
-- `tests/path/to/test.ts`
-
-**Estimated scope:** [Small: 1-2 files | Medium: 3-5 files | Large: 5+ files]
+**Dependencies**: [Prerequisite Task IDs or "None"]
+**Estimated Scope**: [Small: 1-2 files | Medium: 3-5 files | Large: 5+ files]
 ```
 
 ---
 
-## 5. Alignment dengan Timeline M1–M8
-
-| Minggu | Fokus Sprint | Task Pattern |
-|--------|-------------|-------------|
-| **M1** (7–13 Aug) | Setup & PRD | Env setup, DB schema, data catalog import |
-| **M2** (13–20 Aug) | Survey Batch 1 + Scaffolding | ETL pipeline, basemap render, project structure |
-| **M3** (20–27 Aug) | Survey Batch 2 + Frontend Core | H3 choropleth, layer control, popup, filter |
-| **M4** (27 Aug–3 Sep) | Spatial Analysis + Backend | AHP scoring, SDM regression, API endpoints |
-| **M5** (3–7 Sep) | AI + Dashboard | Gemini Function Calling, radar chart, scorecard |
-| **M6** (7–10 Sep) | Integration + Polish | E2E integration, mobile responsive, methodology page |
-| **M7** (10–12 Sep) | QA + User Trial | PyTest, Lighthouse, curated prompt validation |
-| **M8** (12–14 Sep) | Deploy + Submission | Vercel/Render deploy, stress test, documentation |
-
-### Checkpoint Rules
-
-Setelah setiap 2-3 tasks:
-- [ ] Semua test lulus
-- [ ] Aplikasi bisa di-build tanpa error
-- [ ] Fitur yang sudah selesai berjalan end-to-end
-- [ ] Tidak ada regresi pada fitur sebelumnya
-
----
-
-## 6. Risk-First Ordering
-
-Atur task sehingga:
-
-1. **Dependencies terpenuhi** (bangun fondasi dulu)
-2. **Setiap task meninggalkan sistem dalam working state**
-3. **Verification checkpoints** setelah setiap 2-3 tasks
-4. **High-risk tasks di awal** (fail fast):
-   - MAPID MAPS basemap rendering (external dependency)
-   - Gemini API Function Calling (external dependency)
-   - PostGIS spatial queries (complex logic)
-   - AHP consistency ratio validation (mathematical correctness)
+## 5. Risk-First Sequencing
+Sequence tasks so that:
+1. Prerequisite dependencies are satisfied bottom-up.
+2. High-uncertainty external dependencies (MAPID API, Gemini API, PostGIS spatial queries) fail fast early.
+3. Every task leaves the codebase in a clean, working, testable state.

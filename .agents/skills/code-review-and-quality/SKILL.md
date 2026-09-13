@@ -5,105 +5,71 @@ description: "Multi-axis code review for TransitERA WebGIS. Covers five-axis rev
 
 # Code Review and Quality (TransitERA)
 
-Panduan review kode multi-dimensi untuk **TransitERA WebGIS** — mengadaptasi prinsip dari [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) ke konteks **TypeScript (Next.js) + Python (FastAPI)**.
+Multi-dimensional code review standards for **TransitERA WebGIS**, covering **TypeScript (Next.js 16)** and **Python (FastAPI)**.
 
 ---
 
-## 1. Standar Approval
+## 1. Approval Standards
 
-> **Approve perubahan yang pasti meningkatkan code health keseluruhan**, meskipun belum sempurna. Kode sempurna tidak ada — tujuannya adalah perbaikan berkelanjutan. Jangan blokir perubahan karena bukan cara Anda menulisnya.
+> **Approve changes that measurably improve overall code health**, even if imperfect. The goal is continuous improvement, not perfection. Do not block PRs simply because you would have formatted or implemented it slightly differently.
 
 ---
 
 ## 2. Five-Axis Review
 
-Setiap review mengevaluasi kode di 5 dimensi:
+Evaluate all changes across 5 dimensions:
 
 ### Axis 1: Correctness
-
-- Apakah kode sesuai dengan spec/task requirements?
-- Apakah edge cases ditangani (null, empty, boundary values)?
-- Apakah error paths ditangani (bukan hanya happy path)?
-- Apakah semua tests lulus? Apakah tests menguji hal yang benar?
-- **TransitERA specific:**
-  - Apakah koordinat divalidasi terhadap Surabaya bounding box?
-  - Apakah AHP CR ≤ 0.10?
-  - Apakah H3 resolution konsisten (8 atau 9)?
+- Conforms to task requirements and specifications.
+- Handles edge cases (null, empty arrays, boundary coordinates).
+- Handles error paths gracefully (not just happy paths).
+- All tests pass and assert real domain invariants.
+- **TransitERA Specifics:**
+  - Coordinates validated against Surabaya bounding box (`[112.55, -7.38]` to `[112.85, -7.18]`).
+  - AHP Consistency Ratio $CR \le 0.10$.
+  - Consistent Uber H3 resolutions (8 for macro analysis, 9 for walkability buffers).
 
 ### Axis 2: Readability & Simplicity
-
-- Apakah nama deskriptif dan konsisten? (Tidak ada `temp`, `data`, `result` tanpa konteks)
-- Apakah control flow straightforward?
-- **Bisa dikerjakan dalam lebih sedikit baris?** (1000 baris di mana 100 cukup = failure)
-- Apakah ada dead code artifacts?
-- **TransitERA specific:**
-  - Apakah komponen React fokus pada satu tugas?
-  - Apakah Pydantic models jelas mendokumentasikan schema?
-  - Apakah UI bebas dari emoji mentah? (Wajib gunakan Lucide Icons, shadcn/ui, atau Mantine UI daripada emoji Unicode).
+- Descriptive, intention-revealing names (no ambiguous `temp`, `data`, `res`).
+- Straightforward control flow; avoid deeply nested conditionals.
+- **YAGNI & Conciseness**: If 100 lines can solve it cleanly, reject a 500-line over-abstraction.
+- **TransitERA Specifics:**
+  - Strict **Anti-Emoji Rule**: Zero raw Unicode emojis in user interfaces. Wajib use `lucide-react`.
+  - Pydantic models document request/response contracts explicitly.
 
 ### Axis 3: Architecture
-
-- Apakah mengikuti pola existing atau memperkenalkan yang baru? Jika baru, apakah justified?
-- Apakah module boundaries bersih?
-- Apakah ada code duplication yang harus di-share?
-- **TransitERA specific:**
-  - Apakah data fetching terpisah dari presentasi?
-  - Apakah AI logic di backend (bukan frontend)?
-  - Apakah spatial queries di PostGIS (bukan client-side)?
+- Preserves clean module boundaries.
+- Separates data fetching from presentation components.
+- Heavy spatial computations reside in backend / PostGIS, not client thread.
+- AI orchestration resides in backend proxy, not exposed frontend callers.
 
 ### Axis 4: Security
-
-- Apakah user input divalidasi?
-- Apakah secrets tidak di code/log/version control?
-- Apakah SQL queries parameterized?
-- **TransitERA specific:**
-  - Apakah API keys hanya di `.env` backend?
-  - Apakah Gemini responses divalidasi sebelum render?
-  - Apakah bounding box guardrail aktif?
+- Validates input at system boundaries.
+- Zero secrets, tokens, or plaintext passwords in code, logs, or git commits.
+- All SQL queries parameterized (SQLAlchemy / GeoAlchemy2).
+- Passes `python scripts/scan_secrets.py` with 0 findings.
 
 ### Axis 5: Performance
-
-- Apakah ada N+1 query patterns?
-- Apakah ada unbounded data fetching?
-- Apakah ada re-render berlebihan di komponen UI?
-- **TransitERA specific:**
-  - Apakah H3 data di-load viewport-based?
-  - Apakah komponen berat (RadarChart) di-lazy load?
-  - Apakah pre-computed scores di-cache di Redis?
+- No N+1 database queries.
+- No unbounded client fetching.
+- Heavy components (MapLibre, Radar Charts, Simulators) dynamically imported with `ssr: false`.
+- Network waterfalls eliminated using `Promise.all()`.
 
 ---
 
-## 3. Change Sizing
-
-```
-~100 lines changed   → Baik. Reviewable dalam satu sesi.
-~300 lines changed   → Acceptable jika single logical change.
-~1000 lines changed  → Terlalu besar. Split.
-```
-
-**Pisahkan refactoring dari feature work.** Perubahan yang refactor kode existing DAN menambah behavior baru = dua perubahan — submit terpisah.
+## 3. Change Sizing & Scope
+- **~100 lines changed**: Optimal. Single review pass.
+- **~300 lines changed**: Acceptable for a cohesive logical change.
+- **>1000 lines changed**: Too large. Must be split.
+- **Separate Refactoring from Features**: Do not combine large refactors with new feature logic in the same commit.
 
 ---
 
-## 4. Structural Remedies
-
-Ketika menemukan masalah struktural, usulkan solusi — bukan hanya masalah:
-
-- **Replace chain of conditionals** → typed model atau explicit dispatcher
-- **Collapse duplicate branches** → single clearer flow
-- **Separate orchestration dari business logic** agar masing-masing readable
-- **Move feature-specific logic** keluar dari shared module ke package yang memiliki konsep tersebut
-- **Reuse canonical helper** daripada near-duplicate bespoke
-- **Extract helper, atau split large file** ke focused modules
-
----
-
-## 5. Type Safety Standards
+## 4. Type Safety Standards
 
 ### TypeScript (Frontend)
-
 ```typescript
-// ✅ Baik: Strict types
+// GOOD: Strict interface
 interface StationTODData {
   stationId: string;
   stationName: string;
@@ -118,61 +84,30 @@ interface StationTODData {
   typology: 'commercial_transit_hub' | 'mixed_use_residential' | 'low_accessibility_feeder';
 }
 
-// ❌ Buruk: any types
+// BAD: Any type
 const data: any = await fetchData();
 ```
 
 ### Python (Backend)
-
 ```python
-# ✅ Baik: Type hints + Pydantic
-from pydantic import BaseModel
+# GOOD: Pydantic v2 type hints
+from pydantic import BaseModel, Field
 
 class TODScore(BaseModel):
     station_id: str
-    tod_readiness_score: float
+    tod_readiness_score: float = Field(..., ge=0, le=100)
     density: float
     diversity: float
     design: float
     destination_accessibility: float
     distance_to_transit: float
-
-async def get_tod_score(station_id: str) -> TODScore:
-    ...
-
-# ❌ Buruk: No type hints
-def get_data(id):
-    ...
 ```
 
 ---
 
-## 6. Change Descriptions
-
-Setiap commit/PR memerlukan deskripsi yang berdiri sendiri:
-
-**Baris pertama:** Pendek, imperatif, standalone.
-- ✅ "Add H3 choropleth layer with TOD score color ramp"
-- ✅ "Fix AHP weight calculation for 5D matrix"
-- ❌ "Fix bug"
-- ❌ "Update files"
-- ❌ "WIP"
-
-**Body:** Apa yang berubah dan mengapa. Sertakan konteks, keputusan, dan reasoning.
-
----
-
-## 7. Karpathy Surgical Review & Vercel Performance Gate
-
-Sebelum menandai tinjauan kode selesai, terapkan checklist bedah:
-1. **Surgical Scope Check**:
-   - Apakah setiap baris yang diubah memiliki korelasi langsung dengan permintaan pengguna?
-   - Apakah ada kode atau pemformatan di sekitarnya yang diubah tanpa alasan? (Jika ya, kembalikan).
-   - Apakah import atau variabel yatim (*orphaned*) yang ditinggalkan sudah dibersihkan?
-2. **Vercel Performance Audit**:
-   - Apakah ada pemanggilan `await` bertingkat yang sebenarnya independen dan bisa menggunakan `Promise.all()`?
-   - Apakah komponen MapLibre/WebGL di-load secara dinamis dengan SSR nonaktif?
-   - Apakah ada re-render tidak perlu akibat passing objek inline sebagai props komponen berat?
-3. **TransitERA Compliance**:
-   - Apakah bebas dari raw emoji? (Wajib menggunakan `lucide-react`).
-   - Apakah bebas dari hardcoded secrets/API keys? (Wajib lolos `python scripts/scan_secrets.py`).
+## 5. Karpathy Surgical Review Checklist
+Before concluding review:
+1. **Surgical Verification**: Does every changed line trace directly to the requested task?
+2. **Cleanup Check**: Were orphaned imports, variables, or helpers cleanly removed?
+3. **No Unrelated Touches**: Did the author refrain from refactoring working adjacent code?
+4. **Automated Gates**: Did `npm run build` and `pytest` pass with 0 errors?
