@@ -10,7 +10,7 @@ import { PersonaType } from '@/lib/persona';
 import { Layers } from 'lucide-react';
 
 import { useH3Layer } from './useH3Layer';
-import { useStationMarkers } from './useStationMarkers';
+import { useStationMarkers, bringStationMarkersToFront } from './useStationMarkers';
 import { useStationPerimeter } from './useStationPerimeter';
 import { useTransitRoute } from './useTransitRoute';
 import { useIsochroneLayer, IsochroneMode, IsochroneMinutes, IsochroneViewType } from './useIsochroneLayer';
@@ -304,7 +304,9 @@ export const MapContainer: React.FC<MapContainerProps> = ({
             data: surveyData
           });
 
-          // Circle layer with dynamic category color-coding for Activities
+          const beforeStationId = currentMap.getLayer('station-points-halo') ? 'station-points-halo' : undefined;
+
+          // Circle layer with dynamic category color-coding for Activities (placed under station markers)
           currentMap.addLayer({
             id: 'survey-points-circle',
             type: 'circle',
@@ -323,7 +325,9 @@ export const MapContainer: React.FC<MapContainerProps> = ({
               'circle-stroke-width': 1.5,
               'circle-stroke-color': '#ffffff'
             }
-          });
+          }, beforeStationId);
+
+          bringStationMarkersToFront(currentMap);
 
           // Interactive Detail Popup on Click
           currentMap.on('click', 'survey-points-circle', (e) => {
@@ -494,6 +498,8 @@ export const MapContainer: React.FC<MapContainerProps> = ({
         if (typeof currentMap.getSource !== 'function' || !currentMap.getStyle()) return;
         if (!data || !data.type) return;
 
+        const beforeStationId = currentMap.getLayer('station-points-halo') ? 'station-points-halo' : undefined;
+
         if (!currentMap.getSource('transit-nodes-source')) {
           currentMap.addSource('transit-nodes-source', { type: 'geojson', data });
           currentMap.addLayer({
@@ -506,7 +512,9 @@ export const MapContainer: React.FC<MapContainerProps> = ({
               'circle-stroke-width': 1.5,
               'circle-stroke-color': '#ffffff'
             }
-          });
+          }, beforeStationId);
+
+          bringStationMarkersToFront(currentMap);
 
           currentMap.on('click', 'transit-nodes-circle', (e) => {
             const props = e.features?.[0]?.properties;
@@ -558,6 +566,8 @@ export const MapContainer: React.FC<MapContainerProps> = ({
         if (typeof currentMap.getSource !== 'function' || !currentMap.getStyle()) return;
         if (!data || !data.type) return;
 
+        const beforeStationId = currentMap.getLayer('station-points-halo') ? 'station-points-halo' : undefined;
+
         if (!currentMap.getSource('flood-hazard-source')) {
           currentMap.addSource('flood-hazard-source', { type: 'geojson', data });
           currentMap.addLayer({
@@ -566,9 +576,9 @@ export const MapContainer: React.FC<MapContainerProps> = ({
             source: 'flood-hazard-source',
             paint: {
               'fill-color': '#3B82F6',
-              'fill-opacity': 0.35
+              'fill-opacity': 0.25
             }
-          });
+          }, beforeStationId);
           currentMap.addLayer({
             id: 'flood-hazard-line',
             type: 'line',
@@ -577,7 +587,9 @@ export const MapContainer: React.FC<MapContainerProps> = ({
               'line-color': '#2563EB',
               'line-width': 1
             }
-          });
+          }, beforeStationId);
+
+          bringStationMarkersToFront(currentMap);
 
           currentMap.on('click', 'flood-hazard-fill', (e) => {
             const props = e.features?.[0]?.properties;
@@ -631,6 +643,8 @@ export const MapContainer: React.FC<MapContainerProps> = ({
         if (typeof currentMap.getSource !== 'function' || !currentMap.getStyle()) return;
         if (!data || !data.type) return;
 
+        const beforeStationId = currentMap.getLayer('station-points-halo') ? 'station-points-halo' : undefined;
+
         if (!currentMap.getSource('ntl-source')) {
           currentMap.addSource('ntl-source', { type: 'geojson', data });
           currentMap.addLayer({
@@ -639,9 +653,9 @@ export const MapContainer: React.FC<MapContainerProps> = ({
             source: 'ntl-source',
             paint: {
               'fill-color': '#F59E0B',
-              'fill-opacity': 0.28
+              'fill-opacity': 0.22
             }
-          });
+          }, beforeStationId);
           currentMap.addLayer({
             id: 'ntl-line',
             type: 'line',
@@ -650,7 +664,9 @@ export const MapContainer: React.FC<MapContainerProps> = ({
               'line-color': '#D97706',
               'line-width': 1
             }
-          });
+          }, beforeStationId);
+
+          bringStationMarkersToFront(currentMap);
         } else {
           const src = currentMap.getSource('ntl-source') as maplibregl.GeoJSONSource | undefined;
           if (src && typeof src.setData === 'function') {
@@ -687,6 +703,8 @@ export const MapContainer: React.FC<MapContainerProps> = ({
         if (typeof currentMap.getSource !== 'function' || !currentMap.getStyle()) return;
         if (!data || !data.type) return;
 
+        const beforeStationId = currentMap.getLayer('station-points-halo') ? 'station-points-halo' : undefined;
+
         if (!currentMap.getSource('shopping-centers-source')) {
           currentMap.addSource('shopping-centers-source', { type: 'geojson', data });
           currentMap.addLayer({
@@ -699,7 +717,9 @@ export const MapContainer: React.FC<MapContainerProps> = ({
               'circle-stroke-width': 1.5,
               'circle-stroke-color': '#ffffff'
             }
-          });
+          }, beforeStationId);
+
+          bringStationMarkersToFront(currentMap);
 
           currentMap.on('click', 'shopping-centers-circle', (e) => {
             const props = e.features?.[0]?.properties;
@@ -809,10 +829,12 @@ export const MapContainer: React.FC<MapContainerProps> = ({
             'default': '#94a3b8',
           };
 
+          const beforeStationId = m.getLayer('station-points-halo') ? 'station-points-halo' : undefined;
+
           if (!m.getSource('gistaru-source')) {
             m.addSource('gistaru-source', { type: 'geojson', data });
 
-            // Polygon fill
+            // Polygon fill (rendered under station markers)
             m.addLayer({
               id: 'gistaru-fill',
               type: 'fill',
@@ -830,7 +852,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                 ],
                 'fill-opacity': 0.25,
               },
-            });
+            }, beforeStationId);
 
             // Polygon border
             m.addLayer({
@@ -842,7 +864,9 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                 'line-width': 0.8,
                 'line-opacity': 0.6,
               },
-            });
+            }, beforeStationId);
+
+            bringStationMarkersToFront(m);
 
             // Click popup
             m.on('click', 'gistaru-fill', (e) => {
@@ -902,10 +926,12 @@ export const MapContainer: React.FC<MapContainerProps> = ({
           const m = mapRef.current;
           if (!m.getStyle()) return;
 
+          const beforeStationId = m.getLayer('station-points-halo') ? 'station-points-halo' : undefined;
+
           if (!m.getSource('bhumi-source')) {
             m.addSource('bhumi-source', { type: 'geojson', data });
 
-            // Fill by tipe hak
+            // Fill by tipe hak (placed under station markers)
             m.addLayer({
               id: 'bhumi-fill',
               type: 'fill',
@@ -920,9 +946,9 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                   'Hak Guna Usaha', '#ef4444',
                   '#94a3b8',
                 ],
-                'fill-opacity': 0.3,
+                'fill-opacity': 0.25,
               },
-            });
+            }, beforeStationId);
 
             // Border
             m.addLayer({
@@ -932,9 +958,11 @@ export const MapContainer: React.FC<MapContainerProps> = ({
               paint: {
                 'line-color': '#22c55e',
                 'line-width': 1.0,
-                'line-opacity': 0.8,
+                'line-opacity': 0.7,
               },
-            });
+            }, beforeStationId);
+
+            bringStationMarkersToFront(m);
 
             // Click popup
             m.on('click', 'bhumi-fill', (e) => {

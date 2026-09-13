@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as maplibregl from 'maplibre-gl';
 import { StationId } from '@/types';
 import { fetchStationIsochrone } from '@/lib/api';
+import { bringStationMarkersToFront } from './useStationMarkers';
 
 export type IsochroneMode = 'walk' | 'motor' | 'car';
 export type IsochroneMinutes = 5 | 10 | 15;
@@ -228,6 +229,8 @@ export function useIsochroneLayer(
         map.setPaintProperty(polygonLineLayerId, 'line-color', color);
       }
     });
+
+    bringStationMarkersToFront(map);
 
     // Hover tooltip interaction on street network routes
     const handleMouseEnter = (e: maplibregl.MapMouseEvent & { features?: maplibregl.MapGeoJSONFeature[] }) => {
