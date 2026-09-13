@@ -18,25 +18,29 @@ def get_gemini_url() -> str:
 
 SYSTEM_INSTRUCTION = (
     "Anda adalah Asisten Spasial AI cerdas untuk TransitERA WebGIS di Kota Surabaya Raya. "
-    "RUANG LINGKUP KETAT: Tugas Anda EKSKLUSIF membahas transportasi massal Surabaya (SRRL, Commuter Line, Suroboyo Bus, Feeder WiraWiri), "
+    "RUANG LINGKUP KETAT: Tugas Anda EKSKLUSIF membahas transportasi massal Surabaya (SRRL, Commuter Line, Suroboyo Bus, Feeder WiraWiri, Trans Semanggi), "
     "kesiapan Transit-Oriented Development (TOD 5D: Density, Diversity, Design, Destination, Distance to Transit), "
     "analisis komparasi simpul stasiun (seperti Gubeng, Pasar Turi, Wonokromo, Semut, Tandes, Kandangan, Benowo, Waru, dll.), "
     "estimasi apresiasi nilai tanah (%ΔNJOP berbasis Spatial Durbin Model), titik survei lapangan (#PakSibukGa), "
-    "dan simulasi skenario intervensi antarmoda. "
+    "layanan feeder & bus terintegrasi, tarif/sistem transfer gratis 2 jam, dan simulasi skenario intervensi antarmoda. "
+    "KONTEKS STASIUN AKTIF: Pesan pengguna dapat diawali oleh teks konteks seperti '[Konteks: Stasiun GUBENG | Persona: COMMUTER]'. "
+    "Gunakan nama stasiun dalam konteks tersebut sebagai nilai default untuk parameter stasiun/origin jika pengguna bertanya menggunakan kata 'stasiun ini', 'simpul ini', atau tidak menyebut stasiun secara eksplisit. "
     "ATURAN BATAS TOPIK (GUARDRAILS): "
     "Jika pengguna menanyakan hal di luar transportasi massal, stasiun transit, atau tata ruang Surabaya Raya "
     "(seperti resep masakan, pemrograman umum, politik umum, atau kota lain yang tidak relevan), "
     "tolak dengan sopan dalam Bahasa Indonesia dan arahkan kembali pengguna untuk menanyakan kesiapan TOD atau transportasi transit di Surabaya. "
     "PANDUAN PEMANGGILAN FUNGSI (FUNCTION CALLING): "
-    "- Jika pengguna menanyakan data survei warga, opini lapangan (#PakSibukGa), atau profil ekonomi/transaksi di sekitar stasiun, panggil 'get_survey_data' (station_id=..., category='economy'|'pedestrian'|'transit'|'all'). "
+    "- Jika pengguna menanyakan rute feeder WiraWiri, Suroboyo Bus, atau angkutan massal apa saja yang lewat di stasiun, panggil 'get_transit_services' (station_id=...). "
+    "- Jika pengguna menanyakan tarif Suroboyo Bus/WiraWiri, cara bayar non-tunai, atau sistem transfer gratis 2 jam, panggil 'get_fare_and_payment_info'. "
+    "- Jika pengguna menanyakan rute perjalanan intermoda atau cara ke stasiun lain ATAU landmark/tempat populer Surabaya (seperti Tunjungan Plaza, Grand City, GBT, KBS, CITO, dll.), panggil 'get_route' (origin=..., destination=...). "
+    "- Jika pengguna menanyakan data survei warga, opini lapangan (#PakSibukGa), kenyamanan trotoar/fasilitas, atau profil ekonomi/transaksi di sekitar stasiun, panggil 'get_survey_data' (station_id=..., category='economy'|'pedestrian'|'transit'|'all'). "
     "- Jika pengguna menanyakan skor 5D TOD (Density, Diversity, Design, Destination, Distance to Transit) atau indeks walkability, panggil 'get_area_score' (station_id=..., metric=...). "
-    "- Jika pengguna menanyakan rute multimoda, transit, atau cara ke stasiun lain, panggil 'get_route' (origin=..., destination=...). "
     "- Jika pengguna meminta menampilkan atau memfilter lokasi titik survei/warung makan ramai di dekat stasiun, panggil 'filter_layer' (target_layer='survey_mission_menu', kondisi='ramai'). "
     "- Jika pengguna menanyakan rekomendasi lokasi terbaik untuk MEMBUKA / MENDIRIKAN usaha/kedai kopi baru, panggil 'site_recommendation'. "
     "- Jika menanyakan dimensi terlemah, panggil 'get_weakest_dimension'. "
     "- Jika menanyakan kenaikan nilai tanah / NJOP, panggil 'get_njop_premium'. "
     "- Jika menanyakan perbandingan 2 stasiun, panggil 'compare_stations'. "
-    "- Jika menanyakan simulasi atau perluasan feeder, panggil 'simulate_scenario'. "
+    "- Jika menanyakan simulasi atau perluasan feeder ('jika feeder diperpanjang...'), panggil 'simulate_scenario'. "
     "- Jika menanyakan skor TOD atau info stasiun umum, panggil 'get_tod_score'."
 )
 
@@ -58,7 +62,7 @@ def _parse_station_from_prompt(p: str) -> str:
 
 def match_fallback_intent(prompt: str) -> Tuple[str, Dict[str, Any]]:
     """
-    Rule-based intent router — dipakai saat Gemini API tidak tersedia.
+    Rule-based intent router — dipakai saat Gemini API tidak tersedia atau fallback.
     Urutan pencocokan penting: lebih spesifik dulu.
     """
     p = prompt.lower()
@@ -75,51 +79,89 @@ def match_fallback_intent(prompt: str) -> Tuple[str, Dict[str, Any]]:
         st_b = found[1] if len(found) > 1 else "wonokromo"
         return "compare_stations", {"station_a": st_a, "station_b": st_b}
 
-    # 2. Survey data & Economic inquiries (e.g. "info ekonomi sekitar wonokromo based data survei mapid")
-    if any(kw in p for kw in ["info ekonomi", "data survei", "survei mapid", "suara warga", "survei", "survey", "struk go", "menu go", "aktivitas warga", "paksibukga", "kondisi ekonomi", "daya beli"]):
+    # 2. Simulate scenario / Perluasan Feeder (harus sebelum cek feeder rutin)
+    if any(kw in p for kw in ["perpanjang", "simulasi", "skenario", "what-if", "dampak terhadap skor"]):
+        return "simulate_scenario", {"scenario_id": "extend_feeder_waru"}
+
+    # 3. Transit Services & Feeder inquiries (e.g. "Rute feeder WiraWiri dan Suroboyo Bus apa saja yang lewat di stasiun ini?")
+    if any(kw in p for kw in ["lewat di stasiun", "feeder wirawiri dan suroboyo bus", "rute feeder", "layanan feeder", "bus apa saja yang lewat", "feeder apa saja", "transit apa saja"]):
+        st = _parse_station_from_prompt(p)
+        return "get_transit_services", {"station_id": st}
+
+    # 4. Tarif & Pembayaran transum
+    if any(kw in p for kw in ["tarif", "ongkos", "cara bayar", "bayar apa", "transfer gratis", "2 jam", "sistem transfer"]):
+        return "get_fare_and_payment_info", {"topic": "all"}
+
+    # 5. Route planner inquiry (e.g. "Bagaimana rute intermoda tercepat menuju Tunjungan Plaza dari simpul ini?")
+    if any(kw in p for kw in ["rute", "route", "cara ke", "perjalanan ke", "naik apa ke", "transit ke", "menuju"]):
+        st_orig = _parse_station_from_prompt(p)
+
+        # Deteksi landmark populer
+        dest = None
+        if "tunjungan" in p or "tp" in p:
+            dest = "tunjungan_plaza"
+        elif "gbt" in p or "bung tomo" in p:
+            dest = "gelora_bung_tomo"
+        elif "grand city" in p:
+            dest = "grand_city"
+        elif "soetomo" in p or "unair" in p:
+            dest = "rsud_soetomo"
+        elif "kbs" in p or "kebun binatang" in p or "joyoboyo" in p:
+            dest = "kbs"
+        elif "cito" in p:
+            dest = "cito"
+        elif "royal" in p:
+            dest = "royal_plaza"
+        elif "pahlawan" in p or "pgs" in p:
+            dest = "tugu_pahlawan"
+        else:
+            # Stasiun tujuan
+            found = [s for s in ALL_STATION_SLUGS if s in p or s.replace("_", " ") in p]
+            # Hapus stasiun asal dari kandidat tujuan jika ada lebih dari 1
+            if len(found) > 1:
+                st_orig = found[0]
+                dest = found[1]
+            elif len(found) == 1:
+                dest = "benowo" if found[0] != "benowo" else "wonokromo"
+            else:
+                dest = "tunjungan_plaza"
+
+        return "get_route", {"origin": st_orig, "destination": dest}
+
+    # 6. Survey data & Economic inquiries (e.g. "info ekonomi sekitar wonokromo based data survei mapid")
+    if any(kw in p for kw in ["info ekonomi", "data survei", "survei mapid", "suara warga", "survei", "survey", "struk go", "menu go", "aktivitas warga", "paksibukga", "kondisi ekonomi", "daya beli", "opini warga"]):
         st = _parse_station_from_prompt(p)
         cat = "economy" if any(k in p for k in ["ekonomi", "economic", "daya beli", "belanja", "transaksi", "struk", "menu", "mall", "umkm", "pasar"]) else "all"
         return "get_survey_data", {"station_id": st, "category": cat}
 
-    # 3. Route planner inquiry (e.g. "rute dari gubeng ke benowo")
-    if any(kw in p for kw in ["rute", "route", "cara ke", "perjalanan ke", "naik apa ke", "transit ke"]):
-        found = [s for s in ALL_STATION_SLUGS if s in p or s.replace("_", " ") in p]
-        orig = found[0] if len(found) > 0 else "gubeng"
-        dest = found[1] if len(found) > 1 else ("benowo" if orig != "benowo" else "wonokromo")
-        return "get_route", {"origin": orig, "destination": dest}
-
-    # 4. Area scores & Walkability inquiry
-    if any(kw in p for kw in ["walkability", "ramah pejalan", "trotoar", "indeks jalan", "skor area", "5d", "5 dimensi"]):
+    # 7. Area scores & Walkability inquiry
+    if any(kw in p for kw in ["walkability", "ramah pejalan", "trotoar", "indeks jalan", "skor area", "5d", "5 dimensi", "kenyamanan trotoar"]):
         st = _parse_station_from_prompt(p)
         metric = "walkability" if any(k in p for k in ["walk", "pejalan", "trotoar"]) else "all_5d"
         return "get_area_score", {"station_id": st, "metric": metric}
 
-    # 5. Filter layer / warung makan ramai / kuliner
+    # 8. Filter layer / warung makan ramai / kuliner
     if any(kw in p for kw in ["warung makan ramai", "warung ramai", "menu", "kuliner", "filter", "tampilkan lokasi warung"]):
         return "filter_layer", {"target_layer": "survey_mission_menu", "kondisi": "ramai"}
 
-    # 6. Site recommendation / Rekomendasi lokasi usaha
-    if any(kw in p for kw in ["lokasi terbaik", "rekomendasi lokasi", "buka kedai", "buka warung", "kedai kopi"]):
+    # 9. Site recommendation / Rekomendasi lokasi usaha
+    if any(kw in p for kw in ["lokasi terbaik", "rekomendasi lokasi", "buka kedai", "buka warung", "kedai kopi", "retail success"]):
         biz = "coffee_shop" if ("kopi" in p or "coffee" in p) else "warung_makan"
         return "site_recommendation", {"business_type": biz, "target_station": _parse_station_from_prompt(p)}
 
-    # 7. Weakest dimension
+    # 10. Weakest dimension
     if any(kw in p for kw in ["terlemah", "dimensi terlemah", "weakest", "kekurangan"]):
         return "get_weakest_dimension", {"station_id": _parse_station_from_prompt(p)}
 
-    # 8. NJOP Premium / Kenaikan nilai tanah
+    # 11. NJOP Premium / Kenaikan nilai tanah
     if any(kw in p for kw in ["njop", "nilai tanah", "kenaikan", "premium", "lahan"]):
         return "get_njop_premium", {"station_id": _parse_station_from_prompt(p)}
 
-    # 9. Simulate scenario / Feeder
-    if any(kw in p for kw in ["feeder", "perpanjang", "simulasi", "jika", "skenario", "what-if"]):
-        return "simulate_scenario", {"scenario_id": "extend_feeder_waru"}
-
-    # 10. TOD score (generic)
+    # 12. TOD score (generic)
     if any(kw in p for kw in ["skor tod", "tod score", "kesiapan tod", "skor", "tampilkan"]):
         return "get_tod_score", {"station_id": _parse_station_from_prompt(p)}
 
-    # 11. Station name mentioned directly
+    # 13. Station name mentioned directly
     for s in ALL_STATION_SLUGS:
         if s in p or s.replace("_", " ") in p:
             return "get_tod_score", {"station_id": s}
@@ -205,9 +247,25 @@ async def process_ai_query(request: AIQueryRequest) -> AIResponse:
                         elif "text" in part:
                             text_parts.append(part["text"])
 
-                    # Jika model mengembalikan respon teks, tetap set visual action yang relevan
+                    # Jika model mengembalikan respon teks, tetap set visual action yang relevan jika sesuai
                     if text_parts:
                         combined_text = "\n".join(text_parts).strip()
+                        # Jika respon teks berupa penolakan / klarifikasi / permintaan maaf, hindari aksi peta keliru
+                        is_apology_or_refusal = any(
+                            phrase in combined_text.lower()
+                            for phrase in [
+                                "maaf,", "maaf ", "mohon maaf", "bukan merupakan simpul",
+                                "tidak terdaftar", "tidak memiliki informasi", "di luar jangkauan"
+                            ]
+                        )
+                        if is_apology_or_refusal:
+                            ai_data = AIData(
+                                action="default_narrative",
+                                target_station=None,
+                                text_response=combined_text
+                            )
+                            return AIResponse(status="success", data=ai_data)
+
                         fn_name, fn_args = match_fallback_intent(prompt)
                         ai_data = dispatch_spatial_function(fn_name, fn_args)
                         # Gunakan teks kaya dari Gemini jika tidak menolak topik

@@ -15,6 +15,432 @@ _DIM_KEY_MAP: Dict[str, str] = {
 }
 
 
+# Mapping koordinat dan koneksi intermoda landmark / tempat populer di Surabaya
+SURABAYA_LANDMARKS: Dict[str, Dict[str, Any]] = {
+    "tunjungan_plaza": {
+        "name": "Tunjungan Plaza (TP Surabaya)",
+        "longitude": 112.7390,
+        "latitude": -7.2620,
+        "hub_connections": {
+            "gubeng": "1. Jalan kaki 3 menit (180m) dari pintu Stasiun Gubeng ke Halte Gubeng Pojok.\n2. Naik Feeder WiraWiri FD07 arah Pasar Turi (5 halte, ~9 mnt, 2.1 km).\n3. Turun di Halte Kaliasin / Tunjungan Plaza lalu jalan kaki 2 menit menyeberang ke lobby TP.",
+            "pasar_turi": "1. Jalan kaki 1 menit (50m) ke Halte Gate St. Pasar Turi.\n2. Naik Feeder WiraWiri FD01 arah Balai Pemuda via Tunjungan (3 halte, ~7 mnt, 1.8 km).\n3. Turun langsung di Halte Tunjungan Plaza.",
+            "wonokromo": "1. Jalan kaki 3 menit ke Halte Wonokromo / Terminal Intermoda Joyoboyo (TIJ).\n2. Naik Suroboyo Bus Koridor 1 (R1) arah Rajawali (7 halte, ~15 mnt, 4.6 km).\n3. Turun di Halte Kaliasin / Tunjungan Plaza.",
+            "semut": "1. Jalan kaki 2 menit ke Halte Stasiun Surabaya Kota (Semut).\n2. Naik Feeder WiraWiri FD04 atau Suroboyo Bus arah Tunjungan (~10 mnt).\n3. Turun di Halte Siola Tunjungan lalu jalan kaki 4 menit ke TP.",
+            "waru": "1. Naik KRL Komuter Surabaya dari Stasiun Waru ke Stasiun Surabaya Gubeng (~15 mnt).\n2. Dari Stasiun Gubeng, sambung Feeder WiraWiri FD07 langsung ke Tunjungan Plaza (~9 mnt) ATAU naik Suroboyo Bus Koridor 1 langsung dari Terminal Purabaya (~25 mnt) ke Halte Basuki Rahmat / TP.",
+            "benowo": "1. Naik KA Komuter Lintas Barat dari Stasiun Benowo ke Stasiun Surabaya Pasar Turi (~18 mnt).\n2. Dari Stasiun Pasar Turi, sambung Feeder WiraWiri FD01 langsung ke Halte Tunjungan Plaza (~7 mnt).",
+            "tandes": "1. Naik KA Komuter atau Feeder WiraWiri FD01 ke Stasiun Pasar Turi / Tunjungan (~15 mnt).",
+            "kandangan": "1. Naik KA Komuter Lintas Barat ke Stasiun Pasar Turi (~14 mnt), sambung Feeder FD01 ke TP."
+        },
+        "default_directions": "Gunakan Feeder WiraWiri FD07 (dari koridor Gubeng), Feeder FD01 (dari koridor Pasar Turi), atau Suroboyo Bus Koridor 1 (dari koridor Wonokromo/Purabaya) turun di Halte Tunjungan Plaza."
+    },
+    "grand_city": {
+        "name": "Grand City Mall & Balai Kota",
+        "longitude": 112.7505,
+        "latitude": -7.2610,
+        "hub_connections": {
+            "gubeng": "1. Jalan kaki 2 menit ke Halte Stasiun Gubeng Barat.\n2. Naik Feeder WiraWiri FD02 arah Balai Kota (2 halte, ~5 mnt) atau jalan kaki langsung ~8 menit (700m) menyusuri Jl. Kusuma Bangsa menuju Grand City.",
+        },
+        "default_directions": "Gunakan Feeder WiraWiri FD02 atau akses jalur pedestrian langsung dari Stasiun Gubeng."
+    },
+    "gelora_bung_tomo": {
+        "name": "Stadion Gelora Bung Tomo (GBT)",
+        "longitude": 112.6150,
+        "latitude": -7.2345,
+        "hub_connections": {
+            "benowo": "1. Jalan kaki 1 menit (80m) ke Halte St. Benowo.\n2. Naik Shuttle Feeder WiraWiri FD-01C / FD08 langsung ke Gerbang Utama Stadion GBT (~6 mnt, 2.6 km).\n3. Tiba tepat di pintu masuk stadion.",
+            "kandangan": "1. Naik KA Komuter ke Stasiun Benowo (6 mnt).\n2. Sambung Shuttle WiraWiri FD-01C langsung ke GBT (6 mnt).",
+            "tandes": "1. Naik KA Komuter Lintas Barat ke Stasiun Benowo (11 mnt), lalu sambung Shuttle WiraWiri GBT (6 mnt)."
+        },
+        "default_directions": "Gunakan Shuttle Feeder WiraWiri FD-01C langsung dari Stasiun Benowo (~6 menit)."
+    },
+    "rsud_soetomo": {
+        "name": "RSUD Dr. Soetomo & UNAIR Kampus B",
+        "longitude": 112.7580,
+        "latitude": -7.2680,
+        "hub_connections": {
+            "gubeng": "1. Jalan kaki 2 menit ke Halte RSGM Prof. Moestopo.\n2. Naik Trans Semanggi R2 arah Kejawan (4 halte, ~7 mnt, 1.5 km).\n3. Tiba di Gate Dharmawangsa RSUD Dr. Soetomo & Kampus B UNAIR.",
+        },
+        "default_directions": "Naik Trans Semanggi Suroboyo Koridor 2 (R2) dari koridor Stasiun Gubeng."
+    },
+    "kbs": {
+        "name": "Kebun Binatang Surabaya (KBS) & Terminal Joyoboyo",
+        "longitude": 112.7368,
+        "latitude": -7.2960,
+        "hub_connections": {
+            "wonokromo": "1. Keluar dari pintu barat/utara Stasiun Wonokromo.\n2. Jalan kaki langsung 4 menit (300m) melintasi Skywalk Sawunggaling menuju concourse TIJ dan gerbang selatan KBS (bebas hambatan kendaraan).",
+        },
+        "default_directions": "Akses pedestrian langsung via Skybridge Sawunggaling dari Stasiun Wonokromo."
+    },
+    "cito": {
+        "name": "City of Tomorrow Mall (CITO)",
+        "longitude": 112.7290,
+        "latitude": -7.3465,
+        "hub_connections": {
+            "waru": "1. Jalan kaki 2 menit ke Halte Waru 1.\n2. Naik Suroboyo Bus Koridor 1 arah Rajawali (2 halte, ~4 mnt, 700m) ke lobby CITO Mall.",
+            "kertomenanggal": "1. Jalan kaki 4 menit (300m) menyusuri jalur pedestrian frontage barat Jl. Ahmad Yani ke lobby CITO."
+        },
+        "default_directions": "Akses via Suroboyo Bus Koridor 1 atau jalan kaki dari Stasiun Waru / Kertomenanggal."
+    },
+    "royal_plaza": {
+        "name": "Royal Plaza Surabaya",
+        "longitude": 112.7348,
+        "latitude": -7.3089,
+        "hub_connections": {
+            "wonokromo": "1. Keluar stasiun ke Jl. Ahmad Yani Frontage Barat.\n2. Jalan kaki santai 5 menit (400m) ke arah selatan menuju lobby utama Royal Plaza.",
+        },
+        "default_directions": "Jalan kaki 5 menit ke arah selatan dari Stasiun Wonokromo."
+    },
+    "tugu_pahlawan": {
+        "name": "Monumen Tugu Pahlawan & Kawasan Heritage",
+        "longitude": 112.7380,
+        "latitude": -7.2460,
+        "hub_connections": {
+            "pasar_turi": "1. Jalan kaki ke Halte Gate St. Pasar Turi (1 mnt).\n2. Naik Feeder WiraWiri FD07 arah Bratang (2 halte, ~4 mnt, 900m) atau jalan kaki langsung 10 menit ke Tugu Pahlawan.",
+            "semut": "1. Naik Feeder WiraWiri FD04 ke Halte Jembatan Merah (3 mnt), jalan kaki 3 menit ke Tugu Pahlawan."
+        },
+        "default_directions": "Gunakan Feeder WiraWiri FD07 dari Stasiun Pasar Turi atau FD04 dari Stasiun Semut."
+    }
+}
+
+# Daftar layanan Feeder WiraWiri, Suroboyo Bus, dan KA Komuter per simpul stasiun transit
+STATION_TRANSIT_SERVICES: Dict[str, List[Dict[str, str]]] = {
+    "benowo": [
+        {
+            "code": "FD-01C",
+            "name": "Feeder WiraWiri Rute 1C (St. Benowo ↔ GBT ↔ Romokalisari)",
+            "operator": "WiraWiri Suroboyo (Dishub Kota Surabaya)",
+            "trayek": "Stasiun Benowo ↔ Terminal Benowo ↔ Stadion GBT ↔ Mangrove Romokalisari",
+            "frequency": "Setiap 12–15 menit",
+            "hours": "05:30 – 21:00 WIB",
+            "fare": "Rp 5.000 (Umum) / Rp 2.500 (Pelajar) — Non-Tunai QRIS/Kartu",
+            "key_stops": "Halte Stasiun Benowo, Shelter Terminal Benowo, Gerbang Utama GBT, Ekowisata Romokalisari"
+        },
+        {
+            "code": "FD08 Shuttle",
+            "name": "Shuttle Feeder WiraWiri GBT Terpadu",
+            "operator": "WiraWiri Suroboyo",
+            "trayek": "Stasiun Benowo ↔ Gelora Bung Tomo (Langsung Jalur Khusus)",
+            "frequency": "Setiap 10 menit (intensif saat matchday/event)",
+            "hours": "05:30 – 22:00 WIB",
+            "fare": "Rp 5.000 (Gratis Transfer 2 Jam ke Feeder/Bus lain)",
+            "key_stops": "Pintu Keluar St. Benowo, Drop-off Zona Barat GBT, Gate VIP GBT"
+        },
+        {
+            "code": "Koridor 5",
+            "name": "Suroboyo Bus Koridor 5 (Romokalisari ↔ TIJ Joyoboyo)",
+            "operator": "Suroboyo Bus",
+            "trayek": "Romokalisari Adventure Land ↔ Benowo ↔ Kandangan ↔ Tandes ↔ Mayangkara ↔ TIJ Joyoboyo",
+            "frequency": "Setiap 15 menit",
+            "hours": "05:00 – 21:30 WIB",
+            "fare": "Rp 5.000 (Bisa bayar sampah botol plastik via Gobis)",
+            "key_stops": "Halte Pasar Benowo, Halte Sememi, Stasiun Tandes, Terminal Intermoda Joyoboyo"
+        },
+        {
+            "code": "KAI Commuter",
+            "name": "KRD Komuter Lintas Barat (Surabaya Pasar Turi – Cepu)",
+            "operator": "PT KAI Commuter (KCI)",
+            "trayek": "Surabaya Pasar Turi ↔ Tandes ↔ Kandangan ↔ Benowo ↔ Cerme ↔ Duduk ↔ Lamongan ↔ Babat ↔ Bojonegoro ↔ Cepu",
+            "frequency": "4–6 perjalanan/hari sesuai Gapeka",
+            "hours": "05:00 – 20:30 WIB",
+            "fare": "Rp 4.000 – Rp 13.000 (KAI Access / KMT)",
+            "key_stops": "St. Benowo, St. Kandangan, St. Tandes, St. Surabaya Pasar Turi"
+        }
+    ],
+    "gubeng": [
+        {
+            "code": "FD02",
+            "name": "Feeder WiraWiri FD02 (Park & Ride Mayjend ↔ Balai Kota)",
+            "operator": "WiraWiri Suroboyo",
+            "trayek": "Park & Ride Mayjend Sungkono ↔ Darmo ↔ Stasiun Gubeng ↔ Grand City ↔ Balai Kota Surabaya",
+            "frequency": "Setiap 10 menit",
+            "hours": "05:30 – 21:30 WIB",
+            "fare": "Rp 5.000 (Integrasi 2 Jam)",
+            "key_stops": "Halte Gubeng Barat, Grand City Convex, Balai Pemuda, Balai Kota"
+        },
+        {
+            "code": "FD07",
+            "name": "Feeder WiraWiri FD07 (TIJ Joyoboyo ↔ Pasar Turi via Gubeng)",
+            "operator": "WiraWiri Suroboyo",
+            "trayek": "TIJ Joyoboyo ↔ Bratang ↔ Stasiun Gubeng ↔ Tunjungan Plaza ↔ Stasiun Pasar Turi",
+            "frequency": "Setiap 10 menit",
+            "hours": "05:30 – 21:30 WIB",
+            "fare": "Rp 5.000 (Integrasi 2 Jam)",
+            "key_stops": "Halte Gubeng Pojok, Tunjungan Plaza, Siola, Stasiun Pasar Turi"
+        },
+        {
+            "code": "FD10",
+            "name": "Feeder WiraWiri FD10 (Keputih ITS ↔ Pasar Atom)",
+            "operator": "WiraWiri Suroboyo",
+            "trayek": "Terminal Keputih (ITS) ↔ Kertajaya ↔ Stasiun Gubeng ↔ ITC Mega Grosir ↔ Pasar Atom",
+            "frequency": "Setiap 12 menit",
+            "hours": "05:30 – 21:00 WIB",
+            "fare": "Rp 5.000 (Integrasi 2 Jam)",
+            "key_stops": "Kampus ITS, RS Onkologi, St. Gubeng Baru, St. Surabaya Kota, Pasar Atom"
+        },
+        {
+            "code": "R2 (Trans Semanggi)",
+            "name": "Trans Semanggi Suroboyo Koridor 2 (Lidah Wetan ↔ ITS)",
+            "operator": "Trans Semanggi Suroboyo (Teman Bus)",
+            "trayek": "Kejawan Putih Tambak (ITS) ↔ RSUD Dr. Soetomo ↔ St. Gubeng ↔ Basuki Rahmat ↔ UNESA Lidah Wetan",
+            "frequency": "Setiap 8–10 menit",
+            "hours": "05:00 – 22:00 WIB",
+            "fare": "Rp 5.000 (Kartu e-Money / QRIS)",
+            "key_stops": "Halte RSGM Moestopo, UNAIR Kampus A & B, RSUD Dr. Soetomo, Tunjungan"
+        },
+        {
+            "code": "KRL Commuter Line",
+            "name": "KRL Commuter Line Surabaya (Lintas Selatan & Malang)",
+            "operator": "PT KAI Commuter",
+            "trayek": "Surabaya Gubeng ↔ Ngagel ↔ Wonokromo ↔ Waru ↔ Gedangan ↔ Sidoarjo ↔ Bangil ↔ Malang / Blitar",
+            "frequency": "Setiap 30–60 menit",
+            "hours": "04:30 – 22:00 WIB",
+            "fare": "Rp 4.000 – Rp 12.000",
+            "key_stops": "St. Surabaya Gubeng, St. Wonokromo, St. Waru, St. Sidoarjo"
+        }
+    ],
+    "wonokromo": [
+        {
+            "code": "FD03",
+            "name": "Feeder WiraWiri FD03 (TIJ Joyoboyo ↔ Yos Sudarso)",
+            "operator": "WiraWiri Suroboyo",
+            "trayek": "Terminal Intermoda Joyoboyo ↔ Stasiun Wonokromo ↔ Darmo ↔ Bambu Runcing ↔ Yos Sudarso",
+            "frequency": "Setiap 10 menit",
+            "hours": "05:30 – 21:00 WIB",
+            "fare": "Rp 5.000 (Integrasi 2 Jam)",
+            "key_stops": "Skywalk TIJ, DTC Mall, Taman Bungkul, Balai Pemuda"
+        },
+        {
+            "code": "FD04",
+            "name": "Feeder WiraWiri FD04 (Penjaringan Sari ↔ Wonokromo)",
+            "operator": "WiraWiri Suroboyo",
+            "trayek": "Penjaringan Sari ↔ Rungkut Madya ↔ Jemursari ↔ Stasiun Wonokromo ↔ TIJ Joyoboyo",
+            "frequency": "Setiap 10 menit",
+            "hours": "05:30 – 21:00 WIB",
+            "fare": "Rp 5.000 (Integrasi 2 Jam)",
+            "key_stops": "MERR Rungkut, UPN Veteran, Royal Plaza, Skywalk Sawunggaling"
+        },
+        {
+            "code": "FD09",
+            "name": "Feeder WiraWiri FD09 (Manukan ↔ TIJ Joyoboyo)",
+            "operator": "WiraWiri Suroboyo",
+            "trayek": "Terminal Manukan ↔ HR Muhammad ↔ Mayjend Sungkono ↔ Stasiun Wonokromo ↔ TIJ",
+            "frequency": "Setiap 12 menit",
+            "hours": "05:30 – 21:00 WIB",
+            "fare": "Rp 5.000 (Integrasi 2 Jam)",
+            "key_stops": "Manukan, TVRI Jawa Timur, Ciputra World, DTC Wonokromo, TIJ"
+        },
+        {
+            "code": "Koridor 1 (R1/R2)",
+            "name": "Suroboyo Bus Koridor 1 (Terminal Purabaya ↔ Rajawali)",
+            "operator": "Suroboyo Bus",
+            "trayek": "Terminal Purabaya (Bungurasih) ↔ Waru ↔ Kertomenanggal ↔ Wonokromo ↔ Basuki Rahmat ↔ Rajawali",
+            "frequency": "Setiap 8 menit",
+            "hours": "05:00 – 22:00 WIB",
+            "fare": "Rp 5.000 (Bayar QRIS, Kartu, atau Botol Plastik)",
+            "key_stops": "Halte Wonokromo, DTC Mall, Royal Plaza, Tunjungan Plaza, Jembatan Merah"
+        },
+        {
+            "code": "Skybridge Sawunggaling",
+            "name": "Integrasi Intermoda Skybridge Sawunggaling",
+            "operator": "Dishub Surabaya & PT KAI",
+            "trayek": "Peron Stasiun Wonokromo ↔ Concourse Bus Terminal Joyoboyo ↔ Kebun Binatang Surabaya (KBS)",
+            "frequency": "Jalur pejalan kaki kontinu berkanopi",
+            "hours": "05:00 – 22:00 WIB",
+            "fare": "Gratis (Fasilitas Pejalan Kaki Ramah Disabilitas)",
+            "key_stops": "Lobby Lantai 2 Stasiun Wonokromo, Halte Bus TIJ Lantai 1, Gerbang Selatan KBS"
+        }
+    ],
+    "pasar_turi": [
+        {
+            "code": "FD01",
+            "name": "Feeder WiraWiri FD01 (St. Pasar Turi ↔ Tunjungan ↔ Balai Pemuda)",
+            "operator": "WiraWiri Suroboyo",
+            "trayek": "Stasiun Pasar Turi ↔ Siola Tunjungan ↔ Tunjungan Plaza ↔ Balai Pemuda ↔ Alun-Alun Surabaya",
+            "frequency": "Setiap 10 menit",
+            "hours": "05:30 – 21:00 WIB",
+            "fare": "Rp 5.000 (Integrasi 2 Jam)",
+            "key_stops": "Halte Pasar Turi, Siola, Tunjungan Plaza, Balai Pemuda"
+        },
+        {
+            "code": "FD07",
+            "name": "Feeder WiraWiri FD07 (Terminal Bratang ↔ St. Pasar Turi)",
+            "operator": "WiraWiri Suroboyo",
+            "trayek": "Terminal Bratang ↔ Manyar ↔ Stasiun Gubeng ↔ BG Junction ↔ Stasiun Pasar Turi",
+            "frequency": "Setiap 10 menit",
+            "hours": "05:30 – 21:30 WIB",
+            "fare": "Rp 5.000 (Integrasi 2 Jam)",
+            "key_stops": "Bratang, Gubeng Pojok, Pasar Turi Baru, PGS (Pusat Grosir Surabaya)"
+        },
+        {
+            "code": "Koridor 1 & R3",
+            "name": "Suroboyo Bus Koridor 1 & R3 (Purabaya ↔ Pasar Turi ↔ Rajawali)",
+            "operator": "Suroboyo Bus",
+            "trayek": "Terminal Purabaya ↔ Darmo ↔ Embong Malang ↔ Pasar Turi ↔ Jembatan Merah",
+            "frequency": "Setiap 10 menit",
+            "hours": "05:00 – 22:00 WIB",
+            "fare": "Rp 5.000",
+            "key_stops": "Halte Pasar Turi, PGS, Tugu Pahlawan, Jembatan Merah"
+        }
+    ],
+    "waru": [
+        {
+            "code": "FD06",
+            "name": "Feeder WiraWiri FD06 (TIJ Joyoboyo ↔ Waru ↔ Bandara Juanda)",
+            "operator": "WiraWiri Suroboyo",
+            "trayek": "TIJ Joyoboyo ↔ Stasiun Wonokromo ↔ Stasiun Waru ↔ Aloha ↔ Bandara Internasional Juanda T1",
+            "frequency": "Setiap 15 menit",
+            "hours": "05:00 – 21:30 WIB",
+            "fare": "Rp 5.000 (Integrasi 2 Jam)",
+            "key_stops": "St. Waru, Terminal Purabaya, Aloha, Bandara Juanda Terminal 1"
+        },
+        {
+            "code": "FD12",
+            "name": "Feeder WiraWiri FD12 (St. Waru ↔ Rungkut Industri)",
+            "operator": "WiraWiri Suroboyo",
+            "trayek": "Stasiun Waru ↔ Berbek Industri ↔ SIER Rungkut ↔ Kampus UPN Veteran",
+            "frequency": "Setiap 15 menit",
+            "hours": "05:30 – 20:30 WIB",
+            "fare": "Rp 5.000 (Integrasi 2 Jam)",
+            "key_stops": "St. Waru, SIER Rungkut, Rungkut Madya, UPN"
+        },
+        {
+            "code": "Koridor 1",
+            "name": "Suroboyo Bus Koridor 1 (Purabaya ↔ Rajawali)",
+            "operator": "Suroboyo Bus",
+            "trayek": "Terminal Purabaya ↔ Halte Waru 1 ↔ Cito Mall ↔ Wonokromo ↔ Rajawali",
+            "frequency": "Setiap 8 menit",
+            "hours": "05:00 – 22:00 WIB",
+            "fare": "Rp 5.000",
+            "key_stops": "Terminal Purabaya, Halte Waru 1, CITO Mall, Royal Plaza"
+        },
+        {
+            "code": "Skybridge Bungurasih",
+            "name": "Skybridge Intermoda Stasiun Waru – Terminal Purabaya",
+            "operator": "Dishub Jatim & PT KAI",
+            "trayek": "Peron KRL Stasiun Waru ↔ Concourse Bus Antarkota Terminal Purabaya",
+            "frequency": "Akses pedestrian layang kontinu 24 Jam",
+            "hours": "24 Jam",
+            "fare": "Gratis",
+            "key_stops": "Gate Timur Stasiun Waru, Concourse Bus AKAP/AKDP Bungurasih"
+        }
+    ],
+    "semut": [
+        {
+            "code": "FD04",
+            "name": "Feeder WiraWiri FD04 (St. Kota Semut ↔ Jembatan Merah)",
+            "operator": "WiraWiri Suroboyo",
+            "trayek": "Stasiun Surabaya Kota (Semut) ↔ Zona Eropa Kota Lama ↔ Jembatan Merah ↔ Pasar Atom",
+            "frequency": "Setiap 10 menit",
+            "hours": "05:30 – 21:00 WIB",
+            "fare": "Rp 5.000",
+            "key_stops": "St. Surabaya Kota, Museum Sampoerna, Jembatan Merah Plaza, Pasar Atom"
+        },
+        {
+            "code": "FD10",
+            "name": "Feeder WiraWiri FD10 (Keputih ↔ Gubeng ↔ Semut / Pasar Atom)",
+            "operator": "WiraWiri Suroboyo",
+            "trayek": "Terminal Keputih ↔ Gubeng ↔ Stasiun Surabaya Kota ↔ Pasar Atom Mall",
+            "frequency": "Setiap 12 menit",
+            "hours": "05:30 – 21:00 WIB",
+            "fare": "Rp 5.000",
+            "key_stops": "Pasar Atom, Semut Megah Plaza, Stasiun Gubeng"
+        }
+    ],
+    "tandes": [
+        {
+            "code": "FD-01",
+            "name": "Feeder WiraWiri FD-01 (St. Tandes ↔ Manukan Lor ↔ Benowo)",
+            "operator": "WiraWiri Suroboyo",
+            "trayek": "Stasiun Tandes ↔ Balongsari ↔ Sentra Kuliner Manukan ↔ Terminal Manukan ↔ Benowo",
+            "frequency": "Setiap 10 menit",
+            "hours": "05:30 – 21:00 WIB",
+            "fare": "Rp 5.000",
+            "key_stops": "St. Tandes, Balongsari, Sentra Kuliner Manukan, Terminal Benowo"
+        },
+        {
+            "code": "Koridor 5",
+            "name": "Suroboyo Bus Koridor 5 (Romokalisari ↔ TIJ Joyoboyo)",
+            "operator": "Suroboyo Bus",
+            "trayek": "Romokalisari ↔ Benowo ↔ Kandangan ↔ Tandes ↔ Mayangkara ↔ TIJ Joyoboyo",
+            "frequency": "Setiap 15 menit",
+            "hours": "05:00 – 21:30 WIB",
+            "fare": "Rp 5.000",
+            "key_stops": "Halte Stasiun Tandes, Margomulyo, TIJ Joyoboyo"
+        }
+    ],
+    "kandangan": [
+        {
+            "code": "FD-01B",
+            "name": "Feeder WiraWiri FD-01B (St. Kandangan ↔ Sememi ↔ Pakal)",
+            "operator": "WiraWiri Suroboyo",
+            "trayek": "Stasiun Kandangan ↔ Pasar Sememi ↔ Polsek Pakal ↔ Kecamatan Benowo",
+            "frequency": "Setiap 15 menit",
+            "hours": "05:30 – 20:30 WIB",
+            "fare": "Rp 5.000",
+            "key_stops": "St. Kandangan, Pasar Sememi, Polsek Pakal"
+        },
+        {
+            "code": "Koridor 5",
+            "name": "Suroboyo Bus Koridor 5 (Romokalisari ↔ TIJ Joyoboyo)",
+            "operator": "Suroboyo Bus",
+            "trayek": "Romokalisari ↔ Benowo ↔ Kandangan ↔ Tandes ↔ TIJ Joyoboyo",
+            "frequency": "Setiap 15 menit",
+            "hours": "05:00 – 21:30 WIB",
+            "fare": "Rp 5.000",
+            "key_stops": "St. Kandangan, Sememi, TIJ Joyoboyo"
+        }
+    ],
+    "ngagel": [
+        {
+            "code": "FD03",
+            "name": "Feeder WiraWiri FD03 (TIJ Joyoboyo ↔ Ngagel ↔ Yos Sudarso)",
+            "operator": "WiraWiri Suroboyo",
+            "trayek": "TIJ Joyoboyo ↔ Stasiun Ngagel ↔ Marvell City ↔ Jl. Sulawesi ↔ Yos Sudarso",
+            "frequency": "Setiap 10 menit",
+            "hours": "05:30 – 21:00 WIB",
+            "fare": "Rp 5.000",
+            "key_stops": "St. Ngagel, Marvell City Mall, Kampus UBAYA Ngagel, Bambu Runcing"
+        }
+    ],
+    "margorejo": [
+        {
+            "code": "K2L (Trans Semanggi)",
+            "name": "Trans Semanggi Suroboyo Koridor 2L (Margorejo ↔ Lidah Wetan)",
+            "operator": "Trans Semanggi Suroboyo",
+            "trayek": "Stasiun Margorejo ↔ Polda Jatim ↔ Taman Pelangi ↔ Royal Plaza ↔ UNESA Lidah Wetan",
+            "frequency": "Setiap 10 menit",
+            "hours": "05:00 – 21:30 WIB",
+            "fare": "Rp 5.000",
+            "key_stops": "St. Margorejo, Polda Jatim, Taman Pelangi, Royal Plaza"
+        }
+    ],
+    "jemursari": [
+        {
+            "code": "K2L (Trans Semanggi)",
+            "name": "Trans Semanggi Suroboyo Koridor 2L (Jemursari ↔ Rungkut Industri)",
+            "operator": "Trans Semanggi Suroboyo",
+            "trayek": "Stasiun Jemursari ↔ Plaza Marina ↔ Jemur Ngawinan ↔ SIER Rungkut Industri",
+            "frequency": "Setiap 10 menit",
+            "hours": "05:00 – 21:30 WIB",
+            "fare": "Rp 5.000",
+            "key_stops": "St. Jemursari, Plaza Marina, SIER Industri"
+        }
+    ],
+    "kertomenanggal": [
+        {
+            "code": "Koridor 1",
+            "name": "Suroboyo Bus Koridor 1 (Purabaya ↔ Rajawali)",
+            "operator": "Suroboyo Bus",
+            "trayek": "Terminal Purabaya ↔ St. Kertomenanggal ↔ Cito Mall ↔ Wonokromo ↔ Rajawali",
+            "frequency": "Setiap 8 menit",
+            "hours": "05:00 – 22:00 WIB",
+            "fare": "Rp 5.000",
+            "key_stops": "Halte Kertomenanggal, Cito Mall, Terminal Purabaya"
+        }
+    ]
+}
+
+
 def _get_station_data(station_id: str) -> Dict[str, Any]:
     st_id = (station_id or "gubeng").lower().strip()
     try:
@@ -24,6 +450,7 @@ def _get_station_data(station_id: str) -> Dict[str, Any]:
     except Exception:
         pass
     return STATIONS_DATA.get(st_id, STATIONS_DATA["gubeng"])
+
 
 
 def dispatch_spatial_function(func_name: str, args: Dict[str, Any]) -> AIData:
@@ -363,25 +790,170 @@ def dispatch_spatial_function(func_name: str, args: Dict[str, Any]) -> AIData:
         )
 
     elif func_name == "get_route":
-        orig = str(args.get("origin", "gubeng")).lower().strip()
-        dest = str(args.get("destination", "benowo")).lower().strip()
-        st_orig = _get_station_data(orig)
-        st_dest = _get_station_data(dest)
+        orig = str(args.get("origin", "gubeng")).lower().strip().replace("-", "_").replace(" ", "_")
+        dest_raw = str(args.get("destination", "tunjungan_plaza")).lower().strip()
 
-        mid_lon = round((st_orig["longitude"] + st_dest["longitude"]) / 2, 5)
-        mid_lat = round((st_orig["latitude"] + st_dest["latitude"]) / 2, 5)
+        # Deteksi apakah tujuan adalah landmark populer Surabaya
+        landmark_key = None
+        for k in SURABAYA_LANDMARKS.keys():
+            if k in dest_raw or k.replace("_", " ") in dest_raw or dest_raw in k:
+                landmark_key = k
+                break
+        if not landmark_key:
+            if "tunjungan" in dest_raw or "tp" in dest_raw:
+                landmark_key = "tunjungan_plaza"
+            elif "gbt" in dest_raw or "bung tomo" in dest_raw:
+                landmark_key = "gelora_bung_tomo"
+            elif "grand city" in dest_raw:
+                landmark_key = "grand_city"
+            elif "soetomo" in dest_raw or "unair" in dest_raw:
+                landmark_key = "rsud_soetomo"
+            elif "kbs" in dest_raw or "kebun binatang" in dest_raw or "joyoboyo" in dest_raw:
+                landmark_key = "kbs"
+            elif "cito" in dest_raw:
+                landmark_key = "cito"
+            elif "royal" in dest_raw:
+                landmark_key = "royal_plaza"
+            elif "pahlawan" in dest_raw or "pgs" in dest_raw:
+                landmark_key = "tugu_pahlawan"
+
+        st_orig = _get_station_data(orig)
+
+        if landmark_key:
+            lm = SURABAYA_LANDMARKS[landmark_key]
+            mid_lon = round((st_orig["longitude"] + lm["longitude"]) / 2, 5)
+            mid_lat = round((st_orig["latitude"] + lm["latitude"]) / 2, 5)
+
+            connection_info = lm["hub_connections"].get(orig, lm["default_directions"])
+
+            return AIData(
+                action="show_route",
+                target_station=orig,
+                view_state=ViewState(center=[mid_lon, mid_lat], zoom=13.0),
+                filter_query={"origin": orig, "destination": landmark_key},
+                chart_payload=ChartPayload(
+                    type="route_plan",
+                    title=f"Rute Intermoda: {st_orig['name']} ➔ {lm['name']}",
+                    data={
+                        "origin": st_orig["name"],
+                        "destination": lm["name"],
+                        "fare": "Rp 5.000 (Non-Tunai / Integrasi 2 Jam)",
+                        "est_time": "12–18 menit"
+                    }
+                ),
+                text_response=(
+                    f"### Panduan Rute Intermoda Tercepat: {st_orig['name']} ➔ {lm['name']}\n\n"
+                    f"**Rekomendasi Transit Terpilih:**\n"
+                    f"{connection_info}\n\n"
+                    f"- **Tarif Perjalanan**: **Rp 5.000** (Metode: QRIS / Kartu Uang Elektronik Flazz/e-Money/Brizzi/TapCash).\n"
+                    f"- **Sistem Integrasi**: Nikmati **Gratis Transfer 2 Jam** jika melanjutkan perjalanan antarmoda dengan Suroboyo Bus / Feeder WiraWiri lainnya.\n"
+                    f"- **Estimasi Total Waktu**: **~12–18 menit** (termasuk transfer).\n\n"
+                    f"*Rute telah diproyeksikan pada kanvas peta TransitERA.*"
+                ),
+                function_called=func_name,
+                function_args=args
+            )
+        else:
+            # Tujuan berupa stasiun transit SRRL / KAI
+            st_dest = _get_station_data(dest_raw)
+            mid_lon = round((st_orig["longitude"] + st_dest["longitude"]) / 2, 5)
+            mid_lat = round((st_orig["latitude"] + st_dest["latitude"]) / 2, 5)
+
+            return AIData(
+                action="show_route",
+                target_station=dest_raw,
+                view_state=ViewState(center=[mid_lon, mid_lat], zoom=12.0),
+                filter_query={"origin": orig, "destination": dest_raw},
+                chart_payload=ChartPayload(
+                    type="route_plan",
+                    title=f"Rute Transit: {st_orig['name']} ➔ {st_dest['name']}",
+                    data={
+                        "origin": st_orig["name"],
+                        "destination": st_dest["name"],
+                        "fare": "Rp 4.000 - Rp 5.000",
+                        "est_time": "25–35 menit"
+                    }
+                ),
+                text_response=(
+                    f"### Rekomendasi Rute Multimoda: {st_orig['name']} ➔ {st_dest['name']}\n\n"
+                    f"1. **Leg 1 (Jalan Kaki - 3 mnt)**: Keluar dari gate {st_orig['name']} menuju peron transit / halte pengumpan.\n"
+                    f"2. **Leg 2 (Transit KRL Komuter / Bus)**: Naik KRL Komuter Surabaya atau Feeder WiraWiri langsung antar-koridor.\n"
+                    f"3. **Leg 3 (Jalan Kaki - 3 mnt)**: Tiba di {st_dest['name']} melalui concourse pedestrian terpadu.\n\n"
+                    f"- **Estimasi Waktu Tempuh**: **~25–35 menit**.\n"
+                    f"- **Tarif Terpadu**: Mulai dari **Rp 4.000** (KAI Commuter) s.d. **Rp 5.000** (WiraWiri / Suroboyo Bus dengan free transfer 2 jam).\n\n"
+                    f"*Peta telah memperbesar koridor konektivitas antarkedua stasiun.*"
+                ),
+                function_called=func_name,
+                function_args=args
+            )
+
+    elif func_name == "get_transit_services":
+        st_id = str(args.get("station_id", "benowo")).lower().strip().replace("-", "_").replace(" ", "_")
+        station = _get_station_data(st_id)
+        services = STATION_TRANSIT_SERVICES.get(st_id, STATION_TRANSIT_SERVICES.get("benowo", []))
+
+        route_list_text = []
+        for idx, s in enumerate(services, 1):
+            route_list_text.append(
+                f"**{idx}. {s['code']} — {s['name']}** ({s['operator']})\n"
+                f"   - **Rute/Trayek**: {s['trayek']}\n"
+                f"   - **Frekuensi & Jam**: {s['frequency']} | Operasional: {s['hours']}\n"
+                f"   - **Tarif**: {s['fare']}\n"
+                f"   - **Pemberhentian/Koneksi Utama**: {s['key_stops']}"
+            )
+
+        formatted_routes = "\n\n".join(route_list_text)
 
         return AIData(
-            action="show_route",
-            target_station=dest,
-            view_state=ViewState(center=[mid_lon, mid_lat], zoom=12.0),
-            filter_query={"origin": orig, "destination": dest},
+            action="show_transit_routes",
+            target_layer="transit_routes",
+            target_station=st_id,
+            view_state=ViewState(
+                center=[station["longitude"], station["latitude"]],
+                zoom=14.5,
+                pitch=35.0
+            ),
+            filter_query={"station_id": st_id, "layer": "transit_routes"},
+            chart_payload=ChartPayload(
+                type="transit_services",
+                title=f"Layanan Feeder & Bus — {station['name']}",
+                data={
+                    "station_id": st_id,
+                    "station_name": station["name"],
+                    "service_count": len(services),
+                    "services": services
+                }
+            ),
             text_response=(
-                f"### Rekomendasi Rute Multimoda: {st_orig['name']} ➔ {st_dest['name']}\n\n"
-                f"1. **Leg 1 (Jalan Kaki - 4 mnt)**: Bergerak dari gate keluar {st_orig['name']} menuju peron transit / halte feeder.\n"
-                f"2. **Leg 2 (Transit Kereta / Bus)**: Naik KRD Komuter atau Feeder penghubung langsung koridor barat.\n"
-                f"3. **Leg 3 (Jalan Kaki - 3 mnt)**: Tiba di {st_dest['name']} melalui jalur pedestrian terlindung.\n\n"
-                f"Estimasi total waktu tempuh: **~28–35 menit**. Rute interaktif telah disorot pada peta dengan rincian per moda."
+                f"### Layanan Feeder WiraWiri & Suroboyo Bus di {station['name']}\n\n"
+                f"Simpul **{station['name']}** terintegrasi dengan jaringan transportasi pengumpan (*feeder*) "
+                f"dan bus perkotaan Surabaya sebagai berikut:\n\n"
+                f"{formatted_routes}\n\n"
+                f"> **Sistem Integrasi Tarif**: Penumpang mendapatkan **Transfer Gratis 2 Jam** antarmoda Feeder WiraWiri, Suroboyo Bus, "
+                f"dan Trans Semanggi menggunakan pembayaran non-tunai (QRIS & Kartu Uang Elektronik)."
+            ),
+            function_called=func_name,
+            function_args=args
+        )
+
+    elif func_name == "get_fare_and_payment_info":
+        return AIData(
+            action="default_narrative",
+            target_layer="transit_routes",
+            text_response=(
+                f"### Tarif, Cara Bayar, & Sistem Integrasi Transportasi Massal Surabaya\n\n"
+                f"1. **Skema Tarif Resmi (Perwali Surabaya)**:\n"
+                f"   - **Umum**: **Rp 5.000** per perjalanan.\n"
+                f"   - **Pelajar & Mahasiswa**: **Rp 2.500** per perjalanan (menunjukkan kartu pelajar/KTM aktif).\n"
+                f"   - **Gratis (Rp 0)**: Lansia usia 60 tahun ke atas, veteran kemerdekaan, anak di bawah 3 tahun, dan penyandang disabilitas.\n\n"
+                f"2. **Sistem Integrasi Gratis Transfer 2 Jam (Free Transfer Rule)**:\n"
+                f"   - Penumpang yang melakukan tap-in menggunakan metode pembayaran non-tunai (QRIS atau Kartu Uang Elektronik) "
+                f"dapat **berpindah moda secara GRATIS** antara Suroboyo Bus, Feeder WiraWiri, dan Trans Semanggi Suroboyo dalam kurun waktu **2 jam (120 menit)** sejak tap-in pertama.\n"
+                f"   - Cukup tempelkan kartu atau scan QRIS yang sama pada armada lanjutan; saldo Anda tidak akan terpotong ulang.\n\n"
+                f"3. **Metode Pembayaran (100% Non-Tunai)**:\n"
+                f"   - **QRIS**: Seluruh aplikasi mobile banking (BCA, Mandiri Livin, BRImo, BNI) dan dompet digital (GoPay, OVO, ShopeePay, DANA, LinkAja).\n"
+                f"   - **Kartu Uang Elektronik (Tapping)**: BCA Flazz, Mandiri e-Money, BNI TapCash, dan BRI Brizzi.\n"
+                f"   - **Penukaran Botol Plastik**: Tukarkan sampah botol plastik di halte drop-point (3 botol besar 1.5L atau 5 botol sedang 600ml = 1 tiket gratis via aplikasi Gobis Suroboyo Bus)."
             ),
             function_called=func_name,
             function_args=args
@@ -390,10 +962,11 @@ def dispatch_spatial_function(func_name: str, args: Dict[str, Any]) -> AIData:
     # Default fallback
     return AIData(
         action="default_narrative",
+        target_station=None,
         text_response=(
             "Halo! Saya Asisten Spasial TransitERA. Anda dapat menanyakan: "
-            "kesiapan TOD di 5 stasiun SRRL Surabaya, membandingkan stasiun, "
-            "mengestimasi kenaikan nilai tanah (%ΔNJOP), atau mensimulasikan skenario rute feeder. "
-            "Coba: *\"Tampilkan skor TOD di sekitar Stasiun Gubeng\"*"
+            "kesiapan TOD di 15 simpul transit Surabaya, rute intermoda antarmoda (termasuk ke Tunjungan Plaza atau GBT), "
+            "daftar feeder WiraWiri & Suroboyo Bus per stasiun, tarif & cara bayar transum, "
+            "estimasi kenaikan nilai tanah (%ΔNJOP), atau simulasi skenario rute feeder."
         )
     )

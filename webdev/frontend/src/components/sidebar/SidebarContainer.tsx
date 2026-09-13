@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { StationId } from '@/types';
+import { StationId, RoutePlan } from '@/types';
 import { PersonaType, getPersonaConfig } from '@/lib/persona';
 import { ChoroplethMode, BasemapStyleKey } from '@/components/map/LayerControl';
 import {
@@ -17,13 +17,15 @@ import {
   BusRoute,
   TouristDestination,
 } from '@/lib/dummy-data';
+import { findRouteToDestination } from '@/lib/transit-router';
+import { fetchTransitRoutes } from '@/lib/api';
 import {
   Layers, Map, Users, TreePine, SlidersHorizontal,
   Store, Landmark, DollarSign, Home,
   Train as TrainIcon, Bus, MapPin, Settings, HelpCircle, MessageSquare, Video,
   ChevronRight, ChevronDown, Clock, AlertTriangle, Droplets, Wind, Thermometer,
   Eye, EyeOff, Star, Hexagon, ScrollText, BarChart2, CircleDollarSign, Building2,
-  Navigation, ExternalLink, Footprints, Circle
+  Navigation, ExternalLink, Footprints, Circle, CheckCircle2, RotateCcw
 } from 'lucide-react';
 
 interface SidebarContainerProps {
@@ -56,6 +58,10 @@ interface SidebarContainerProps {
   onToggleGistaru?: () => void;
   showBhumi?: boolean;
   onToggleBhumi?: () => void;
+  // Routing Controls
+  onSelectRoutePlan?: (plan: RoutePlan | null) => void;
+  onHighlightRoute?: (routeIds: string[]) => void;
+  activeRoutePlan?: RoutePlan | null;
 }
 
 /* ── Orange Toggle ── */
@@ -168,6 +174,9 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
   onToggleGistaru,
   showBhumi,
   onToggleBhumi,
+  onSelectRoutePlan,
+  onHighlightRoute,
+  activeRoutePlan,
 }) => {
   const [govActiveTab, setGovActiveTab] = useState<'filter' | 'layers' | 'legends' | 'demographics' | 'environment'>('filter');
   const [bizActiveTab, setBizActiveTab] = useState<'filter' | 'layers' | 'legends' | 'competitors' | 'poilist'>('filter');
@@ -187,6 +196,49 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
   const [showBus, setShowBus] = useState(true);
   const [trainDirectionFilter, setTrainDirectionFilter] = useState<'all' | 'southbound' | 'northbound'>('all');
   const [envDataMap, setEnvDataMap] = useState<Record<string, any>>({});
+  const [trayekData, setTrayekData] = useState<any>(null);
+  const [routeTypeFilter, setRouteTypeFilter] = useState<'all' | 'feeder' | 'bus'>('all');
+  const [selectedTrayekId, setSelectedTrayekId] = useState<string | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetchTransitRoutes()
+      .then((data) => {
+        if (isMounted && data) {
+          setTrayekData(data);
+        }
+      })
+      .catch(() => {});
+    return () => { isMounted = false; };
+  }, []);
+
+  const trayekFeatures: any[] = React.useMemo(() => {
+    if (!trayekData?.features) return [];
+    return trayekData.features.map((f: any) => f.properties || {});
+  }, [trayekData]);
+
+  const handleRouteToDestination = (d: TouristDestination) => {
+    if (activeRoutePlan?.to === d.id) {
+      onSelectRoutePlan?.(null);
+      onHighlightRoute?.([]);
+      return;
+    }
+    const plan = findRouteToDestination(activeStation, d, trayekData);
+    onSelectRoutePlan?.(plan);
+    if (plan?.route_ids && plan.route_ids.length > 0) {
+      onHighlightRoute?.(plan.route_ids);
+    }
+  };
+
+  const handleHighlightTrayek = (routeId: string) => {
+    if (selectedTrayekId === routeId) {
+      setSelectedTrayekId(null);
+      onHighlightRoute?.([]);
+    } else {
+      setSelectedTrayekId(routeId);
+      onHighlightRoute?.([routeId]);
+    }
+  };
 
   useEffect(() => {
     fetch('/data/station_environment_data.json')
@@ -354,6 +406,42 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
           </>
         ) : (
           <>
+            {/* ── Kontrol Rute Trayek Transum Klacak.id (Khusus Komuter) ── */}
+            <div className="mb-2.5 p-2.5 rounded-xl bg-gradient-to-r from-emerald-950/60 to-slate-900 border border-emerald-500/40 shadow-sm space-y-2">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="p-1 rounded-lg bg-emerald-500/20 text-emerald-400 shrink-0">
+                    <Bus className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-slate-100">Rute Trayek Transum (Klacak.id)</div>
+                    <div className="text-[9px] text-emerald-300">16 Koridor WiraWiri & Suroboyo Bus</div>
+                  </div>
+                </div>
+                <div
+                  className={`toggle-switch ${showTransitRoutes ? 'active' : ''}`}
+                  onClick={onToggleTransitRoutes}
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Toggle Rute Transum Klacak.id"
+                />
+              </div>
+              <div className="flex items-center justify-between pt-1.5 border-t border-emerald-900/50 text-[9px]">
+                <span className="text-slate-400">Status di Peta:</span>
+                <button
+                  type="button"
+                  onClick={onToggleTransitRoutes}
+                  className={`font-mono font-bold px-1.5 py-0.5 rounded text-[8.5px] transition-colors ${
+                    showTransitRoutes
+                      ? 'text-emerald-300 bg-emerald-500/20 border border-emerald-500/30'
+                      : 'text-slate-400 bg-slate-800 border border-slate-700'
+                  }`}
+                >
+                  {showTransitRoutes ? 'TAMPIL (16 TRAYEK)' : 'DISEMBUNYIKAN (OFF)'}
+                </button>
+              </div>
+            </div>
+
             {/* ── Cakupan Perimeter Khusus Komuter (Radius 1 km) ── */}
             <div className="text-[10px] uppercase font-bold tracking-wider text-cyan-400 px-1 pt-1 pb-1.5 flex items-center justify-between">
               <span>Cakupan Area Transit</span>
@@ -385,7 +473,7 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
           <Toggle
             active={showTransitRoutes ?? true}
             onToggle={onToggleTransitRoutes ?? (() => {})}
-            label="Rute Feeder WiraWiri & Bus"
+            label="Rute Feeder WiraWiri & Bus (Klacak.id)"
             icon={<Bus className="w-4 h-4 text-emerald-400" />}
           />
           <Toggle
@@ -639,91 +727,6 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
                 </div>
               </div>
             )}
-
-            {/* Tourist Destinations Panel (Mobile) */}
-            {comActiveTab === 'tourist' && (
-              <div className="px-3 py-3 space-y-2 border-t border-slate-800/60 mt-2">
-                <div className="flex items-center justify-between">
-                  <div className="text-[10px] font-bold text-cyan-400 uppercase tracking-wider">Destinasi Terdekat</div>
-                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-brand-lime/10 text-brand-lime font-bold border border-brand-lime/20">
-                    {touristSpots.length} POI
-                  </span>
-                </div>
-
-                {/* Station Filter Pills */}
-                <div className="bg-slate-900/60 p-2 rounded-lg border border-slate-800 space-y-1.5">
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-100">
-                    <MapPin className="w-3.5 h-3.5 text-brand-lime shrink-0" />
-                    <span className="truncate">Titik Asal: {stationInfo.fullName}</span>
-                  </div>
-                  <div className="flex flex-wrap gap-1 pt-1 border-t border-slate-800/70">
-                    {Array.from(new Set([activeStation, 'gubeng', 'pasar_turi', 'semut', 'wonokromo', 'waru'] as StationId[])).map((stId) => (
-                      <button
-                        key={stId}
-                        onClick={() => onSelectStation?.(stId)}
-                        className={`px-2 py-1 rounded text-[9px] font-bold truncate transition-all text-center ${
-                          activeStation === stId
-                            ? 'bg-brand-lime text-slate-950 shadow-sm'
-                            : 'bg-slate-800 text-slate-400 hover:text-slate-200'
-                        }`}
-                      >
-                        {STATION_NAMES[stId]?.shortName || stId}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="space-y-2 max-h-[300px] overflow-y-auto pr-1">
-                  {touristSpots.map((d) => {
-                    const routeUrl = getDirectionsUrl(
-                      stationInfo.lat,
-                      stationInfo.lng,
-                      d.lat,
-                      d.lng,
-                      d.walkTime.includes('Bus') ? 'transit' : 'walking'
-                    );
-
-                    return (
-                      <div key={d.id} className="bg-slate-800/40 p-2.5 rounded-lg border border-slate-700/50">
-                        <div className="flex justify-between items-start mb-1">
-                          <div className="flex-1 min-w-0">
-                            <div className="text-xs font-bold text-slate-200">{d.name}</div>
-                            <div className="text-[10px] text-slate-400 mt-0.5">{d.description}</div>
-                            <div className="flex items-center gap-2 mt-1 text-[9px] text-slate-400">
-                              <span className="text-amber-300 font-bold flex items-center gap-0.5">
-                                <Star className="w-2.5 h-2.5 fill-amber-300 text-amber-300" /> {d.rating}
-                              </span>
-                              <span>·</span>
-                              <span>{d.distanceFromStation}</span>
-                              <span>·</span>
-                              <span>{d.walkTime}</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="mt-2 pt-1.5 border-t border-slate-700/40 flex items-center justify-between">
-                          <span className="text-[8.5px] text-slate-400">Dari: {stationInfo.shortName}</span>
-                          <a
-                            href={routeUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-brand-lime/15 text-brand-lime text-[9px] font-bold border border-brand-lime/30 hover:bg-brand-lime hover:text-slate-950 transition-all"
-                          >
-                            <Navigation className="w-2.5 h-2.5" />
-                            <span>Petunjuk Rute</span>
-                            <ExternalLink className="w-2.5 h-2.5" />
-                          </a>
-                        </div>
-                      </div>
-                    );
-                  })}
-                  {touristSpots.length === 0 && (
-                    <div className="text-center py-4 text-xs text-slate-500 italic">
-                      Belum ada destinasi wisata terdata di sekitar {stationInfo.shortName}
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
           </>
         )}
 
@@ -861,21 +864,228 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
               </div>
             )}
             
-            {/* Bus Routes Panel */}
+            {/* Bus & Feeder Routes Panel (Klacak.id) */}
             {comActiveTab === 'routes' && (
-              <div className="px-3 py-3 space-y-2 border-t border-slate-800/60 mt-2">
-                <div className="text-[10px] font-bold text-brand-lime uppercase tracking-wider mb-2">Feeder Terintegrasi</div>
-                {busRoutes.map((br, idx) => (
-                  <div key={idx} className="flex items-center justify-between bg-slate-800/30 p-2 rounded border border-slate-700/50">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full" style={{ backgroundColor: br.color }}></div>
-                      <div>
-                        <div className="text-xs font-bold text-slate-200">{br.routeName}</div>
-                        <div className="text-[10px] text-slate-400">Frek: {br.frequency}</div>
-                      </div>
-                    </div>
+              <div className="px-3 py-3 space-y-2.5 border-t border-slate-800/60 mt-2">
+                <div className="flex items-center justify-between">
+                  <div className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <Bus className="w-3.5 h-3.5" />
+                    <span>Trayek Transum (Klacak.id)</span>
                   </div>
-                ))}
+                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 font-bold border border-emerald-500/30">
+                    {trayekFeatures.length || 16} Rute
+                  </span>
+                </div>
+
+                {/* Master Toggle Card */}
+                <div className="p-2.5 rounded-xl bg-slate-900/80 border border-emerald-500/40 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-xs font-bold text-slate-200">Overlay Rute di Peta</div>
+                      <div className="text-[9px] text-slate-400">Nyalakan/matikan seluruh trayek di peta</div>
+                    </div>
+                    <div
+                      className={`toggle-switch ${showTransitRoutes ? 'active' : ''}`}
+                      onClick={onToggleTransitRoutes}
+                      role="button"
+                      tabIndex={0}
+                      aria-label="Toggle Rute Transum di Peta"
+                    />
+                  </div>
+                  <div className="flex items-center justify-between pt-1 border-t border-slate-800 text-[9px]">
+                    <span className="text-slate-400">Status Layer:</span>
+                    <button
+                      type="button"
+                      onClick={onToggleTransitRoutes}
+                      className={`px-2 py-0.5 rounded text-[8.5px] font-bold ${
+                        showTransitRoutes
+                          ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                          : 'bg-slate-800 text-slate-400 border border-slate-700'
+                      }`}
+                    >
+                      {showTransitRoutes ? 'Aktif (Klik Matikan)' : 'Mati (Klik Aktifkan)'}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Filter Mode */}
+                <div className="flex items-center justify-between gap-1">
+                  {(['all', 'feeder', 'bus'] as const).map((mode) => (
+                    <button
+                      key={mode}
+                      onClick={() => setRouteTypeFilter(mode)}
+                      className={`flex-1 py-1 text-[9px] font-bold rounded-lg transition-all text-center ${
+                        routeTypeFilter === mode
+                          ? 'bg-emerald-500 text-slate-950 shadow-sm'
+                          : 'bg-slate-800/60 text-slate-400 hover:text-slate-200'
+                      }`}
+                    >
+                      {mode === 'all' ? 'Semua' : mode === 'feeder' ? 'WiraWiri' : 'Suroboyo Bus'}
+                    </button>
+                  ))}
+                </div>
+
+                {/* List of Trayek */}
+                <div className="space-y-1.5 max-h-[280px] overflow-y-auto pr-1">
+                  {(trayekFeatures.length > 0 ? trayekFeatures : busRoutes).filter((r: any) => {
+                    const isFeeder = (r.is_feeder ?? (r.code ? r.code.startsWith('FD') : false));
+                    if (routeTypeFilter === 'feeder') return isFeeder;
+                    if (routeTypeFilter === 'bus') return !isFeeder;
+                    return true;
+                  }).map((r: any, idx: number) => {
+                    const rId = r.route_id || r.id || `route-${idx}`;
+                    const isHighlighted = selectedTrayekId === rId;
+                    return (
+                      <div
+                        key={idx}
+                        className={`p-2 rounded-lg border transition-all ${
+                          isHighlighted
+                            ? 'bg-emerald-950/40 border-emerald-500/60 shadow-sm'
+                            : 'bg-slate-800/40 border-slate-700/50'
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex items-center gap-2">
+                            <span
+                              className="w-2.5 h-2.5 rounded-full shrink-0"
+                              style={{ backgroundColor: r.color || '#10B981' }}
+                            />
+                            <div>
+                              <div className="text-xs font-bold text-slate-200">
+                                {r.code || r.routeCode || 'TRAYEK'}
+                              </div>
+                              <div className="text-[9px] text-slate-400 line-clamp-1">
+                                {r.display_name || r.name || r.routeName}
+                              </div>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => handleHighlightTrayek(rId)}
+                            className={`px-2 py-0.5 rounded text-[8.5px] font-bold shrink-0 transition-all ${
+                              isHighlighted
+                                ? 'bg-emerald-500 text-slate-950 shadow-sm'
+                                : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
+                            }`}
+                          >
+                            {isHighlighted ? 'Disorot' : 'Sorot'}
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Tourist Destinations Panel (Mobile) */}
+            {comActiveTab === 'tourist' && (
+              <div className="px-3 py-3 space-y-2 border-t border-slate-800/60 mt-2">
+                <div className="flex items-center justify-between">
+                  <div className="text-[10px] font-bold text-cyan-400 uppercase tracking-wider">Destinasi Terdekat</div>
+                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-brand-lime/10 text-brand-lime font-bold border border-brand-lime/20">
+                    {touristSpots.length} POI
+                  </span>
+                </div>
+
+                {/* Station Filter Pills */}
+                <div className="bg-slate-900/60 p-2 rounded-lg border border-slate-800 space-y-1.5">
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-100">
+                    <MapPin className="w-3.5 h-3.5 text-brand-lime shrink-0" />
+                    <span className="truncate">Titik Asal: {stationInfo.fullName}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1 pt-1 border-t border-slate-800/70">
+                    {Array.from(new Set([activeStation, 'gubeng', 'pasar_turi', 'semut', 'wonokromo', 'waru'] as StationId[])).map((stId) => (
+                      <button
+                        key={stId}
+                        type="button"
+                        onClick={() => onSelectStation?.(stId)}
+                        className={`px-2 py-1 rounded text-[9px] font-bold truncate transition-all text-center ${
+                          activeStation === stId
+                            ? 'bg-brand-lime text-slate-950 shadow-sm'
+                            : 'bg-slate-800 text-slate-400 hover:text-slate-200'
+                        }`}
+                      >
+                        {STATION_NAMES[stId]?.shortName || stId}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-2 max-h-[300px] overflow-y-auto pr-1">
+                  {touristSpots.map((d) => {
+                    const routeUrl = getDirectionsUrl(
+                      stationInfo.lat,
+                      stationInfo.lng,
+                      d.lat,
+                      d.lng,
+                      d.walkTime.includes('Bus') ? 'transit' : 'walking'
+                    );
+                    const isRouteActive = activeRoutePlan?.to === d.id;
+
+                    return (
+                      <div key={d.id} className="bg-slate-800/40 p-2.5 rounded-lg border border-slate-700/50">
+                        <div className="flex justify-between items-start mb-1">
+                          <div className="flex-1 min-w-0">
+                            <div className="text-xs font-bold text-slate-200">{d.name}</div>
+                            <div className="text-[10px] text-slate-400 mt-0.5">{d.description}</div>
+                            <div className="flex items-center gap-2 mt-1 text-[9px] text-slate-400">
+                              <span className="text-amber-300 font-bold flex items-center gap-0.5">
+                                <Star className="w-2.5 h-2.5 fill-amber-300 text-amber-300" /> {d.rating}
+                              </span>
+                              <span>·</span>
+                              <span>{d.distanceFromStation}</span>
+                              <span>·</span>
+                              <span>{d.walkTime}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="mt-2 pt-1.5 border-t border-slate-700/40 flex items-center justify-between">
+                          <span className="text-[8.5px] text-slate-400">Dari: {stationInfo.shortName}</span>
+                          <div className="flex items-center gap-1 shrink-0">
+                            <button
+                              type="button"
+                              onClick={() => handleRouteToDestination(d)}
+                              className={`inline-flex items-center gap-1 px-2.5 py-1 rounded text-[9px] font-bold transition-all border ${
+                                isRouteActive
+                                  ? 'bg-brand-lime text-slate-950 border-brand-lime shadow-sm font-extrabold'
+                                  : 'bg-brand-lime/15 text-brand-lime border-brand-lime/30 hover:bg-brand-lime hover:text-slate-950'
+                              }`}
+                              title={isRouteActive ? 'Klik untuk mematikan rute' : 'Tampilkan rute intermoda langsung di peta WebGIS'}
+                            >
+                              {isRouteActive ? (
+                                <>
+                                  <CheckCircle2 className="w-2.5 h-2.5 text-slate-950" />
+                                  <span>Rute Aktif</span>
+                                  <RotateCcw className="w-2.5 h-2.5 opacity-60" />
+                                </>
+                              ) : (
+                                <>
+                                  <Navigation className="w-2.5 h-2.5" />
+                                  <span>Petunjuk Rute</span>
+                                </>
+                              )}
+                            </button>
+                            <a
+                              href={routeUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-1 rounded text-slate-500 hover:text-slate-200 hover:bg-slate-800"
+                              title="Buka rute navigasi di Google Maps eksternal"
+                            >
+                              <ExternalLink className="w-2.5 h-2.5" />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                  {touristSpots.length === 0 && (
+                    <div className="text-center py-4 text-xs text-slate-500 italic">
+                      Belum ada destinasi wisata terdata di sekitar {stationInfo.shortName}
+                    </div>
+                  )}
+                </div>
               </div>
             )}
           </>
@@ -1091,9 +1301,30 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
             <div className="px-2 space-y-0.5">
               <NavItem icon={Layers} label="Lapisan Peta (Layers)" active={comActiveTab === 'layers'} onClick={() => setComActiveTab('layers')} />
               <NavItem icon={Map} label="Legenda (Legends)" active={comActiveTab === 'legends'} onClick={() => setComActiveTab('legends')} />
-                <div className="my-1 border-t border-slate-800/80" />
+              <div className="my-1 border-t border-slate-800/80" />
               <NavItem icon={TrainIcon} label="Jadwal Transit" active={comActiveTab === 'schedules'} onClick={() => setComActiveTab('schedules')} badge={`${trainSchedules.length + busRoutes.length}`} />
+              <NavItem icon={Bus} label="Trayek Transum (Klacak.id)" active={comActiveTab === 'routes'} onClick={() => setComActiveTab('routes')} badge={`${trayekFeatures.length || 16}`} />
               <NavItem icon={MapPin} label="Destinasi Terdekat" active={comActiveTab === 'tourist'} onClick={() => setComActiveTab('tourist')} badge={`${touristSpots.length}`} />
+            </div>
+
+            {/* Quick Toggle for Klacak.id Transit Routes */}
+            <div className="px-3 py-1.5 mx-2 my-1.5 rounded-lg bg-slate-800/60 border border-slate-700/60 flex items-center justify-between">
+              <div className="flex items-center gap-1.5 overflow-hidden">
+                <Bus className={`w-3.5 h-3.5 shrink-0 ${showTransitRoutes ? 'text-brand-lime' : 'text-slate-500'}`} />
+                <span className="text-[9.5px] font-semibold text-slate-300 truncate">Rute Transum:</span>
+              </div>
+              <button
+                type="button"
+                onClick={onToggleTransitRoutes}
+                className={`px-2 py-0.5 rounded text-[8.5px] font-bold transition-all border shrink-0 ${
+                  showTransitRoutes
+                    ? 'bg-brand-lime/20 text-brand-lime border-brand-lime/40 hover:bg-brand-lime hover:text-slate-950'
+                    : 'bg-slate-800 text-slate-400 border-slate-700 hover:text-slate-200'
+                }`}
+                title={showTransitRoutes ? 'Klik untuk mematikan rute trayek transum dari peta' : 'Klik untuk menyalakan rute trayek transum di peta'}
+              >
+                {showTransitRoutes ? '16 Trayek ON' : 'OFF'}
+              </button>
             </div>
 
             {/* General Features Rendering */}
@@ -1280,6 +1511,124 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
               </div>
             )}
 
+            {/* Bus & Feeder Routes Panel (Klacak.id) */}
+            {comActiveTab === 'routes' && (
+              <div className="px-3 py-3 space-y-2.5 border-t border-slate-800/60 mt-2">
+                <div className="flex items-center justify-between">
+                  <div className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <Bus className="w-3.5 h-3.5" />
+                    <span>Trayek Transum (Klacak.id)</span>
+                  </div>
+                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-300 font-bold border border-emerald-500/30">
+                    {trayekFeatures.length || 16} Rute
+                  </span>
+                </div>
+
+                {/* Master Toggle Card */}
+                <div className="p-2.5 rounded-xl bg-slate-900/80 border border-emerald-500/40 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="text-xs font-bold text-slate-200">Overlay Rute di Peta</div>
+                      <div className="text-[9px] text-slate-400">Nyalakan/matikan seluruh trayek di peta</div>
+                    </div>
+                    <div
+                      className={`toggle-switch ${showTransitRoutes ? 'active' : ''}`}
+                      onClick={onToggleTransitRoutes}
+                      role="button"
+                      tabIndex={0}
+                      aria-label="Toggle Rute Transum di Peta"
+                    />
+                  </div>
+                  <div className="flex items-center justify-between pt-1 border-t border-slate-800 text-[9px]">
+                    <span className="text-slate-400">Status Layer:</span>
+                    <button
+                      type="button"
+                      onClick={onToggleTransitRoutes}
+                      className={`px-2 py-0.5 rounded text-[8.5px] font-bold ${
+                        showTransitRoutes
+                          ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                          : 'bg-slate-800 text-slate-400 border border-slate-700'
+                      }`}
+                    >
+                      {showTransitRoutes ? 'Aktif (Klik Matikan)' : 'Mati (Klik Aktifkan)'}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Filter Mode */}
+                <div className="flex items-center justify-between gap-1">
+                  {(['all', 'feeder', 'bus'] as const).map((mode) => (
+                    <button
+                      key={mode}
+                      onClick={() => setRouteTypeFilter(mode)}
+                      className={`flex-1 py-1 text-[9px] font-bold rounded-lg transition-all text-center ${
+                        routeTypeFilter === mode
+                          ? 'bg-emerald-500 text-slate-950 shadow-sm'
+                          : 'bg-slate-800/60 text-slate-400 hover:text-slate-200'
+                      }`}
+                    >
+                      {mode === 'all' ? 'Semua' : mode === 'feeder' ? 'WiraWiri' : 'Suroboyo Bus'}
+                    </button>
+                  ))}
+                </div>
+
+                {/* List of Trayek */}
+                <div className="space-y-1.5 max-h-[300px] overflow-y-auto pr-1">
+                  {(trayekFeatures.length > 0 ? trayekFeatures : busRoutes).filter((r: any) => {
+                    const isFeeder = (r.is_feeder ?? (r.code ? r.code.startsWith('FD') : false));
+                    if (routeTypeFilter === 'feeder') return isFeeder;
+                    if (routeTypeFilter === 'bus') return !isFeeder;
+                    return true;
+                  }).map((r: any, idx: number) => {
+                    const rId = r.route_id || r.id || `route-${idx}`;
+                    const isHighlighted = selectedTrayekId === rId;
+                    return (
+                      <div
+                        key={idx}
+                        className={`p-2 rounded-lg border transition-all ${
+                          isHighlighted
+                            ? 'bg-emerald-950/40 border-emerald-500/60 shadow-sm'
+                            : 'bg-slate-800/40 border-slate-700/50'
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex items-center gap-2">
+                            <span
+                              className="w-2.5 h-2.5 rounded-full shrink-0"
+                              style={{ backgroundColor: r.color || '#10B981' }}
+                            />
+                            <div>
+                              <div className="text-xs font-bold text-slate-200">
+                                {r.code || r.routeCode || 'TRAYEK'}
+                              </div>
+                              <div className="text-[9.5px] text-slate-400 line-clamp-1">
+                                {r.display_name || r.name || r.routeName}
+                              </div>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => handleHighlightTrayek(rId)}
+                            className={`px-2 py-0.5 rounded text-[8.5px] font-bold shrink-0 transition-all ${
+                              isHighlighted
+                                ? 'bg-emerald-500 text-slate-950 shadow-sm'
+                                : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
+                            }`}
+                          >
+                            {isHighlighted ? 'Disorot' : 'Sorot'}
+                          </button>
+                        </div>
+                        <div className="mt-1.5 pt-1 border-t border-slate-700/40 flex items-center justify-between text-[8.5px] text-slate-400">
+                          <span>{r.operator || 'DISHUB Surabaya'}</span>
+                          <span className="font-mono text-emerald-400 font-semibold">{r.fare || 'Rp 5.000'}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
             {/* Tourist Destinations */}
             {comActiveTab === 'tourist' && (
               <div className="px-3 py-3 space-y-2 border-t border-slate-800/60 mt-2">
@@ -1366,23 +1715,46 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
                               </span>
                             </div>
 
-                            {/* Hyperlink Rute Navigasi dari Stasiun Asal */}
+                            {/* Rute Navigasi dari Stasiun Asal */}
                             <div className="mt-2 pt-1.5 border-t border-slate-700/50 flex items-center justify-between">
-                              <span className="text-[8.5px] text-slate-400 truncate max-w-[130px]">
+                              <span className="text-[8.5px] text-slate-400 truncate max-w-[120px]">
                                 Dari: <span className="text-slate-300 font-medium">{stationInfo.shortName}</span>
                               </span>
-                              <a
-                                href={routeUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={(e) => e.stopPropagation()}
-                                className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-brand-lime/15 hover:bg-brand-lime text-brand-lime hover:text-slate-950 text-[9.5px] font-bold transition-all border border-brand-lime/30 hover:border-brand-lime shadow-sm group/btn shrink-0"
-                                title={`Buka rute navigasi dari ${stationInfo.fullName} ke ${d.name} di Google Maps`}
-                              >
-                                <Navigation className="w-3 h-3 shrink-0 group-hover/btn:rotate-45 transition-transform" />
-                                <span>Petunjuk Rute</span>
-                                <ExternalLink className="w-2.5 h-2.5 opacity-70 group-hover/btn:opacity-100" />
-                              </a>
+                              <div className="flex items-center gap-1 shrink-0">
+                                <button
+                                  type="button"
+                                  onClick={() => handleRouteToDestination(d)}
+                                  className={`inline-flex items-center gap-1 px-2.5 py-1 rounded text-[9.5px] font-bold transition-all border shadow-sm group/btn ${
+                                    activeRoutePlan?.to === d.id
+                                      ? 'bg-brand-lime text-slate-950 border-brand-lime font-black'
+                                      : 'bg-brand-lime/15 hover:bg-brand-lime text-brand-lime hover:text-slate-950 border-brand-lime/30 hover:border-brand-lime'
+                                  }`}
+                                  title={activeRoutePlan?.to === d.id ? 'Klik untuk mematikan rute' : `Tampilkan rute intermoda dari ${stationInfo.shortName} ke ${d.name} langsung di peta WebGIS`}
+                                >
+                                  {activeRoutePlan?.to === d.id ? (
+                                    <>
+                                      <CheckCircle2 className="w-3 h-3 text-slate-950" />
+                                      <span>Rute Aktif</span>
+                                      <RotateCcw className="w-2.5 h-2.5 opacity-60 ml-0.5" />
+                                    </>
+                                  ) : (
+                                    <>
+                                      <Navigation className="w-3 h-3 shrink-0 group-hover/btn:rotate-45 transition-transform" />
+                                      <span>Petunjuk Rute</span>
+                                    </>
+                                  )}
+                                </button>
+                                <a
+                                  href={routeUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="p-1 rounded text-slate-500 hover:text-slate-200 hover:bg-slate-800/80 transition-colors"
+                                  title="Buka rute navigasi di Google Maps eksternal"
+                                >
+                                  <ExternalLink className="w-3 h-3 opacity-60 hover:opacity-100" />
+                                </a>
+                              </div>
                             </div>
                           </div>
                         </div>

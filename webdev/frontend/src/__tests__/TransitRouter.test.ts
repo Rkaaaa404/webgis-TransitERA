@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildTransitGraph, findRoute } from '../lib/transit-router';
+import { buildTransitGraph, findRoute, findRouteToDestination } from '../lib/transit-router';
 
 describe('Transit Router Engine', () => {
   it('should build transit graph with station nodes and commuter connections', () => {
@@ -52,5 +52,44 @@ describe('Transit Router Engine', () => {
     expect(plan).not.toBeNull();
     expect(plan?.steps.length).toBeGreaterThan(0);
     expect(plan?.total_min).toBeGreaterThan(0);
+  });
+
+  it('should calculate internal walking route to close destination (e.g. Monumen Kapal Selam)', () => {
+    const plan = findRouteToDestination('gubeng', {
+      name: 'Monumen Kapal Selam (Monkasel)',
+      lat: -7.2658,
+      lng: 112.7505,
+      walkTime: '6 mnt',
+      distanceFromStation: '450 m'
+    });
+
+    expect(plan).toBeDefined();
+    expect(plan.from).toBe('gubeng');
+    expect(plan.steps.length).toBe(1);
+    expect(plan.steps[0].mode).toBe('walk');
+    expect(plan.steps[0].to_station).toBe('Monumen Kapal Selam (Monkasel)');
+    expect(plan.geometry).toBeDefined();
+    expect(plan.geometry?.length).toBeGreaterThanOrEqual(2);
+    expect(plan.total_min).toBeLessThanOrEqual(10);
+  });
+
+  it('should calculate internal multi-modal transit route to farther destination (e.g. Tunjungan Plaza)', () => {
+    const plan = findRouteToDestination('gubeng', {
+      name: 'Tunjungan Plaza (TP 1-6)',
+      lat: -7.2625,
+      lng: 112.7388,
+      walkTime: '15 mnt (Bus R1)',
+      distanceFromStation: '2.1 km'
+    });
+
+    expect(plan).toBeDefined();
+    expect(plan.from).toBe('gubeng');
+    expect(plan.steps.length).toBe(3); // walk to halte -> transit -> walk to TP
+    expect(plan.steps[0].mode).toBe('walk');
+    expect(plan.steps[1].mode).toBe('feeder');
+    expect(plan.steps[2].mode).toBe('walk');
+    expect(plan.has_transfer).toBe(true);
+    expect(plan.geometry?.length).toBeGreaterThanOrEqual(4);
+    expect(plan.route_ids.length).toBeGreaterThan(0);
   });
 });

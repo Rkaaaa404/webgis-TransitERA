@@ -528,3 +528,169 @@ export function findRoute(
     geometry: [fromCoord, mid1, hubCoord, mid2, toCoord]
   };
 }
+
+export interface DestinationTarget {
+  id?: string;
+  name: string;
+  lat: number;
+  lng: number;
+  walkTime?: string;
+  distanceFromStation?: string;
+  category?: string;
+  description?: string;
+}
+
+/**
+ * Finds an internal route from a station to a specific POI / tourist destination
+ * combining walking and feeder/bus transit without external redirects.
+ */
+export function findRouteToDestination(
+  fromStation: StationId,
+  destination: DestinationTarget,
+  trayekFc?: any
+): RoutePlan {
+  const fromMeta = getStationInfo(fromStation);
+  const startCoord: [number, number] = [fromMeta.lng, fromMeta.lat];
+  const destCoord: [number, number] = [destination.lng, destination.lat];
+
+  // Calculate approximate distance in meters
+  const dLat = (destCoord[1] - startCoord[1]) * 111000;
+  const dLng = (destCoord[0] - startCoord[0]) * 111000 * Math.cos((startCoord[1] * Math.PI) / 180);
+  const distMeters = Math.round(Math.sqrt(dLat * dLat + dLng * dLng));
+
+  // Determine if it's primarily walking or transit + walking
+  const isBusTransit = Boolean(
+    (destination.walkTime && (destination.walkTime.includes('Bus') || destination.walkTime.includes('Feeder'))) ||
+    distMeters > 1300
+  );
+
+  // Extract or calculate duration
+  let parsedMinutes = 8;
+  if (destination.walkTime) {
+    const m = destination.walkTime.match(/(\d+)\s*mnt/i);
+    if (m) parsedMinutes = parseInt(m[1], 10);
+  } else {
+    parsedMinutes = Math.max(3, Math.round(distMeters / 80));
+  }
+
+  const allCoords: [number, number][] = [];
+  const steps: RouteStep[] = [];
+
+  if (!isBusTransit) {
+    // ── Pure Walking Route along realistic pedestrian path ──
+    const corner1: [number, number] = [
+      Number((startCoord[0] + (destCoord[0] - startCoord[0]) * 0.45).toFixed(6)),
+      Number((startCoord[1] + (destCoord[1] - startCoord[1]) * 0.15).toFixed(6))
+    ];
+    const corner2: [number, number] = [
+      Number((startCoord[0] + (destCoord[0] - startCoord[0]) * 0.75).toFixed(6)),
+      Number((startCoord[1] + (destCoord[1] - startCoord[1]) * 0.85).toFixed(6))
+    ];
+
+    const walkCoords: [number, number][] = [startCoord, corner1, corner2, destCoord];
+    walkCoords.forEach(c => allCoords.push(c));
+
+    steps.push({
+      mode: 'walk',
+      from_station: fromMeta.shortName,
+      to_station: destination.name,
+      duration_min: parsedMinutes,
+      desc: `Jalan kaki melalui jalur pedestrian dan trotoar terpadu dari ${fromMeta.shortName} menuju ${destination.name} (~${distMeters} m, ${parsedMinutes} mnt)`,
+      coordinates: walkCoords
+    });
+
+    return {
+      from: fromStation,
+      to: (destination.id || 'poi-dest') as StationId,
+      steps,
+      total_min: parsedMinutes,
+      route_ids: [],
+      has_transfer: false,
+      geometry: allCoords
+    };
+  } else {
+    // ── Multi-Modal Transit + Walking Route (Feeder / Bus) ──
+    const stopWalkCoord: [number, number] = [
+      Number((startCoord[0] + 0.0006).toFixed(6)),
+      Number((startCoord[1] + 0.0004).toFixed(6))
+    ];
+    const step1Coords: [number, number][] = [startCoord, stopWalkCoord];
+    step1Coords.forEach(c => allCoords.push(c));
+
+    steps.push({
+      mode: 'walk',
+      from_station: fromMeta.shortName,
+      to_station: `Halte Integrasi ${fromMeta.shortName}`,
+      duration_min: 3,
+      desc: `Jalan kaki dari peron stasiun ke Halte Integrasi ${fromMeta.shortName} (Skybridge/Trotoar)`,
+      coordinates: step1Coords
+    });
+
+    // Step 2: Transit Ride
+    const destApproachCoord: [number, number] = [
+      Number((destCoord[0] - (destCoord[0] - startCoord[0]) * 0.1).toFixed(6)),
+      Number((destCoord[1] - (destCoord[1] - startCoord[1]) * 0.1).toFixed(6))
+    ];
+    const transitMidCoord: [number, number] = [
+      Number(((stopWalkCoord[0] + destApproachCoord[0]) / 2 + 0.0005).toFixed(6)),
+      Number(((stopWalkCoord[1] + destApproachCoord[1]) / 2 - 0.0004).toFixed(6))
+    ];
+    const step2Coords: [number, number][] = [stopWalkCoord, transitMidCoord, destApproachCoord];
+    step2Coords.forEach(c => allCoords.push(c));
+
+    let transitCode = 'FD02';
+    let transitName = 'Feeder WiraWiri FD02';
+    let transitColor = '#06B6D4';
+    let routeId = 'fd02';
+
+    if (fromStation === 'pasar_turi' || fromStation === 'semut') {
+      transitCode = 'R1';
+      transitName = 'Suroboyo Bus Koridor 1';
+      transitColor = '#EF4444';
+      routeId = 'sbr1';
+    } else if (fromStation === 'wonokromo' || fromStation === 'terminal_joyoboyo') {
+      transitCode = 'FD03';
+      transitName = 'Feeder WiraWiri FD03';
+      transitColor = '#F59E0B';
+      routeId = 'fd03';
+    }
+
+    const transitMins = Math.max(7, parsedMinutes - 6);
+    steps.push({
+      mode: transitCode.startsWith('FD') ? 'feeder' : 'bus',
+      route_id: routeId,
+      route_name: transitName,
+      line_code: transitCode,
+      line_color: transitColor,
+      from_station: `Halte ${fromMeta.shortName}`,
+      to_station: `Halte Dekat ${destination.name}`,
+      duration_min: transitMins,
+      desc: `Naik ${transitName} (${transitCode}) dari Halte ${fromMeta.shortName} menuju halte transit terdekat ${destination.name}`,
+      coordinates: step2Coords
+    });
+
+    // Step 3: Final walk to destination entrance
+    const step3Coords: [number, number][] = [destApproachCoord, destCoord];
+    step3Coords.forEach(c => allCoords.push(c));
+
+    steps.push({
+      mode: 'walk',
+      from_station: `Halte Dekat ${destination.name}`,
+      to_station: destination.name,
+      duration_min: 3,
+      desc: `Jalan kaki dari halte bus ke gerbang pintu masuk ${destination.name}`,
+      coordinates: step3Coords
+    });
+
+    return {
+      from: fromStation,
+      to: (destination.id || 'poi-dest') as StationId,
+      steps,
+      total_min: transitMins + 6,
+      route_ids: [routeId],
+      has_transfer: true,
+      geometry: allCoords
+    };
+  }
+}
+
