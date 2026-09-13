@@ -327,3 +327,21 @@ async def test_get_intermodal_routes(client):
     assert len(data["plans"]) >= 2
     assert "steps" in data["plans"][0]
 
+
+@pytest.mark.asyncio
+async def test_get_gistaru_layer(client):
+    response = await client.get("/api/layers/gistaru")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["type"] == "FeatureCollection"
+    assert len(data["features"]) > 0
+
+
+@pytest.mark.asyncio
+async def test_get_bhumi_layer(client):
+    response = await client.get("/api/layers/bhumi")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["type"] == "FeatureCollection"
+    assert len(data["features"]) >= 500
+
