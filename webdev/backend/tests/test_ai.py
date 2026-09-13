@@ -131,3 +131,47 @@ async def test_ai_query_walkability_score(client):
     assert ai_data["function_called"] == "get_area_score"
     assert ai_data["target_station"] == "gubeng"
 
+
+@pytest.mark.asyncio
+async def test_ai_query_landmark_route_tunjungan_plaza(client):
+    """Kueri rute ke landmark (Tunjungan Plaza) dari simpul Gubeng wajib memanggil get_route."""
+    prompt = "[Konteks: Stasiun GUBENG | Persona: COMMUTER] Bagaimana rute intermoda tercepat menuju Tunjungan Plaza dari simpul ini?"
+    response = await client.post("/api/ai/query", json={"prompt": prompt})
+    assert response.status_code == 200
+    res = response.json()
+    assert res["status"] == "success"
+    ai_data = res["data"]
+    assert ai_data["action"] == "show_route"
+    assert "tunjungan plaza" in ai_data["text_response"].lower()
+    assert "feeder" in ai_data["text_response"].lower() or "wirawiri" in ai_data["text_response"].lower()
+
+
+@pytest.mark.asyncio
+async def test_ai_query_feeder_services_benowo(client):
+    """Kueri feeder WiraWiri dan bus di Stasiun Benowo wajib memanggil get_transit_services."""
+    prompt = "[Konteks: Stasiun BENOWO | Persona: COMMUTER] Rute feeder WiraWiri dan Suroboyo Bus apa saja yang lewat di stasiun ini?"
+    response = await client.post("/api/ai/query", json={"prompt": prompt})
+    assert response.status_code == 200
+    res = response.json()
+    assert res["status"] == "success"
+    ai_data = res["data"]
+    assert ai_data["action"] == "show_transit_routes"
+    assert ai_data["target_station"] == "benowo"
+    assert ai_data["function_called"] == "get_transit_services"
+    assert "wirawiri" in ai_data["text_response"].lower()
+    assert "benowo" in ai_data["text_response"].lower()
+
+
+@pytest.mark.asyncio
+async def test_ai_query_fare_and_payment(client):
+    """Kueri tarif dan sistem transfer gratis 2 jam wajib memanggil get_fare_and_payment_info."""
+    prompt = "Berapa tarif Suroboyo Bus dan WiraWiri? Bagaimana cara bayar dan sistem transfer gratis 2 jamnya?"
+    response = await client.post("/api/ai/query", json={"prompt": prompt})
+    assert response.status_code == 200
+    res = response.json()
+    assert res["status"] == "success"
+    ai_data = res["data"]
+    assert "5.000" in ai_data["text_response"]
+    assert "2 jam" in ai_data["text_response"].lower()
+
+

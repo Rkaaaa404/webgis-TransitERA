@@ -243,17 +243,21 @@ export function useTransitRoute(
       }
     });
 
-    // Node Tujuan
+    // Node Tujuan (Gunakan koordinat titik akhir rute & nama destinasi aktual bila menuju POI)
+    const destCoord = allCoords.length > 0 ? allCoords[allCoords.length - 1] : [toMeta.lng, toMeta.lat];
+    const lastStep = activeRoutePlan.steps[activeRoutePlan.steps.length - 1];
+    const destName = lastStep?.to_station || toMeta.shortName;
+
     features.push({
       type: 'Feature',
       id: 'destination-node',
       geometry: {
         type: 'Point',
-        coordinates: [toMeta.lng, toMeta.lat]
+        coordinates: destCoord
       },
       properties: {
         role: 'destination',
-        name: toMeta.shortName
+        name: destName
       }
     });
 

@@ -76,14 +76,21 @@ export default function WebGISPage() {
 
   const handleExecuteMapAction = (aiData: any) => {
     setMapActionTrigger(aiData);
-    if (aiData.target_station) {
+    if (
+      aiData.target_station &&
+      aiData.action !== 'default_narrative' &&
+      aiData.action !== 'show_route'
+    ) {
       setActiveStation(aiData.target_station as StationId);
     }
     if (aiData.target_layer === 'h3_njop_premium') {
       setChoroplethMode('njop_premium');
     }
-    if (aiData.target_layer === 'survey_points') {
+    if (aiData.target_layer === 'survey_points' || aiData.target_layer === 'survey_activity') {
       setShowSurveyPoints(true);
+    }
+    if (aiData.action === 'show_transit_routes' || aiData.target_layer === 'transit_routes') {
+      setShowTransitRoutes(true);
     }
     if (aiData.highlight_h3_index) {
       setHighlightedH3Index(aiData.highlight_h3_index);
@@ -136,6 +143,9 @@ export default function WebGISPage() {
           onToggleGistaru={() => setShowGistaru((v) => !v)}
           showBhumi={showBhumi}
           onToggleBhumi={() => setShowBhumi((v) => !v)}
+          onSelectRoutePlan={setActiveRoutePlan}
+          onHighlightRoute={setActiveRouteIds}
+          activeRoutePlan={activeRoutePlan}
         />
         </div>
 
@@ -239,6 +249,9 @@ export default function WebGISPage() {
                 onToggleGistaru={() => setShowGistaru((v) => !v)}
                 showBhumi={showBhumi}
                 onToggleBhumi={() => setShowBhumi((v) => !v)}
+                onSelectRoutePlan={setActiveRoutePlan}
+                onHighlightRoute={setActiveRouteIds}
+                activeRoutePlan={activeRoutePlan}
                 isMobileMode={true}
               />
             )}

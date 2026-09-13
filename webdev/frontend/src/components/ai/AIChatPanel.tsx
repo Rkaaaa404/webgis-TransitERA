@@ -186,11 +186,11 @@ export const AIChatPanel: React.FC<AIChatPanelProps> = ({
               />
 
               {/* Interactive Spatial Action Badge */}
-              {msg.action && msg.sender === 'assistant' && (
+              {msg.action && msg.action !== 'default_narrative' && msg.sender === 'assistant' && (
                 <div className="mt-2 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px]">
                   <div className="flex items-center gap-1 text-brand-lime font-semibold">
                     <Compass className="w-3 h-3" />
-                    <span>Aksi Peta: {msg.action.replace('_', ' ')}</span>
+                    <span>Aksi Peta: {msg.action.replace(/_/g, ' ')}</span>
                   </div>
                   {msg.targetStation && (
                     <span className="bg-brand-lime/10 text-brand-lime px-1.5 py-0.5 rounded uppercase font-bold text-[9px] border border-brand-lime/30">
