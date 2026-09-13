@@ -9,7 +9,8 @@ const TenantMixChart = dynamic(() => import('./TenantMixChart').then(mod => mod.
   loading: () => <div className="w-full h-48 bg-slate-900/50 backdrop-blur-md rounded-xl animate-pulse" /> 
 });
 import { AIChatPanel } from '@/components/ai/AIChatPanel';
-import { Building, TrendingUp, LineChart, Wallet, ArrowUpRight } from 'lucide-react';
+import { Building, TrendingUp, LineChart, Wallet, ArrowUpRight, Users } from 'lucide-react';
+import { getDemographicsForStation } from '@/lib/dummy-data';
 
 interface InvestorPanelProps {
   station: StationData;
@@ -24,6 +25,8 @@ export const InvestorPanel: React.FC<InvestorPanelProps> = ({
   activeH3Index,
   onExecuteMapAction,
 }) => {
+  const demographics = getDemographicsForStation(activeStation);
+
   // Dummy projection data based on TOD score
   const baseGrowth = 4.5;
   const todMultiplier = (station.tod_readiness_score / 100) * 5; 
@@ -46,7 +49,40 @@ export const InvestorPanel: React.FC<InvestorPanelProps> = ({
 
       {/* Scrollable Content */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        
+        {/* ROW 0: Area Summary (Karakteristik Pasar & Populasi 1km) */}
+        {demographics && (
+          <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4 text-brand-lime" />
+                <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">Area Summary</h4>
+              </div>
+              <span className="text-[9px] text-slate-400 font-mono bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">
+                {demographics.kecamatan} • Radius 1km
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-slate-950/60 rounded-lg p-2.5 text-center border border-slate-800/80">
+                <div className="text-base font-black text-brand-lime font-mono">{demographics.population.toLocaleString()}</div>
+                <div className="text-[10px] text-slate-400 mt-0.5">Populasi</div>
+              </div>
+              <div className="bg-slate-950/60 rounded-lg p-2.5 text-center border border-slate-800/80">
+                <div className="text-base font-black text-cyan-400 font-mono">{demographics.density.toLocaleString()}</div>
+                <div className="text-[10px] text-slate-400 mt-0.5">Jiwa/km²</div>
+              </div>
+              <div className="bg-slate-950/60 rounded-lg p-2.5 text-center border border-slate-800/80">
+                <div className="text-sm font-bold text-emerald-400 font-mono">{demographics.avgIncome}</div>
+                <div className="text-[10px] text-slate-400 mt-0.5">Rata-rata Pendapatan</div>
+              </div>
+              <div className="bg-slate-950/60 rounded-lg p-2.5 text-center border border-slate-800/80">
+                <div className="text-sm font-bold text-brand-teal font-mono">{demographics.employmentRate}%</div>
+                <div className="text-[10px] text-slate-400 mt-0.5">Tingkat Pekerjaan</div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* ROW 1: Retail Score & Tenant Mix */}
         <div className="grid grid-cols-1 gap-4">
           <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4">

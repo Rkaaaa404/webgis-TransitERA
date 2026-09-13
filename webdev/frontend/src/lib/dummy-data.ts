@@ -1,7 +1,59 @@
 import { StationId } from '@/types';
 
 // ═══════════════════════════════════════════════════
-// 1. TRAIN SCHEDULES (KRL SRRL Surabaya)
+// 1. STATION METADATA & HELPER
+// ═══════════════════════════════════════════════════
+
+export interface StationMeta {
+  fullName: string;
+  shortName: string;
+  code: string;
+  jalurCount: number;
+  lat: number;
+  lng: number;
+}
+
+export const STATION_NAMES: Record<string, StationMeta> = {
+  gubeng: { fullName: 'Stasiun Surabaya Gubeng', shortName: 'Gubeng', code: 'SGU', jalurCount: 6, lat: -7.2654, lng: 112.7521 },
+  pasar_turi: { fullName: 'Stasiun Pasar Turi', shortName: 'Pasar Turi', code: 'SBI', jalurCount: 4, lat: -7.2483, lng: 112.7314 },
+  semut: { fullName: 'Stasiun Surabaya Kota (Semut)', shortName: 'Semut', code: 'SB', jalurCount: 3, lat: -7.2415, lng: 112.7441 },
+  wonokromo: { fullName: 'Stasiun Wonokromo', shortName: 'Wonokromo', code: 'WO', jalurCount: 4, lat: -7.3014, lng: 112.7383 },
+  waru: { fullName: 'Stasiun Waru', shortName: 'Waru', code: 'WR', jalurCount: 3, lat: -7.3519, lng: 112.7297 },
+  tandes: { fullName: 'Stasiun Tandes', shortName: 'Tandes', code: 'TDS', jalurCount: 3, lat: -7.2612, lng: 112.6782 },
+  kandangan: { fullName: 'Stasiun Kandangan', shortName: 'Kandangan', code: 'KND', jalurCount: 3, lat: -7.2512, lng: 112.6475 },
+  benowo: { fullName: 'Stasiun Benowo', shortName: 'Benowo', code: 'BNW', jalurCount: 2, lat: -7.2341, lng: 112.5932 },
+  ngagel: { fullName: 'Stasiun Ngagel', shortName: 'Ngagel', code: 'NGL', jalurCount: 2, lat: -7.2882, lng: 112.7471 },
+  margorejo: { fullName: 'Stasiun Margorejo', shortName: 'Margorejo', code: 'MRG', jalurCount: 2, lat: -7.3142, lng: 112.7352 },
+  jemursari: { fullName: 'Stasiun Jemursari', shortName: 'Jemursari', code: 'JMS', jalurCount: 2, lat: -7.3275, lng: 112.7341 },
+  kertomenanggal: { fullName: 'Stasiun Kertomenanggal', shortName: 'Kertomenanggal', code: 'KRM', jalurCount: 2, lat: -7.3412, lng: 112.7321 },
+  sidotopo: { fullName: 'Stasiun Sidotopo', shortName: 'Sidotopo', code: 'SDT', jalurCount: 4, lat: -7.2355, lng: 112.7562 },
+  kalimas: { fullName: 'Stasiun Kalimas', shortName: 'Kalimas', code: 'KLM', jalurCount: 4, lat: -7.2185, lng: 112.7371 },
+  benteng: { fullName: 'Stasiun Benteng', shortName: 'Benteng', code: 'BTG', jalurCount: 2, lat: -7.2091, lng: 112.7365 }
+};
+
+export function getStationInfo(stationId: StationId | string): StationMeta {
+  return STATION_NAMES[stationId] ?? {
+    fullName: `Stasiun ${stationId}`,
+    shortName: stationId.charAt(0).toUpperCase() + stationId.slice(1),
+    code: stationId.substring(0, 3).toUpperCase(),
+    jalurCount: 2,
+    lat: -7.2654,
+    lng: 112.7521
+  };
+}
+
+export function getDirectionsUrl(
+  originLat: number,
+  originLng: number,
+  destLat: number,
+  destLng: number,
+  mode: 'walking' | 'transit' | 'driving' = 'walking'
+): string {
+  return `https://www.google.com/maps/dir/?api=1&origin=${originLat},${originLng}&destination=${destLat},${destLng}&travelmode=${mode}`;
+}
+
+// ═══════════════════════════════════════════════════
+// 2. TRAIN SCHEDULES (KRL SRRL Surabaya & Commuter Lines)
 // ═══════════════════════════════════════════════════
 
 export interface TrainSchedule {
@@ -16,7 +68,258 @@ export interface TrainSchedule {
   status: 'on_time' | 'delayed' | 'departed';
   stopsAt: StationId[];
   type: 'KRL' | 'Komuter' | 'Lokal';
+  direction?: 'southbound' | 'northbound';
+  directionLabel?: string;
+  currentStationName?: string;
+  nextStop?: string;
+  isTerminus?: boolean;
 }
+
+export interface StationStopConfig {
+  station: StationId;
+  dep: string;
+  platform: number;
+}
+
+export interface TrainMasterData {
+  id: string;
+  trainName: string;
+  trainNumber: string;
+  type: 'KRL' | 'Komuter' | 'Lokal';
+  direction: 'southbound' | 'northbound';
+  origin: string;
+  destination: string;
+  terminusArrival: string;
+  status: 'on_time' | 'delayed' | 'departed';
+  stops: StationStopConfig[];
+}
+
+export const TRAIN_MASTER_DATA: TrainMasterData[] = [
+  // 1. KRL SRRL - Pagi Southbound
+  {
+    id: 'krl-01',
+    trainName: 'KRL SRRL',
+    trainNumber: 'KA 7501',
+    type: 'KRL',
+    direction: 'southbound',
+    origin: 'Surabaya Kota (Semut)',
+    destination: 'Sidoarjo',
+    terminusArrival: '06:58',
+    status: 'on_time',
+    stops: [
+      { station: 'semut', dep: '06:15', platform: 1 },
+      { station: 'pasar_turi', dep: '06:23', platform: 3 },
+      { station: 'gubeng', dep: '06:31', platform: 4 },
+      { station: 'wonokromo', dep: '06:41', platform: 2 },
+      { station: 'waru', dep: '06:49', platform: 1 },
+    ],
+  },
+  // 2. Commuter Line Sindro - Pagi Southbound (starts from Pasar Turi)
+  {
+    id: 'cl-sindro-01',
+    trainName: 'Commuter Line Sindro',
+    trainNumber: 'KA 531',
+    type: 'Komuter',
+    direction: 'southbound',
+    origin: 'Pasar Turi',
+    destination: 'Sidoarjo',
+    terminusArrival: '06:18',
+    status: 'on_time',
+    stops: [
+      { station: 'pasar_turi', dep: '05:40', platform: 2 },
+      { station: 'gubeng', dep: '05:49', platform: 4 },
+      { station: 'wonokromo', dep: '05:59', platform: 2 },
+      { station: 'waru', dep: '06:07', platform: 1 },
+    ],
+  },
+  // 3. Commuter Line Dhoho - Pagi Southbound (Semut -> Gubeng -> Wonokromo -> Waru)
+  {
+    id: 'cl-dhoho-01',
+    trainName: 'Commuter Line Dhoho',
+    trainNumber: 'KA 401',
+    type: 'Lokal',
+    direction: 'southbound',
+    origin: 'Surabaya Kota (Semut)',
+    destination: 'Kertosono - Blitar',
+    terminusArrival: '05:42',
+    status: 'on_time',
+    stops: [
+      { station: 'semut', dep: '05:00', platform: 2 },
+      { station: 'gubeng', dep: '05:12', platform: 5 },
+      { station: 'wonokromo', dep: '05:22', platform: 3 },
+      { station: 'waru', dep: '05:31', platform: 2 },
+    ],
+  },
+  // 4. KRL SRRL - Pagi Northbound (Sidoarjo -> Semut)
+  {
+    id: 'krl-02',
+    trainName: 'KRL SRRL',
+    trainNumber: 'KA 7503',
+    type: 'KRL',
+    direction: 'northbound',
+    origin: 'Sidoarjo',
+    destination: 'Surabaya Kota (Semut)',
+    terminusArrival: '07:45',
+    status: 'on_time',
+    stops: [
+      { station: 'waru', dep: '07:12', platform: 2 },
+      { station: 'wonokromo', dep: '07:20', platform: 1 },
+      { station: 'gubeng', dep: '07:30', platform: 1 },
+      { station: 'pasar_turi', dep: '07:38', platform: 2 },
+      { station: 'semut', dep: '07:45', platform: 2 },
+    ],
+  },
+  // 5. Commuter Line Penataran - Pagi Southbound
+  {
+    id: 'cl-penataran-01',
+    trainName: 'Commuter Line Penataran',
+    trainNumber: 'KA 421',
+    type: 'Lokal',
+    direction: 'southbound',
+    origin: 'Surabaya Kota (Semut)',
+    destination: 'Malang - Blitar',
+    terminusArrival: '07:54',
+    status: 'on_time',
+    stops: [
+      { station: 'semut', dep: '07:10', platform: 1 },
+      { station: 'gubeng', dep: '07:22', platform: 5 },
+      { station: 'wonokromo', dep: '07:33', platform: 3 },
+      { station: 'waru', dep: '07:42', platform: 2 },
+    ],
+  },
+  // 6. Commuter Line Sindro - Pagi Northbound (Terminates at Pasar Turi)
+  {
+    id: 'cl-sindro-02',
+    trainName: 'Commuter Line Sindro',
+    trainNumber: 'KA 532',
+    type: 'Komuter',
+    direction: 'northbound',
+    origin: 'Sidoarjo',
+    destination: 'Pasar Turi',
+    terminusArrival: '08:55',
+    status: 'on_time',
+    stops: [
+      { station: 'waru', dep: '08:27', platform: 2 },
+      { station: 'wonokromo', dep: '08:35', platform: 1 },
+      { station: 'gubeng', dep: '08:45', platform: 1 },
+      { station: 'pasar_turi', dep: '08:55', platform: 2 },
+    ],
+  },
+  // 7. KRL SRRL - Pagi Menjelang Siang Southbound
+  {
+    id: 'krl-03',
+    trainName: 'KRL SRRL',
+    trainNumber: 'KA 7505',
+    type: 'KRL',
+    direction: 'southbound',
+    origin: 'Surabaya Kota (Semut)',
+    destination: 'Sidoarjo',
+    terminusArrival: '09:14',
+    status: 'delayed',
+    stops: [
+      { station: 'semut', dep: '08:30', platform: 1 },
+      { station: 'pasar_turi', dep: '08:38', platform: 3 },
+      { station: 'gubeng', dep: '08:46', platform: 4 },
+      { station: 'wonokromo', dep: '08:56', platform: 2 },
+      { station: 'waru', dep: '09:04', platform: 1 },
+    ],
+  },
+  // 8. KRL SRRL - Siang Northbound
+  {
+    id: 'krl-04',
+    trainName: 'KRL SRRL',
+    trainNumber: 'KA 7507',
+    type: 'KRL',
+    direction: 'northbound',
+    origin: 'Sidoarjo',
+    destination: 'Surabaya Kota (Semut)',
+    terminusArrival: '10:00',
+    status: 'on_time',
+    stops: [
+      { station: 'waru', dep: '09:27', platform: 2 },
+      { station: 'wonokromo', dep: '09:35', platform: 1 },
+      { station: 'gubeng', dep: '09:45', platform: 1 },
+      { station: 'pasar_turi', dep: '09:53', platform: 2 },
+      { station: 'semut', dep: '10:00', platform: 2 },
+    ],
+  },
+  // 9. KRL SRRL - Siang Southbound
+  {
+    id: 'krl-05',
+    trainName: 'KRL SRRL',
+    trainNumber: 'KA 7509',
+    type: 'KRL',
+    direction: 'southbound',
+    origin: 'Surabaya Kota (Semut)',
+    destination: 'Sidoarjo',
+    terminusArrival: '12:44',
+    status: 'on_time',
+    stops: [
+      { station: 'semut', dep: '12:00', platform: 1 },
+      { station: 'pasar_turi', dep: '12:08', platform: 3 },
+      { station: 'gubeng', dep: '12:16', platform: 4 },
+      { station: 'wonokromo', dep: '12:26', platform: 2 },
+      { station: 'waru', dep: '12:34', platform: 1 },
+    ],
+  },
+  // 10. KRL SRRL - Sore Northbound
+  {
+    id: 'krl-06',
+    trainName: 'KRL SRRL',
+    trainNumber: 'KA 7511',
+    type: 'KRL',
+    direction: 'northbound',
+    origin: 'Sidoarjo',
+    destination: 'Surabaya Kota (Semut)',
+    terminusArrival: '15:15',
+    status: 'on_time',
+    stops: [
+      { station: 'waru', dep: '14:42', platform: 2 },
+      { station: 'wonokromo', dep: '14:50', platform: 1 },
+      { station: 'gubeng', dep: '15:00', platform: 1 },
+      { station: 'pasar_turi', dep: '15:08', platform: 2 },
+      { station: 'semut', dep: '15:15', platform: 2 },
+    ],
+  },
+  // 11. KRL SRRL - Sore Rush Hour Southbound
+  {
+    id: 'krl-07',
+    trainName: 'KRL SRRL (Rush Hour)',
+    trainNumber: 'KA 7513',
+    type: 'KRL',
+    direction: 'southbound',
+    origin: 'Surabaya Kota (Semut)',
+    destination: 'Sidoarjo',
+    terminusArrival: '17:48',
+    status: 'on_time',
+    stops: [
+      { station: 'semut', dep: '17:00', platform: 1 },
+      { station: 'pasar_turi', dep: '17:08', platform: 3 },
+      { station: 'gubeng', dep: '17:17', platform: 4 },
+      { station: 'wonokromo', dep: '17:28', platform: 2 },
+      { station: 'waru', dep: '17:36', platform: 1 },
+    ],
+  },
+  // 12. KRL SRRL - Malam Rush Hour Northbound
+  {
+    id: 'krl-08',
+    trainName: 'KRL SRRL (Rush Hour)',
+    trainNumber: 'KA 7515',
+    type: 'KRL',
+    direction: 'northbound',
+    origin: 'Sidoarjo',
+    destination: 'Surabaya Kota (Semut)',
+    terminusArrival: '19:30',
+    status: 'departed',
+    stops: [
+      { station: 'waru', dep: '18:57', platform: 2 },
+      { station: 'wonokromo', dep: '19:05', platform: 1 },
+      { station: 'gubeng', dep: '19:15', platform: 1 },
+      { station: 'pasar_turi', dep: '19:23', platform: 2 },
+      { station: 'semut', dep: '19:30', platform: 2 },
+    ],
+  },
+];
 
 export const TRAIN_SCHEDULES: TrainSchedule[] = [
   {
@@ -26,102 +329,13 @@ export const TRAIN_SCHEDULES: TrainSchedule[] = [
     origin: 'Surabaya Kota (Semut)',
     destination: 'Sidoarjo',
     departureTime: '06:15',
-    arrivalTime: '06:52',
+    arrivalTime: '06:58',
     platform: 1,
     status: 'on_time',
     stopsAt: ['semut', 'pasar_turi', 'gubeng', 'wonokromo', 'waru'],
     type: 'KRL',
-  },
-  {
-    id: 'krl-02',
-    trainName: 'KRL SRRL',
-    trainNumber: 'KA 7503',
-    origin: 'Sidoarjo',
-    destination: 'Surabaya Kota (Semut)',
-    departureTime: '07:00',
-    arrivalTime: '07:38',
-    platform: 2,
-    status: 'on_time',
-    stopsAt: ['waru', 'wonokromo', 'gubeng', 'pasar_turi', 'semut'],
-    type: 'KRL',
-  },
-  {
-    id: 'krl-03',
-    trainName: 'KRL SRRL',
-    trainNumber: 'KA 7505',
-    origin: 'Surabaya Kota (Semut)',
-    destination: 'Sidoarjo',
-    departureTime: '08:30',
-    arrivalTime: '09:08',
-    platform: 1,
-    status: 'delayed',
-    stopsAt: ['semut', 'pasar_turi', 'gubeng', 'wonokromo', 'waru'],
-    type: 'KRL',
-  },
-  {
-    id: 'krl-04',
-    trainName: 'KRL SRRL',
-    trainNumber: 'KA 7507',
-    origin: 'Sidoarjo',
-    destination: 'Surabaya Kota (Semut)',
-    departureTime: '09:15',
-    arrivalTime: '09:53',
-    platform: 2,
-    status: 'on_time',
-    stopsAt: ['waru', 'wonokromo', 'gubeng', 'pasar_turi', 'semut'],
-    type: 'KRL',
-  },
-  {
-    id: 'krl-05',
-    trainName: 'KRL SRRL',
-    trainNumber: 'KA 7509',
-    origin: 'Surabaya Kota (Semut)',
-    destination: 'Sidoarjo',
-    departureTime: '12:00',
-    arrivalTime: '12:38',
-    platform: 1,
-    status: 'on_time',
-    stopsAt: ['semut', 'pasar_turi', 'gubeng', 'wonokromo', 'waru'],
-    type: 'KRL',
-  },
-  {
-    id: 'krl-06',
-    trainName: 'KRL SRRL',
-    trainNumber: 'KA 7511',
-    origin: 'Sidoarjo',
-    destination: 'Surabaya Kota (Semut)',
-    departureTime: '14:30',
-    arrivalTime: '15:08',
-    platform: 2,
-    status: 'on_time',
-    stopsAt: ['waru', 'wonokromo', 'gubeng', 'pasar_turi', 'semut'],
-    type: 'KRL',
-  },
-  {
-    id: 'krl-07',
-    trainName: 'KRL SRRL',
-    trainNumber: 'KA 7513',
-    origin: 'Surabaya Kota (Semut)',
-    destination: 'Sidoarjo',
-    departureTime: '17:00',
-    arrivalTime: '17:38',
-    platform: 1,
-    status: 'on_time',
-    stopsAt: ['semut', 'pasar_turi', 'gubeng', 'wonokromo', 'waru'],
-    type: 'KRL',
-  },
-  {
-    id: 'krl-08',
-    trainName: 'KRL SRRL',
-    trainNumber: 'KA 7515',
-    origin: 'Sidoarjo',
-    destination: 'Surabaya Kota (Semut)',
-    departureTime: '18:45',
-    arrivalTime: '19:23',
-    platform: 2,
-    status: 'departed',
-    stopsAt: ['waru', 'wonokromo', 'gubeng', 'pasar_turi', 'semut'],
-    type: 'KRL',
+    direction: 'southbound',
+    directionLabel: 'Arah Sidoarjo (Selatan)',
   },
 ];
 
@@ -241,6 +455,92 @@ export const BUS_ROUTES: BusRoute[] = [
       { name: 'Jl. Mayjend Sungkono', lat: -7.2920, lng: 112.7200 },
       { name: 'Ciputra World', lat: -7.2890, lng: 112.7100 },
       { name: 'Pakuwon Mall', lat: -7.2850, lng: 112.6980 },
+    ],
+    estimatedTime: '25 menit',
+  },
+  // WIRAWIRI FEEDER INTEGRATION
+  {
+    id: 'fd-01',
+    routeCode: 'FD-01 (WiraWiri)',
+    routeName: 'Stasiun Pasar Turi ↔ Tunjungan ↔ Balai Pemuda',
+    color: '#06b6d4',
+    frequency: 'Setiap 10 menit',
+    operatingHours: '05:30 - 21:00 WIB',
+    fare: 'Rp 5.000 (QRIS / Kartu)',
+    nearestStation: 'pasar_turi',
+    stops: [
+      { name: 'Stasiun Pasar Turi', lat: -7.2478, lng: 112.7306 },
+      { name: 'Siola Tunjungan', lat: -7.2560, lng: 112.7380 },
+      { name: 'Tunjungan Plaza', lat: -7.2620, lng: 112.7390 },
+      { name: 'Balai Pemuda (Alun-Alun)', lat: -7.2635, lng: 112.7445 },
+    ],
+    estimatedTime: '15 menit',
+  },
+  {
+    id: 'fd-07',
+    routeCode: 'FD-07 (WiraWiri)',
+    routeName: 'TIJ Joyoboyo ↔ Bratang ↔ Stasiun Gubeng',
+    color: '#06b6d4',
+    frequency: 'Setiap 10 menit',
+    operatingHours: '05:30 - 21:30 WIB',
+    fare: 'Rp 5.000 (QRIS / Kartu)',
+    nearestStation: 'gubeng',
+    stops: [
+      { name: 'Stasiun Gubeng Baru', lat: -7.2654, lng: 112.7521 },
+      { name: 'Grand City', lat: -7.2610, lng: 112.7505 },
+      { name: 'Terminal Bratang', lat: -7.2930, lng: 112.7600 },
+      { name: 'Terminal Intermoda Joyoboyo', lat: -7.2990, lng: 112.7370 },
+    ],
+    estimatedTime: '20 menit',
+  },
+  {
+    id: 'fd-03',
+    routeCode: 'FD-03 (WiraWiri)',
+    routeName: 'Stasiun Kota (Semut) ↔ Ampel ↔ Kenjeran',
+    color: '#06b6d4',
+    frequency: 'Setiap 12 menit',
+    operatingHours: '05:30 - 21:00 WIB',
+    fare: 'Rp 5.000 (QRIS / Kartu)',
+    nearestStation: 'semut',
+    stops: [
+      { name: 'Stasiun Surabaya Kota', lat: -7.2372, lng: 112.7431 },
+      { name: 'Wisata Religi Ampel', lat: -7.2300, lng: 112.7430 },
+      { name: 'Pegirian', lat: -7.2340, lng: 112.7480 },
+      { name: 'Sentra Ikan Bulak Kenjeran', lat: -7.2350, lng: 112.7950 },
+    ],
+    estimatedTime: '25 menit',
+  },
+  {
+    id: 'fd-04',
+    routeCode: 'FD-04 (WiraWiri)',
+    routeName: 'Stasiun Wonokromo ↔ TIJ Joyoboyo ↔ KBS',
+    color: '#06b6d4',
+    frequency: 'Setiap 10 menit',
+    operatingHours: '05:30 - 21:00 WIB',
+    fare: 'Rp 5.000 (QRIS / Kartu)',
+    nearestStation: 'wonokromo',
+    stops: [
+      { name: 'Stasiun Wonokromo', lat: -7.3014, lng: 112.7383 },
+      { name: 'DTC Wonokromo', lat: -7.3050, lng: 112.7380 },
+      { name: 'TIJ Joyoboyo', lat: -7.2990, lng: 112.7370 },
+      { name: 'Kebon Binatang Surabaya (KBS)', lat: -7.2960, lng: 112.7360 },
+    ],
+    estimatedTime: '15 menit',
+  },
+  {
+    id: 'fd-06',
+    routeCode: 'FD-06 (WiraWiri)',
+    routeName: 'TIJ Joyoboyo ↔ Stasiun Waru ↔ Bandara Juanda',
+    color: '#06b6d4',
+    frequency: 'Setiap 15 menit',
+    operatingHours: '05:00 - 21:30 WIB',
+    fare: 'Rp 5.000 (QRIS / Kartu)',
+    nearestStation: 'waru',
+    stops: [
+      { name: 'Terminal Purabaya', lat: -7.3530, lng: 112.7320 },
+      { name: 'Stasiun Waru', lat: -7.3519, lng: 112.7297 },
+      { name: 'Aloha Juanda', lat: -7.3680, lng: 112.7400 },
+      { name: 'Bandara Internasional Juanda T1', lat: -7.3790, lng: 112.7870 },
     ],
     estimatedTime: '25 menit',
   },
@@ -466,7 +766,65 @@ export const ENVIRONMENT_DATA: EnvironmentData[] = [
 // ═══════════════════════════════════════════════════
 
 export function getTrainSchedulesForStation(stationId: StationId): TrainSchedule[] {
-  return TRAIN_SCHEDULES.filter((t) => t.stopsAt.includes(stationId));
+  const stationMeta = getStationInfo(stationId);
+  const results: TrainSchedule[] = [];
+
+  for (const train of TRAIN_MASTER_DATA) {
+    const stopIdx = train.stops.findIndex((s) => s.station === stationId);
+    if (stopIdx === -1) continue; // Skip trains that do not call at this station
+
+    const currentStop = train.stops[stopIdx];
+    const isFirstStop = stopIdx === 0;
+    const isLastStop = stopIdx === train.stops.length - 1;
+
+    // Determine next stop
+    let nextStop: string | undefined;
+    if (isLastStop) {
+      if (train.direction === 'southbound') {
+        nextStop = 'Stasiun Sidoarjo (Terminus)';
+      } else {
+        nextStop = undefined;
+      }
+    } else {
+      const nextStationId = train.stops[stopIdx + 1].station;
+      nextStop = STATION_NAMES[nextStationId]?.shortName || nextStationId;
+    }
+
+    // Check if this train terminates at this station
+    const isTerminus = isLastStop && (
+      train.direction === 'northbound' && (stationId === 'semut' || (stationId === 'pasar_turi' && train.destination === 'Pasar Turi'))
+    );
+
+    const stopsAtList = train.stops.map((s) => s.station);
+
+    // Dynamic origin and destination display
+    const originDisplay = isFirstStop ? stationMeta.fullName : train.origin;
+    const destDisplay = isTerminus ? `Pemberhentian Akhir (${stationMeta.shortName})` : train.destination;
+
+    results.push({
+      id: `${train.id}-${stationId}`,
+      trainName: train.trainName,
+      trainNumber: train.trainNumber,
+      type: train.type,
+      direction: train.direction,
+      directionLabel: train.direction === 'southbound' 
+        ? 'Arah Sidoarjo (Selatan)' 
+        : (isTerminus ? `Tiba di ${stationMeta.shortName}` : 'Arah Surabaya Kota (Utara)'),
+      origin: originDisplay,
+      destination: destDisplay,
+      departureTime: currentStop.dep,
+      arrivalTime: train.terminusArrival,
+      platform: currentStop.platform,
+      status: train.status,
+      stopsAt: stopsAtList,
+      currentStationName: stationMeta.fullName,
+      nextStop,
+      isTerminus,
+    });
+  }
+
+  // Sort chronologically by departure time
+  return results.sort((a, b) => a.departureTime.localeCompare(b.departureTime));
 }
 
 export function getBusRoutesForStation(stationId: StationId): BusRoute[] {

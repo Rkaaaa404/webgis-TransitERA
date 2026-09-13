@@ -61,9 +61,6 @@ export default function WebGISPage() {
 
   // Auto-switch defaults when persona changes
   useEffect(() => {
-    const config = getPersonaConfig(activePersona);
-    setBasemapStyle(config.defaultBasemap);
-    
     if (activePersona === 'government') setChoroplethMode('tod_score');
     if (activePersona === 'business') setChoroplethMode('njop_premium');
     if (activePersona === 'commuter') setChoroplethMode('typology');
@@ -107,6 +104,7 @@ export default function WebGISPage() {
         <SidebarContainer
           activePersona={activePersona}
           activeStation={activeStation}
+          onSelectStation={(stId) => setActiveStation(stId)}
           choroplethMode={choroplethMode}
           onChangeChoroplethMode={setChoroplethMode}
           showSurveyPoints={showSurveyPoints}
@@ -189,6 +187,7 @@ export default function WebGISPage() {
               <SidebarContainer
                 activePersona={activePersona}
                 activeStation={activeStation}
+                onSelectStation={(stId) => setActiveStation(stId)}
                 choroplethMode={choroplethMode}
                 onChangeChoroplethMode={setChoroplethMode}
                 showSurveyPoints={showSurveyPoints}
