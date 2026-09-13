@@ -275,6 +275,40 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
             className="flex-1 h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-brand-lime" />
         </div>
       </div>
+
+      {/* Quick Layer Overlays */}
+      <div className="pt-2 border-t border-slate-800">
+        <div className="flex items-center justify-between mb-1.5">
+          <label className="text-[10px] text-slate-300 font-bold uppercase tracking-wider">Lapisan Spasial Cepat</label>
+          <span className="text-[9px] text-brand-lime font-mono">Peta</span>
+        </div>
+        <div className="space-y-1 bg-slate-900/50 p-1.5 rounded-lg border border-slate-800">
+          <Toggle
+            active={showTransitRoutes ?? true}
+            onToggle={onToggleTransitRoutes ?? (() => {})}
+            label="Rute Feeder WiraWiri & Bus"
+            icon={<Bus className="w-4 h-4 text-emerald-400" />}
+          />
+          <Toggle
+            active={showGistaru ?? false}
+            onToggle={onToggleGistaru ?? (() => {})}
+            label="Kawasan BWP (GISTARU)"
+            icon={<Map className="w-4 h-4 text-amber-400" />}
+          />
+          <Toggle
+            active={showBhumi ?? false}
+            onToggle={onToggleBhumi ?? (() => {})}
+            label="Persil Tanah (Bhumi ATR)"
+            icon={<ScrollText className="w-4 h-4 text-emerald-400" />}
+          />
+          <Toggle
+            active={showEconomicPOI ?? false}
+            onToggle={onToggleEconomicPOI ?? (() => {})}
+            label="Economic POI (Mall & Retail)"
+            icon={<Building2 className="w-4 h-4 text-amber-400" />}
+          />
+        </div>
+      </div>
     </div>
   );
 
@@ -1134,11 +1168,18 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
                   </div>
                 </div>
 
-                {/* Filters */}
+                {/* Filters & Route Overlay */}
                 <div className="bg-slate-900/40 p-2 rounded-lg border border-slate-800 space-y-1.5">
-                  <div className="text-[9px] text-slate-500 font-bold uppercase tracking-wider">FILTER MODA</div>
-                  <Toggle active={showKRL} onToggle={() => setShowKRL(!showKRL)} label={`Kereta Commuter (${filteredTrains.length})`} />
-                  <Toggle active={showBus} onToggle={() => setShowBus(!showBus)} label={`Feeder Terintegrasi (${busRoutes.length})`} />
+                  <div className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">FILTER MODA &amp; PETA</div>
+                  <Toggle active={showKRL} onToggle={() => setShowKRL(!showKRL)} label={`Kereta Commuter (${filteredTrains.length})`} icon={<TrainIcon className="w-4 h-4 text-cyan-400" />} />
+                  <Toggle active={showBus} onToggle={() => setShowBus(!showBus)} label={`Feeder Terintegrasi (${busRoutes.length})`} icon={<Bus className="w-4 h-4 text-emerald-400" />} />
+                  <div className="pt-1 border-t border-slate-800/60" />
+                  <Toggle
+                    active={showTransitRoutes ?? true}
+                    onToggle={onToggleTransitRoutes ?? (() => {})}
+                    label="Rute Feeder WiraWiri di Peta"
+                    icon={<Bus className="w-4 h-4 text-brand-lime" />}
+                  />
                 </div>
 
                 <div className="space-y-2.5 max-h-[320px] overflow-y-auto pr-1">

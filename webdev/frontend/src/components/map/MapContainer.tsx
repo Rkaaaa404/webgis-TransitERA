@@ -232,7 +232,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
               if (props.connected_stations) {
                 const parsed = typeof props.connected_stations === 'string' ? JSON.parse(props.connected_stations) : props.connected_stations;
                 if (Array.isArray(parsed) && parsed.length > 0) {
-                  connStations = parsed.map((s: any) => `<span style="background: rgba(15,23,42,0.1); border: 1px solid rgba(15,23,42,0.2); padding: 1px 5px; border-radius: 4px; font-size: 9.5px; margin-right: 3px; display: inline-block;">${s.station_name.replace('Stasiun ', '')} (${s.distance_m}m)</span>`).join('');
+                  connStations = parsed.map((s: any) => `<span style="background: rgba(30,41,59,0.85); border: 1px solid rgba(148,163,184,0.3); color: #38bdf8; padding: 2px 6px; border-radius: 4px; font-size: 9.5px; margin-right: 3px; display: inline-block;">${s.station_name.replace('Stasiun ', '')} (${s.distance_m}m)</span>`).join('');
                 }
               }
             } catch {}
@@ -240,25 +240,25 @@ export const MapContainer: React.FC<MapContainerProps> = ({
             new maplibregl.Popup({ closeButton: true, maxWidth: '320px' })
               .setLngLat(e.lngLat)
               .setHTML(`
-                <div style="font-family: system-ui, sans-serif; padding: 6px 4px; font-size: 12px; color: #0f172a;">
-                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px;">
-                    <span style="background: ${props.color || '#059669'}; color: #ffffff; padding: 2px 7px; border-radius: 4px; font-size: 9px; font-weight: 700; text-transform: uppercase;">
+                <div style="font-family: system-ui, -apple-system, sans-serif; padding: 4px 2px; font-size: 12px; color: #f8fafc; line-height: 1.45;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 6px;">
+                    <span style="background: ${props.color || '#059669'}; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em;">
                       ${props.code || 'Trayek'}
                     </span>
-                    <span style="font-size: 10px; color: #64748b; font-weight: 600;">
+                    <span style="font-size: 10px; color: #94a3b8; font-weight: 600;">
                       ${props.hours || '05:30 - 21:00 WIB'}
                     </span>
                   </div>
-                  <strong style="font-size: 13px; color: #0f172a; display: block; margin-top: 4px;">
+                  <strong style="font-size: 14px; color: #ffffff; display: block; margin-bottom: 5px; letter-spacing: -0.01em;">
                     ${props.display_name || props.title}
                   </strong>
-                  <div style="margin: 4px 0; font-size: 11px; color: #475569;">
-                    <span>Operator: <strong>${props.operator || 'WiraWiri / Suroboyo Bus'}</strong></span><br/>
-                    <span>Tarif: <strong style="color: #059669;">${props.fare || 'Rp 5.000'}</strong></span>
+                  <div style="margin: 4px 0 6px 0; font-size: 11.5px; color: #cbd5e1; display: flex; flex-direction: column; gap: 3px;">
+                    <div><span style="color: #94a3b8;">Operator:</span> <strong style="color: #f1f5f9;">${props.operator || 'WiraWiri / Suroboyo Bus'}</strong></div>
+                    <div><span style="color: #94a3b8;">Tarif Terintegrasi:</span> <strong style="color: #34d399;">${props.fare || 'Rp 5.000'}</strong></div>
                   </div>
                   ${connStations ? `
-                    <div style="margin-top: 6px; padding-top: 5px; border-top: 1px solid #e2e8f0;">
-                      <div style="font-size: 9.5px; font-weight: 700; color: #64748b; margin-bottom: 3px;">INTEGRASI STASIUN KERETA:</div>
+                    <div style="margin-top: 6px; padding-top: 5px; border-top: 1px solid rgba(148,163,184,0.2);">
+                      <div style="font-size: 9.5px; font-weight: 700; color: #94a3b8; margin-bottom: 4px;">INTEGRASI STASIUN KERETA:</div>
                       <div>${connStations}</div>
                     </div>
                   ` : ''}
@@ -535,12 +535,12 @@ export const MapContainer: React.FC<MapContainerProps> = ({
             new maplibregl.Popup()
               .setLngLat(e.lngLat)
               .setHTML(`
-                <div style="font-family: sans-serif; padding: 4px; font-size: 12px;">
-                  <div style="display: flex; items-center; gap: 6px; margin-bottom: 2px;">
-                    <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981; margin-top: 3px;"></span>
-                    <strong style="color: #059669;">${props.NAMA || 'Halte Bus'}</strong>
+                <div style="font-family: system-ui, -apple-system, sans-serif; padding: 4px 2px; font-size: 12px; color: #f8fafc;">
+                  <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                    <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #34d399;"></span>
+                    <strong style="color: #34d399; font-size: 13px;">${props.NAMA || 'Halte Bus'}</strong>
                   </div>
-                  <span style="color: #4b5563; font-size: 11px;">${props.ALAMAT || 'Kota Surabaya'}</span>
+                  <span style="color: #cbd5e1; font-size: 11px;">${props.ALAMAT || 'Kota Surabaya'}</span>
                 </div>
               `)
               .addTo(currentMap);
@@ -610,12 +610,12 @@ export const MapContainer: React.FC<MapContainerProps> = ({
             new maplibregl.Popup()
               .setLngLat(e.lngLat)
               .setHTML(`
-                <div style="font-family: sans-serif; padding: 4px; font-size: 12px;">
-                  <div style="display: flex; items-center; gap: 6px; margin-bottom: 2px;">
-                    <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #2563eb; margin-top: 3px;"></span>
-                    <strong style="color: #2563EB;">Zona Risiko Genangan Banjir</strong>
+                <div style="font-family: system-ui, -apple-system, sans-serif; padding: 4px 2px; font-size: 12px; color: #f8fafc;">
+                  <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                    <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #60a5fa;"></span>
+                    <strong style="color: #60a5fa; font-size: 13px;">Zona Risiko Genangan Banjir</strong>
                   </div>
-                  <span style="font-size: 11px; color: #475569;">Tingkat Kerentanan: ${props.Kelas || 'Terancam Banjir'}</span>
+                  <span style="font-size: 11px; color: #cbd5e1;">Tingkat Kerentanan: <strong style="color: #ffffff;">${props.Kelas || 'Terancam Banjir'}</strong></span>
                 </div>
               `)
               .addTo(currentMap);
@@ -771,12 +771,12 @@ export const MapContainer: React.FC<MapContainerProps> = ({
             'default': '#94a3b8',
           };
 
-          const beforeStationId = m.getLayer('station-points-halo') ? 'station-points-halo' : undefined;
+          const underlayBeforeId = m.getLayer('h3-hex-fill') ? 'h3-hex-fill' : (m.getLayer('transit-routes-line') ? 'transit-routes-line' : undefined);
 
           if (!m.getSource('gistaru-source')) {
             m.addSource('gistaru-source', { type: 'geojson', data });
 
-            // Polygon fill (rendered under station markers)
+            // Polygon fill (rendered under H3 / transit markers)
             m.addLayer({
               id: 'gistaru-fill',
               type: 'fill',
@@ -792,9 +792,9 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                   'I', ZONA_COLORS['I'],
                   ZONA_COLORS['default'],
                 ],
-                'fill-opacity': 0.35,
+                'fill-opacity': 0.40,
               },
-            }, beforeStationId);
+            }, underlayBeforeId);
 
             // Polygon border
             m.addLayer({
@@ -803,10 +803,10 @@ export const MapContainer: React.FC<MapContainerProps> = ({
               source: 'gistaru-source',
               paint: {
                 'line-color': '#d97706',
-                'line-width': 1.0,
-                'line-opacity': 0.75,
+                'line-width': 1.2,
+                'line-opacity': 0.85,
               },
-            }, beforeStationId);
+            }, underlayBeforeId);
 
             bringStationMarkersToFront(m);
 
@@ -814,21 +814,27 @@ export const MapContainer: React.FC<MapContainerProps> = ({
             m.on('click', 'gistaru-fill', (e) => {
               const p = e.features?.[0]?.properties;
               if (!p) return;
-              new maplibregl.Popup({ maxWidth: '280px' })
+              new maplibregl.Popup({ maxWidth: '300px' })
                 .setLngLat(e.lngLat)
                 .setHTML(`
-                  <div style="font-family:system-ui,sans-serif;font-size:12px;color:#0f172a;padding:6px 4px">
-                    <div style="font-weight:700;font-size:13px;margin-bottom:4px">${p.NAMOBJ || p.NAMZON || 'Pola Ruang'}</div>
-                    <div style="color:#475569;margin-bottom:3px">
-                      Zona: <strong>${p.NAMZON || '–'}</strong> (${p.KODZON || '–'})<br/>
-                      Sub-Zona: <strong>${p.NAMSZN || '–'}</strong> (${p.KODSZN || '–'})<br/>
-                      BWP: <strong>${p.KODBWP || '–'}${p.KOSBWP ? '-' + p.KOSBWP : ''}</strong><br/>
-                      Kelurahan: <strong>${p.WADMKD || '–'}</strong>, ${p.WADMKC || ''}<br/>
-                      Luas: <strong>${p.LUASHA ? p.LUASHA.toFixed(2) + ' ha' : '–'}</strong><br/>
-                      TOD: <strong>${p.TOD_04 || '–'}</strong>
+                  <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 12px; color: #f8fafc; padding: 4px 2px; line-height: 1.45;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 6px;">
+                      <span style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); padding: 2px 7px; border-radius: 4px; font-size: 9.5px; font-weight: 700; text-transform: uppercase;">
+                        ${p.NAMZON || 'Pola Ruang'}
+                      </span>
+                      <span style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: 700;">
+                        BWP: ${p.KODBWP || '–'}${p.KOSBWP ? '-' + p.KOSBWP : ''}
+                      </span>
                     </div>
-                    <div style="font-size:9px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:4px;margin-top:4px">
-                      Sumber: GISTARU ATR/BPN — RDTR Kota Surabaya Perda No. 8 Tahun 2018
+                    <div style="font-weight: 800; font-size: 14px; color: #ffffff; letter-spacing: -0.01em; margin-bottom: 6px;">${p.NAMOBJ || p.NAMZON || 'Pola Ruang'}</div>
+                    <div style="color: #cbd5e1; font-size: 11.5px; display: flex; flex-direction: column; gap: 3px; margin-bottom: 6px;">
+                      <div><span style="color: #94a3b8;">Sub-Zona:</span> <strong style="color: #f1f5f9;">${p.NAMSZN || '–'}</strong> <span style="color: #64748b;">(${p.KODSZN || '–'})</span></div>
+                      <div><span style="color: #94a3b8;">Kelurahan:</span> <strong style="color: #f1f5f9;">${p.WADMKD || '–'}</strong>, <span style="color: #94a3b8;">${p.WADMKC || ''}</span></div>
+                      <div><span style="color: #94a3b8;">Luas Kawasan:</span> <strong style="color: #38bdf8;">${p.LUASHA ? p.LUASHA.toFixed(2) + ' ha' : '–'}</strong></div>
+                      <div><span style="color: #94a3b8;">Rencana TOD:</span> <strong style="color: #a3e635;">${p.TOD_04 || '–'}</strong></div>
+                    </div>
+                    <div style="font-size: 9.5px; color: #94a3b8; border-top: 1px solid rgba(148, 163, 184, 0.2); padding-top: 5px; margin-top: 6px;">
+                      Sumber: GISTARU ATR/BPN — RDTR Kota Surabaya Perda No. 8/2018
                     </div>
                   </div>
                 `)
@@ -866,7 +872,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
           const m = mapRef.current;
           if (!m.getStyle() || !data || !data.type) return;
 
-          const beforeStationId = m.getLayer('station-points-halo') ? 'station-points-halo' : undefined;
+          const underlayBeforeId = m.getLayer('h3-hex-fill') ? 'h3-hex-fill' : (m.getLayer('transit-routes-line') ? 'transit-routes-line' : undefined);
 
           if (!m.getSource('bhumi-source')) {
             m.addSource('bhumi-source', { type: 'geojson', data });
@@ -879,34 +885,36 @@ export const MapContainer: React.FC<MapContainerProps> = ({
               paint: {
                 'fill-color': [
                   'match',
-                  ['coalesce', ['get', 'tipehak'], 'HGB'],
+                  ['coalesce', ['get', 'tipehak'], 'Hak Guna Bangunan'],
                   'Hak Milik', '#10b981',
                   'Hak Guna Bangunan', '#3b82f6',
                   'Hak Pakai', '#f59e0b',
+                  'Hak Pengelolaan', '#8b5cf6',
                   'Hak Guna Usaha', '#ef4444',
                   '#06b6d4',
                 ],
-                'fill-opacity': 0.45,
+                'fill-opacity': 0.55,
               },
-            }, beforeStationId);
+            }, underlayBeforeId);
 
-            // Border
+            // Clean dark border
             m.addLayer({
               id: 'bhumi-line',
               type: 'line',
               source: 'bhumi-source',
               paint: {
-                'line-color': '#059669',
-                'line-width': 2.0,
-                'line-opacity': 0.95,
+                'line-color': '#0f172a',
+                'line-width': 1.2,
+                'line-opacity': 0.85,
               },
-            }, beforeStationId);
+            }, underlayBeforeId);
 
-            // NIB Label
+            // NIB Label (crisp, displayed when zoomed in)
             m.addLayer({
               id: 'bhumi-label',
               type: 'symbol',
               source: 'bhumi-source',
+              minzoom: 14.5,
               layout: {
                 'text-field': ['concat', 'NIB: ', ['coalesce', ['get', 'nib'], 'Persil']],
                 'text-size': 10,
@@ -915,11 +923,11 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                 'text-allow-overlap': false,
               },
               paint: {
-                'text-color': '#ffffff',
-                'text-halo-color': '#064e3b',
+                'text-color': '#f8fafc',
+                'text-halo-color': '#0f172a',
                 'text-halo-width': 2.0,
               }
-            }, beforeStationId);
+            }, underlayBeforeId);
 
             bringStationMarkersToFront(m);
 
@@ -927,26 +935,28 @@ export const MapContainer: React.FC<MapContainerProps> = ({
             m.on('click', 'bhumi-fill', (e) => {
               const p = e.features?.[0]?.properties;
               if (!p) return;
-              new maplibregl.Popup({ maxWidth: '280px' })
+              new maplibregl.Popup({ maxWidth: '300px' })
                 .setLngLat(e.lngLat)
                 .setHTML(`
-                  <div style="font-family:system-ui,sans-serif;font-size:12px;color:#0f172a;padding:6px 4px">
-                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px;">
-                      <span style="background: #10b981; color: #ffffff; padding: 2px 7px; border-radius: 4px; font-size: 9px; font-weight: 700; text-transform: uppercase;">
+                  <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 12px; color: #f8fafc; padding: 4px 2px; line-height: 1.45;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 6px;">
+                      <span style="background: ${p.tipehak === 'Hak Milik' ? 'rgba(16,185,129,0.2)' : p.tipehak === 'Hak Guna Bangunan' ? 'rgba(59,130,246,0.2)' : 'rgba(245,158,11,0.2)'}; color: ${p.tipehak === 'Hak Milik' ? '#34d399' : p.tipehak === 'Hak Guna Bangunan' ? '#60a5fa' : '#fbbf24'}; border: 1px solid ${p.tipehak === 'Hak Milik' ? 'rgba(16,185,129,0.4)' : p.tipehak === 'Hak Guna Bangunan' ? 'rgba(59,130,246,0.4)' : 'rgba(245,158,11,0.4)'}; padding: 2px 7px; border-radius: 4px; font-size: 9.5px; font-weight: 700; text-transform: uppercase;">
                         ${p.tipehak || 'Persil Tanah'}
                       </span>
-                      <span style="font-size: 10px; color: #64748b; font-weight: 600;">
+                      <span style="background: rgba(15,23,42,0.6); border: 1px solid rgba(148,163,184,0.3); padding: 2px 6px; border-radius: 4px; font-size: 10px; color: #a5f3fc; font-weight: 700; font-family: monospace;">
                         NIB: ${p.nib || '–'}
                       </span>
                     </div>
-                    <div style="font-weight:700;font-size:13px;margin-bottom:4px">Bidang Tanah Terdaftar</div>
-                    <div style="color:#475569;margin-bottom:3px">
-                      Tipe Hak: <strong>${p.tipehak || '–'}</strong><br/>
-                      Luas Bidang: <strong>${p.luas ? Math.round(p.luas).toLocaleString('id-ID') + ' m²' : '–'}</strong><br/>
-                      Status Akurasi: <strong>${p.akurasibidang || 'Terpetakan'}</strong><br/>
-                      Koridor Stasiun: <strong>${(p._station_id || '–').replace(/_/g, ' ').toUpperCase()}</strong>
+                    <div style="font-weight: 800; font-size: 14px; color: #ffffff; letter-spacing: -0.01em; margin-bottom: 6px;">Bidang Tanah Terdaftar</div>
+                    <div style="color: #cbd5e1; font-size: 11.5px; display: flex; flex-direction: column; gap: 3px; margin-bottom: 6px;">
+                      <div><span style="color: #94a3b8;">Tipe Hak:</span> <strong style="color: #f1f5f9;">${p.tipehak || '–'}</strong></div>
+                      <div><span style="color: #94a3b8;">Penggunaan:</span> <strong style="color: #f1f5f9;">${p.penggunaan || 'Komersial / Hunian'}</strong></div>
+                      <div><span style="color: #94a3b8;">Luas Bidang:</span> <strong style="color: #38bdf8;">${p.luas ? Math.round(p.luas).toLocaleString('id-ID') + ' m²' : '–'}</strong></div>
+                      <div><span style="color: #94a3b8;">Status Akurasi:</span> <strong style="color: #34d399;">${p.akurasibidang || 'Terpetakan Presisi (KW1)'}</strong></div>
+                      <div><span style="color: #94a3b8;">Koridor Simpul:</span> <strong style="color: #f1f5f9;">${(p._station_id || '–').replace(/_/g, ' ').toUpperCase()}</strong></div>
+                      ${p.kelurahan ? `<div><span style="color: #94a3b8;">Wilayah:</span> <span style="color: #cbd5e1;">${p.kelurahan}, ${p.kecamatan || ''}</span></div>` : ''}
                     </div>
-                    <div style="font-size:9px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:4px;margin-top:4px">
+                    <div style="font-size: 9.5px; color: #94a3b8; border-top: 1px solid rgba(148,163,184,0.2); padding-top: 5px; margin-top: 6px;">
                       Sumber: BHUMI ATR/BPN — Peta Interaktif Bidang Tanah Terdaftar
                     </div>
                   </div>
@@ -1041,26 +1051,26 @@ export const MapContainer: React.FC<MapContainerProps> = ({
           m.on('click', 'economic-poi-circle', (e) => {
             const p = e.features?.[0]?.properties;
             if (!p) return;
-            new maplibregl.Popup({ maxWidth: '280px' })
+            new maplibregl.Popup({ maxWidth: '300px' })
               .setLngLat(e.lngLat)
               .setHTML(`
-                <div style="font-family:system-ui,sans-serif;font-size:12px;color:#0f172a;padding:6px 4px">
-                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px;">
-                    <span style="background: #f59e0b; color: #ffffff; padding: 2px 7px; border-radius: 4px; font-size: 9px; font-weight: 700; text-transform: uppercase;">
+                <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 12px; color: #f8fafc; padding: 4px 2px; line-height: 1.45;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 6px;">
+                    <span style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); padding: 2px 7px; border-radius: 4px; font-size: 9.5px; font-weight: 700; text-transform: uppercase;">
                       Economic POI
                     </span>
-                    <span style="font-size: 10px; color: #059669; font-weight: 700;">
+                    <span style="font-size: 10px; color: #34d399; font-weight: 700;">
                       ${p.STATUS || 'Aktif Operasional'}
                     </span>
                   </div>
-                  <div style="font-weight:700;font-size:13px;color:#0f172a;margin-bottom:3px">${p.NAMA || 'Pusat Perbelanjaan'}</div>
-                  <div style="font-size:10.5px;color:#475569;margin-bottom:3px">
-                    Kategori: <strong>${p.TIPE_2 || 'Pusat Perbelanjaan'}</strong><br/>
-                    Kecamatan: <strong>${p.KECAMATAN || 'Surabaya'}</strong><br/>
-                    Alamat: <strong>${p.ALAMAT || '–'}</strong>
+                  <div style="font-weight: 800; font-size: 14px; color: #ffffff; letter-spacing: -0.01em; margin-bottom: 6px;">${p.NAMA || 'Pusat Perbelanjaan'}</div>
+                  <div style="color: #cbd5e1; font-size: 11.5px; display: flex; flex-direction: column; gap: 3px; margin-bottom: 6px;">
+                    <div><span style="color: #94a3b8;">Kategori:</span> <strong style="color: #f1f5f9;">${p.TIPE_2 || 'Pusat Perbelanjaan'}</strong></div>
+                    <div><span style="color: #94a3b8;">Kecamatan:</span> <strong style="color: #f1f5f9;">${p.KECAMATAN || 'Surabaya'}</strong></div>
+                    <div><span style="color: #94a3b8;">Alamat:</span> <span style="color: #e2e8f0;">${p.ALAMAT || '–'}</span></div>
                   </div>
-                  <div style="font-size:9px;color:#94a3b8;border-top:1px solid #e2e8f0;padding-top:4px;margin-top:4px">
-                    Sumber: Data Spasial Pusat Perbelanjaan & Retail Kota Surabaya
+                  <div style="font-size: 9.5px; color: #94a3b8; border-top: 1px solid rgba(148, 163, 184, 0.2); padding-top: 5px; margin-top: 6px;">
+                    Sumber: Data Spasial Pusat Perbelanjaan Kota Surabaya
                   </div>
                 </div>
               `)

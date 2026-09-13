@@ -369,6 +369,18 @@ async def get_shopping_centers_layer():
     return _load_spatial_layer("PUSAT PERBELANJAAN DI KOTA SURABAYA TAHUN 2025.geojson")
 
 
+@router.get("/layers/gistaru")
+async def get_gistaru_layer():
+    """Mengambil GeoJSON pola ruang RDTR Kota Surabaya dari GISTARU ATR/BPN (Perda No. 8 Tahun 2018)."""
+    return _load_spatial_layer("gistaru_pola_ruang_surabaya.geojson")
+
+
+@router.get("/layers/bhumi")
+async def get_bhumi_layer():
+    """Mengambil GeoJSON bidang tanah terdaftar (persil tanah) dari BHUMI ATR/BPN di koridor stasiun Surabaya."""
+    return _load_spatial_layer("bhumi_persil_surabaya.geojson")
+
+
 @router.get("/layers/property-prices")
 async def get_property_prices_layer():
     """Mengambil GeoJSON 2.926 data harga properti & NJOP riil Kota Surabaya tahun 2024."""
