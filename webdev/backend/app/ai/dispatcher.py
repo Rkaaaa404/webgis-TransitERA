@@ -1,5 +1,6 @@
 from typing import Dict, Any
 from app.data.stations_data import STATIONS_DATA, get_weakest_dimension_score
+from app.spatial.real_data_pipeline import compute_all_station_analytics
 from app.schemas.ai import AIData, ViewState, ChartPayload
 
 # Mapping dari dimension name → key di scores dict
@@ -12,6 +13,17 @@ _DIM_KEY_MAP: Dict[str, str] = {
 }
 
 
+def _get_station_data(station_id: str) -> Dict[str, Any]:
+    st_id = (station_id or "gubeng").lower().strip()
+    try:
+        all_st = compute_all_station_analytics()
+        if st_id in all_st:
+            return all_st[st_id]
+    except Exception:
+        pass
+    return STATIONS_DATA.get(st_id, STATIONS_DATA["gubeng"])
+
+
 def dispatch_spatial_function(func_name: str, args: Dict[str, Any]) -> AIData:
     """
     Mengeksekusi nama tool yang dipilih Gemini dan membangun dual-output payload.
@@ -21,7 +33,7 @@ def dispatch_spatial_function(func_name: str, args: Dict[str, Any]) -> AIData:
     """
     if func_name == "get_tod_score":
         st_id = args.get("station_id", "gubeng").lower()
-        station = STATIONS_DATA.get(st_id, STATIONS_DATA["gubeng"])
+        station = _get_station_data(st_id)
         weakest_score = get_weakest_dimension_score(station)
         strongest_key = _DIM_KEY_MAP.get(station["strongest_dimension"], "destination_accessibility")
         strongest_score = station["scores"].get(strongest_key, 0.0)
@@ -60,8 +72,8 @@ def dispatch_spatial_function(func_name: str, args: Dict[str, Any]) -> AIData:
     elif func_name == "compare_stations":
         st_a = args.get("station_a", "gubeng").lower()
         st_b = args.get("station_b", "wonokromo").lower()
-        data_a = STATIONS_DATA.get(st_a, STATIONS_DATA["gubeng"])
-        data_b = STATIONS_DATA.get(st_b, STATIONS_DATA["wonokromo"])
+        data_a = _get_station_data(st_a)
+        data_b = _get_station_data(st_b)
 
         mid_lon = round((data_a["longitude"] + data_b["longitude"]) / 2, 6)
         mid_lat = round((data_a["latitude"] + data_b["latitude"]) / 2, 6)
@@ -102,7 +114,7 @@ def dispatch_spatial_function(func_name: str, args: Dict[str, Any]) -> AIData:
 
     elif func_name == "get_weakest_dimension":
         st_id = args.get("station_id", "pasar_turi").lower()
-        station = STATIONS_DATA.get(st_id, STATIONS_DATA["pasar_turi"])
+        station = _get_station_data(st_id)
         weakest_name = station["weakest_dimension"]
         weakest_score = get_weakest_dimension_score(station)
         weakest_benchmark_key = _DIM_KEY_MAP.get(weakest_name, "design")
@@ -130,7 +142,7 @@ def dispatch_spatial_function(func_name: str, args: Dict[str, Any]) -> AIData:
 
     elif func_name == "get_njop_premium":
         st_id = args.get("station_id", "waru").lower()
-        station = STATIONS_DATA.get(st_id, STATIONS_DATA["waru"])
+        station = _get_station_data(st_id)
         njop = station["njop_premium"]
 
         return AIData(

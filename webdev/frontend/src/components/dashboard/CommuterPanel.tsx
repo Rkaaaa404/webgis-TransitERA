@@ -89,9 +89,16 @@ export const CommuterPanel: React.FC<CommuterPanelProps> = ({
           </div>
         </div>
 
-        {/* Travel Estimator */}
+        {/* Travel Estimator / Intermodal Journey Planner */}
         <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-4">
-          <TravelEstimator estimates={station.travel_estimates} />
+          <TravelEstimator 
+            estimates={station.travel_estimates}
+            stationId={activeStation}
+            stationName={station.name}
+            onSelectRoute={(routeId) => {
+              onExecuteMapAction?.({ action: 'highlight_route', route_id: routeId });
+            }}
+          />
         </div>
 
         {/* AI Advisor */}

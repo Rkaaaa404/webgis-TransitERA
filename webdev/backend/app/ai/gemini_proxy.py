@@ -13,23 +13,42 @@ logger = logging.getLogger(__name__)
 _DUMMY_KEYS = {"", "dummy", "your_gemini_api_key_here"}
 
 def get_gemini_url() -> str:
-    model = getattr(settings, "GEMINI_MODEL", "gemini-1.5-flash")
+    model = getattr(settings, "GEMINI_MODEL", "gemini-2.5-flash")
     return f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 
 SYSTEM_INSTRUCTION = (
-    "Anda adalah Asisten Spasial AI untuk TransitERA WebGIS di Surabaya. "
-    "Tugas Anda: menerjemahkan pertanyaan pengguna terkait kesiapan TOD, "
-    "komparasi 5 stasiun (Gubeng, Pasar Turi, Semut, Wonokromo, Waru), "
-    "estimasi %ΔNJOP, filter survei, atau simulasi skenario feeder — "
-    "menjadi pemanggilan fungsi yang tepat. "
-    "Selalu gunakan function calling jika tersedia."
+    "Anda adalah Asisten Spasial AI cerdas untuk TransitERA WebGIS di Kota Surabaya Raya. "
+    "RUANG LINGKUP KETAT: Tugas Anda EKSKLUSIF membahas transportasi massal Surabaya (SRRL, Commuter Line, Suroboyo Bus, Feeder WiraWiri), "
+    "kesiapan Transit-Oriented Development (TOD 5D: Density, Diversity, Design, Destination, Distance to Transit), "
+    "analisis komparasi simpul stasiun (seperti Gubeng, Pasar Turi, Wonokromo, Semut, Tandes, Kandangan, Benowo, Waru, dll.), "
+    "estimasi apresiasi nilai tanah (%ΔNJOP berbasis Spatial Durbin Model), titik survei lapangan (#PakSibukGa), "
+    "dan simulasi skenario intervensi antarmoda. "
+    "ATURAN BATAS TOPIK (GUARDRAILS): "
+    "Jika pengguna menanyakan hal di luar transportasi massal, stasiun transit, atau tata ruang Surabaya Raya "
+    "(seperti resep masakan, pemrograman umum, politik umum, atau kota lain yang tidak relevan), "
+    "tolak dengan sopan dalam Bahasa Indonesia dan arahkan kembali pengguna untuk menanyakan kesiapan TOD atau transportasi transit di Surabaya. "
+    "PANDUAN PEMANGGILAN FUNGSI (FUNCTION CALLING): "
+    "- Jika pengguna meminta menampilkan atau memfilter lokasi titik survei/warung makan ramai di dekat stasiun, panggil 'filter_layer' (target_layer='survey_mission_menu', kondisi='ramai'). "
+    "- Jika pengguna menanyakan rekomendasi lokasi terbaik untuk MEMBUKA / MENDIRIKAN usaha/kedai kopi baru, panggil 'site_recommendation'. "
+    "- Jika menanyakan dimensi terlemah, panggil 'get_weakest_dimension'. "
+    "- Jika menanyakan kenaikan nilai tanah / NJOP, panggil 'get_njop_premium'. "
+    "- Jika menanyakan perbandingan 2 stasiun, panggil 'compare_stations'. "
+    "- Jika menanyakan simulasi atau perluasan feeder, panggil 'simulate_scenario'. "
+    "- Jika menanyakan skor TOD atau info stasiun umum, panggil 'get_tod_score'."
 )
 
+ALL_STATION_SLUGS = [
+    "gubeng", "pasar_turi", "wonokromo", "semut", "tandes", 
+    "kandangan", "benowo", "ngagel", "margorejo", "jemursari", 
+    "kertomenanggal", "waru", "sidotopo", "kalimas", "benteng"
+]
 
 def _parse_station_from_prompt(p: str) -> str:
     """Mengekstrak station_id dari prompt secara case-insensitive."""
-    for s in ["gubeng", "pasar_turi", "semut", "wonokromo", "waru"]:
-        if s in p or s.replace("_", " ") in p:
+    p_clean = p.lower().replace("-", " ")
+    for s in ALL_STATION_SLUGS:
+        s_clean = s.replace("_", " ")
+        if s in p_clean or s_clean in p_clean:
             return s
     return "gubeng"
 
@@ -43,32 +62,32 @@ def match_fallback_intent(prompt: str) -> Tuple[str, Dict[str, Any]]:
 
     # 1. Compare stations
     if ("bandingkan" in p or "compare" in p) and any(
-        s in p for s in ["gubeng", "pasar turi", "semut", "wonokromo", "waru"]
+        s.replace("_", " ") in p for s in ALL_STATION_SLUGS
     ):
         found = [
-            s for s in ["gubeng", "pasar_turi", "semut", "wonokromo", "waru"]
+            s for s in ALL_STATION_SLUGS
             if s in p or s.replace("_", " ") in p
         ]
         st_a = found[0] if len(found) > 0 else "gubeng"
         st_b = found[1] if len(found) > 1 else "wonokromo"
         return "compare_stations", {"station_a": st_a, "station_b": st_b}
 
-    # 2. Site recommendation / Rekomendasi lokasi usaha
-    if any(kw in p for kw in ["lokasi terbaik", "rekomendasi lokasi", "coffee", "kopi", "warung buka"]):
+    # 2. Filter layer / warung makan ramai / kuliner
+    if any(kw in p for kw in ["warung makan ramai", "warung ramai", "menu", "kuliner", "filter", "tampilkan lokasi warung"]):
+        return "filter_layer", {"target_layer": "survey_mission_menu", "kondisi": "ramai"}
+
+    # 3. Site recommendation / Rekomendasi lokasi usaha
+    if any(kw in p for kw in ["lokasi terbaik", "rekomendasi lokasi", "buka kedai", "buka warung", "kedai kopi"]):
         biz = "coffee_shop" if ("kopi" in p or "coffee" in p) else "warung_makan"
         return "site_recommendation", {"business_type": biz, "target_station": _parse_station_from_prompt(p)}
 
-    # 3. Weakest dimension
+    # 4. Weakest dimension
     if any(kw in p for kw in ["terlemah", "dimensi terlemah", "weakest", "kekurangan"]):
         return "get_weakest_dimension", {"station_id": _parse_station_from_prompt(p)}
 
-    # 4. NJOP Premium / Kenaikan nilai tanah
+    # 5. NJOP Premium / Kenaikan nilai tanah
     if any(kw in p for kw in ["njop", "nilai tanah", "kenaikan", "premium", "lahan"]):
         return "get_njop_premium", {"station_id": _parse_station_from_prompt(p)}
-
-    # 5. Filter layer / warung / kuliner
-    if any(kw in p for kw in ["warung", "ramai", "menu", "kuliner", "filter"]):
-        return "filter_layer", {"target_layer": "survey_mission_menu", "kondisi": "ramai"}
 
     # 6. Simulate scenario / Feeder
     if any(kw in p for kw in ["feeder", "perpanjang", "simulasi", "jika", "skenario", "what-if"]):
@@ -79,7 +98,7 @@ def match_fallback_intent(prompt: str) -> Tuple[str, Dict[str, Any]]:
         return "get_tod_score", {"station_id": _parse_station_from_prompt(p)}
 
     # 8. Station name mentioned directly
-    for s in ["gubeng", "pasar_turi", "semut", "wonokromo", "waru"]:
+    for s in ALL_STATION_SLUGS:
         if s in p or s.replace("_", " ") in p:
             return "get_tod_score", {"station_id": s}
 
@@ -96,7 +115,7 @@ async def process_ai_query(request: AIQueryRequest) -> AIResponse:
     api_key = settings.GEMINI_API_KEY
     prompt = request.prompt.strip()
 
-    # Coba Gemini hanya jika key valid (bukan dummy)
+    # Coba Gemini jika key valid (bukan dummy)
     if api_key and api_key not in _DUMMY_KEYS:
         try:
             payload = {
@@ -115,6 +134,7 @@ async def process_ai_query(request: AIQueryRequest) -> AIResponse:
                 candidates = result.get("candidates", [])
                 if candidates:
                     parts = candidates[0].get("content", {}).get("parts", [])
+                    text_parts = []
                     for part in parts:
                         if "functionCall" in part:
                             fn = part["functionCall"]
@@ -123,6 +143,18 @@ async def process_ai_query(request: AIQueryRequest) -> AIResponse:
                             logger.info(f"Gemini function call: {fn_name}({fn_args})")
                             ai_data = dispatch_spatial_function(fn_name, fn_args)
                             return AIResponse(status="success", data=ai_data)
+                        elif "text" in part:
+                            text_parts.append(part["text"])
+
+                    # Jika model mengembalikan respon teks, tetap set visual action yang relevan
+                    if text_parts:
+                        combined_text = "\n".join(text_parts).strip()
+                        fn_name, fn_args = match_fallback_intent(prompt)
+                        ai_data = dispatch_spatial_function(fn_name, fn_args)
+                        # Gunakan teks kaya dari Gemini jika tidak menolak topik
+                        if len(combined_text) > 30:
+                            ai_data.text_response = combined_text
+                        return AIResponse(status="success", data=ai_data)
             else:
                 logger.warning(
                     f"Gemini API returned {resp.status_code}: {resp.text[:200]}"

@@ -1,0 +1,339 @@
+{
+  "generated_by": "TransitERA_Station_Clustering_and_Regression.ipynb",
+  "timestamp": "2026-09-13",
+  "total_stations": 15,
+  "cluster_count": 4,
+  "cluster_typologies": {
+    "0": "Suburban Commuter & Feeder Priority",
+    "1": "Heritage & Mixed Urban Core",
+    "2": "Metropolitan Commercial Intermodal Hub",
+    "3": "Suburban Commuter & Feeder Priority"
+  },
+  "pca_explained_variance_ratio": [
+    0.4496567301054735,
+    0.2370154063658525
+  ],
+  "sdm_regression": {
+    "r_squared": 0.782,
+    "direct_effect_pct": 10.2,
+    "spillover_effect_pct": 4.6,
+    "formula": "%ΔNJOP = 0.145 * TOD + 0.052 * W_TOD - 0.003 * DistFeeder"
+  },
+  "stations": {
+    "benowo": {
+      "id": "benowo",
+      "name": "Stasiun Benowo",
+      "latitude": -7.23407,
+      "longitude": 112.6152,
+      "cluster": 1,
+      "typology": "Heritage & Mixed Urban Core",
+      "is_tier_1": false,
+      "tod_readiness_score": 50.5,
+      "scores": {
+        "density": 45.0,
+        "diversity": 55.0,
+        "design": 69.0,
+        "destination_accessibility": 40.0,
+        "distance_to_transit": 50.8
+      },
+      "njop_base_m2": 7600000,
+      "predicted_njop_premium_pct": 6.3,
+      "ci_lower_pct": 4.7,
+      "ci_upper_pct": 7.9
+    },
+    "kertomenanggal": {
+      "id": "kertomenanggal",
+      "name": "Stasiun Kertomenanggal",
+      "latitude": -7.34058,
+      "longitude": 112.7294,
+      "cluster": 1,
+      "typology": "Heritage & Mixed Urban Core",
+      "is_tier_1": false,
+      "tod_readiness_score": 57.0,
+      "scores": {
+        "density": 45.0,
+        "diversity": 55.0,
+        "design": 69.0,
+        "destination_accessibility": 53.8,
+        "distance_to_transit": 70.0
+      },
+      "njop_base_m2": 7800000,
+      "predicted_njop_premium_pct": 7.7,
+      "ci_lower_pct": 5.8,
+      "ci_upper_pct": 9.6
+    },
+    "jemursari": {
+      "id": "jemursari",
+      "name": "Stasiun Jemursari",
+      "latitude": -7.32928,
+      "longitude": 112.7314,
+      "cluster": 1,
+      "typology": "Heritage & Mixed Urban Core",
+      "is_tier_1": false,
+      "tod_readiness_score": 56.6,
+      "scores": {
+        "density": 52.2,
+        "diversity": 55.0,
+        "design": 69.0,
+        "destination_accessibility": 47.6,
+        "distance_to_transit": 65.5
+      },
+      "njop_base_m2": 10400000,
+      "predicted_njop_premium_pct": 7.7,
+      "ci_lower_pct": 5.8,
+      "ci_upper_pct": 9.6
+    },
+    "pasar_turi": {
+      "id": "pasar_turi",
+      "name": "Stasiun Pasar Turi",
+      "latitude": -7.24817,
+      "longitude": 112.7312,
+      "cluster": 0,
+      "typology": "Suburban Commuter & Feeder Priority",
+      "is_tier_1": true,
+      "tod_readiness_score": 79.2,
+      "scores": {
+        "density": 82.0,
+        "diversity": 86.0,
+        "design": 65.5,
+        "destination_accessibility": 83.0,
+        "distance_to_transit": 79.5
+      },
+      "njop_base_m2": 18300000,
+      "predicted_njop_premium_pct": 12.3,
+      "ci_lower_pct": 9.2,
+      "ci_upper_pct": 15.4
+    },
+    "gubeng": {
+      "id": "gubeng",
+      "name": "Stasiun Surabaya Gubeng",
+      "latitude": -7.2652,
+      "longitude": 112.7522,
+      "cluster": 2,
+      "typology": "Metropolitan Commercial Intermodal Hub",
+      "is_tier_1": true,
+      "tod_readiness_score": 84.5,
+      "scores": {
+        "density": 88.0,
+        "diversity": 85.5,
+        "design": 78.0,
+        "destination_accessibility": 90.0,
+        "distance_to_transit": 81.5
+      },
+      "njop_base_m2": 7000000,
+      "predicted_njop_premium_pct": 14.8,
+      "ci_lower_pct": 11.1,
+      "ci_upper_pct": 18.5
+    },
+    "kalimas": {
+      "id": "kalimas",
+      "name": "Stasiun KAlimas",
+      "latitude": -7.21991,
+      "longitude": 112.735,
+      "cluster": 1,
+      "typology": "Heritage & Mixed Urban Core",
+      "is_tier_1": false,
+      "tod_readiness_score": 52.2,
+      "scores": {
+        "density": 54.5,
+        "diversity": 55.0,
+        "design": 69.0,
+        "destination_accessibility": 43.8,
+        "distance_to_transit": 42.2
+      },
+      "njop_base_m2": 5000000,
+      "predicted_njop_premium_pct": 6.7,
+      "ci_lower_pct": 5.0,
+      "ci_upper_pct": 8.4
+    },
+    "margorejo": {
+      "id": "margorejo",
+      "name": "Stasiun Margorejo",
+      "latitude": -7.3147,
+      "longitude": 112.7344,
+      "cluster": 1,
+      "typology": "Heritage & Mixed Urban Core",
+      "is_tier_1": false,
+      "tod_readiness_score": 60.7,
+      "scores": {
+        "density": 51.6,
+        "diversity": 55.0,
+        "design": 69.0,
+        "destination_accessibility": 52.5,
+        "distance_to_transit": 83.4
+      },
+      "njop_base_m2": 10400000,
+      "predicted_njop_premium_pct": 8.0,
+      "ci_lower_pct": 6.0,
+      "ci_upper_pct": 10.0
+    },
+    "ngagel": {
+      "id": "ngagel",
+      "name": "Stasiun Ngagel",
+      "latitude": -7.28778,
+      "longitude": 112.7482,
+      "cluster": 3,
+      "typology": "Suburban Commuter & Feeder Priority",
+      "is_tier_1": false,
+      "tod_readiness_score": 57.3,
+      "scores": {
+        "density": 62.9,
+        "diversity": 55.0,
+        "design": 63.0,
+        "destination_accessibility": 62.4,
+        "distance_to_transit": 40.0
+      },
+      "njop_base_m2": 7000000,
+      "predicted_njop_premium_pct": 6.0,
+      "ci_lower_pct": 4.5,
+      "ci_upper_pct": 7.5
+    },
+    "benteng": {
+      "id": "benteng",
+      "name": "Stasiun Benteng",
+      "latitude": -7.22119,
+      "longitude": 112.744,
+      "cluster": 3,
+      "typology": "Suburban Commuter & Feeder Priority",
+      "is_tier_1": false,
+      "tod_readiness_score": 48.8,
+      "scores": {
+        "density": 45.0,
+        "diversity": 55.0,
+        "design": 63.0,
+        "destination_accessibility": 45.0,
+        "distance_to_transit": 40.0
+      },
+      "njop_base_m2": 5800000,
+      "predicted_njop_premium_pct": 4.3,
+      "ci_lower_pct": 3.2,
+      "ci_upper_pct": 5.4
+    },
+    "sidotopo": {
+      "id": "sidotopo",
+      "name": "Stasiun Sidotopo",
+      "latitude": -7.23529,
+      "longitude": 112.7574,
+      "cluster": 0,
+      "typology": "Suburban Commuter & Feeder Priority",
+      "is_tier_1": false,
+      "tod_readiness_score": 68.5,
+      "scores": {
+        "density": 98.0,
+        "diversity": 55.0,
+        "design": 69.0,
+        "destination_accessibility": 69.8,
+        "distance_to_transit": 40.0
+      },
+      "njop_base_m2": 6100000,
+      "predicted_njop_premium_pct": 5.6,
+      "ci_lower_pct": 4.2,
+      "ci_upper_pct": 7.0
+    },
+    "kandangan": {
+      "id": "kandangan",
+      "name": "Stasiun KAndangan",
+      "latitude": -7.25079,
+      "longitude": 112.6572,
+      "cluster": 3,
+      "typology": "Suburban Commuter & Feeder Priority",
+      "is_tier_1": false,
+      "tod_readiness_score": 49.2,
+      "scores": {
+        "density": 47.4,
+        "diversity": 55.0,
+        "design": 69.0,
+        "destination_accessibility": 40.0,
+        "distance_to_transit": 40.0
+      },
+      "njop_base_m2": 7000000,
+      "predicted_njop_premium_pct": 1.7,
+      "ci_lower_pct": 1.3,
+      "ci_upper_pct": 2.1
+    },
+    "semut": {
+      "id": "semut",
+      "name": "Stasiun Surabaya Kota (Semut)",
+      "latitude": -7.24298,
+      "longitude": 112.742,
+      "cluster": 1,
+      "typology": "Heritage & Mixed Urban Core",
+      "is_tier_1": false,
+      "tod_readiness_score": 71.0,
+      "scores": {
+        "density": 74.0,
+        "diversity": 78.0,
+        "design": 60.0,
+        "destination_accessibility": 75.0,
+        "distance_to_transit": 68.0
+      },
+      "njop_base_m2": 17400000,
+      "predicted_njop_premium_pct": 9.4,
+      "ci_lower_pct": 7.1,
+      "ci_upper_pct": 11.8
+    },
+    "tandes": {
+      "id": "tandes",
+      "name": "Stasiun Tandes",
+      "latitude": -7.25897,
+      "longitude": 112.687,
+      "cluster": 1,
+      "typology": "Heritage & Mixed Urban Core",
+      "is_tier_1": false,
+      "tod_readiness_score": 48.6,
+      "scores": {
+        "density": 45.0,
+        "diversity": 55.0,
+        "design": 69.0,
+        "destination_accessibility": 40.0,
+        "distance_to_transit": 40.0
+      },
+      "njop_base_m2": 7000000,
+      "predicted_njop_premium_pct": 5.1,
+      "ci_lower_pct": 3.8,
+      "ci_upper_pct": 6.4
+    },
+    "wonokromo": {
+      "id": "wonokromo",
+      "name": "Stasiun Wonokromo",
+      "latitude": -7.30206,
+      "longitude": 112.7394,
+      "cluster": 1,
+      "typology": "Heritage & Mixed Urban Core",
+      "is_tier_1": true,
+      "tod_readiness_score": 76.8,
+      "scores": {
+        "density": 85.0,
+        "diversity": 79.0,
+        "design": 62.0,
+        "destination_accessibility": 78.0,
+        "distance_to_transit": 84.0
+      },
+      "njop_base_m2": 11200000,
+      "predicted_njop_premium_pct": 11.6,
+      "ci_lower_pct": 8.7,
+      "ci_upper_pct": 14.5
+    },
+    "waru": {
+      "id": "waru",
+      "name": "Stasiun Waru (Gerbang Selatan)",
+      "latitude": -7.3547,
+      "longitude": 112.7297,
+      "cluster": 1,
+      "typology": "Heritage & Mixed Urban Core",
+      "is_tier_1": false,
+      "tod_readiness_score": 68.2,
+      "scores": {
+        "density": 70.0,
+        "diversity": 65.0,
+        "design": 54.0,
+        "destination_accessibility": 68.0,
+        "distance_to_transit": 84.0
+      },
+      "njop_base_m2": 6500000,
+      "predicted_njop_premium_pct": 8.2,
+      "ci_lower_pct": 6.1,
+      "ci_upper_pct": 10.2
+    }
+  }
+}

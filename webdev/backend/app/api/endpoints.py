@@ -22,6 +22,7 @@ from app.schemas.tod import (
 )
 from app.schemas.ai import AIQueryRequest, AIResponse
 from app.data.stations_data import STATIONS_DATA, get_all_h3_features, get_all_survey_features
+from app.spatial.real_data_pipeline import compute_all_station_analytics, get_all_real_h3_features
 from app.data.mapid_client import fetch_survey_geojson
 from app.ai.gemini_proxy import process_ai_query
 from app.core.config import settings
@@ -69,12 +70,19 @@ def _validate_surabaya_bbox(lat: float, lon: float) -> None:
 # ---------------------------------------------------------------------------
 
 @router.get("/stations", response_model=List[StationSummary])
-async def list_stations(db: Optional[Session] = Depends(get_db)):
-    """Mengambil ringkasan 5 simpul stasiun transit utama SRRL Surabaya (PostGIS / In-Memory)."""
+async def list_stations(
+    all: bool = Query(False, description="Set True untuk seluruh 15 stasiun Surabaya Raya, False untuk 5 stasiun utama SRRL"),
+    db: Optional[Session] = Depends(get_db)
+):
+    """Mengambil ringkasan simpul stasiun transit SRRL Surabaya (PostGIS / In-Memory)."""
+    core_ids = {"gubeng", "pasar_turi", "semut", "wonokromo", "waru"}
+
     if is_db_connected() and db is not None:
         try:
             db_stations = db.query(Station).all()
             if db_stations:
+                if not all:
+                    db_stations = [s for s in db_stations if s.id in core_ids]
                 return [
                     StationSummary(
                         id=s.id,
@@ -85,12 +93,18 @@ async def list_stations(db: Optional[Session] = Depends(get_db)):
                         typology=s.typology,
                         weakest_dimension=s.weakest_dimension,
                         strongest_dimension=s.strongest_dimension,
-                        status="operational",
+                        status="Focus Area" if s.id in {"gubeng", "pasar_turi", "wonokromo"} else "Surabaya Rail Network",
+                        is_tier_1=s.id in {"gubeng", "pasar_turi", "wonokromo"},
                     )
                     for s in db_stations
                 ]
         except Exception as e:
-            logger.warning(f"Gagal query stasiun dari database, fallback ke in-memory: {e}")
+            logger.warning(f"Gagal query stasiun dari database, fallback ke real data pipeline: {e}")
+
+    all_computed = compute_all_station_analytics()
+    station_list = list(all_computed.values())
+    if not all:
+        station_list = [s for s in station_list if s["id"] in core_ids]
 
     return [
         StationSummary(
@@ -102,16 +116,18 @@ async def list_stations(db: Optional[Session] = Depends(get_db)):
             typology=s["typology"],
             weakest_dimension=s["weakest_dimension"],
             strongest_dimension=s["strongest_dimension"],
-            status=s["status"],
+            status=s.get("status", "Focus Area" if s.get("is_tier_1") else "Surabaya Rail Network"),
+            is_tier_1=s.get("is_tier_1", False),
         )
-        for s in STATIONS_DATA.values()
+        for s in station_list
     ]
 
 
 @router.get("/tod-score/{station_id}", response_model=StationTODScoreResponse)
 async def get_station_tod_score(station_id: StationId, db: Optional[Session] = Depends(get_db)):
     """Mengambil detail skor 5D TOD, benchmark koridor, dan rekomendasi per stasiun."""
-    data = STATIONS_DATA.get(station_id.value)
+    all_computed = compute_all_station_analytics()
+    data = all_computed.get(station_id.value) or STATIONS_DATA.get(station_id.value)
     if not data:
         raise HTTPException(status_code=404, detail=f"Stasiun '{station_id}' tidak ditemukan")
 
@@ -205,8 +221,12 @@ async def get_h3_grid(
         except Exception as e:
             logger.warning(f"Gagal query PostGIS H3 grid, fallback ke in-memory: {e}")
 
-    # Fallback In-Memory
-    geo_data = get_all_h3_features()
+    # Fallback In-Memory (computed from real spatial dataset)
+    try:
+        geo_data = get_all_real_h3_features()
+    except Exception as e:
+        logger.warning(f"Fallback ke static h3 features: {e}")
+        geo_data = get_all_h3_features()
     features = geo_data["features"]
 
     if station:
@@ -290,6 +310,37 @@ async def get_stations_layer():
     return _load_spatial_layer("stasiun_surabaya.geojson")
 
 
+@router.get("/layers/transit-routes")
+async def get_transit_routes_layer(
+    category: Optional[str] = Query(None, description="suroboyo_bus | trans_semanggi | feeder_wirawiri | bus_tumpuk"),
+    station_id: Optional[str] = Query(None, description="Filter rute yang terhubung dengan stasiun KA tertentu")
+):
+    """Mengambil GeoJSON 16 rute trayek riil Suroboyo Bus, Trans Semanggi, dan Feeder WiraWiri."""
+    data = _load_spatial_layer("trayek_surabaya.geojson")
+    features = data.get("features", [])
+    if category:
+        features = [f for f in features if f.get("properties", {}).get("category") == category]
+    if station_id:
+        st_id = station_id.lower().strip()
+        features = [
+            f for f in features
+            if st_id in f.get("properties", {}).get("connected_station_ids", [])
+        ]
+    return {
+        "type": "FeatureCollection",
+        "metadata": data.get("metadata", {}),
+        "features": features
+    }
+
+
+@router.get("/transit/intermodal-routes/{station_id}")
+async def get_station_intermodal_routes(station_id: StationId):
+    """Mengambil opsi navigasi perjalanan intermoda riil dari stasiun ke destinasi penting."""
+    from app.spatial.intermodal_engine import get_intermodal_plans
+    plans = get_intermodal_plans(station_id.value)
+    return {"station_id": station_id.value, "plans": plans}
+
+
 # ---------------------------------------------------------------------------
 # NJOP Premium endpoint
 # ---------------------------------------------------------------------------
@@ -297,7 +348,8 @@ async def get_stations_layer():
 @router.get("/njop-premium/{station_id}", response_model=NJOPPremiumResponse)
 async def get_njop_premium(station_id: StationId):
     """Mengambil estimasi premium nilai lahan (%ΔNJOP) berbasis Spatial Durbin Model."""
-    data = STATIONS_DATA.get(station_id.value)
+    all_computed = compute_all_station_analytics()
+    data = all_computed.get(station_id.value) or STATIONS_DATA.get(station_id.value)
     if not data:
         raise HTTPException(status_code=404, detail="Stasiun tidak ditemukan")
 
@@ -486,7 +538,8 @@ _SCENARIO_IMPACTS = {
 @router.post("/simulate", response_model=ScenarioSimulationResponse)
 async def simulate_scenario(request: ScenarioSimulationRequest):
     """Mensimulasikan skenario intervensi what-if terhadap skor TOD dan %ΔNJOP."""
-    st_data = STATIONS_DATA.get(request.target_station.value, STATIONS_DATA["waru"])
+    all_stations = compute_all_station_analytics()
+    st_data = all_stations.get(request.target_station.value) or STATIONS_DATA.get(request.target_station.value, STATIONS_DATA["waru"])
     base_score = st_data["tod_readiness_score"]
     base_njop = st_data["njop_premium"]["avg_njop_premium_pct"]
 

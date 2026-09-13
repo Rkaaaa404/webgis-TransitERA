@@ -96,13 +96,22 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
               <select
                 value={activeStation}
                 onChange={(e) => onSelectStation(e.target.value as StationId)}
-                className="max-w-[90px] sm:max-w-[150px] md:max-w-none text-ellipsis overflow-hidden whitespace-nowrap appearance-none bg-slate-900/70 hover:bg-slate-800 text-slate-200 text-[10px] md:text-xs font-semibold py-1.5 pl-2 pr-6 md:pl-3 md:pr-7 rounded-lg border border-slate-700 focus:outline-none focus:ring-1 focus:ring-brand-lime/50 cursor-pointer transition-colors"
+                className="max-w-[110px] sm:max-w-[170px] md:max-w-none text-ellipsis overflow-hidden whitespace-nowrap appearance-none bg-slate-900/70 hover:bg-slate-800 text-slate-200 text-[10px] md:text-xs font-semibold py-1.5 pl-2 pr-6 md:pl-3 md:pr-7 rounded-lg border border-slate-700 focus:outline-none focus:ring-1 focus:ring-brand-lime/50 cursor-pointer transition-colors"
               >
-                {FALLBACK_STATIONS.map((s) => (
-                  <option key={s.id} value={s.id} className="bg-slate-900 text-slate-200">
-                    {s.name.replace('Stasiun Surabaya ', 'St. ').replace('Stasiun ', 'St. ')} ({s.tod_readiness_score})
-                  </option>
-                ))}
+                <optgroup label="Focus Area" className="bg-slate-950 font-bold text-brand-lime">
+                  {FALLBACK_STATIONS.filter((s) => s.is_tier_1).map((s) => (
+                    <option key={s.id} value={s.id} className="bg-slate-900 text-slate-100 font-medium">
+                      {s.name.replace('Stasiun Surabaya ', 'St. ').replace('Stasiun ', 'St. ')} ({s.tod_readiness_score})
+                    </option>
+                  ))}
+                </optgroup>
+                <optgroup label="Surabaya Rail Network" className="bg-slate-950 font-bold text-slate-400">
+                  {FALLBACK_STATIONS.filter((s) => !s.is_tier_1).map((s) => (
+                    <option key={s.id} value={s.id} className="bg-slate-900 text-slate-300 font-normal">
+                      {s.name.replace('Stasiun Surabaya ', 'St. ').replace('Stasiun ', 'St. ')} ({s.tod_readiness_score})
+                    </option>
+                  ))}
+                </optgroup>
               </select>
               <ChevronDown className="w-3 h-3 text-slate-500 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
             </div>

@@ -308,3 +308,22 @@ async def test_get_stations_layer(client):
     assert data["type"] == "FeatureCollection"
     assert len(data["features"]) == 17  # 17 stasiun Surabaya
 
+
+@pytest.mark.asyncio
+async def test_get_transit_routes_layer(client):
+    response = await client.get("/api/layers/transit-routes")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["type"] == "FeatureCollection"
+    assert len(data["features"]) == 16
+
+
+@pytest.mark.asyncio
+async def test_get_intermodal_routes(client):
+    response = await client.get("/api/transit/intermodal-routes/gubeng")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["station_id"] == "gubeng"
+    assert len(data["plans"]) >= 2
+    assert "steps" in data["plans"][0]
+

@@ -1,3 +1,9 @@
+ALL_STATION_ENUM = [
+    "gubeng", "pasar_turi", "wonokromo", "semut", "waru",
+    "tandes", "kandangan", "benowo", "ngagel", "margorejo",
+    "jemursari", "kertomenanggal", "sidotopo", "kalimas", "benteng"
+]
+
 # TransitERA Spatial AI Function Calling Tool Declarations
 SPATIAL_TOOLS = [
     {
@@ -8,7 +14,7 @@ SPATIAL_TOOLS = [
             "properties": {
                 "station_id": {
                     "type": "string",
-                    "enum": ["gubeng", "pasar_turi", "semut", "wonokromo", "waru"],
+                    "enum": ALL_STATION_ENUM,
                     "description": "ID simpul stasiun transit SRRL."
                 }
             },
@@ -23,12 +29,12 @@ SPATIAL_TOOLS = [
             "properties": {
                 "station_a": {
                     "type": "string",
-                    "enum": ["gubeng", "pasar_turi", "semut", "wonokromo", "waru"],
+                    "enum": ALL_STATION_ENUM,
                     "description": "ID stasiun pertama"
                 },
                 "station_b": {
                     "type": "string",
-                    "enum": ["gubeng", "pasar_turi", "semut", "wonokromo", "waru"],
+                    "enum": ALL_STATION_ENUM,
                     "description": "ID stasiun kedua"
                 }
             },
@@ -43,7 +49,7 @@ SPATIAL_TOOLS = [
             "properties": {
                 "station_id": {
                     "type": "string",
-                    "enum": ["gubeng", "pasar_turi", "semut", "wonokromo", "waru"],
+                    "enum": ALL_STATION_ENUM,
                     "description": "ID stasiun transit"
                 }
             },
@@ -58,7 +64,7 @@ SPATIAL_TOOLS = [
             "properties": {
                 "station_id": {
                     "type": "string",
-                    "enum": ["gubeng", "pasar_turi", "semut", "wonokromo", "waru"],
+                    "enum": ALL_STATION_ENUM,
                     "description": "ID stasiun transit"
                 }
             },
@@ -67,14 +73,14 @@ SPATIAL_TOOLS = [
     },
     {
         "name": "filter_layer",
-        "description": "Memfilter tampilan layer peta berdasarkan kriteria tertentu (misal titik survei Menu Go ramai, Struk Go, atau Activity).",
+        "description": "Memfilter dan MENAMPILKAN titik-titik sebaran lokasi survei kuliner/warung makan ramai (Menu Go), pedagang, atau layer peta di dekat stasiun.",
         "parameters": {
             "type": "object",
             "properties": {
                 "target_layer": {
                     "type": "string",
                     "enum": ["h3_tod_score", "h3_njop_premium", "survey_activity", "survey_mission_menu", "survey_mission_properti", "survey_mission_struk"],
-                    "description": "Nama layer yang ingin difilter"
+                    "description": "Nama layer yang ingin difilter (gunakan 'survey_mission_menu' untuk warung makan/kuliner ramai)"
                 },
                 "kondisi": {
                     "type": "string",
@@ -101,19 +107,19 @@ SPATIAL_TOOLS = [
     },
     {
         "name": "site_recommendation",
-        "description": "Memberikan rekomendasi sel H3 terbaik untuk pembukaan usaha UMKM kuliner atau komersial berdasarkan proksi daya beli (Struk Go) dan keramaian (Menu Go).",
+        "description": "Menganalisis dan merekomendasikan lokasi terbaik untuk MEMBUKA / MENDIRIKAN usaha baru (contoh: 'di mana lokasi terbaik untuk buka kedai kopi').",
         "parameters": {
             "type": "object",
             "properties": {
                 "business_type": {
                     "type": "string",
                     "enum": ["coffee_shop", "warung_makan", "retail_minimarket"],
-                    "description": "Kategori usaha yang ingin dibuka."
+                    "description": "Jenis usaha yang ingin dibuka."
                 },
                 "target_station": {
                     "type": "string",
-                    "enum": ["all", "gubeng", "pasar_turi", "semut", "wonokromo", "waru"],
-                    "description": "Filter kawasan stasiun tertentu"
+                    "enum": ["gubeng", "pasar_turi", "semut", "wonokromo", "waru"],
+                    "description": "Stasiun transit terdekat untuk lokasi usaha."
                 }
             },
             "required": ["business_type"]

@@ -11,12 +11,15 @@ interface LayerControlProps {
   onToggleSurveyPoints: () => void;
   showTransitNodes?: boolean;
   onToggleTransitNodes?: () => void;
+  showTransitRoutes?: boolean;
+  onToggleTransitRoutes?: () => void;
   showFloodHazard?: boolean;
   onToggleFloodHazard?: () => void;
   showNighttimeLight?: boolean;
   onToggleNighttimeLight?: () => void;
   surveyCount?: number | null;
   transitCount?: number | null;
+  routesCount?: number | null;
   floodCount?: number | null;
   ntlCount?: number | null;
   basemapStyle: BasemapStyleKey;
@@ -31,12 +34,15 @@ export const LayerControl: React.FC<LayerControlProps> = ({
   onToggleSurveyPoints,
   showTransitNodes = false,
   onToggleTransitNodes,
+  showTransitRoutes = false,
+  onToggleTransitRoutes,
   showFloodHazard = false,
   onToggleFloodHazard,
   showNighttimeLight = false,
   onToggleNighttimeLight,
   surveyCount,
   transitCount,
+  routesCount,
   floodCount,
   ntlCount,
   basemapStyle,
@@ -174,6 +180,25 @@ export const LayerControl: React.FC<LayerControlProps> = ({
             </span>
             <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-800 text-slate-300">
               {typeof transitCount === 'number' ? `${transitCount.toLocaleString('id-ID')} Titik` : '125 Titik'}
+            </span>
+          </button>
+        )}
+
+        {onToggleTransitRoutes && (
+          <button
+            onClick={onToggleTransitRoutes}
+            className={`w-full py-1.5 px-2 rounded-lg text-[11px] font-medium flex items-center justify-between border transition-all ${
+              showTransitRoutes
+                ? 'bg-amber-500/20 border-amber-500/50 text-amber-300 font-bold'
+                : 'bg-slate-950/40 border-slate-800 text-slate-400 hover:text-slate-300'
+            }`}
+          >
+            <span className="flex items-center gap-1.5">
+              <Bus className="w-3.5 h-3.5" />
+              Trayek Bus &amp; Feeder
+            </span>
+            <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-800 text-slate-300">
+              {typeof routesCount === 'number' ? `${routesCount} Rute` : '16 Rute'}
             </span>
           </button>
         )}

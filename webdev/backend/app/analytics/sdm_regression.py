@@ -44,9 +44,17 @@ class SDMRegressor:
         dengan dekomposisi efek langsung (Direct), limpahan spasial (Spillover), dan penalti banjir.
         """
         # 1. Spatial Lag Calculation (WX dan WY)
-        if neighbor_tod_scores and len(neighbor_tod_scores) > 0:
-            # Row-standardized spatial weights W: w_ij = 1 / k
-            w_avg = float(np.mean(neighbor_tod_scores))
+        if neighbor_tod_scores is not None:
+            if isinstance(neighbor_tod_scores, (int, float)):
+                w_avg = float(neighbor_tod_scores)
+            elif len(neighbor_tod_scores) > 0:
+                # Row-standardized spatial weights W: w_ij = 1 / k
+                w_avg = float(np.mean(neighbor_tod_scores))
+            elif neighbor_avg_tod is not None:
+                w_avg = float(neighbor_avg_tod)
+            else:
+                decay_ratio = max(0.60, 1.0 - (distance_to_station_m / 2000.0))
+                w_avg = round(tod_score * decay_ratio, 1)
         elif neighbor_avg_tod is not None:
             w_avg = float(neighbor_avg_tod)
         else:

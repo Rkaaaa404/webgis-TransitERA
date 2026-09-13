@@ -2,13 +2,15 @@ import math
 from typing import Dict, Any, List
 
 from app.spatial.h3_grid import generate_station_h3_cluster
+from app.spatial.real_data_pipeline import compute_all_station_analytics, get_all_real_h3_features
 
-STATIONS_DATA: Dict[str, Dict[str, Any]] = {
+_STATIC_FALLBACK_STATIONS_DATA: Dict[str, Dict[str, Any]] = {
     "gubeng": {
         "id": "gubeng",
         "name": "Stasiun Surabaya Gubeng",
         "latitude": -7.2654,
         "longitude": 112.7521,
+        "is_tier_1": True,
         "tod_readiness_score": 84.5,
         "scores": {
             "density": 88.0,
@@ -28,6 +30,7 @@ STATIONS_DATA: Dict[str, Dict[str, Any]] = {
         "weakest_dimension": "Design",
         "strongest_dimension": "Destination Accessibility",
         "status": "Sangat Siap (Tier 1)",
+        "njop_base_m2": 7000000,
         "njop_premium": {
             "avg_njop_premium_pct": 14.8,
             "ci_lower_pct": 11.2,
@@ -48,6 +51,7 @@ STATIONS_DATA: Dict[str, Dict[str, Any]] = {
         "name": "Stasiun Pasar Turi",
         "latitude": -7.2478,
         "longitude": 112.7306,
+        "is_tier_1": True,
         "tod_readiness_score": 79.2,
         "scores": {
             "density": 82.0,
@@ -67,6 +71,7 @@ STATIONS_DATA: Dict[str, Dict[str, Any]] = {
         "weakest_dimension": "Design",
         "strongest_dimension": "Diversity",
         "status": "Siap (Tier 2)",
+        "njop_base_m2": 18300000,
         "njop_premium": {
             "avg_njop_premium_pct": 12.3,
             "ci_lower_pct": 9.1,
@@ -87,6 +92,7 @@ STATIONS_DATA: Dict[str, Dict[str, Any]] = {
         "name": "Stasiun Surabaya Kota (Semut)",
         "latitude": -7.2372,
         "longitude": 112.7431,
+        "is_tier_1": False,
         "tod_readiness_score": 71.0,
         "scores": {
             "density": 74.0,
@@ -102,23 +108,24 @@ STATIONS_DATA: Dict[str, Dict[str, Any]] = {
             "destination_accessibility": 79.5,
             "distance_to_transit": 78.0
         },
-        "typology": "Mixed-Use Heritage Core",
-        "weakest_dimension": "Distance to Transit",
+        "typology": "Mixed-Use Heritage Transit",
+        "weakest_dimension": "Design",
         "strongest_dimension": "Diversity",
         "status": "Cukup Siap (Tier 2)",
+        "njop_base_m2": 17400000,
         "njop_premium": {
-            "avg_njop_premium_pct": 9.7,
+            "avg_njop_premium_pct": 9.4,
             "ci_lower_pct": 6.8,
-            "ci_upper_pct": 12.6,
+            "ci_upper_pct": 12.0,
             "affected_h3_count": 19,
-            "r_squared": 0.69,
-            "direct_effect_pct": 6.8,
-            "spillover_effect_pct": 2.9
+            "r_squared": 0.71,
+            "direct_effect_pct": 6.7,
+            "spillover_effect_pct": 2.7
         },
         "policy_recommendations": [
-            "Revitalisasi koridor heritage kawasan pecinan Kya-Kya dan Jembatan Merah terhubung ke stasiun.",
-            "Penambahan titik feeder WiraWiri untuk menghubungkan kawasan bisnis pergudangan.",
-            "Perbaikan drainase jalan untuk mengeliminasi genangan saat musim hujan tinggi."
+            "Revitalisasi koridor pedestrian cagar budaya di sekitar Stasiun Semut dan Jembatan Merah.",
+            "Perbaikan drainase mikro untuk mitigasi genangan air di Jalan Stasiun Kota.",
+            "Penguatan rute feeder penghubung kawasan heritage Kota Tua Surabaya."
         ]
     },
     "wonokromo": {
@@ -126,13 +133,14 @@ STATIONS_DATA: Dict[str, Dict[str, Any]] = {
         "name": "Stasiun Wonokromo",
         "latitude": -7.3014,
         "longitude": 112.7383,
-        "tod_readiness_score": 76.4,
+        "is_tier_1": True,
+        "tod_readiness_score": 76.8,
         "scores": {
-            "density": 82.5,
-            "diversity": 74.0,
-            "design": 58.2,
-            "destination_accessibility": 79.1,
-            "distance_to_transit": 88.0
+            "density": 85.0,
+            "diversity": 79.0,
+            "design": 62.0,
+            "destination_accessibility": 78.0,
+            "distance_to_transit": 84.0
         },
         "benchmark_scores": {
             "density": 77.0,
@@ -141,37 +149,39 @@ STATIONS_DATA: Dict[str, Dict[str, Any]] = {
             "destination_accessibility": 79.5,
             "distance_to_transit": 78.0
         },
-        "typology": "Mixed-Use Residential Area",
+        "typology": "Dense Commuter Mixed-Use",
         "weakest_dimension": "Design",
-        "strongest_dimension": "Distance to Transit",
+        "strongest_dimension": "Density",
         "status": "Siap (Tier 2)",
+        "njop_base_m2": 11200000,
         "njop_premium": {
-            "avg_njop_premium_pct": 11.5,
-            "ci_lower_pct": 8.4,
-            "ci_upper_pct": 14.6,
+            "avg_njop_premium_pct": 11.6,
+            "ci_lower_pct": 8.5,
+            "ci_upper_pct": 14.7,
             "affected_h3_count": 19,
-            "r_squared": 0.72,
-            "direct_effect_pct": 8.1,
-            "spillover_effect_pct": 3.4
+            "r_squared": 0.75,
+            "direct_effect_pct": 8.0,
+            "spillover_effect_pct": 3.6
         },
         "policy_recommendations": [
-            "Peningkatan kualitas trotoar timur stasiun menuju DTC (Darmo Trade Center) dan frontage Ahmad Yani.",
-            "Pembangunan JPO modern atau penyeberangan sebidang ramah pejalan kaki.",
-            "Penataan terminal angkutan mikrolet terintegrasi dengan gate stasiun."
+            "Penyediaan JPO terintegrasi langsung antara lantai 2 stasiun dengan DTC Mall.",
+            "Penataan ulang pangkalan ojek online di bawah flyover Mayangkara agar tidak memacetkan lajur bus.",
+            "Pembangunan shelter transit antarmoda dengan Terminal Joyoboyo."
         ]
     },
     "waru": {
         "id": "waru",
-        "name": "Stasiun Waru",
-        "latitude": -7.3519,
+        "name": "Stasiun Waru (Gerbang Selatan)",
+        "latitude": -7.3547,
         "longitude": 112.7297,
-        "tod_readiness_score": 68.3,
+        "is_tier_1": False,
+        "tod_readiness_score": 68.2,
         "scores": {
             "density": 70.0,
             "diversity": 65.0,
-            "design": 52.0,
-            "destination_accessibility": 71.5,
-            "distance_to_transit": 83.0
+            "design": 54.0,
+            "destination_accessibility": 68.0,
+            "distance_to_transit": 84.0
         },
         "benchmark_scores": {
             "density": 77.0,
@@ -180,16 +190,17 @@ STATIONS_DATA: Dict[str, Dict[str, Any]] = {
             "destination_accessibility": 79.5,
             "distance_to_transit": 78.0
         },
-        "typology": "Low-Accessibility Feeder Zone",
+        "typology": "Suburban Feeder Node",
         "weakest_dimension": "Design",
         "strongest_dimension": "Distance to Transit",
-        "status": "Butuh Peningkatan (Tier 3)",
+        "status": "Cukup Siap (Tier 2)",
+        "njop_base_m2": 6500000,
         "njop_premium": {
             "avg_njop_premium_pct": 8.2,
-            "ci_lower_pct": 5.5,
-            "ci_upper_pct": 10.9,
+            "ci_lower_pct": 5.7,
+            "ci_upper_pct": 10.7,
             "affected_h3_count": 19,
-            "r_squared": 0.65,
+            "r_squared": 0.69,
             "direct_effect_pct": 5.9,
             "spillover_effect_pct": 2.3
         },
@@ -200,6 +211,11 @@ STATIONS_DATA: Dict[str, Dict[str, Any]] = {
         ]
     }
 }
+
+try:
+    STATIONS_DATA: Dict[str, Dict[str, Any]] = compute_all_station_analytics()
+except Exception as e:
+    STATIONS_DATA = _STATIC_FALLBACK_STATIONS_DATA
 
 # Mapping dari dimension name ke key dalam scores dict
 _DIMENSION_KEY_MAP: Dict[str, str] = {
@@ -220,19 +236,22 @@ def get_weakest_dimension_score(station: Dict[str, Any]) -> float:
 
 def get_all_h3_features() -> Dict[str, Any]:
     """Pre-generate GeoJSON FeatureCollection seluruh sel H3 dari semua stasiun."""
-    features = []
-    for s_id, s_data in STATIONS_DATA.items():
-        cluster_features = generate_station_h3_cluster(
-            station_id=s_id,
-            station_name=s_data["name"],
-            center_lon=s_data["longitude"],
-            center_lat=s_data["latitude"],
-            base_tod_score=s_data["tod_readiness_score"],
-            base_njop_premium=s_data["njop_premium"]["avg_njop_premium_pct"],
-            typology=s_data["typology"]
-        )
-        features.extend(cluster_features)
-    return {"type": "FeatureCollection", "features": features}
+    try:
+        return get_all_real_h3_features()
+    except Exception:
+        features = []
+        for s_id, s_data in STATIONS_DATA.items():
+            cluster_features = generate_station_h3_cluster(
+                station_id=s_id,
+                station_name=s_data["name"],
+                center_lon=s_data["longitude"],
+                center_lat=s_data["latitude"],
+                base_tod_score=s_data["tod_readiness_score"],
+                base_njop_premium=s_data["njop_premium"]["avg_njop_premium_pct"],
+                typology=s_data["typology"]
+            )
+            features.extend(cluster_features)
+        return {"type": "FeatureCollection", "features": features}
 
 
 def get_all_survey_features() -> Dict[str, Any]:

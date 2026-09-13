@@ -26,7 +26,8 @@ export const FALLBACK_STATIONS: StationData[] = [
     typology: 'Commercial Transit Hub',
     weakest_dimension: 'Design',
     strongest_dimension: 'Destination Accessibility',
-    status: 'Sangat Siap (Tier 1)',
+    status: 'Focus Area',
+    is_tier_1: true,
     njop_premium: {
       avg_njop_premium_pct: 14.8,
       ci_lower_pct: 11.2,
@@ -79,7 +80,8 @@ export const FALLBACK_STATIONS: StationData[] = [
     typology: 'Commercial Transit Hub',
     weakest_dimension: 'Design',
     strongest_dimension: 'Diversity',
-    status: 'Siap (Tier 2)',
+    status: 'Focus Area',
+    is_tier_1: true,
     njop_premium: {
       avg_njop_premium_pct: 12.3,
       ci_lower_pct: 9.1,
@@ -132,7 +134,8 @@ export const FALLBACK_STATIONS: StationData[] = [
     typology: 'Mixed-Use Heritage Core',
     weakest_dimension: 'Design',
     strongest_dimension: 'Diversity',
-    status: 'Cukup Siap (Tier 2)',
+    status: 'Surabaya Rail Network',
+    is_tier_1: false,
     njop_premium: {
       avg_njop_premium_pct: 9.7,
       ci_lower_pct: 6.8,
@@ -168,10 +171,11 @@ export const FALLBACK_STATIONS: StationData[] = [
       destination_accessibility: 79.5,
       distance_to_transit: 78.0
     },
-    typology: 'Mixed-Use Residential Area',
+    typology: 'Dense Commuter Mixed-Use',
     weakest_dimension: 'Design',
     strongest_dimension: 'Distance to Transit',
-    status: 'Siap (Tier 2)',
+    status: 'Focus Area',
+    is_tier_1: true,
     njop_premium: {
       avg_njop_premium_pct: 11.5,
       ci_lower_pct: 8.4,
@@ -207,10 +211,11 @@ export const FALLBACK_STATIONS: StationData[] = [
       destination_accessibility: 79.5,
       distance_to_transit: 78.0
     },
-    typology: 'Low-Accessibility Feeder Zone',
+    typology: 'Suburban Feeder Node',
     weakest_dimension: 'Design',
     strongest_dimension: 'Distance to Transit',
-    status: 'Butuh Peningkatan (Tier 3)',
+    status: 'Surabaya Rail Network',
+    is_tier_1: false,
     njop_premium: {
       avg_njop_premium_pct: 8.2,
       ci_lower_pct: 5.5,
@@ -225,12 +230,172 @@ export const FALLBACK_STATIONS: StationData[] = [
       'Ekspansi koridor feeder WiraWiri rute selatan Sidoarjo-Surabaya.',
       'Pencegahan titik genangan banjir berkala di persimpangan Bundaran Waru.'
     ]
+  },
+  {
+    id: 'tandes',
+    name: 'Stasiun Tandes',
+    latitude: -7.2590,
+    longitude: 112.6870,
+    tod_readiness_score: 47.5,
+    scores: { density: 50.0, diversity: 55.0, design: 55.0, destination_accessibility: 45.0, distance_to_transit: 50.0 },
+    benchmark_scores: { density: 77.0, diversity: 76.5, design: 62.5, destination_accessibility: 79.5, distance_to_transit: 78.0 },
+    typology: 'Suburban Commuter & Feeder Priority',
+    weakest_dimension: 'Destination Accessibility',
+    strongest_dimension: 'Diversity',
+    status: 'Surabaya Rail Network',
+    is_tier_1: false,
+    njop_premium: { avg_njop_premium_pct: 6.5, ci_lower_pct: 4.8, ci_upper_pct: 8.1, affected_h3_count: 19, r_squared: 0.70, direct_effect_pct: 4.5, spillover_effect_pct: 2.0 },
+    policy_recommendations: ['Peningkatan frekuensi feeder bus koridor barat Surabaya.']
+  },
+  {
+    id: 'kandangan',
+    name: 'Stasiun Kandangan',
+    latitude: -7.2505,
+    longitude: 112.6575,
+    tod_readiness_score: 48.0,
+    scores: { density: 48.0, diversity: 52.0, design: 52.0, destination_accessibility: 42.0, distance_to_transit: 55.0 },
+    benchmark_scores: { density: 77.0, diversity: 76.5, design: 62.5, destination_accessibility: 79.5, distance_to_transit: 78.0 },
+    typology: 'Suburban Commuter & Feeder Priority',
+    weakest_dimension: 'Destination Accessibility',
+    strongest_dimension: 'Distance to Transit',
+    status: 'Surabaya Rail Network',
+    is_tier_1: false,
+    njop_premium: { avg_njop_premium_pct: 6.2, ci_lower_pct: 4.6, ci_upper_pct: 7.8, affected_h3_count: 19, r_squared: 0.70, direct_effect_pct: 4.3, spillover_effect_pct: 1.9 },
+    policy_recommendations: ['Penyediaan drop-off point feeder terpadu menuju perumahan barat.']
+  },
+  {
+    id: 'benowo',
+    name: 'Stasiun Benowo',
+    latitude: -7.2341,
+    longitude: 112.6152,
+    tod_readiness_score: 50.5,
+    scores: { density: 45.0, diversity: 55.0, design: 69.0, destination_accessibility: 40.0, distance_to_transit: 50.8 },
+    benchmark_scores: { density: 77.0, diversity: 76.5, design: 62.5, destination_accessibility: 79.5, distance_to_transit: 78.0 },
+    typology: 'Suburban Commuter & Feeder Priority',
+    weakest_dimension: 'Destination Accessibility',
+    strongest_dimension: 'Design',
+    status: 'Surabaya Rail Network',
+    is_tier_1: false,
+    njop_premium: { avg_njop_premium_pct: 7.3, ci_lower_pct: 5.5, ci_upper_pct: 9.1, affected_h3_count: 19, r_squared: 0.70, direct_effect_pct: 5.1, spillover_effect_pct: 2.2 },
+    policy_recommendations: ['Integrasi rute shuttle menuju Stadion Gelora Bung Tomo (GBT).']
+  },
+  {
+    id: 'ngagel',
+    name: 'Stasiun Ngagel',
+    latitude: -7.2882,
+    longitude: 112.7485,
+    tod_readiness_score: 54.9,
+    scores: { density: 65.0, diversity: 60.0, design: 58.0, destination_accessibility: 58.0, distance_to_transit: 62.0 },
+    benchmark_scores: { density: 77.0, diversity: 76.5, design: 62.5, destination_accessibility: 79.5, distance_to_transit: 78.0 },
+    typology: 'Heritage & Mixed Urban Core',
+    weakest_dimension: 'Design',
+    strongest_dimension: 'Density',
+    status: 'Surabaya Rail Network',
+    is_tier_1: false,
+    njop_premium: { avg_njop_premium_pct: 7.8, ci_lower_pct: 5.8, ci_upper_pct: 9.8, affected_h3_count: 19, r_squared: 0.72, direct_effect_pct: 5.5, spillover_effect_pct: 2.3 },
+    policy_recommendations: ['Pemberhentian komuter padat penghubung koridor industri dan perkuliahan.']
+  },
+  {
+    id: 'margorejo',
+    name: 'Stasiun Margorejo',
+    latitude: -7.3142,
+    longitude: 112.7354,
+    tod_readiness_score: 60.1,
+    scores: { density: 70.0, diversity: 65.0, design: 60.0, destination_accessibility: 65.0, distance_to_transit: 68.0 },
+    benchmark_scores: { density: 77.0, diversity: 76.5, design: 62.5, destination_accessibility: 79.5, distance_to_transit: 78.0 },
+    typology: 'Heritage & Mixed Urban Core',
+    weakest_dimension: 'Design',
+    strongest_dimension: 'Density',
+    status: 'Surabaya Rail Network',
+    is_tier_1: false,
+    njop_premium: { avg_njop_premium_pct: 8.5, ci_lower_pct: 6.4, ci_upper_pct: 10.6, affected_h3_count: 19, r_squared: 0.72, direct_effect_pct: 6.0, spillover_effect_pct: 2.5 },
+    policy_recommendations: ['Integrasi trotoar frontage road Jalan Ahmad Yani menuju pusat komersial Marina.']
+  },
+  {
+    id: 'jemursari',
+    name: 'Stasiun Jemursari',
+    latitude: -7.3276,
+    longitude: 112.7335,
+    tod_readiness_score: 55.8,
+    scores: { density: 68.0, diversity: 62.0, design: 58.0, destination_accessibility: 60.0, distance_to_transit: 64.0 },
+    benchmark_scores: { density: 77.0, diversity: 76.5, design: 62.5, destination_accessibility: 79.5, distance_to_transit: 78.0 },
+    typology: 'Heritage & Mixed Urban Core',
+    weakest_dimension: 'Design',
+    strongest_dimension: 'Density',
+    status: 'Surabaya Rail Network',
+    is_tier_1: false,
+    njop_premium: { avg_njop_premium_pct: 7.9, ci_lower_pct: 5.9, ci_upper_pct: 9.9, affected_h3_count: 19, r_squared: 0.72, direct_effect_pct: 5.5, spillover_effect_pct: 2.4 },
+    policy_recommendations: ['Penguatan jalur penyeberangan aman pejalan kaki melintasi rel kereta ganda.']
+  },
+  {
+    id: 'kertomenanggal',
+    name: 'Stasiun Kertomenanggal',
+    latitude: -7.3406,
+    longitude: 112.7294,
+    tod_readiness_score: 57.0,
+    scores: { density: 66.0, diversity: 60.0, design: 58.0, destination_accessibility: 58.0, distance_to_transit: 65.0 },
+    benchmark_scores: { density: 77.0, diversity: 76.5, design: 62.5, destination_accessibility: 79.5, distance_to_transit: 78.0 },
+    typology: 'Heritage & Mixed Urban Core',
+    weakest_dimension: 'Design',
+    strongest_dimension: 'Density',
+    status: 'Surabaya Rail Network',
+    is_tier_1: false,
+    njop_premium: { avg_njop_premium_pct: 8.0, ci_lower_pct: 6.0, ci_upper_pct: 10.0, affected_h3_count: 19, r_squared: 0.72, direct_effect_pct: 5.6, spillover_effect_pct: 2.4 },
+    policy_recommendations: ['Fasilitas park-and-ride komuter perbatasan selatan Surabaya.']
+  },
+  {
+    id: 'sidotopo',
+    name: 'Stasiun Sidotopo',
+    latitude: -7.2319,
+    longitude: 112.7562,
+    tod_readiness_score: 65.7,
+    scores: { density: 78.0, diversity: 68.0, design: 58.0, destination_accessibility: 65.0, distance_to_transit: 70.0 },
+    benchmark_scores: { density: 77.0, diversity: 76.5, design: 62.5, destination_accessibility: 79.5, distance_to_transit: 78.0 },
+    typology: 'Dense Urban Commuter Spine',
+    weakest_dimension: 'Design',
+    strongest_dimension: 'Density',
+    status: 'Surabaya Rail Network',
+    is_tier_1: false,
+    njop_premium: { avg_njop_premium_pct: 9.0, ci_lower_pct: 6.8, ci_upper_pct: 11.2, affected_h3_count: 19, r_squared: 0.74, direct_effect_pct: 6.3, spillover_effect_pct: 2.7 },
+    policy_recommendations: ['Optimalisasi kawasan depo KA Sidotopo sebagai transit node terpadu Surabaya Utara.']
+  },
+  {
+    id: 'kalimas',
+    name: 'Stasiun Kalimas',
+    latitude: -7.2199,
+    longitude: 112.7350,
+    tod_readiness_score: 50.9,
+    scores: { density: 52.0, diversity: 55.0, design: 50.0, destination_accessibility: 52.0, distance_to_transit: 54.0 },
+    benchmark_scores: { density: 77.0, diversity: 76.5, design: 62.5, destination_accessibility: 79.5, distance_to_transit: 78.0 },
+    typology: 'Suburban Commuter & Feeder Priority',
+    weakest_dimension: 'Design',
+    strongest_dimension: 'Diversity',
+    status: 'Surabaya Rail Network',
+    is_tier_1: false,
+    njop_premium: { avg_njop_premium_pct: 6.8, ci_lower_pct: 5.1, ci_upper_pct: 8.5, affected_h3_count: 19, r_squared: 0.70, direct_effect_pct: 4.8, spillover_effect_pct: 2.0 },
+    policy_recommendations: ['Integrasi logistik dan angkutan barang pelabuhan Tanjung Perak.']
+  },
+  {
+    id: 'benteng',
+    name: 'Stasiun Benteng',
+    latitude: -7.2023,
+    longitude: 112.7402,
+    tod_readiness_score: 47.4,
+    scores: { density: 48.0, diversity: 50.0, design: 48.0, destination_accessibility: 46.0, distance_to_transit: 50.0 },
+    benchmark_scores: { density: 77.0, diversity: 76.5, design: 62.5, destination_accessibility: 79.5, distance_to_transit: 78.0 },
+    typology: 'Suburban Commuter & Feeder Priority',
+    weakest_dimension: 'Destination Accessibility',
+    strongest_dimension: 'Diversity',
+    status: 'Surabaya Rail Network',
+    is_tier_1: false,
+    njop_premium: { avg_njop_premium_pct: 6.1, ci_lower_pct: 4.5, ci_upper_pct: 7.7, affected_h3_count: 19, r_squared: 0.70, direct_effect_pct: 4.2, spillover_effect_pct: 1.9 },
+    policy_recommendations: ['Penyediaan shuttle feeder khusus kawasan pelabuhan dan pangkalan militer.']
   }
 ];
 
 export async function fetchStations(): Promise<StationData[]> {
   try {
-    const res = await fetch(`${API_BASE_URL}/stations`, { next: { revalidate: 60 } });
+    const res = await fetch(`${API_BASE_URL}/stations?all=true`, { next: { revalidate: 60 } });
     if (res.ok) {
       const summaries: any[] = await res.json();
       // Merge backend data with enrichment fields from fallback (menu_go, tenant_mix, etc.)
@@ -494,10 +659,20 @@ function createHexFeature(stId: string, stName: string, lon: number, lat: number
   }
   const stBaseH3: Record<string, string> = {
     gubeng: '898d80835d3ffff',
-    pasar_turi: '898d808311bffff',
-    semut: '898d808302bffff',
-    wonokromo: '898d80824cbffff',
-    waru: '898d8090d7bffff',
+    pasar_turi: '898d8083113ffff',
+    semut: '898d8083037ffff',
+    wonokromo: '898d80824dbffff',
+    waru: '898d8090d73ffff',
+    tandes: '898d8080503ffff',
+    kandangan: '898d8080ccfffff',
+    benowo: '898d808096bffff',
+    ngagel: '898d809196bffff',
+    margorejo: '898d8090a2fffff',
+    jemursari: '898d809086fffff',
+    kertomenanggal: '898d8090837ffff',
+    kalimas: '898d808337bffff',
+    benteng: '898d8083227ffff',
+    sidotopo: '898d8083053ffff',
   };
   const centerHex = stBaseH3[stId] || '898d80835d3ffff';
   const h3Index = idx === 0 ? centerHex : `${centerHex.slice(0, 11)}${idx.toString(16).padStart(2, '0')}ffff`;
@@ -619,5 +794,29 @@ export async function fetchStationsLayer(): Promise<any> {
   }
   return { type: 'FeatureCollection', features: [] };
 }
+
+export async function fetchTransitRoutes(stationId?: string): Promise<any> {
+  try {
+    const url = stationId 
+      ? `${API_BASE_URL}/layers/transit-routes?station_id=${encodeURIComponent(stationId)}`
+      : `${API_BASE_URL}/layers/transit-routes`;
+    const res = await fetch(url);
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn('fetchTransitRoutes failed:', err);
+  }
+  return { type: 'FeatureCollection', features: [] };
+}
+
+export async function fetchIntermodalRoutes(stationId: StationId): Promise<any> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/transit/intermodal-routes/${stationId}`);
+    if (res.ok) return await res.json();
+  } catch (err) {
+    console.warn(`fetchIntermodalRoutes(${stationId}) failed:`, err);
+  }
+  return { station_id: stationId, plans: [] };
+}
+
 
 

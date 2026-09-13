@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as maplibregl from 'maplibre-gl';
 import { StationId } from '@/types';
 import { BASEMAP_STYLES, FALLBACK_BASEMAP_STYLES, SURABAYA_DEFAULT_ZOOM } from '@/lib/mapid';
-import { FALLBACK_STATIONS, fetchMapidSurvey, fetchTransitNodes, fetchFloodHazard, fetchNighttimeLight } from '@/lib/api';
+import { FALLBACK_STATIONS, fetchMapidSurvey, fetchTransitNodes, fetchTransitRoutes, fetchFloodHazard, fetchNighttimeLight } from '@/lib/api';
 import { ChoroplethMode, BasemapStyleKey, LayerControl } from './LayerControl';
 import { PersonaType } from '@/lib/persona';
 import { Layers } from 'lucide-react';
@@ -50,10 +50,12 @@ export const MapContainer: React.FC<MapContainerProps> = ({
   const [isMapLoaded, setIsMapLoaded] = useState(false);
   const [isLayerControlOpen, setIsLayerControlOpen] = useState(false);
   const [showTransitNodes, setShowTransitNodes] = useState(false);
+  const [showTransitRoutes, setShowTransitRoutes] = useState(true);
   const [showFloodHazard, setShowFloodHazard] = useState(false);
   const [showNighttimeLight, setShowNighttimeLight] = useState(false);
   const [surveyCount, setSurveyCount] = useState<number | null>(null);
   const [transitCount, setTransitCount] = useState<number | null>(null);
+  const [routesCount, setRoutesCount] = useState<number | null>(null);
   const [floodCount, setFloodCount] = useState<number | null>(null);
   const [ntlCount, setNtlCount] = useState<number | null>(null);
   const currentStyleRef = useRef<BasemapStyleKey>(basemapStyle);
@@ -61,6 +63,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
   // 0. Pre-fetch Dynamic Layer Counts
   useEffect(() => {
     fetchTransitNodes().then((d) => setTransitCount(d.features?.length ?? 125)).catch(() => setTransitCount(125));
+    fetchTransitRoutes().then((d) => setRoutesCount(d.features?.length ?? 16)).catch(() => setRoutesCount(16));
     fetchFloodHazard().then((d) => setFloodCount(d.features?.length ?? 1553)).catch(() => setFloodCount(1553));
     fetchNighttimeLight().then((d) => setNtlCount(d.features?.length ?? 52)).catch(() => setNtlCount(52));
     fetchMapidSurvey().then((d) => setSurveyCount(d.features?.length ?? 100)).catch(() => setSurveyCount(100));
@@ -131,56 +134,105 @@ export const MapContainer: React.FC<MapContainerProps> = ({
   useH3Layer(mapRef.current, isMapLoaded, choroplethMode, onSelectH3Index, h3ScoreRange, h3RingFilter);
   useStationMarkers(mapRef.current, isMapLoaded, onSelectStation);
 
-  // 1.5 Add Feeder Routes layer for Commuter Persona
+  // 1.5 Add Real Transit Routes layer (16 trayek Suroboyo Bus & Feeder WiraWiri)
   useEffect(() => {
     if (!mapRef.current || !isMapLoaded) return;
     const map = mapRef.current;
     
-    if (activePersona === 'commuter') {
-      if (!map.getSource('feeder-routes-source')) {
-        map.addSource('feeder-routes-source', {
-          type: 'geojson',
-          data: {
-            type: 'FeatureCollection',
-            features: [
-              {
-                type: 'Feature',
-                properties: {},
-                geometry: {
-                  type: 'LineString',
-                  coordinates: [
-                    [112.7521, -7.2654], // Gubeng
-                    [112.7481, -7.2704],
-                    [112.7431, -7.2754],
-                    [112.7383, -7.3014]  // Wonokromo
-                  ]
+    const shouldShow = showTransitRoutes || activePersona === 'commuter';
+
+    if (shouldShow) {
+      fetchTransitRoutes().then((data) => {
+        if (!map.getSource('transit-routes-source')) {
+          map.addSource('transit-routes-source', {
+            type: 'geojson',
+            data
+          });
+
+          map.addLayer({
+            id: 'transit-routes-line',
+            type: 'line',
+            source: 'transit-routes-source',
+            layout: {
+              'line-join': 'round',
+              'line-cap': 'round',
+            },
+            paint: {
+              'line-color': ['coalesce', ['get', 'color'], '#10B981'],
+              'line-width': [
+                'interpolate', ['linear'], ['zoom'],
+                10, 2.0,
+                13, 3.5,
+                16, 5.0
+              ],
+              'line-opacity': 0.85
+            }
+          });
+
+          // Interactive Popup on Route Click
+          map.on('click', 'transit-routes-line', (e) => {
+            const props = e.features?.[0]?.properties;
+            if (!props) return;
+
+            let connStations = '';
+            try {
+              if (props.connected_stations) {
+                const parsed = typeof props.connected_stations === 'string' ? JSON.parse(props.connected_stations) : props.connected_stations;
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                  connStations = parsed.map((s: any) => `<span style="background: rgba(15,23,42,0.1); border: 1px solid rgba(15,23,42,0.2); padding: 1px 5px; border-radius: 4px; font-size: 9.5px; margin-right: 3px; display: inline-block;">${s.station_name.replace('Stasiun ', '')} (${s.distance_m}m)</span>`).join('');
                 }
               }
-            ]
+            } catch {}
+
+            new maplibregl.Popup({ closeButton: true, maxWidth: '320px' })
+              .setLngLat(e.lngLat)
+              .setHTML(`
+                <div style="font-family: system-ui, sans-serif; padding: 6px 4px; font-size: 12px; color: #0f172a;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px;">
+                    <span style="background: ${props.color || '#059669'}; color: #ffffff; padding: 2px 7px; border-radius: 4px; font-size: 9px; font-weight: 700; text-transform: uppercase;">
+                      ${props.code || 'Trayek'}
+                    </span>
+                    <span style="font-size: 10px; color: #64748b; font-weight: 600;">
+                      ${props.hours || '05:30 - 21:00 WIB'}
+                    </span>
+                  </div>
+                  <strong style="font-size: 13px; color: #0f172a; display: block; margin-top: 4px;">
+                    ${props.display_name || props.title}
+                  </strong>
+                  <div style="margin: 4px 0; font-size: 11px; color: #475569;">
+                    <span>Operator: <strong>${props.operator || 'WiraWiri / Suroboyo Bus'}</strong></span><br/>
+                    <span>Tarif: <strong style="color: #059669;">${props.fare || 'Rp 5.000'}</strong></span>
+                  </div>
+                  ${connStations ? `
+                    <div style="margin-top: 6px; padding-top: 5px; border-top: 1px solid #e2e8f0;">
+                      <div style="font-size: 9.5px; font-weight: 700; color: #64748b; margin-bottom: 3px;">INTEGRASI STASIUN KERETA:</div>
+                      <div>${connStations}</div>
+                    </div>
+                  ` : ''}
+                </div>
+              `)
+              .addTo(map);
+          });
+
+          map.on('mouseenter', 'transit-routes-line', () => {
+            map.getCanvas().style.cursor = 'pointer';
+          });
+          map.on('mouseleave', 'transit-routes-line', () => {
+            map.getCanvas().style.cursor = '';
+          });
+        } else {
+          (map.getSource('transit-routes-source') as maplibregl.GeoJSONSource).setData(data);
+          if (map.getLayer('transit-routes-line')) {
+            map.setLayoutProperty('transit-routes-line', 'visibility', 'visible');
           }
-        });
-        map.addLayer({
-          id: 'feeder-routes-line',
-          type: 'line',
-          source: 'feeder-routes-source',
-          paint: {
-            'line-color': '#B1FC91',
-            'line-width': 3,
-            'line-dasharray': [2, 2],
-            'line-opacity': 0.8
-          }
-        });
-      } else {
-        if (map.getLayer('feeder-routes-line')) {
-          map.setLayoutProperty('feeder-routes-line', 'visibility', 'visible');
         }
-      }
+      });
     } else {
-      if (map.getLayer('feeder-routes-line')) {
-        map.setLayoutProperty('feeder-routes-line', 'visibility', 'none');
+      if (map.getLayer('transit-routes-line')) {
+        map.setLayoutProperty('transit-routes-line', 'visibility', 'none');
       }
     }
-  }, [activePersona, isMapLoaded]);
+  }, [showTransitRoutes, activePersona, isMapLoaded]);
 
   // 2. Survey Points Layer (#PakSibukGa 360 Titik)
   useEffect(() => {
@@ -546,6 +598,9 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                   onToggleSurveyPoints={onToggleSurveyPoints}
                   showTransitNodes={showTransitNodes}
                   onToggleTransitNodes={() => setShowTransitNodes((prev) => !prev)}
+                  showTransitRoutes={showTransitRoutes}
+                  onToggleTransitRoutes={() => setShowTransitRoutes((prev) => !prev)}
+                  routesCount={routesCount}
                   showFloodHazard={showFloodHazard}
                   onToggleFloodHazard={() => setShowFloodHazard((prev) => !prev)}
                   showNighttimeLight={showNighttimeLight}
