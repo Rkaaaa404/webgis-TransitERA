@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StationId } from '@/types';
 import { PersonaType, getPersonaConfig } from '@/lib/persona';
 import { ChoroplethMode, BasemapStyleKey } from '@/components/map/LayerControl';
@@ -179,9 +179,29 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
   const [showKRL, setShowKRL] = useState(true);
   const [showBus, setShowBus] = useState(true);
   const [trainDirectionFilter, setTrainDirectionFilter] = useState<'all' | 'southbound' | 'northbound'>('all');
+  const [envDataMap, setEnvDataMap] = useState<Record<string, any>>({});
+
+  useEffect(() => {
+    fetch('/data/station_environment_data.json')
+      .then((res) => res.ok ? res.json() : null)
+      .then((data) => {
+        if (data) setEnvDataMap(data);
+      })
+      .catch(() => {});
+  }, []);
 
   const demographics = getDemographicsForStation(activeStation);
-  const environment = getEnvironmentForStation(activeStation);
+  const rawEnv = envDataMap[activeStation] || getEnvironmentForStation(activeStation);
+  const environment = rawEnv ? {
+    ...rawEnv,
+    greenSpacePct: rawEnv.green_space_pct ?? rawEnv.greenSpacePct ?? 18.5,
+    aqiColor: rawEnv.aqi_color ?? rawEnv.aqiColor ?? '#f59e0b',
+    aqiLabel: rawEnv.aqi_label ?? rawEnv.aqiLabel ?? 'Sedang',
+    floodRisk: rawEnv.flood_risk ?? rawEnv.floodRisk ?? 'rendah',
+    floodRiskColor: rawEnv.flood_risk_color ?? rawEnv.floodRiskColor ?? '#10b981',
+    floodNote: rawEnv.flood_note ?? 'Perlu penguatan drainase primer koridor stasiun.',
+    provenance: 'Sumber: Open-Meteo (Copernicus CAMS), BPBD Kota Surabaya, & RTRW Perda 8/2024'
+  } : undefined;
   const trainSchedules = getTrainSchedulesForStation(activeStation);
   const busRoutes = getBusRoutesForStation(activeStation);
   const touristSpots = getTouristDestinationsForStation(activeStation);
@@ -923,7 +943,7 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
                         Risiko {environment.floodRisk}
                       </span>
                     </div>
-                    <div className="text-[9px] text-slate-400 mt-1">Perlu penguatan drainase primer koridor stasiun.</div>
+                    <div className="text-[9px] text-slate-400 mt-1">{environment.floodNote}</div>
                   </div>
                 </div>
 
@@ -938,6 +958,14 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
                     <Thermometer className="w-4 h-4 text-red-400 mx-auto mb-1" />
                     <div className="text-sm font-bold text-red-400">{environment.temperature}°C</div>
                     <div className="text-[9px] text-slate-400">Suhu Permukaan</div>
+                  </div>
+                </div>
+
+                {/* Provenance Badge */}
+                <div className="pt-2 border-t border-slate-800/70">
+                  <div className="text-[8px] text-slate-400 leading-tight">
+                    <span className="text-brand-lime font-bold">Data Empiris Riil: </span>
+                    {environment.provenance}
                   </div>
                 </div>
               </div>

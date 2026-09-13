@@ -209,6 +209,21 @@ export function useStationMarkers(
       ]);
     }
 
+    // 3.5 Hit Target Layer (Large invisible click & hover catcher for seamless UX)
+    const hitTargetLayerId = 'station-points-hit-target';
+    if (!map.getLayer(hitTargetLayerId)) {
+      map.addLayer({
+        id: hitTargetLayerId,
+        type: 'circle',
+        source: sourceId,
+        paint: {
+          'circle-radius': 24,
+          'circle-opacity': 0.001, // Near-invisible but interactive
+          'circle-stroke-opacity': 0,
+        },
+      });
+    }
+
     // 4. Station Label Symbol Layer (Native Vector Text Rendering)
     if (!map.getLayer(labelLayerId)) {
       map.addLayer({
@@ -222,13 +237,13 @@ export function useStationMarkers(
             ['linear'],
             ['zoom'],
             10,
-            8.5,
+            9.0,
             12.5,
-            10,
+            11,
             15,
-            12,
+            13,
           ],
-          'text-offset': [0, 1.15],
+          'text-offset': [0, 1.2],
           'text-anchor': 'top',
           'text-allow-overlap': true,
           'text-ignore-placement': true,
@@ -240,10 +255,10 @@ export function useStationMarkers(
             '#67e8f9',
             ['get', 'isFocus'],
             '#B1FC91',
-            '#e2e8f0',
+            '#f1f5f9',
           ],
-          'text-halo-color': '#0f172a',
-          'text-halo-width': 2.5,
+          'text-halo-color': '#020617',
+          'text-halo-width': 3.0,
           'text-halo-blur': 0.5,
         },
       });
@@ -254,9 +269,12 @@ export function useStationMarkers(
         '#67e8f9',
         ['get', 'isFocus'],
         '#B1FC91',
-        '#e2e8f0',
+        '#f1f5f9',
       ]);
     }
+
+    // Always bring station markers to front
+    bringStationMarkersToFront(map);
 
     // 5. Native Event Handlers
     const handleClick = (e: maplibregl.MapMouseEvent & { features?: maplibregl.MapGeoJSONFeature[] }) => {
@@ -334,6 +352,10 @@ export function useStationMarkers(
     map.on('mouseenter', circleLayerId, handleMouseEnter);
     map.on('mouseleave', circleLayerId, handleMouseLeave);
 
+    map.on('click', hitTargetLayerId, handleClick);
+    map.on('mouseenter', hitTargetLayerId, handleMouseEnter);
+    map.on('mouseleave', hitTargetLayerId, handleMouseLeave);
+
     return () => {
       if (popupRef.current) {
         popupRef.current.remove();
@@ -342,6 +364,29 @@ export function useStationMarkers(
       map.off('click', circleLayerId, handleClick);
       map.off('mouseenter', circleLayerId, handleMouseEnter);
       map.off('mouseleave', circleLayerId, handleMouseLeave);
+
+      map.off('click', hitTargetLayerId, handleClick);
+      map.off('mouseenter', hitTargetLayerId, handleMouseEnter);
+      map.off('mouseleave', hitTargetLayerId, handleMouseLeave);
     };
   }, [map, isMapLoaded, onSelectStation, activeStation, activePersona]);
 }
+
+/**
+ * Utility to bring station marker layers to the absolute top of the MapLibre layer stack,
+ * ensuring they are never buried under H3 polygons, GISTARU, BHUMI, or survey points.
+ */
+export function bringStationMarkersToFront(map: maplibregl.Map) {
+  const haloLayerId = 'station-points-halo';
+  const circleLayerId = 'station-points-circle';
+  const hitTargetLayerId = 'station-points-hit-target';
+  const labelLayerId = 'station-points-label';
+
+  try {
+    if (map.getLayer(haloLayerId)) map.moveLayer(haloLayerId);
+    if (map.getLayer(circleLayerId)) map.moveLayer(circleLayerId);
+    if (map.getLayer(hitTargetLayerId)) map.moveLayer(hitTargetLayerId);
+    if (map.getLayer(labelLayerId)) map.moveLayer(labelLayerId);
+  } catch {}
+}
+

@@ -5,6 +5,7 @@ import { StationData, StationId, RoutePlan } from '@/types';
 import { DiamondGauge } from './DiamondGauge';
 import { TravelEstimator } from './TravelEstimator';
 import { TransitRoutePlanner } from './TransitRoutePlanner';
+import { WiraWiriRouteExplorer } from './WiraWiriRouteExplorer';
 import { AIChatPanel } from '@/components/ai/AIChatPanel';
 import { STATION_NAMES } from '@/lib/dummy-data';
 import { fetchStationRealPOIs } from '@/lib/api';
@@ -67,7 +68,7 @@ const COMMUTER_HUBS: StationId[] = [
 
 interface WalkablePOI {
   name: string;
-  category: 'kuliner' | 'minimarket_atm' | 'transit_layanan';
+  category: 'kuliner' | 'wisata' | 'minimarket_atm' | 'transit_layanan';
   categoryLabel: string;
   distanceM: number;
   walkMinutes: number;
@@ -77,6 +78,7 @@ interface WalkablePOI {
 // Database POI Terkurasi Sekitar Stasiun dalam Radius 1 km (10-15 Menit Jalan Kaki)
 const STATION_POIS: Record<string, WalkablePOI[]> = {
   gubeng: [
+    { name: 'Monumen Kapal Selam (Monkasel)', category: 'wisata', categoryLabel: 'Wisata & Edukasi', distanceM: 350, walkMinutes: 4, notes: 'Museum kapal selam legendaris KRI Pasopati 410' },
     { name: 'Sentra Kuliner Stasiun Gubeng Baru', category: 'kuliner', categoryLabel: 'Kuliner', distanceM: 120, walkMinutes: 2, notes: 'Rawon, Nasi Bebek & Kopi Tiam' },
     { name: 'Indomaret Point Stasiun Gubeng', category: 'minimarket_atm', categoryLabel: 'Ritel & ATM', distanceM: 80, walkMinutes: 1, notes: 'Buka 24 Jam • ATM BCA & Mandiri' },
     { name: 'Shelter Suroboyo Bus Koridor 2', category: 'transit_layanan', categoryLabel: 'Transit', distanceM: 150, walkMinutes: 2, notes: 'Akses Koridor Timur-Barat' },
@@ -85,32 +87,34 @@ const STATION_POIS: Record<string, WalkablePOI[]> = {
     { name: 'Halte Feeder WiraWiri FD07', category: 'transit_layanan', categoryLabel: 'Transit', distanceM: 90, walkMinutes: 1, notes: 'Integrasi rute Joyoboyo - Bratang' },
   ],
   pasar_turi: [
+    { name: 'Tugu Pahlawan & Museum 10 Nopember', category: 'wisata', categoryLabel: 'Wisata Sejarah', distanceM: 450, walkMinutes: 6, notes: 'Ikon perjuangan arek-arek Suroboyo' },
     { name: 'Pusat Grosir Surabaya (PGS)', category: 'minimarket_atm', categoryLabel: 'Belanja & Niaga', distanceM: 320, walkMinutes: 4, notes: 'Pusat ritel & grosir tekstil' },
     { name: 'Pasar Turi Baru Food Court', category: 'kuliner', categoryLabel: 'Kuliner', distanceM: 260, walkMinutes: 3, notes: 'Pilihan aneka masakan Jawa Timur' },
     { name: 'Galeri ATM Mandiri & BRI', category: 'minimarket_atm', categoryLabel: 'Ritel & ATM', distanceM: 140, walkMinutes: 2, notes: 'Tarik & setor tunai' },
-    { name: 'Halte Feeder WiraWiri FD01', category: 'transit_layanan', categoryLabel: 'Transit', distanceM: 110, walkMinutes: 1, notes: 'Rute langsung Tunjungan Plaza & Alun-Alun' },
+    { name: 'Halte Feeder WiraWiri FD07', category: 'transit_layanan', categoryLabel: 'Transit', distanceM: 110, walkMinutes: 1, notes: 'Rute langsung Gubeng & Terminal Bratang' },
     { name: 'Nasi Campur Tambak Bayan', category: 'kuliner', categoryLabel: 'Kuliner', distanceM: 480, walkMinutes: 6, notes: 'Kuliner khas dekat Jl. Pasar Besar' },
   ],
   semut: [
-    { name: 'Kawasan Wisata Kota Lama (Kya-Kya)', category: 'kuliner', categoryLabel: 'Heritage & Kuliner', distanceM: 350, walkMinutes: 5, notes: 'Wisata malam pecinan & jajanan khas' },
+    { name: 'Kawasan Wisata Kota Lama (Kya-Kya)', category: 'wisata', categoryLabel: 'Heritage & Wisata', distanceM: 350, walkMinutes: 5, notes: 'Wisata malam pecinan, arsitektur kolonial & kuliner' },
     { name: 'Sentra Oleh-Oleh Jembatan Merah', category: 'minimarket_atm', categoryLabel: 'Belanja', distanceM: 520, walkMinutes: 7, notes: 'Pusat jajanan legendaris' },
     { name: 'Plaza Jembatan Merah (JMP)', category: 'minimarket_atm', categoryLabel: 'Niaga', distanceM: 580, walkMinutes: 8, notes: 'Pusat perbelanjaan grosir utara' },
     { name: 'Shelter Suroboyo Bus SB-04', category: 'transit_layanan', categoryLabel: 'Transit', distanceM: 200, walkMinutes: 3, notes: 'Rute menuju Pantai Kenjeran' },
   ],
   wonokromo: [
+    { name: 'Kebun Binatang Surabaya (KBS)', category: 'wisata', categoryLabel: 'Wisata Rekreasi', distanceM: 480, walkMinutes: 6, notes: 'Taman satwa bersejarah & Patung Suroboyo' },
     { name: 'Royal Plaza Surabaya', category: 'minimarket_atm', categoryLabel: 'Mall & Belanja', distanceM: 420, walkMinutes: 5, notes: 'Departemen store, bioskop & food court' },
     { name: 'Darmo Trade Center (DTC)', category: 'minimarket_atm', categoryLabel: 'Pusat Niaga', distanceM: 240, walkMinutes: 3, notes: 'Pusat perbelanjaan terintegrasi stasiun' },
     { name: 'Pojok Kuliner Stasiun Wonokromo', category: 'kuliner', categoryLabel: 'Kuliner', distanceM: 90, walkMinutes: 1, notes: 'Pecel Madiun & Soto Ayam Lamongan' },
     { name: 'Halte Feeder WiraWiri Wonokromo', category: 'transit_layanan', categoryLabel: 'Transit', distanceM: 120, walkMinutes: 2, notes: 'Koneksi ke Mayjend Sungkono & HR Muhammad' },
   ],
   waru: [
+    { name: 'City of Tomorrow (Cito Mall)', category: 'minimarket_atm', categoryLabel: 'Mall & Ritel', distanceM: 850, walkMinutes: 11, notes: 'Pusat belanja gerbang perbatasan Surabaya-Sidoarjo' },
     { name: 'Fasilitas Park & Ride Stasiun Waru', category: 'transit_layanan', categoryLabel: 'Layanan', distanceM: 60, walkMinutes: 1, notes: 'Parkir mobil/motor tarif flat aman' },
     { name: 'Alfamart & ATM Center Stasiun', category: 'minimarket_atm', categoryLabel: 'Ritel & ATM', distanceM: 70, walkMinutes: 1, notes: 'ATM BCA & BNI' },
     { name: 'Sentra Kuliner Waru Makmur', category: 'kuliner', categoryLabel: 'Kuliner', distanceM: 230, walkMinutes: 3, notes: 'Warung makan murah meriah' },
-    { name: 'City of Tomorrow (Cito Mall)', category: 'minimarket_atm', categoryLabel: 'Mall & Ritel', distanceM: 850, walkMinutes: 11, notes: 'Pusat belanja gerbang perbatasan' },
   ],
   terminal_joyoboyo: [
-    { name: 'Kebun Binatang Surabaya (KBS)', category: 'kuliner', categoryLabel: 'Wisata & Rekreasi', distanceM: 350, walkMinutes: 4, notes: 'Akses skybridge penyeberangan aman' },
+    { name: 'Kebun Binatang Surabaya (KBS)', category: 'wisata', categoryLabel: 'Wisata & Rekreasi', distanceM: 350, walkMinutes: 4, notes: 'Akses skybridge penyeberangan aman' },
     { name: 'Sentra Wisata Kuliner (SWK) Joyoboyo', category: 'kuliner', categoryLabel: 'Kuliner', distanceM: 180, walkMinutes: 2, notes: 'Pujasera binaan Pemkot Surabaya' },
     { name: 'Park & Ride Gedung TIJ', category: 'transit_layanan', categoryLabel: 'Layanan', distanceM: 30, walkMinutes: 1, notes: 'Gedung parkir 5 lantai tarif terjangkau' },
     { name: 'Shelter Utama Suroboyo Bus Koridor 1', category: 'transit_layanan', categoryLabel: 'Transit', distanceM: 50, walkMinutes: 1, notes: 'Rute Purabaya - Joyoboyo - Rajawali' },
@@ -122,7 +126,8 @@ const STATION_POIS: Record<string, WalkablePOI[]> = {
     { name: 'Pemberangkatan Bus Damri Bandara Juanda', category: 'transit_layanan', categoryLabel: 'Transit', distanceM: 100, walkMinutes: 1, notes: 'Jadwal setiap 30 menit ke T1 & T2' },
   ],
   terminal_bratang: [
-    { name: 'Taman Flora & Kuliner Bratang', category: 'kuliner', categoryLabel: 'Taman & Kuliner', distanceM: 250, walkMinutes: 3, notes: 'Taman kota asri & sentra kuliner kaki lima' },
+    { name: 'Taman Flora & Kebun Bibit Bratang', category: 'wisata', categoryLabel: 'Taman Wisata', distanceM: 250, walkMinutes: 3, notes: 'Taman kota asri, rusa & ruang terbuka hijau' },
+    { name: 'Sentra Kuliner SWK Bratang', category: 'kuliner', categoryLabel: 'Kuliner', distanceM: 180, walkMinutes: 2, notes: 'Pujasera aneka kuliner lokal Jawa Timur' },
     { name: 'Pasar Burung & Bunga Bratang', category: 'minimarket_atm', categoryLabel: 'Pasar Seni', distanceM: 300, walkMinutes: 4, notes: 'Destinasi khas Surabaya Timur' },
     { name: 'Pemberangkatan Feeder WiraWiri FD07', category: 'transit_layanan', categoryLabel: 'Transit', distanceM: 40, walkMinutes: 1, notes: 'Koneksi ke Stasiun Gubeng & TIJ' },
   ]
@@ -215,7 +220,7 @@ export const CommuterPanel: React.FC<CommuterPanelProps> = ({
   onHighlightRoute,
   onSelectRoutePlan,
 }) => {
-  const [poiFilter, setPoiFilter] = useState<'semua' | 'kuliner' | 'minimarket_atm' | 'transit_layanan'>('semua');
+  const [poiFilter, setPoiFilter] = useState<'semua' | 'wisata' | 'kuliner' | 'minimarket_atm' | 'transit_layanan'>('semua');
   const [realPois, setRealPois] = useState<any[]>([]);
   const [surveySummary, setSurveySummary] = useState<any>(null);
 
@@ -365,8 +370,9 @@ export const CommuterPanel: React.FC<CommuterPanelProps> = ({
           <div className="flex items-center gap-1 overflow-x-auto pb-1">
             {[
               { id: 'semua', label: 'Semua' },
-              { id: 'kuliner', label: 'Kuliner' },
-              { id: 'minimarket_atm', label: 'Ritel & ATM' },
+              { id: 'wisata', label: 'Wisata & Rekreasi' },
+              { id: 'kuliner', label: 'Kuliner Khas' },
+              { id: 'minimarket_atm', label: 'Ritel & Belanja' },
               { id: 'transit_layanan', label: 'Koneksi Transit' },
             ].map((tab) => (
               <button
@@ -392,12 +398,14 @@ export const CommuterPanel: React.FC<CommuterPanelProps> = ({
               >
                 <div className="flex items-center gap-2 overflow-hidden">
                   <div className="w-6 h-6 rounded-md bg-slate-800 flex items-center justify-center text-slate-300 shrink-0">
-                    {poi.category === 'kuliner' ? (
+                    {poi.category === 'wisata' ? (
+                      <Compass className="w-3 h-3 text-cyan-400" />
+                    ) : poi.category === 'kuliner' ? (
                       <Utensils className="w-3 h-3 text-amber-400" />
                     ) : poi.category === 'minimarket_atm' ? (
                       <ShoppingBag className="w-3 h-3 text-emerald-400" />
                     ) : (
-                      <Bus className="w-3 h-3 text-cyan-400" />
+                      <Bus className="w-3 h-3 text-purple-400" />
                     )}
                   </div>
                   <div className="overflow-hidden">
@@ -480,56 +488,12 @@ export const CommuterPanel: React.FC<CommuterPanelProps> = ({
           );
         })()}
 
-        {/* ── 5D TOD DIMENSIONS (EWING & CERVERO 2010 STANDARD) ── */}
-        <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-3.5 space-y-2.5">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1.5">
-              <Sliders className="w-3.5 h-3.5 text-cyan-400" />
-              <h4 className="text-xs font-bold text-slate-200">Indeks 5D TOD (Ewing &amp; Cervero 2010)</h4>
-            </div>
-            <span className="text-[9px] font-mono text-cyan-300 font-bold bg-cyan-950/80 px-1.5 py-0.5 rounded border border-cyan-500/30">
-              Skor: {station.tod_readiness_score.toFixed(1)}/100
-            </span>
-          </div>
-
-          <div className="grid grid-cols-5 gap-1.5 text-center">
-            <div className="bg-slate-950/60 p-1.5 rounded border border-slate-800">
-              <div className="text-[8px] text-slate-400 font-medium truncate">Density</div>
-              <div className="text-[11px] font-bold text-emerald-400 font-mono mt-0.5">
-                {Math.round(station.scores.density)}
-              </div>
-            </div>
-            <div className="bg-slate-950/60 p-1.5 rounded border border-slate-800">
-              <div className="text-[8px] text-slate-400 font-medium truncate">Diversity</div>
-              <div className="text-[11px] font-bold text-cyan-400 font-mono mt-0.5">
-                {Math.round(station.scores.diversity)}
-              </div>
-            </div>
-            <div className="bg-slate-950/60 p-1.5 rounded border border-slate-800">
-              <div className="text-[8px] text-slate-400 font-medium truncate">Design</div>
-              <div className="text-[11px] font-bold text-brand-lime font-mono mt-0.5">
-                {Math.round(station.scores.design)}
-              </div>
-            </div>
-            <div className="bg-slate-950/60 p-1.5 rounded border border-slate-800">
-              <div className="text-[8px] text-slate-400 font-medium truncate">Dest. Acc</div>
-              <div className="text-[11px] font-bold text-amber-400 font-mono mt-0.5">
-                {Math.round(station.scores.destination_accessibility)}
-              </div>
-            </div>
-            <div className="bg-slate-950/60 p-1.5 rounded border border-slate-800">
-              <div className="text-[8px] text-slate-400 font-medium truncate">Dist. Transit</div>
-              <div className="text-[11px] font-bold text-purple-400 font-mono mt-0.5">
-                {Math.round(station.scores.distance_to_transit)}
-              </div>
-            </div>
-          </div>
-
-          <div className="text-[8px] text-slate-500 font-mono flex items-center justify-between pt-0.5">
-            <span>5 Dimensi: Density, Diversity, Design, Destination, Distance</span>
-            <span className="text-cyan-400 font-semibold">AHP CR &le; 0.10</span>
-          </div>
-        </div>
+        {/* ── KATALOG INTERAKTIF FEEDER WIRAWIRI & SUROBOYO BUS ── */}
+        <WiraWiriRouteExplorer
+          activeStation={activeStation}
+          onSelectStation={onSelectStation}
+          onHighlightRoute={onHighlightRoute}
+        />
 
         {/* ── PERENCANA RUTE TRANSIT MULTIMODA & ROUTING ENGINE VISUAL ── */}
         <TransitRoutePlanner

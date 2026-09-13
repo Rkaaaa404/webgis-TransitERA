@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as maplibregl from 'maplibre-gl';
 import { ChoroplethMode } from './LayerControl';
 import { fetchH3Grid } from '@/lib/api';
+import { bringStationMarkersToFront } from './useStationMarkers';
 
 function getChoroplethPaintExpression(mode: ChoroplethMode): any {
   if (mode === 'tod_score') {
@@ -94,8 +95,9 @@ export function useH3Layer(
 
       const isVisible = choroplethMode !== 'none' && activePersona !== 'commuter';
       const visibility = isVisible ? 'visible' : 'none';
+      const beforeStationId = map.getLayer('station-points-halo') ? 'station-points-halo' : undefined;
 
-      // Add Fill Layer if not present
+      // Add Fill Layer if not present (placed before/under station markers)
       if (!map.getLayer('h3-tod-fill')) {
         map.addLayer({
           id: 'h3-tod-fill',
@@ -109,12 +111,12 @@ export function useH3Layer(
             'fill-opacity': [
               'case',
               ['boolean', ['feature-state', 'hover'], false],
-              0.88,
-              0.62
+              0.65,
+              0.38
             ]
           },
           filter: getFilterExpression(h3ScoreRange, h3RingFilter)
-        });
+        }, beforeStationId);
       } else {
         map.setLayoutProperty('h3-tod-fill', 'visibility', visibility);
         if (isVisible) {
@@ -135,14 +137,16 @@ export function useH3Layer(
           paint: {
             'line-color': '#4A4478',
             'line-width': 1.0,
-            'line-opacity': 0.65
+            'line-opacity': 0.50
           },
           filter: getFilterExpression(h3ScoreRange, h3RingFilter)
-        });
+        }, beforeStationId);
       } else {
         map.setLayoutProperty('h3-tod-border', 'visibility', visibility);
         map.setFilter('h3-tod-border', getFilterExpression(h3ScoreRange, h3RingFilter));
       }
+
+      bringStationMarkersToFront(map);
 
       // Event Listeners for Interaction
       let hoveredStateId: any = null;

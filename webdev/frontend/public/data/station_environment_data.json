@@ -1,0 +1,362 @@
+{
+  "gubeng": {
+    "station_id": "gubeng",
+    "station_name": "Stasiun Surabaya Gubeng",
+    "aqi": 79,
+    "aqi_label": "Sedang",
+    "aqi_color": "#f59e0b",
+    "pm25": 29.4,
+    "temperature": 27.6,
+    "flood_risk": "tinggi",
+    "flood_risk_color": "#ef4444",
+    "flood_note": "Zona rawan genangan musiman. Prioritas penguatan saluran & pompa primer.",
+    "green_space_pct": 19.8,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  },
+  "pasar_turi": {
+    "station_id": "pasar_turi",
+    "station_name": "Stasiun Surabaya Pasarturi",
+    "aqi": 79,
+    "aqi_label": "Sedang",
+    "aqi_color": "#f59e0b",
+    "pm25": 29.4,
+    "temperature": 27.3,
+    "flood_risk": "tinggi",
+    "flood_risk_color": "#ef4444",
+    "flood_note": "Zona rawan genangan musiman. Prioritas penguatan saluran & pompa primer.",
+    "green_space_pct": 12.4,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  },
+  "wonokromo": {
+    "station_id": "wonokromo",
+    "station_name": "Stasiun Wonokromo",
+    "aqi": 79,
+    "aqi_label": "Sedang",
+    "aqi_color": "#f59e0b",
+    "pm25": 29.4,
+    "temperature": 27.3,
+    "flood_risk": "tinggi",
+    "flood_risk_color": "#ef4444",
+    "flood_note": "Zona rawan genangan musiman. Prioritas penguatan saluran & pompa primer.",
+    "green_space_pct": 5.5,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  },
+  "semut": {
+    "station_id": "semut",
+    "station_name": "Stasiun Surabaya Kota (Semut)",
+    "aqi": 79,
+    "aqi_label": "Sedang",
+    "aqi_color": "#f59e0b",
+    "pm25": 29.4,
+    "temperature": 27.1,
+    "flood_risk": "tinggi",
+    "flood_risk_color": "#ef4444",
+    "flood_note": "Zona rawan genangan musiman. Prioritas penguatan saluran & pompa primer.",
+    "green_space_pct": 12.4,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  },
+  "waru": {
+    "station_id": "waru",
+    "station_name": "Stasiun Waru",
+    "aqi": 79,
+    "aqi_label": "Sedang",
+    "aqi_color": "#f59e0b",
+    "pm25": 29.4,
+    "temperature": 26.9,
+    "flood_risk": "sedang",
+    "flood_risk_color": "#f59e0b",
+    "flood_note": "Zona rawan genangan musiman. Prioritas penguatan saluran & pompa primer.",
+    "green_space_pct": 12.4,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  },
+  "terminal_joyoboyo": {
+    "station_id": "terminal_joyoboyo",
+    "station_name": "Terminal Intermoda Joyoboyo (TIJ)",
+    "aqi": 79,
+    "aqi_label": "Sedang",
+    "aqi_color": "#f59e0b",
+    "pm25": 29.4,
+    "temperature": 27.3,
+    "flood_risk": "tinggi",
+    "flood_risk_color": "#ef4444",
+    "flood_note": "Zona rawan genangan musiman. Prioritas penguatan saluran & pompa primer.",
+    "green_space_pct": 5.9,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  },
+  "terminal_purabaya": {
+    "station_id": "terminal_purabaya",
+    "station_name": "Terminal Purabaya (Bungurasih)",
+    "aqi": 79,
+    "aqi_label": "Sedang",
+    "aqi_color": "#f59e0b",
+    "pm25": 29.4,
+    "temperature": 26.9,
+    "flood_risk": "sedang",
+    "flood_risk_color": "#f59e0b",
+    "flood_note": "Zona rawan genangan musiman. Prioritas penguatan saluran & pompa primer.",
+    "green_space_pct": 12.4,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  },
+  "terminal_bratang": {
+    "station_id": "terminal_bratang",
+    "station_name": "Terminal Bratang",
+    "aqi": 79,
+    "aqi_label": "Sedang",
+    "aqi_color": "#f59e0b",
+    "pm25": 29.4,
+    "temperature": 27.6,
+    "flood_risk": "tinggi",
+    "flood_risk_color": "#ef4444",
+    "flood_note": "Zona rawan genangan musiman. Prioritas penguatan saluran & pompa primer.",
+    "green_space_pct": 28.5,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  },
+  "tandes": {
+    "station_id": "tandes",
+    "station_name": "Stasiun Tandes",
+    "aqi": 79,
+    "aqi_label": "Sedang",
+    "aqi_color": "#f59e0b",
+    "pm25": 29.4,
+    "temperature": 27.3,
+    "flood_risk": "tinggi",
+    "flood_risk_color": "#ef4444",
+    "flood_note": "Zona rawan genangan musiman. Prioritas penguatan saluran & pompa primer.",
+    "green_space_pct": 12.4,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  },
+  "kandangan": {
+    "station_id": "kandangan",
+    "station_name": "Stasiun Kandangan",
+    "aqi": 79,
+    "aqi_label": "Sedang",
+    "aqi_color": "#f59e0b",
+    "pm25": 29.4,
+    "temperature": 26.5,
+    "flood_risk": "tinggi",
+    "flood_risk_color": "#ef4444",
+    "flood_note": "Zona rawan genangan musiman. Prioritas penguatan saluran & pompa primer.",
+    "green_space_pct": 28.5,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  },
+  "benowo": {
+    "station_id": "benowo",
+    "station_name": "Stasiun Benowo",
+    "aqi": 113,
+    "aqi_label": "Tidak Sehat (Sensitif)",
+    "aqi_color": "#f97316",
+    "pm25": 65.4,
+    "temperature": 26.8,
+    "flood_risk": "rendah",
+    "flood_risk_color": "#10b981",
+    "flood_note": "Elevasi aman bebas genangan. Saluran pematusan koridor berfungsi optimal.",
+    "green_space_pct": 28.5,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  },
+  "ngagel": {
+    "station_id": "ngagel",
+    "station_name": "Stasiun Ngagel",
+    "aqi": 79,
+    "aqi_label": "Sedang",
+    "aqi_color": "#f59e0b",
+    "pm25": 29.4,
+    "temperature": 27.6,
+    "flood_risk": "tinggi",
+    "flood_risk_color": "#ef4444",
+    "flood_note": "Zona rawan genangan musiman. Prioritas penguatan saluran & pompa primer.",
+    "green_space_pct": 12.4,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  },
+  "margorejo": {
+    "station_id": "margorejo",
+    "station_name": "Stasiun Margorejo",
+    "aqi": 79,
+    "aqi_label": "Sedang",
+    "aqi_color": "#f59e0b",
+    "pm25": 29.4,
+    "temperature": 26.9,
+    "flood_risk": "tinggi",
+    "flood_risk_color": "#ef4444",
+    "flood_note": "Zona rawan genangan musiman. Prioritas penguatan saluran & pompa primer.",
+    "green_space_pct": 12.4,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  },
+  "jemursari": {
+    "station_id": "jemursari",
+    "station_name": "Stasiun Jemursari",
+    "aqi": 79,
+    "aqi_label": "Sedang",
+    "aqi_color": "#f59e0b",
+    "pm25": 29.4,
+    "temperature": 26.9,
+    "flood_risk": "tinggi",
+    "flood_risk_color": "#ef4444",
+    "flood_note": "Zona rawan genangan musiman. Prioritas penguatan saluran & pompa primer.",
+    "green_space_pct": 12.4,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  },
+  "kertomenanggal": {
+    "station_id": "kertomenanggal",
+    "station_name": "Stasiun Kertomenanggal",
+    "aqi": 79,
+    "aqi_label": "Sedang",
+    "aqi_color": "#f59e0b",
+    "pm25": 29.4,
+    "temperature": 26.9,
+    "flood_risk": "tinggi",
+    "flood_risk_color": "#ef4444",
+    "flood_note": "Zona rawan genangan musiman. Prioritas penguatan saluran & pompa primer.",
+    "green_space_pct": 12.4,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  },
+  "sidotopo": {
+    "station_id": "sidotopo",
+    "station_name": "Depo Kereta Sidotopo",
+    "aqi": 79,
+    "aqi_label": "Sedang",
+    "aqi_color": "#f59e0b",
+    "pm25": 29.4,
+    "temperature": 27.1,
+    "flood_risk": "tinggi",
+    "flood_risk_color": "#ef4444",
+    "flood_note": "Zona rawan genangan musiman. Prioritas penguatan saluran & pompa primer.",
+    "green_space_pct": 12.4,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  },
+  "kalimas": {
+    "station_id": "kalimas",
+    "station_name": "Stasiun Barang Kalimas",
+    "aqi": 79,
+    "aqi_label": "Sedang",
+    "aqi_color": "#f59e0b",
+    "pm25": 29.4,
+    "temperature": 27.1,
+    "flood_risk": "tinggi",
+    "flood_risk_color": "#ef4444",
+    "flood_note": "Zona rawan genangan musiman. Prioritas penguatan saluran & pompa primer.",
+    "green_space_pct": 12.4,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  },
+  "benteng": {
+    "station_id": "benteng",
+    "station_name": "Stasiun Benteng (Ujung)",
+    "aqi": 79,
+    "aqi_label": "Sedang",
+    "aqi_color": "#f59e0b",
+    "pm25": 29.4,
+    "temperature": 27.1,
+    "flood_risk": "sedang",
+    "flood_risk_color": "#f59e0b",
+    "flood_note": "Zona rawan genangan musiman. Prioritas penguatan saluran & pompa primer.",
+    "green_space_pct": 12.4,
+    "provenance": {
+      "air_quality": "Open-Meteo Air Quality API / Copernicus CAMS Global (US AQI & PM2.5)",
+      "weather": "Open-Meteo Forecast / ECMWF IFS (2m Surface Temperature)",
+      "flood": "Peta Bahaya Banjir BPBD Kota Surabaya (banjir_surabaya.geojson)",
+      "rth": "GISTARU Pola Ruang Kota Surabaya Perda No. 8/2024 (Kementerian ATR/BPN)",
+      "last_updated": "September 2026"
+    }
+  }
+}

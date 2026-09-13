@@ -251,7 +251,7 @@ export const AIChatPanel: React.FC<AIChatPanelProps> = ({
 
       {/* Curated Prompt Chips */}
       <div className="px-3.5 py-2 bg-slate-900/40 border-t border-slate-800/80">
-        <CuratedPromptChips onSelectPrompt={handleSendMessage} disabled={isLoading} />
+        <CuratedPromptChips onSelectPrompt={handleSendMessage} disabled={isLoading} activePersona={activePersona} />
       </div>
 
       {/* Input Area */}
