@@ -1,7 +1,7 @@
 import React from 'react';
-import { Layers, Eye, Map, Check, X, Bus, CloudRain, Sparkles } from 'lucide-react';
+import { Layers, Eye, Map, Check, X, Bus, CloudRain, Sparkles, Hexagon, CircleDollarSign, Star, EyeOff, Building2 } from 'lucide-react';
 
-export type ChoroplethMode = 'tod_score' | 'njop_premium' | 'typology';
+export type ChoroplethMode = 'tod_score' | 'njop_premium' | 'typology' | 'none';
 export type BasemapStyleKey = 'street' | 'street-2d' | 'dark' | 'light' | 'satellite';
 
 interface LayerControlProps {
@@ -13,6 +13,8 @@ interface LayerControlProps {
   onToggleTransitNodes?: () => void;
   showTransitRoutes?: boolean;
   onToggleTransitRoutes?: () => void;
+  showShoppingCenters?: boolean;
+  onToggleShoppingCenters?: () => void;
   showFloodHazard?: boolean;
   onToggleFloodHazard?: () => void;
   showNighttimeLight?: boolean;
@@ -20,6 +22,7 @@ interface LayerControlProps {
   surveyCount?: number | null;
   transitCount?: number | null;
   routesCount?: number | null;
+  shoppingCount?: number | null;
   floodCount?: number | null;
   ntlCount?: number | null;
   basemapStyle: BasemapStyleKey;
@@ -36,6 +39,8 @@ export const LayerControl: React.FC<LayerControlProps> = ({
   onToggleTransitNodes,
   showTransitRoutes = false,
   onToggleTransitRoutes,
+  showShoppingCenters = false,
+  onToggleShoppingCenters,
   showFloodHazard = false,
   onToggleFloodHazard,
   showNighttimeLight = false,
@@ -43,6 +48,7 @@ export const LayerControl: React.FC<LayerControlProps> = ({
   surveyCount,
   transitCount,
   routesCount,
+  shoppingCount,
   floodCount,
   ntlCount,
   basemapStyle,
@@ -50,7 +56,7 @@ export const LayerControl: React.FC<LayerControlProps> = ({
   onClose
 }) => {
   return (
-    <div className="bg-slate-900/95 border border-slate-700/80 backdrop-blur-xl rounded-xl p-3 text-slate-200 text-xs w-72 space-y-3 shadow-2xl">
+    <div className="bg-slate-900/95 border border-slate-700/80 backdrop-blur-xl rounded-xl p-3 text-slate-200 text-xs w-72 space-y-3 shadow-2xl max-h-[85vh] overflow-y-auto">
       {/* Header */}
       <div className="flex items-center justify-between pb-2 border-b border-slate-800">
         <div className="flex items-center gap-1.5">
@@ -98,10 +104,11 @@ export const LayerControl: React.FC<LayerControlProps> = ({
         </div>
       </div>
 
-      {/* Choropleth Mode Selector */}
+      {/* ── 1. Mutually Exclusive Thematic H3 Overlay (Pilih Satu) ── */}
       <div>
-        <div className="text-[10px] uppercase font-semibold text-slate-400 mb-1.5">
-          Overlay Choropleth H3
+        <div className="text-[10px] uppercase font-bold text-cyan-400 mb-1.5 flex items-center justify-between">
+          <span>Overlay Tematik H3</span>
+          <span className="text-[9px] text-brand-lime font-mono">Pilih Satu</span>
         </div>
         <div className="space-y-1">
           <button
@@ -112,7 +119,10 @@ export const LayerControl: React.FC<LayerControlProps> = ({
                 : 'bg-slate-950/40 border-slate-800/80 text-slate-400 hover:text-slate-300'
             }`}
           >
-            <span>TOD Readiness Score (5D)</span>
+            <span className="flex items-center gap-1.5">
+              <Hexagon className="w-3.5 h-3.5" />
+              TOD Readiness Score (5D)
+            </span>
             {choroplethMode === 'tod_score' && <Check className="w-3.5 h-3.5 text-brand-lime" />}
           </button>
 
@@ -124,7 +134,10 @@ export const LayerControl: React.FC<LayerControlProps> = ({
                 : 'bg-slate-950/40 border-slate-800/80 text-slate-400 hover:text-slate-300'
             }`}
           >
-            <span>Estimasi Nilai Lahan (%ΔNJOP)</span>
+            <span className="flex items-center gap-1.5">
+              <CircleDollarSign className="w-3.5 h-3.5" />
+              Estimasi Nilai Lahan (%ΔNJOP)
+            </span>
             {choroplethMode === 'njop_premium' && <Check className="w-3.5 h-3.5 text-brand-lime" />}
           </button>
 
@@ -136,16 +149,38 @@ export const LayerControl: React.FC<LayerControlProps> = ({
                 : 'bg-slate-950/40 border-slate-800/80 text-slate-400 hover:text-slate-300'
             }`}
           >
-            <span>Tipologi Kawasan (Cluster)</span>
+            <span className="flex items-center gap-1.5">
+              <Star className="w-3.5 h-3.5" />
+              Tipologi Kawasan (Cluster)
+            </span>
             {choroplethMode === 'typology' && <Check className="w-3.5 h-3.5 text-brand-lime" />}
+          </button>
+
+          <button
+            onClick={() => onChangeChoroplethMode('none')}
+            className={`w-full text-left py-1.5 px-2 rounded-lg text-[11px] font-medium flex items-center justify-between border transition-all ${
+              choroplethMode === 'none'
+                ? 'bg-brand-lime/15 border-brand-lime/50 text-brand-lime font-bold'
+                : 'bg-slate-950/40 border-slate-800/80 text-slate-400 hover:text-slate-300'
+            }`}
+          >
+            <span className="flex items-center gap-1.5">
+              <EyeOff className="w-3.5 h-3.5" />
+              Tanpa Grid H3 (Clean View)
+            </span>
+            {choroplethMode === 'none' && <Check className="w-3.5 h-3.5 text-brand-lime" />}
           </button>
         </div>
       </div>
 
-      {/* Overlay Layers Toggle */}
+      {/* ── Pemisah Garis Tegas ── */}
+      <div className="my-2.5 border-t border-slate-800" />
+
+      {/* ── 2. Multi-Active Contextual Overlay Layers ── */}
       <div className="space-y-1">
-        <div className="text-[10px] uppercase font-semibold text-slate-400 mb-1">
-          Layer Spasial Tematik
+        <div className="text-[10px] uppercase font-bold text-slate-400 mb-1 flex items-center justify-between">
+          <span>Layer Spasial Tambahan</span>
+          <span className="text-[9px] text-slate-500 font-mono">Multi-Aktif</span>
         </div>
 
         <button
@@ -158,7 +193,7 @@ export const LayerControl: React.FC<LayerControlProps> = ({
         >
           <span className="flex items-center gap-1.5">
             <Eye className="w-3.5 h-3.5" />
-            Survei Lapangan
+            Opini Publik (Survei MAPID)
           </span>
           <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-800 text-slate-300">
             {typeof surveyCount === 'number' ? `${surveyCount.toLocaleString('id-ID')} Titik` : '100 Titik'}
@@ -203,6 +238,25 @@ export const LayerControl: React.FC<LayerControlProps> = ({
           </button>
         )}
 
+        {onToggleShoppingCenters && (
+          <button
+            onClick={onToggleShoppingCenters}
+            className={`w-full py-1.5 px-2 rounded-lg text-[11px] font-medium flex items-center justify-between border transition-all ${
+              showShoppingCenters
+                ? 'bg-pink-500/20 border-pink-500/50 text-pink-300 font-bold'
+                : 'bg-slate-950/40 border-slate-800 text-slate-400 hover:text-slate-300'
+            }`}
+          >
+            <span className="flex items-center gap-1.5">
+              <Building2 className="w-3.5 h-3.5" />
+              Pusat Perbelanjaan (Mall)
+            </span>
+            <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-slate-800 text-slate-300">
+              {typeof shoppingCount === 'number' ? `${shoppingCount} Mall` : '35 Mall'}
+            </span>
+          </button>
+        )}
+
         {onToggleFloodHazard && (
           <button
             onClick={onToggleFloodHazard}
@@ -242,18 +296,19 @@ export const LayerControl: React.FC<LayerControlProps> = ({
         )}
       </div>
 
-      {/* Dynamic Color Ramp Legend */}
-      <div className="pt-2 border-t border-slate-800">
-        <div className="text-[10px] font-semibold text-slate-400 mb-1.5">
-          {choroplethMode === 'tod_score'
-            ? 'Legenda TOD Readiness Score'
-            : choroplethMode === 'njop_premium'
-            ? 'Legenda Kenaikan %ΔNJOP'
-            : 'Legenda Tipologi Kawasan'}
+      {/* ── 3. Dynamic Reactive Legend (Hanya Merender Layer Aktif) ── */}
+      <div className="pt-2 border-t border-slate-800 space-y-2">
+        <div className="text-[10px] font-bold text-slate-300 uppercase tracking-wider">
+          Legenda Simbologi Aktif
         </div>
 
+        {/* Legend: TOD Readiness Score */}
         {choroplethMode === 'tod_score' && (
-          <div className="space-y-1">
+          <div className="space-y-1 p-2 rounded-lg bg-slate-950/50 border border-slate-800">
+            <div className="flex items-center justify-between text-[10px] font-semibold text-slate-200">
+              <span>TOD Readiness Score (5D)</span>
+              <span className="text-[9px] text-brand-lime font-mono">H3 Grid</span>
+            </div>
             <div className="h-2 rounded-full bg-gradient-to-r from-red-500 via-amber-500 to-emerald-500 w-full" />
             <div className="flex justify-between text-[9px] text-slate-400 font-medium">
               <span>0 (Rendah)</span>
@@ -263,8 +318,13 @@ export const LayerControl: React.FC<LayerControlProps> = ({
           </div>
         )}
 
+        {/* Legend: %ΔNJOP Premium */}
         {choroplethMode === 'njop_premium' && (
-          <div className="space-y-1">
+          <div className="space-y-1 p-2 rounded-lg bg-slate-950/50 border border-slate-800">
+            <div className="flex items-center justify-between text-[10px] font-semibold text-slate-200">
+              <span>Kenaikan Nilai Lahan (%ΔNJOP)</span>
+              <span className="text-[9px] text-cyan-400 font-mono">H3 Grid</span>
+            </div>
             <div className="h-2 rounded-full bg-gradient-to-r from-indigo-500 via-blue-500 to-emerald-400 w-full" />
             <div className="flex justify-between text-[9px] text-slate-400 font-medium">
               <span>+0%</span>
@@ -274,26 +334,78 @@ export const LayerControl: React.FC<LayerControlProps> = ({
           </div>
         )}
 
+        {/* Legend: Tipologi Kawasan */}
         {choroplethMode === 'typology' && (
-          <div className="space-y-1 text-[10px]">
+          <div className="space-y-1.5 p-2 rounded-lg bg-slate-950/50 border border-slate-800 text-[10px]">
+            <div className="text-[10px] font-semibold text-slate-200 mb-1">Tipologi Kawasan (Cluster)</div>
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded bg-[#B1FC91]" />
+              <span className="w-2.5 h-2.5 rounded bg-[#B1FC91] shrink-0" />
               <span className="text-slate-300">Commercial Transit Hub</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded bg-[#4FC5C2]" />
-              <span className="text-slate-300">Mixed-Use Residential</span>
+              <span className="w-2.5 h-2.5 rounded bg-[#4FC5C2] shrink-0" />
+              <span className="text-slate-300">Mixed-Use Residential Area</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded bg-[#F59E0B]" />
+              <span className="w-2.5 h-2.5 rounded bg-[#F59E0B] shrink-0" />
               <span className="text-slate-300">Mixed-Use Heritage Core</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded bg-[#473DD2]" />
-              <span className="text-slate-300">Low-Access Feeder Zone</span>
+              <span className="w-2.5 h-2.5 rounded bg-[#473DD2] shrink-0" />
+              <span className="text-slate-300">Low-Accessibility Feeder Zone</span>
             </div>
           </div>
         )}
+
+        {/* Legend: Contextual Symbols */}
+        <div className="space-y-1 pt-1 text-[10px]">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-gradient-to-tr from-brand-lime to-brand-teal border border-white shrink-0" />
+            <span className="text-slate-300">Simpul Transit / Stasiun &amp; Terminal</span>
+          </div>
+
+          {showSurveyPoints && (
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-pink-500 border border-white shrink-0" />
+              <span className="text-slate-300">Opini Publik / Survei MAPID</span>
+            </div>
+          )}
+
+          {showTransitRoutes && (
+            <div className="flex items-center gap-2">
+              <span className="w-4 h-1 rounded bg-amber-400 shrink-0" />
+              <span className="text-slate-300">Trayek Suroboyo Bus &amp; Feeder WiraWiri</span>
+            </div>
+          )}
+
+          {showTransitNodes && (
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 border border-slate-900 shrink-0" />
+              <span className="text-slate-300">Halte Feeder &amp; Bus Stop</span>
+            </div>
+          )}
+
+          {showShoppingCenters && (
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-pink-500 border border-white shrink-0" />
+              <span className="text-slate-300">Pusat Perbelanjaan &amp; Mall (35 Lokasi)</span>
+            </div>
+          )}
+
+          {showFloodHazard && (
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded bg-blue-500/80 border border-blue-400 shrink-0" />
+              <span className="text-slate-300">Zona Kerentanan Banjir</span>
+            </div>
+          )}
+
+          {showNighttimeLight && (
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded bg-amber-400/80 border border-amber-300 shrink-0" />
+              <span className="text-slate-300">Cahaya Malam (Aktivitas NTL)</span>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

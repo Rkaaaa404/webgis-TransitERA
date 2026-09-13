@@ -4,13 +4,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as maplibregl from 'maplibre-gl';
 import { StationId } from '@/types';
 import { BASEMAP_STYLES, FALLBACK_BASEMAP_STYLES, SURABAYA_DEFAULT_ZOOM } from '@/lib/mapid';
-import { FALLBACK_STATIONS, fetchMapidSurvey, fetchTransitNodes, fetchTransitRoutes, fetchFloodHazard, fetchNighttimeLight } from '@/lib/api';
+import { FALLBACK_STATIONS, fetchMapidSurvey, fetchTransitNodes, fetchTransitRoutes, fetchFloodHazard, fetchNighttimeLight, fetchShoppingCenters } from '@/lib/api';
 import { ChoroplethMode, BasemapStyleKey, LayerControl } from './LayerControl';
 import { PersonaType } from '@/lib/persona';
 import { Layers } from 'lucide-react';
 
 import { useH3Layer } from './useH3Layer';
 import { useStationMarkers } from './useStationMarkers';
+import { useStationPerimeter } from './useStationPerimeter';
 
 interface MapContainerProps {
   activeStation: StationId;
@@ -53,9 +54,11 @@ export const MapContainer: React.FC<MapContainerProps> = ({
   const [showTransitRoutes, setShowTransitRoutes] = useState(true);
   const [showFloodHazard, setShowFloodHazard] = useState(false);
   const [showNighttimeLight, setShowNighttimeLight] = useState(false);
+  const [showShoppingCenters, setShowShoppingCenters] = useState(false);
   const [surveyCount, setSurveyCount] = useState<number | null>(null);
   const [transitCount, setTransitCount] = useState<number | null>(null);
   const [routesCount, setRoutesCount] = useState<number | null>(null);
+  const [shoppingCount, setShoppingCount] = useState<number | null>(null);
   const [floodCount, setFloodCount] = useState<number | null>(null);
   const [ntlCount, setNtlCount] = useState<number | null>(null);
   const currentStyleRef = useRef<BasemapStyleKey>(basemapStyle);
@@ -64,6 +67,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
   useEffect(() => {
     fetchTransitNodes().then((d) => setTransitCount(d.features?.length ?? 125)).catch(() => setTransitCount(125));
     fetchTransitRoutes().then((d) => setRoutesCount(d.features?.length ?? 16)).catch(() => setRoutesCount(16));
+    fetchShoppingCenters().then((d) => setShoppingCount(d.features?.length ?? 35)).catch(() => setShoppingCount(35));
     fetchFloodHazard().then((d) => setFloodCount(d.features?.length ?? 1553)).catch(() => setFloodCount(1553));
     fetchNighttimeLight().then((d) => setNtlCount(d.features?.length ?? 52)).catch(() => setNtlCount(52));
     fetchMapidSurvey().then((d) => setSurveyCount(d.features?.length ?? 100)).catch(() => setSurveyCount(100));
@@ -131,8 +135,9 @@ export const MapContainer: React.FC<MapContainerProps> = ({
   }, []);
 
   // Use Custom Hooks for Modular Layers
-  useH3Layer(mapRef.current, isMapLoaded, choroplethMode, onSelectH3Index, h3ScoreRange, h3RingFilter);
-  useStationMarkers(mapRef.current, isMapLoaded, onSelectStation);
+  useH3Layer(mapRef.current, isMapLoaded, choroplethMode, onSelectH3Index, h3ScoreRange, h3RingFilter, activePersona);
+  useStationMarkers(mapRef.current, isMapLoaded, onSelectStation, activeStation, activePersona);
+  useStationPerimeter(mapRef.current, isMapLoaded, activeStation, activePersona);
 
   // 1.5 Add Real Transit Routes layer (16 trayek Suroboyo Bus & Feeder WiraWiri)
   useEffect(() => {
@@ -297,58 +302,122 @@ export const MapContainer: React.FC<MapContainerProps> = ({
             if (!props) return;
 
             const categoryColors: Record<string, string> = {
-              'Pedestrian & Walkability': '#0891b2',
-              'Transit Multimodal': '#059669',
-              'Hambatan & Disamenity': '#d97706',
-              'User Experience & Dinamika': '#7c3aed',
+              'Pedestrian & Walkability': '#06b6d4',
+              'Transit Multimodal': '#10b981',
+              'Hambatan & Disamenity': '#f59e0b',
+              'User Experience & Dinamika': '#8b5cf6',
             };
-            const badgeBg = categoryColors[props.category] || '#2563eb';
+            const categoryIcons: Record<string, string> = {
+              'Pedestrian & Walkability': `<svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M13 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0M5 17l3-5 2 2 2-4 3 5M9 12l-1 3"/></svg>`,
+              'Transit Multimodal': `<svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16M8 15h.01M16 15h.01"/></svg>`,
+              'Hambatan & Disamenity': `<svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>`,
+              'User Experience & Dinamika': `<svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+            };
+            const badgeBg = categoryColors[props.category] || '#3b82f6';
+            const catIcon = categoryIcons[props.category] || '';
 
-            // Parse images if array or string
+            // Resolve image from any possible field name
             let imageUrl = '';
             try {
-              if (props.images) {
-                const parsed = typeof props.images === 'string' ? JSON.parse(props.images) : props.images;
-                if (Array.isArray(parsed) && parsed.length > 0) imageUrl = parsed[0];
+              const imgField = props.images || props.image || props.foto || props.photo || props.picture || '';
+              if (imgField) {
+                const parsed = typeof imgField === 'string'
+                  ? (imgField.startsWith('[') ? JSON.parse(imgField) : [imgField])
+                  : imgField;
+                if (Array.isArray(parsed) && parsed.length > 0) {
+                  imageUrl = String(parsed[0]).trim();
+                }
               }
             } catch {
               // ignore parse errors
             }
 
             const imageHtml = imageUrl
-              ? `<div style="margin: 6px 0; border-radius: 6px; overflow: hidden; max-height: 110px;">
-                   <img src="${imageUrl}" alt="Foto Lapangan" style="width: 100%; height: 105px; object-fit: cover; border-radius: 6px;" onerror="this.style.display='none'" />
+              ? `<div style="margin: 8px 0 6px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1);">
+                   <img src="${imageUrl}" alt="Foto Lapangan"
+                     style="width: 100%; height: 120px; object-fit: cover; display: block;"
+                     onerror="this.parentElement.style.display='none'" />
                  </div>`
               : '';
 
-            new maplibregl.Popup({ closeButton: true, maxWidth: '320px' })
+            new maplibregl.Popup({ closeButton: true, maxWidth: '300px', className: 'survey-popup-dark' })
               .setLngLat(e.lngLat)
               .setHTML(`
-                <div style="font-family: system-ui, -apple-system, sans-serif; padding: 6px 4px; font-size: 12px; color: #0f172a;">
-                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px;">
-                    <span style="background: ${badgeBg}; color: #ffffff; padding: 2px 7px; border-radius: 4px; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">
+                <style>
+                  .survey-popup-dark .maplibregl-popup-content {
+                    background: rgba(15, 23, 42, 0.97) !important;
+                    border: 1px solid rgba(99, 102, 241, 0.3) !important;
+                    border-radius: 12px !important;
+                    padding: 12px !important;
+                    box-shadow: 0 20px 40px rgba(0,0,0,0.6) !important;
+                  }
+                  .survey-popup-dark .maplibregl-popup-close-button {
+                    color: #94a3b8 !important;
+                    font-size: 18px !important;
+                  }
+                  .survey-popup-dark .maplibregl-popup-tip {
+                    border-top-color: rgba(15, 23, 42, 0.97) !important;
+                  }
+                </style>
+                <div style="font-family: system-ui, -apple-system, sans-serif; font-size: 12px; color: #e2e8f0;">
+
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px;">
+                    <span style="
+                      background: ${badgeBg}22;
+                      color: ${badgeBg};
+                      border: 1px solid ${badgeBg}55;
+                      padding: 3px 8px;
+                      border-radius: 20px;
+                      font-size: 9px;
+                      font-weight: 700;
+                      text-transform: uppercase;
+                      letter-spacing: 0.6px;
+                      display: inline-flex;
+                      align-items: center;
+                      gap: 4px;
+                    ">
+                      <span style="color: ${badgeBg};">${catIcon}</span>
                       ${props.category || 'Survey Activity'}
                     </span>
-                    <span style="font-size: 10px; color: #64748b; font-weight: 600;">
+                    <span style="font-size: 10px; color: #64748b; font-weight: 600; white-space: nowrap;">
                       ${props.id || '#PakSibukGa'}
                     </span>
                   </div>
 
-                  <strong style="font-size: 13px; color: #0f172a; display: block; margin-top: 4px; line-height: 1.3;">
+                  <div style="font-size: 13px; font-weight: 700; color: #f1f5f9; line-height: 1.4; margin-bottom: 5px;">
                     ${props.title || 'Observasi Lapangan'}
-                  </strong>
+                  </div>
 
-                  <p style="margin: 4px 0 6px 0; color: #475569; font-size: 11px; line-height: 1.4;">
+                  <p style="margin: 0 0 8px; color: #94a3b8; font-size: 11px; line-height: 1.5;">
                     ${props.description || 'Data survei primer koridor transit Surabaya.'}
                   </p>
 
                   ${imageHtml}
 
-                  <div style="margin-top: 6px; padding-top: 6px; border-top: 1px solid #e2e8f0; font-size: 10px; color: #64748b; display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
-                    <div><span style="font-weight: 600;">Lokasi:</span> ${props.station_name || props.station_cluster}</div>
-                    <div><span style="font-weight: 600;">Zona:</span> ${props.zone ? props.zone.split(' ')[0] : 'Catchment'}</div>
-                    <div><span style="font-weight: 600;">Surveyor:</span> ${props.user || '@surveyor'}</div>
-                    <div><span style="font-weight: 600;">Waktu:</span> ${(props.timestamp || '').split(' ')[1] || 'WIB'}</div>
+                  <div style="
+                    padding-top: 8px;
+                    border-top: 1px solid rgba(99,102,241,0.2);
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 5px;
+                    font-size: 10px;
+                  ">
+                    <div style="color: #64748b;">
+                      <span style="color: #94a3b8; font-weight: 600; display: block; font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 1px;">Lokasi</span>
+                      <span style="color: #cbd5e1;">${props.station_name || props.station_cluster || '-'}</span>
+                    </div>
+                    <div style="color: #64748b;">
+                      <span style="color: #94a3b8; font-weight: 600; display: block; font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 1px;">Zona</span>
+                      <span style="color: #cbd5e1;">${props.zone ? props.zone.split(' ')[0] : 'Catchment'}</span>
+                    </div>
+                    <div style="color: #64748b;">
+                      <span style="color: #94a3b8; font-weight: 600; display: block; font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 1px;">Surveyor</span>
+                      <span style="color: #cbd5e1;">${props.user || props.surveyor || '@PakSibukGa'}</span>
+                    </div>
+                    <div style="color: #64748b;">
+                      <span style="color: #94a3b8; font-weight: 600; display: block; font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 1px;">Waktu</span>
+                      <span style="color: #cbd5e1;">${(props.timestamp || '').split(' ')[1] || (props.date || 'WIB')}</span>
+                    </div>
                   </div>
                 </div>
               `)
@@ -576,6 +645,71 @@ export const MapContainer: React.FC<MapContainerProps> = ({
     };
   }, [showNighttimeLight, isMapLoaded]);
 
+  // 2.4 Shopping Centers (Pusat Perbelanjaan GEO MAPID 2025) Layer
+  useEffect(() => {
+    let isMounted = true;
+    if (!mapRef.current || !isMapLoaded) return;
+    const map = mapRef.current;
+
+    if (showShoppingCenters) {
+      fetchShoppingCenters().then((data) => {
+        if (!isMounted || !mapRef.current) return;
+        const currentMap = mapRef.current;
+        if (typeof currentMap.getSource !== 'function' || !currentMap.getStyle()) return;
+        if (!data || !data.type) return;
+
+        if (!currentMap.getSource('shopping-centers-source')) {
+          currentMap.addSource('shopping-centers-source', { type: 'geojson', data });
+          currentMap.addLayer({
+            id: 'shopping-centers-circle',
+            type: 'circle',
+            source: 'shopping-centers-source',
+            paint: {
+              'circle-radius': 6,
+              'circle-color': '#EC4899',
+              'circle-stroke-width': 1.5,
+              'circle-stroke-color': '#ffffff'
+            }
+          });
+
+          currentMap.on('click', 'shopping-centers-circle', (e) => {
+            const props = e.features?.[0]?.properties;
+            if (!props) return;
+            new maplibregl.Popup()
+              .setLngLat(e.lngLat)
+              .setHTML(`
+                <div style="font-family: sans-serif; padding: 4px; font-size: 12px; color: #0f172a;">
+                  <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+                    <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #ec4899;"></span>
+                    <strong style="color: #db2777;">${props.NAMA || 'Pusat Perbelanjaan'}</strong>
+                  </div>
+                  <div style="color: #475569; font-size: 11px; margin-top: 2px;">${props.ALAMAT || 'Kota Surabaya'}</div>
+                  <div style="color: #64748b; font-size: 9.5px; margin-top: 4px; font-weight: 600;">Sumber: GEO MAPID Data Catalog 2025</div>
+                </div>
+              `)
+              .addTo(currentMap);
+          });
+        } else {
+          const src = currentMap.getSource('shopping-centers-source') as maplibregl.GeoJSONSource | undefined;
+          if (src && typeof src.setData === 'function') {
+            src.setData(data);
+          }
+          if (currentMap.getLayer('shopping-centers-circle')) {
+            currentMap.setLayoutProperty('shopping-centers-circle', 'visibility', 'visible');
+          }
+        }
+      }).catch(() => {});
+    } else {
+      if (map && typeof map.getLayer === 'function' && map.getLayer('shopping-centers-circle')) {
+        map.setLayoutProperty('shopping-centers-circle', 'visibility', 'none');
+      }
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, [showShoppingCenters, isMapLoaded]);
+
   // 2.5 Dynamic Basemap Style Switch
   useEffect(() => {
     if (!mapRef.current || currentStyleRef.current === basemapStyle) return;
@@ -666,6 +800,9 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                   showTransitRoutes={showTransitRoutes}
                   onToggleTransitRoutes={() => setShowTransitRoutes((prev) => !prev)}
                   routesCount={routesCount}
+                  showShoppingCenters={showShoppingCenters}
+                  onToggleShoppingCenters={() => setShowShoppingCenters((prev) => !prev)}
+                  shoppingCount={shoppingCount}
                   showFloodHazard={showFloodHazard}
                   onToggleFloodHazard={() => setShowFloodHazard((prev) => !prev)}
                   showNighttimeLight={showNighttimeLight}

@@ -26,7 +26,7 @@ function getChoroplethPaintExpression(mode: ChoroplethMode): any {
       16.0, '#B1FC91',
       25.0, '#B1FC91'
     ];
-  } else {
+  } else if (mode === 'typology') {
     return [
       'match',
       ['get', 'typology'],
@@ -36,6 +36,8 @@ function getChoroplethPaintExpression(mode: ChoroplethMode): any {
       'Low-Accessibility Feeder Zone', '#473DD2',
       '#3A3468'
     ];
+  } else {
+    return 'rgba(0,0,0,0)';
   }
 }
 
@@ -58,7 +60,8 @@ export function useH3Layer(
   choroplethMode: ChoroplethMode,
   onSelectH3Index?: (index: string | null) => void,
   h3ScoreRange?: [number, number],
-  h3RingFilter?: number
+  h3RingFilter?: number,
+  activePersona?: string
 ) {
   const cachedDataRef = useRef<any>(null);
   const popupRef = useRef<maplibregl.Popup | null>(null);
@@ -89,12 +92,18 @@ export function useH3Layer(
         (map.getSource('h3-tod-source') as maplibregl.GeoJSONSource).setData(h3Data);
       }
 
+      const isVisible = choroplethMode !== 'none' && activePersona !== 'commuter';
+      const visibility = isVisible ? 'visible' : 'none';
+
       // Add Fill Layer if not present
       if (!map.getLayer('h3-tod-fill')) {
         map.addLayer({
           id: 'h3-tod-fill',
           type: 'fill',
           source: 'h3-tod-source',
+          layout: {
+            visibility: visibility
+          },
           paint: {
             'fill-color': getChoroplethPaintExpression(choroplethMode),
             'fill-opacity': [
@@ -107,7 +116,10 @@ export function useH3Layer(
           filter: getFilterExpression(h3ScoreRange, h3RingFilter)
         });
       } else {
-        map.setPaintProperty('h3-tod-fill', 'fill-color', getChoroplethPaintExpression(choroplethMode));
+        map.setLayoutProperty('h3-tod-fill', 'visibility', visibility);
+        if (isVisible) {
+          map.setPaintProperty('h3-tod-fill', 'fill-color', getChoroplethPaintExpression(choroplethMode));
+        }
         map.setFilter('h3-tod-fill', getFilterExpression(h3ScoreRange, h3RingFilter));
       }
 
@@ -117,6 +129,9 @@ export function useH3Layer(
           id: 'h3-tod-border',
           type: 'line',
           source: 'h3-tod-source',
+          layout: {
+            visibility: visibility
+          },
           paint: {
             'line-color': '#4A4478',
             'line-width': 1.0,
@@ -125,6 +140,7 @@ export function useH3Layer(
           filter: getFilterExpression(h3ScoreRange, h3RingFilter)
         });
       } else {
+        map.setLayoutProperty('h3-tod-border', 'visibility', visibility);
         map.setFilter('h3-tod-border', getFilterExpression(h3ScoreRange, h3RingFilter));
       }
 
@@ -199,11 +215,22 @@ export function useH3Layer(
     };
   }, [map, isMapLoaded, onSelectH3Index]);
 
-  // 2. Update Paint Property dynamically when choroplethMode changes
+  // 2. Update Paint Property & Visibility dynamically when choroplethMode or activePersona changes
   useEffect(() => {
-    if (!map || !isMapLoaded || !map.getLayer('h3-tod-fill')) return;
-    map.setPaintProperty('h3-tod-fill', 'fill-color', getChoroplethPaintExpression(choroplethMode));
-  }, [map, isMapLoaded, choroplethMode]);
+    if (!map || !isMapLoaded) return;
+    const isVisible = choroplethMode !== 'none' && activePersona !== 'commuter';
+    const visibility = isVisible ? 'visible' : 'none';
+
+    if (map.getLayer('h3-tod-fill')) {
+      map.setLayoutProperty('h3-tod-fill', 'visibility', visibility);
+      if (isVisible) {
+        map.setPaintProperty('h3-tod-fill', 'fill-color', getChoroplethPaintExpression(choroplethMode));
+      }
+    }
+    if (map.getLayer('h3-tod-border')) {
+      map.setLayoutProperty('h3-tod-border', 'visibility', visibility);
+    }
+  }, [map, isMapLoaded, choroplethMode, activePersona]);
 
   // 3. Update Filter Expression dynamically
   useEffect(() => {
