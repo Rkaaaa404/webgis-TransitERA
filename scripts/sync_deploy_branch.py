@@ -12,10 +12,9 @@ EXCLUDE_FROM_DEPLOY = [
     "context",
     "scripts",
     ".agents",
-    "TransitERA_PRD.md",
-    "TransitERA_Responsive_PRD.md",
-    "TransitERA_Security_PRD.md",
-    "TRANSITERA_AUDIT_AND_ROADMAP.md"
+    "docs/prd",
+    "docs/roadmap",
+    "docs/design",
 ]
 
 def run_cmd(cmd, check=True):

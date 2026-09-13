@@ -47,6 +47,40 @@ Tampilan dan alat analisis disesuaikan untuk 3 persona spesifik:
 
 ---
 
+## 📂 Struktur Repositori
+
+```
+TransitERA/
+├── docs/                     # Pusat dokumentasi resmi (PRD, roadmap, deployment, design)
+│   ├── README.md             # Indeks utama dokumentasi
+│   ├── DEPLOYMENT_GUIDE.md   # Panduan deployment cloud (Vercel & Supabase)
+│   ├── prd/                  # Master PRD, spesifikasi responsif & keamanan
+│   ├── roadmap/              # Roadmap pengembangan & audit kesiapan
+│   └── design/               # Design token & panduan antarmuka
+├── webdev/                   # Workspace kode aplikasi
+│   ├── frontend/             # Next.js 16 + React 19 + MapLibre GL JS
+│   ├── backend/              # FastAPI + Uber H3 + PySAL SDM + Gemini AI
+│   └── docker-compose.yml    # Orkestrasi container dev
+├── context/                  # Arsip riset, notulensi coaching, katalog data MAPID
+├── scripts/                  # Helper script (secret scanning, model training, sync)
+├── docker-compose.yml        # Orkestrasi stack production
+├── AGENTS.md                 # Aturan koding & standar repository
+└── README.md                 # Ikhtisar proyek ini
+```
+
+---
+
+## 📖 Dokumentasi Lengkap
+
+Seluruh dokumentasi teknis dan arsitektur produk telah dikonsolidasikan di dalam direktori [`docs/`](file:///docs/README.md):
+- **[Master PRD](file:///docs/prd/TransitERA_PRD.md)**: Konsep inti, scoring 5D TOD, dan tri-persona dashboard.
+- **[Responsive Design PRD](file:///docs/prd/TransitERA_Responsive_PRD.md)**: Standar responsif smartphone hingga ultrawide.
+- **[Security PRD](file:///docs/prd/TransitERA_Security_PRD.md)**: Threat model dan perlindungan API key / PII.
+- **[Roadmap & Audit](file:///docs/roadmap/TRANSITERA_AUDIT_AND_ROADMAP.md)**: Milestone M1-M8 dan kesiapan kompetisi.
+- **[Panduan Deployment](file:///docs/DEPLOYMENT_GUIDE.md)**: Cara deploy ke Vercel dan Supabase PostGIS.
+
+---
+
 ## 🚀 Cara Menjalankan Aplikasi
 
 ### Opsi 1: Menggunakan Docker Compose (Direkomendasikan)

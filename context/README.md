@@ -16,10 +16,15 @@ context/
 │   └── MAPID_Documentation_Reference.md
 │
 ├── notulensi/                # Notulensi sesi coaching & technical meeting
-│   ├── notulensi-PRD.md / .pdf / .txt    (Coaching 1: Penyusunan PRD)
-│   ├── notulensi-TM2.md / .pdf / .txt    (Technical Meeting 2: Ketentuan Teknis)
-│   ├── notulensi-AI.md / .pdf / .txt     (Coaching 2: Ekspektasi & Pemanfaatan AI)
-│   └── notulensi-Industri.md / .pdf / .txt (Coaching 3: Industry Demand & VPC)
+│   ├── notulensi-PRD.md / .pdf          (Coaching 1: Penyusunan PRD)
+│   ├── notulensi-TM2.md / .pdf          (Technical Meeting 2: Ketentuan Teknis)
+│   ├── notulensi-AI.md / .pdf           (Coaching 2: Ekspektasi & Pemanfaatan AI)
+│   ├── notulensi-Industri.md / .pdf     (Coaching 3: Industry Demand & VPC)
+│   └── raw_transcripts/                 (Arsip transcript mentah ASR / speech-to-text)
+│       ├── notulensi-PRD.txt
+│       ├── notulensi-TM2.txt
+│       ├── notulensi-AI.txt
+│       └── notulensi-Industri.txt
 │
 ├── proposal_and_survey/      # Dokumen resmi yang dikumpulkan (submission archive)
 │   ├── PRD_Submitted_MAPID_2026.md       (Arsip PRD yang dikumpulkan ke panitia)
@@ -51,13 +56,15 @@ context/
 
 | Kebutuhan Informasi | Dokumen Rujukan Utama |
 | :--- | :--- |
-| **Living PRD Master (Vibe Coding)** | `TransitERA_PRD.md` (di root workspace) |
+| **Living PRD Master (Vibe Coding)** | `docs/prd/TransitERA_PRD.md` |
+| **Pusat Dokumentasi Proyek** | `docs/README.md` |
 | **Arsip PRD Resmi yang Dikumpulkan** | `context/proposal_and_survey/PRD_Submitted_MAPID_2026.md` |
 | **Aturan & Kriteria Penilaian WebGIS** | `context/guidelines/MAPID_WebGIS_Competition_2026_Guide.md` |
 | **Panduan & Standar Data Spasial MAPID** | `context/guidelines/Ketentuan Data & WebGIS  - MAPID WebGIS Competition 2026.md` |
 | **Panduan Survei MAPID APPS (Activity/Mission)** | `context/guidelines/Panduan_Survey_Activities_MAPID_WebGIS_Competition_2026.docx.md` |
-| **Arsitektur & Integrasi AI (Function Calling)** | `context/notulensi/notulensi-AI.md` & `TransitERA_PRD.md` |
+| **Arsitektur & Integrasi AI (Function Calling)** | `context/notulensi/notulensi-AI.md` & `docs/prd/TransitERA_PRD.md` |
 | **Rencana & Sampel Titik Survei Lapangan** | `context/proposal_and_survey/Rencana_Survey_Activities_Pak_Sibuk_Ga.md` |
 | **Daftar Dataset & Skema Atribut MAPID** | `context/catalog_and_sample/MAPID_Data_Catalog.md` |
-| **Spesifikasi Responsif & Desain Mobile** | `TransitERA_Responsive_PRD.md` |
-| **Spesifikasi Keamanan & Threat Model** | `TransitERA_Security_PRD.md` |
+| **Spesifikasi Responsif & Desain Mobile** | `docs/prd/TransitERA_Responsive_PRD.md` |
+| **Spesifikasi Keamanan & Threat Model** | `docs/prd/TransitERA_Security_PRD.md` |
+| **Roadmap & Audit Kesiapan M1-M8** | `docs/roadmap/TRANSITERA_AUDIT_AND_ROADMAP.md` |

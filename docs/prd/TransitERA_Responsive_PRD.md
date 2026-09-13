@@ -1,7 +1,7 @@
 # PRD — Responsive Design
 ## Website TransitERA (Landing Page & WebGIS Platform)
 
-> Turunan dari `TransitERA_PRD.md` dan `DESIGN.md`, fokus khusus pada **keterbacaan dan fungsionalitas di seluruh ukuran perangkat** — dari smartphone kecil sampai monitor desktop lebar. Disusun berdasarkan struktur implementasi aktual di `code.html` (landing page) sehingga bisa langsung dieksekusi sebagai instruksi perbaikan oleh coding agent (Claude Code).
+> Turunan dari `TransitERA_PRD.md` dan `../design/DESIGN.md`, fokus khusus pada **keterbacaan dan fungsionalitas di seluruh ukuran perangkat** — dari smartphone kecil sampai monitor desktop lebar. Disusun berdasarkan struktur implementasi aktual landing page sehingga bisa langsung dieksekusi sebagai instruksi perbaikan oleh coding agent.
 
 | Field | Detail |
 |---|---|
