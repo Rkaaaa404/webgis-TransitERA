@@ -9,7 +9,9 @@ import sys
 
 SECRET_PATTERNS = [
     (r"AIzaSy[0-9A-Za-z-_]{33}", "Google Gemini / Maps API Key"),
+    (r"AQ\.[0-9A-Za-z-_]{20,}", "Google Stitch / AI Studio Key"),
     (r"sk-[a-zA-Z0-9]{32,}", "OpenAI API Key"),
+    (r"['\"][0-9a-f]{24}['\"]", "Potential MAPID / Hex API Key"),
     (r"postgres(?:ql)?:\/\/[a-zA-Z0-9_-]+:[^@\s]+@[a-zA-Z0-9_.-]+", "Postgres URI with password"),
     (r"ghp_[0-9a-zA-Z]{36}", "GitHub Personal Access Token"),
     (r"-----BEGIN (?:RSA )?PRIVATE KEY-----", "Private Key Header")
