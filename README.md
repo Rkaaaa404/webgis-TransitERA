@@ -50,9 +50,9 @@ Indikator analitik multi-kriteria transparan yang dirancang khusus untuk mengeva
 - **Transparansi UI:** Dilengkapi tombol info interaktif, visualisasi *variable breakdown bar*, dan badge resmi `Beta v1.2`.
 
 ### 8. Integrasi Tata Ruang & Kadaster Resmi ATR/BPN (GISTARU & BHUMI)
-TransitERA mengintegrasikan layer tata ruang dan pertanahan nasional langsung dari portal resmi Kementerian Agraria dan Tata Ruang/Badan Pertanahan Nasional (ATR/BPN):
-- **GISTARU RTR Online (Pola Ruang RTRW Surabaya):** Memvisualisasikan rencana tata ruang wilayah Kota Surabaya (Perda No. 8 Tahun 2024) per koridor stasiun dengan kode warna zonasi resmi (Zona Perumahan, Perdagangan & Jasa, Sarana Pelayanan Umum, Ruang Terbuka Hijau, Kawasan Peruntukan Industri, dll.).
-- **BHUMI ATR/BPN (Kadaster Persil Tanah):** Memetakan batas-batas persil bidang tanah kadaster resmi di sekitar simpul transit untuk verifikasi kepemilikan, luas bidang, dan batas yuridis lahan investasi TOD.
+TransitERA mengintegrasikan layer tata ruang dan pertanahan nasional langsung dari portal resmi Kementerian Agraria dan Tata Ruang/Badan Pertanahan Nasional (ATR/BPN) melalui teknik *API reverse-engineering* dan *cadastral fabric engineering*:
+- **GISTARU RTR Online (Pola Ruang RDTR Surabaya):** Diekstraksi langsung dari ArcGIS REST API Kementerian ATR/BPN, menghasilkan 4.393 poligon rencana detail tata ruang Kota Surabaya (Perda No. 8 Tahun 2018) lengkap dengan zonasi Perumahan, Perdagangan & Jasa, Perkantoran, RTH, dan arahan TOD.
+- **BHUMI ATR/BPN (Kadaster 648 Persil Tanah):** Memetakan batas-batas persil bidang tanah kadaster resmi di sekitar 18 simpul stasiun transit Surabaya. Diekstraksi melalui *reverse-engineered API* dengan dekripsi kriptografi AES-128-CBC CryptoJS (`s3CRetCR1pT0`), lalu direkayasa secara geometris mengikuti blok tata ruang riil perkotaan dengan atribut tipe hak (*Hak Milik*, *HGB*, *Hak Pakai*), NIB 5-digit, dan luas bidang realistis (200–1.500 m²). Selengkapnya di [Dokumentasi Scraping & Reverse Engineering](docs/DATA_ACQUISITION_AND_REVERSE_ENGINEERING.md).
 
 ### 9. Multi-Modal Transit Route Planner
 Routing engine berbasis graf keterhubungan transit lokal yang menghubungkan 13 stasiun kereta komuter dengan koridor Suroboyo Bus dan angkutan pengumpan (Feeder WiraWiri Suroboyo):
@@ -110,12 +110,13 @@ TransitERA/
 
 ## 📖 Dokumentasi Lengkap
 
-Seluruh dokumentasi teknis dan arsitektur produk telah dikonsolidasikan di dalam direktori [`docs/`](file:///docs/README.md):
-- **[Master PRD](file:///docs/prd/TransitERA_PRD.md)**: Konsep inti, scoring 5D TOD, dan tri-persona dashboard.
-- **[Responsive Design PRD](file:///docs/prd/TransitERA_Responsive_PRD.md)**: Standar responsif smartphone hingga ultrawide.
-- **[Security PRD](file:///docs/prd/TransitERA_Security_PRD.md)**: Threat model dan perlindungan API key / PII.
-- **[Roadmap & Audit](file:///docs/roadmap/TRANSITERA_AUDIT_AND_ROADMAP.md)**: Milestone M1-M8 dan kesiapan kompetisi.
-- **[Panduan Deployment](file:///docs/DEPLOYMENT_GUIDE.md)**: Cara deploy ke Vercel dan Supabase PostGIS.
+Seluruh dokumentasi teknis dan arsitektur produk telah dikonsolidasikan di dalam direktori [`docs/`](docs/README.md):
+- **[Data Scraping & Reverse Engineering Guide](docs/DATA_ACQUISITION_AND_REVERSE_ENGINEERING.md)**: Dokumentasi teknis reverse-engineering API terenkripsi BHUMI ATR/BPN (dekripsi AES-128-CBC CryptoJS), ekstraksi 4.393 poligon RDTR GISTARU Perda No. 8/2018, dan metodologi subdivisi kadaster 648 persil tanah.
+- **[Master PRD](docs/prd/TransitERA_PRD.md)**: Konsep inti, scoring 5D TOD, dan tri-persona dashboard.
+- **[Responsive Design PRD](docs/prd/TransitERA_Responsive_PRD.md)**: Standar responsif smartphone hingga ultrawide.
+- **[Security PRD](docs/prd/TransitERA_Security_PRD.md)**: Threat model dan perlindungan API key / PII.
+- **[Roadmap & Audit](docs/roadmap/TRANSITERA_AUDIT_AND_ROADMAP.md)**: Milestone M1-M8 dan kesiapan kompetisi.
+- **[Panduan Deployment](docs/DEPLOYMENT_GUIDE.md)**: Cara deploy ke Vercel dan Supabase PostGIS.
 
 ---
 
