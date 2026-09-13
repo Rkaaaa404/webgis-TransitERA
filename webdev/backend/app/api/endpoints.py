@@ -310,6 +310,30 @@ async def get_stations_layer():
     return _load_spatial_layer("stasiun_surabaya.geojson")
 
 
+@router.get("/layers/shopping-centers")
+async def get_shopping_centers_layer():
+    """Mengambil GeoJSON 35 pusat perbelanjaan (mall & retail hubs) Kota Surabaya tahun 2025."""
+    return _load_spatial_layer("PUSAT PERBELANJAAN DI KOTA SURABAYA TAHUN 2025.geojson")
+
+
+@router.get("/layers/property-prices")
+async def get_property_prices_layer():
+    """Mengambil GeoJSON 2.926 data harga properti & NJOP riil Kota Surabaya tahun 2024."""
+    return _load_spatial_layer("HARGA PROPERTI DI KOTA SURABAYA TAHUN 2024.geojson")
+
+
+@router.get("/layers/demographics")
+async def get_demographics_layer():
+    """Mengambil GeoJSON 154 wilayah kelurahan demografi Kota Surabaya."""
+    return _load_spatial_layer("demografi_surabaya.geojson")
+
+
+@router.get("/layers/socioeconomic")
+async def get_socioeconomic_layer():
+    """Mengambil GeoJSON 154 kelurahan status ekonomi sosial (SES) Kota Surabaya tahun 2024."""
+    return _load_spatial_layer("STATUS EKONOMI DAN SOSIAL - SOCIOECONOMIC STATUS (SES) KOTA SURABAYA TAHUN 2024.geojson")
+
+
 @router.get("/layers/transit-routes")
 async def get_transit_routes_layer(
     category: Optional[str] = Query(None, description="suroboyo_bus | trans_semanggi | feeder_wirawiri | bus_tumpuk"),
@@ -492,6 +516,12 @@ async def get_survey_points(
         ]
 
     return {"type": "FeatureCollection", "features": features}
+
+
+@router.get("/layers/mapid-survey")
+async def get_mapid_survey_layer():
+    """Mengambil GeoJSON 100 titik aktivitas dan survei lapangan #PakSibukGa Kota Surabaya."""
+    return fetch_survey_geojson(polygon_coords=_SURABAYA_POLYGON, hashtag="PakSibukGa")
 
 
 # ---------------------------------------------------------------------------

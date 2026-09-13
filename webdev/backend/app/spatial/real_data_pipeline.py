@@ -16,7 +16,7 @@ DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "spatial")
 CALIBRATED_JSON_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "calibrated_models.json")
 
 # Focus Area Hubs (Tier 1)
-TIER_1_STATION_IDS = {"gubeng", "pasar_turi", "wonokromo"}
+TIER_1_STATION_IDS = {"gubeng", "pasar_turi", "wonokromo", "terminal_joyoboyo", "terminal_purabaya"}
 
 def _load_calibrated_models() -> Dict[str, Any]:
     if os.path.exists(CALIBRATED_JSON_PATH):
@@ -180,7 +180,7 @@ def compute_all_station_analytics() -> Dict[str, Dict[str, Any]]:
             "is_tier_1": slug in TIER_1_STATION_IDS,
         }
 
-    # Tambahkan Waru sebagai simpul perbatasan selatan komuter aglomerasi
+    # Integrasi Simpul Multimoda Bersejarah & Strategis Sesuai Perda RTRW Surabaya No. 8/2024
     if "waru" not in stations:
         stations["waru"] = {
             "id": "waru",
@@ -189,6 +189,39 @@ def compute_all_station_analytics() -> Dict[str, Dict[str, Any]]:
             "longitude": 112.7297,
             "kecamatan": "Waru",
             "desa": "Kedungrejo",
+            "is_tier_1": False,
+        }
+
+    if "terminal_joyoboyo" not in stations:
+        stations["terminal_joyoboyo"] = {
+            "id": "terminal_joyoboyo",
+            "name": "Terminal Intermoda Joyoboyo (TIJ)",
+            "latitude": -7.2995,
+            "longitude": 112.7368,
+            "kecamatan": "Wonokromo",
+            "desa": "Sawunggaling",
+            "is_tier_1": True,
+        }
+
+    if "terminal_purabaya" not in stations:
+        stations["terminal_purabaya"] = {
+            "id": "terminal_purabaya",
+            "name": "Terminal Purabaya (Bungurasih)",
+            "latitude": -7.3526,
+            "longitude": 112.7235,
+            "kecamatan": "Waru",
+            "desa": "Bungurasih",
+            "is_tier_1": True,
+        }
+
+    if "terminal_bratang" not in stations:
+        stations["terminal_bratang"] = {
+            "id": "terminal_bratang",
+            "name": "Terminal Bratang",
+            "latitude": -7.2954,
+            "longitude": 112.7612,
+            "kecamatan": "Gubeng",
+            "desa": "Baratajaya",
             "is_tier_1": False,
         }
 
@@ -363,7 +396,7 @@ def compute_all_station_analytics() -> Dict[str, Dict[str, Any]]:
                 "avg_njop_premium_pct": sdm_premium,
                 "ci_lower_pct": ci_low,
                 "ci_upper_pct": ci_up,
-                "affected_h3_count": 19,
+                "affected_h3_count": 37,
                 "r_squared": 0.76,
                 "direct_effect_pct": direct_eff,
                 "spillover_effect_pct": spill_eff,
@@ -378,7 +411,8 @@ def compute_all_station_analytics() -> Dict[str, Dict[str, Any]]:
 def get_all_real_h3_features() -> Dict[str, Any]:
     """
     Menghasilkan GeoJSON FeatureCollection sel Uber H3 (resolusi 9)
-    yang mencakup catchment seluruh stasiun aktif Surabaya.
+    yang mencakup catchment seluruh stasiun aktif Surabaya (k=3 ring / radius ~1.000m
+    sesuai standar delineasi TOD Perda RTRW Surabaya No. 8/2024 & Permen ATR/BPN 16/2017).
     """
     global _CACHED_H3_COLLECTION
     if _CACHED_H3_COLLECTION is not None:
@@ -390,7 +424,8 @@ def get_all_real_h3_features() -> Dict[str, Any]:
     for slug, st in stations.items():
         lat, lon = st["latitude"], st["longitude"]
         center_cell = h3.latlng_to_cell(lat, lon, res=9)
-        ring_cells = sorted(list(h3.grid_disk(center_cell, 2)))
+        # Lapisan ketiga (k=3 disk) menghasilkan 37 sel heksagonal (radius ~1 km)
+        ring_cells = sorted(list(h3.grid_disk(center_cell, 3)))
 
         for cell in ring_cells:
             boundary = h3.cell_to_boundary(cell)
@@ -398,7 +433,7 @@ def get_all_real_h3_features() -> Dict[str, Any]:
             geom_coords.append(geom_coords[0])  # Close polygon ring
 
             ring_dist = h3.grid_distance(center_cell, cell)
-            decay = 1.0 - (ring_dist * 0.08)
+            decay = max(0.55, round(1.0 - (ring_dist * 0.07), 2))
 
             c_tod = round(st["tod_readiness_score"] * decay, 1)
             c_njop_prem = round(st["njop_premium"]["avg_njop_premium_pct"] * decay, 1)
