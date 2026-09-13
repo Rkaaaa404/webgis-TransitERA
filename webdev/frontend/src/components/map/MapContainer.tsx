@@ -136,6 +136,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
 
   // 1.5 Add Real Transit Routes layer (16 trayek Suroboyo Bus & Feeder WiraWiri)
   useEffect(() => {
+    let isMounted = true;
     if (!mapRef.current || !isMapLoaded) return;
     const map = mapRef.current;
     
@@ -143,13 +144,18 @@ export const MapContainer: React.FC<MapContainerProps> = ({
 
     if (shouldShow) {
       fetchTransitRoutes().then((data) => {
-        if (!map.getSource('transit-routes-source')) {
-          map.addSource('transit-routes-source', {
+        if (!isMounted || !mapRef.current) return;
+        const currentMap = mapRef.current;
+        if (typeof currentMap.getSource !== 'function' || !currentMap.getStyle()) return;
+        if (!data || !data.type) return;
+
+        if (!currentMap.getSource('transit-routes-source')) {
+          currentMap.addSource('transit-routes-source', {
             type: 'geojson',
             data
           });
 
-          map.addLayer({
+          currentMap.addLayer({
             id: 'transit-routes-line',
             type: 'line',
             source: 'transit-routes-source',
@@ -170,7 +176,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
           });
 
           // Interactive Popup on Route Click
-          map.on('click', 'transit-routes-line', (e) => {
+          currentMap.on('click', 'transit-routes-line', (e) => {
             const props = e.features?.[0]?.properties;
             if (!props) return;
 
@@ -211,48 +217,61 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                   ` : ''}
                 </div>
               `)
-              .addTo(map);
+              .addTo(currentMap);
           });
 
-          map.on('mouseenter', 'transit-routes-line', () => {
-            map.getCanvas().style.cursor = 'pointer';
+          currentMap.on('mouseenter', 'transit-routes-line', () => {
+            if (mapRef.current?.getCanvas()) mapRef.current.getCanvas().style.cursor = 'pointer';
           });
-          map.on('mouseleave', 'transit-routes-line', () => {
-            map.getCanvas().style.cursor = '';
+          currentMap.on('mouseleave', 'transit-routes-line', () => {
+            if (mapRef.current?.getCanvas()) mapRef.current.getCanvas().style.cursor = '';
           });
         } else {
-          (map.getSource('transit-routes-source') as maplibregl.GeoJSONSource).setData(data);
-          if (map.getLayer('transit-routes-line')) {
-            map.setLayoutProperty('transit-routes-line', 'visibility', 'visible');
+          const src = currentMap.getSource('transit-routes-source') as maplibregl.GeoJSONSource | undefined;
+          if (src && typeof src.setData === 'function') {
+            src.setData(data);
+          }
+          if (currentMap.getLayer('transit-routes-line')) {
+            currentMap.setLayoutProperty('transit-routes-line', 'visibility', 'visible');
           }
         }
-      });
+      }).catch(() => {});
     } else {
-      if (map.getLayer('transit-routes-line')) {
+      if (map && typeof map.getLayer === 'function' && map.getLayer('transit-routes-line')) {
         map.setLayoutProperty('transit-routes-line', 'visibility', 'none');
       }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [showTransitRoutes, activePersona, isMapLoaded]);
 
   // 2. Survey Points Layer (#PakSibukGa 360 Titik)
   useEffect(() => {
+    let isMounted = true;
     if (!mapRef.current || !isMapLoaded) return;
     const map = mapRef.current;
 
     if (showSurveyPoints) {
       fetchMapidSurvey().then((surveyData) => {
+        if (!isMounted || !mapRef.current) return;
+        const currentMap = mapRef.current;
+        if (typeof currentMap.getSource !== 'function' || !currentMap.getStyle()) return;
+        if (!surveyData || !surveyData.type) return;
+
         if (surveyData.features) {
           setSurveyCount(surveyData.features.length);
         }
 
-        if (!map.getSource('survey-points-source')) {
-          map.addSource('survey-points-source', {
+        if (!currentMap.getSource('survey-points-source')) {
+          currentMap.addSource('survey-points-source', {
             type: 'geojson',
             data: surveyData
           });
 
           // Circle layer with dynamic category color-coding for Activities
-          map.addLayer({
+          currentMap.addLayer({
             id: 'survey-points-circle',
             type: 'circle',
             source: 'survey-points-source',
@@ -273,7 +292,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
           });
 
           // Interactive Detail Popup on Click
-          map.on('click', 'survey-points-circle', (e) => {
+          currentMap.on('click', 'survey-points-circle', (e) => {
             const props = e.features?.[0]?.properties;
             if (!props) return;
 
@@ -333,40 +352,53 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                   </div>
                 </div>
               `)
-              .addTo(map);
+              .addTo(currentMap);
           });
 
           // Pointer cursor on hover
-          map.on('mouseenter', 'survey-points-circle', () => {
-            map.getCanvas().style.cursor = 'pointer';
+          currentMap.on('mouseenter', 'survey-points-circle', () => {
+            if (mapRef.current?.getCanvas()) mapRef.current.getCanvas().style.cursor = 'pointer';
           });
-          map.on('mouseleave', 'survey-points-circle', () => {
-            map.getCanvas().style.cursor = '';
+          currentMap.on('mouseleave', 'survey-points-circle', () => {
+            if (mapRef.current?.getCanvas()) mapRef.current.getCanvas().style.cursor = '';
           });
         } else {
-          (map.getSource('survey-points-source') as maplibregl.GeoJSONSource).setData(surveyData);
-          if (map.getLayer('survey-points-circle')) {
-            map.setLayoutProperty('survey-points-circle', 'visibility', 'visible');
+          const src = currentMap.getSource('survey-points-source') as maplibregl.GeoJSONSource | undefined;
+          if (src && typeof src.setData === 'function') {
+            src.setData(surveyData);
+          }
+          if (currentMap.getLayer('survey-points-circle')) {
+            currentMap.setLayoutProperty('survey-points-circle', 'visibility', 'visible');
           }
         }
-      });
+      }).catch(() => {});
     } else {
-      if (map.getLayer('survey-points-circle')) {
+      if (map && typeof map.getLayer === 'function' && map.getLayer('survey-points-circle')) {
         map.setLayoutProperty('survey-points-circle', 'visibility', 'none');
       }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [showSurveyPoints, isMapLoaded]);
 
   // 2.1 Halte Bus & Feeder Layer
   useEffect(() => {
+    let isMounted = true;
     if (!mapRef.current || !isMapLoaded) return;
     const map = mapRef.current;
 
     if (showTransitNodes) {
       fetchTransitNodes().then((data) => {
-        if (!map.getSource('transit-nodes-source')) {
-          map.addSource('transit-nodes-source', { type: 'geojson', data });
-          map.addLayer({
+        if (!isMounted || !mapRef.current) return;
+        const currentMap = mapRef.current;
+        if (typeof currentMap.getSource !== 'function' || !currentMap.getStyle()) return;
+        if (!data || !data.type) return;
+
+        if (!currentMap.getSource('transit-nodes-source')) {
+          currentMap.addSource('transit-nodes-source', { type: 'geojson', data });
+          currentMap.addLayer({
             id: 'transit-nodes-circle',
             type: 'circle',
             source: 'transit-nodes-source',
@@ -378,7 +410,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
             }
           });
 
-          map.on('click', 'transit-nodes-circle', (e) => {
+          currentMap.on('click', 'transit-nodes-circle', (e) => {
             const props = e.features?.[0]?.properties;
             if (!props) return;
             new maplibregl.Popup()
@@ -392,32 +424,45 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                   <span style="color: #4b5563; font-size: 11px;">${props.ALAMAT || 'Kota Surabaya'}</span>
                 </div>
               `)
-              .addTo(map);
+              .addTo(currentMap);
           });
         } else {
-          (map.getSource('transit-nodes-source') as maplibregl.GeoJSONSource).setData(data);
-          if (map.getLayer('transit-nodes-circle')) {
-            map.setLayoutProperty('transit-nodes-circle', 'visibility', 'visible');
+          const src = currentMap.getSource('transit-nodes-source') as maplibregl.GeoJSONSource | undefined;
+          if (src && typeof src.setData === 'function') {
+            src.setData(data);
+          }
+          if (currentMap.getLayer('transit-nodes-circle')) {
+            currentMap.setLayoutProperty('transit-nodes-circle', 'visibility', 'visible');
           }
         }
-      });
+      }).catch(() => {});
     } else {
-      if (map.getLayer('transit-nodes-circle')) {
+      if (map && typeof map.getLayer === 'function' && map.getLayer('transit-nodes-circle')) {
         map.setLayoutProperty('transit-nodes-circle', 'visibility', 'none');
       }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [showTransitNodes, isMapLoaded]);
 
   // 2.2 Flood Hazard Vulnerability Layer
   useEffect(() => {
+    let isMounted = true;
     if (!mapRef.current || !isMapLoaded) return;
     const map = mapRef.current;
 
     if (showFloodHazard) {
       fetchFloodHazard().then((data) => {
-        if (!map.getSource('flood-hazard-source')) {
-          map.addSource('flood-hazard-source', { type: 'geojson', data });
-          map.addLayer({
+        if (!isMounted || !mapRef.current) return;
+        const currentMap = mapRef.current;
+        if (typeof currentMap.getSource !== 'function' || !currentMap.getStyle()) return;
+        if (!data || !data.type) return;
+
+        if (!currentMap.getSource('flood-hazard-source')) {
+          currentMap.addSource('flood-hazard-source', { type: 'geojson', data });
+          currentMap.addLayer({
             id: 'flood-hazard-fill',
             type: 'fill',
             source: 'flood-hazard-source',
@@ -426,7 +471,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
               'fill-opacity': 0.35
             }
           });
-          map.addLayer({
+          currentMap.addLayer({
             id: 'flood-hazard-line',
             type: 'line',
             source: 'flood-hazard-source',
@@ -436,7 +481,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
             }
           });
 
-          map.on('click', 'flood-hazard-fill', (e) => {
+          currentMap.on('click', 'flood-hazard-fill', (e) => {
             const props = e.features?.[0]?.properties;
             if (!props) return;
             new maplibregl.Popup()
@@ -450,34 +495,47 @@ export const MapContainer: React.FC<MapContainerProps> = ({
                   <span style="font-size: 11px; color: #475569;">Tingkat Kerentanan: ${props.Kelas || 'Terancam Banjir'}</span>
                 </div>
               `)
-              .addTo(map);
+              .addTo(currentMap);
           });
         } else {
-          (map.getSource('flood-hazard-source') as maplibregl.GeoJSONSource).setData(data);
-          if (map.getLayer('flood-hazard-fill')) {
-            map.setLayoutProperty('flood-hazard-fill', 'visibility', 'visible');
-            map.setLayoutProperty('flood-hazard-line', 'visibility', 'visible');
+          const src = currentMap.getSource('flood-hazard-source') as maplibregl.GeoJSONSource | undefined;
+          if (src && typeof src.setData === 'function') {
+            src.setData(data);
+          }
+          if (currentMap.getLayer('flood-hazard-fill')) {
+            currentMap.setLayoutProperty('flood-hazard-fill', 'visibility', 'visible');
+            currentMap.setLayoutProperty('flood-hazard-line', 'visibility', 'visible');
           }
         }
-      });
+      }).catch(() => {});
     } else {
-      if (map.getLayer('flood-hazard-fill')) {
+      if (map && typeof map.getLayer === 'function' && map.getLayer('flood-hazard-fill')) {
         map.setLayoutProperty('flood-hazard-fill', 'visibility', 'none');
         map.setLayoutProperty('flood-hazard-line', 'visibility', 'none');
       }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [showFloodHazard, isMapLoaded]);
 
   // 2.3 Nighttime Light (NTL) Economic Radiance Layer
   useEffect(() => {
+    let isMounted = true;
     if (!mapRef.current || !isMapLoaded) return;
     const map = mapRef.current;
 
     if (showNighttimeLight) {
       fetchNighttimeLight().then((data) => {
-        if (!map.getSource('ntl-source')) {
-          map.addSource('ntl-source', { type: 'geojson', data });
-          map.addLayer({
+        if (!isMounted || !mapRef.current) return;
+        const currentMap = mapRef.current;
+        if (typeof currentMap.getSource !== 'function' || !currentMap.getStyle()) return;
+        if (!data || !data.type) return;
+
+        if (!currentMap.getSource('ntl-source')) {
+          currentMap.addSource('ntl-source', { type: 'geojson', data });
+          currentMap.addLayer({
             id: 'ntl-fill',
             type: 'fill',
             source: 'ntl-source',
@@ -486,7 +544,7 @@ export const MapContainer: React.FC<MapContainerProps> = ({
               'fill-opacity': 0.28
             }
           });
-          map.addLayer({
+          currentMap.addLayer({
             id: 'ntl-line',
             type: 'line',
             source: 'ntl-source',
@@ -496,19 +554,26 @@ export const MapContainer: React.FC<MapContainerProps> = ({
             }
           });
         } else {
-          (map.getSource('ntl-source') as maplibregl.GeoJSONSource).setData(data);
-          if (map.getLayer('ntl-fill')) {
-            map.setLayoutProperty('ntl-fill', 'visibility', 'visible');
-            map.setLayoutProperty('ntl-line', 'visibility', 'visible');
+          const src = currentMap.getSource('ntl-source') as maplibregl.GeoJSONSource | undefined;
+          if (src && typeof src.setData === 'function') {
+            src.setData(data);
+          }
+          if (currentMap.getLayer('ntl-fill')) {
+            currentMap.setLayoutProperty('ntl-fill', 'visibility', 'visible');
+            currentMap.setLayoutProperty('ntl-line', 'visibility', 'visible');
           }
         }
-      });
+      }).catch(() => {});
     } else {
-      if (map.getLayer('ntl-fill')) {
+      if (map && typeof map.getLayer === 'function' && map.getLayer('ntl-fill')) {
         map.setLayoutProperty('ntl-fill', 'visibility', 'none');
         map.setLayoutProperty('ntl-line', 'visibility', 'none');
       }
     }
+
+    return () => {
+      isMounted = false;
+    };
   }, [showNighttimeLight, isMapLoaded]);
 
   // 2.5 Dynamic Basemap Style Switch

@@ -45,9 +45,10 @@ export const HeaderNav: React.FC<HeaderNavProps> = ({
               alt="TransitERA Logo"
               className="h-7 md:h-8 w-auto object-contain group-hover:scale-105 transition-transform"
               src="/assets/landing/LOGO.png"
-              width={0}
-              height={0}
-              sizes="64px"
+              width={32}
+              height={32}
+              style={{ width: 'auto' }}
+              priority
             />
 
             <div className="hidden sm:block">

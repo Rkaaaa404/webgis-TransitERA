@@ -208,7 +208,11 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
       {/* H3 Catchment & Score Filter */}
       <div className="space-y-2">
         <div>
-          <label className="text-[10px] text-slate-400 block mb-1">Catchment Ring: <span className="text-brand-lime font-bold">Ring ≤ {h3RingFilter}</span></label>
+          <div className="flex items-center justify-between mb-1">
+            <label className="text-[10px] text-slate-300 font-medium">Radius Zonasi Buffer H3</label>
+            <span className="text-[10px] text-brand-lime font-bold">Ring ≤ {h3RingFilter} (~{h3RingFilter * 300}m)</span>
+          </div>
+          <p className="text-[9px] text-slate-500 mb-1.5 leading-tight">Lapisan cincin heksagonal H3 dari simpul stasiun aktif (Ring 1 ≈ 300m s/d Ring 5 ≈ 1.500m).</p>
           <input type="range" min={0} max={5} value={h3RingFilter} onChange={(e) => onChangeH3RingFilter?.(+e.target.value)}
             className="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-brand-lime" />
         </div>
@@ -226,9 +230,11 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
 
       {/* NJOP Premium Filter */}
       <div className="pt-2 border-t border-slate-800">
-        <label className="text-[10px] text-slate-400 block mb-1">
-          NJOP Premium Range: <span className="text-brand-lime font-bold">{njopRange[0]}% – {njopRange[1]}%</span>
-        </label>
+        <div className="flex items-center justify-between mb-1">
+          <label className="text-[10px] text-slate-300 font-medium">Estimasi Kenaikan Nilai Tanah (%ΔNJOP)</label>
+          <span className="text-[10px] text-brand-lime font-bold">+{njopRange[0]}% – +{njopRange[1]}%</span>
+        </div>
+        <p className="text-[9px] text-slate-500 mb-1.5 leading-tight">Rentang estimasi persentase kenaikan nilai pasar / NJOP tanah di sekitar koridor transit.</p>
         <div className="flex gap-2">
           <input type="range" min={0} max={25} value={njopRange[0]} onChange={(e) => setNjopRange([+e.target.value, njopRange[1]])}
             className="flex-1 h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-brand-lime" />

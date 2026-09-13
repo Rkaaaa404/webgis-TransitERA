@@ -705,16 +705,26 @@ function createHexFeature(stId: string, stName: string, lon: number, lat: number
 
 function localAIResponder(prompt: string, activeStation?: StationId) {
   const p = prompt.toLowerCase();
-  const st = FALLBACK_STATIONS.find(s => s.id === activeStation) || FALLBACK_STATIONS[0];
+  
+  // 1. Detect target station from prompt or activeStation
+  let matchedId: StationId = activeStation || 'gubeng';
+  if (p.includes('gubeng') || p.includes('sgu')) matchedId = 'gubeng';
+  else if (p.includes('pasar turi') || p.includes('pasarturi') || p.includes('turi') || p.includes('sbi')) matchedId = 'pasar_turi';
+  else if (p.includes('semut') || p.includes('surabaya kota') || p.includes('kota')) matchedId = 'semut';
+  else if (p.includes('wonokromo') || p.includes('wo')) matchedId = 'wonokromo';
+  else if (p.includes('waru') || p.includes('wr')) matchedId = 'waru';
+
+  const st = FALLBACK_STATIONS.find(s => s.id === matchedId) || FALLBACK_STATIONS[0];
 
   if (p.includes('bandingkan') || p.includes('compare')) {
+    const otherSt = matchedId === 'gubeng' ? FALLBACK_STATIONS[3] : FALLBACK_STATIONS[0]; // Wonokromo vs Gubeng
     return {
       status: 'success',
       data: {
         action: 'compare_stations',
-        target_station: 'gubeng',
-        view_state: { center: [112.745, -7.283], zoom: 12.5 },
-        text_response: `Perbandingan menunjukkan **Stasiun Surabaya Gubeng (84,5)** memiliki kesiapan TOD lebih tinggi dibanding **Stasiun Wonokromo (76,4)**. Dimensi desain trotoar pejalan kaki adalah area yang paling mendesak untuk diperbaiki di kedua simpul.`
+        target_station: st.id,
+        view_state: { center: [st.longitude, st.latitude], zoom: 12.5 },
+        text_response: `Perbandingan menunjukkan **${st.name} (Skor TOD ${st.tod_readiness_score})** memiliki kesiapan ${st.tod_readiness_score >= otherSt.tod_readiness_score ? 'lebih tinggi' : 'berbeda'} dibanding **${otherSt.name} (Skor TOD ${otherSt.tod_readiness_score})**. Dimensi terlemah di ${st.name} adalah **${st.weakest_dimension}**, sedangkan di ${otherSt.name} adalah **${otherSt.weakest_dimension}**.`
       }
     };
   }
@@ -724,22 +734,22 @@ function localAIResponder(prompt: string, activeStation?: StationId) {
       status: 'success',
       data: {
         action: 'highlight_and_zoom',
-        target_station: 'pasar_turi',
-        view_state: { center: [112.7306, -7.2478], zoom: 14.5 },
-        text_response: `Dimensi terlemah di **Stasiun Pasar Turi** adalah **Design (65,5 / 100)** akibat trotoar terganggu parkir liar dan melubernya PKL di Jalan Semarang. Direkomendasikan relokasi dan pembuatan jalur pedestrian berkanopi.`
+        target_station: st.id,
+        view_state: { center: [st.longitude, st.latitude], zoom: 14.5 },
+        text_response: `Dimensi terlemah di **${st.name}** adalah **${st.weakest_dimension}** (${st.scores[st.weakest_dimension.toLowerCase() as keyof typeof st.scores] ?? 'Perlu Peningkatan'} / 100). Intervensi prioritas: ${st.policy_recommendations[0]}`
       }
     };
   }
 
-  if (p.includes('nilai tanah') || p.includes('njop') || p.includes('waru')) {
+  if (p.includes('nilai tanah') || p.includes('njop') || p.includes('harga') || p.includes('premium')) {
     return {
       status: 'success',
       data: {
         action: 'highlight_and_zoom',
         target_layer: 'h3_njop_premium',
-        target_station: 'waru',
-        view_state: { center: [112.7297, -7.3519], zoom: 14.2 },
-        text_response: `Estimasi Spatial Durbin Model menunjukkan kawasan sekitar **Stasiun Waru** berpotensi mengalami kenaikan nilai lahan (**%ΔNJOP**) rata-rata **+8,2%** (CI 95%: 5,5% - 10,9%) pasca penguatan koridor transit.`
+        target_station: st.id,
+        view_state: { center: [st.longitude, st.latitude], zoom: 14.2 },
+        text_response: `Berdasarkan estimasi Spatial Durbin Model (SDM) pada radius 250-400m di sekitar **${st.name}**, kesiapan TOD saat ini adalah **${st.tod_readiness_score} / 100** dengan potensi kenaikan nilai lahan (**%ΔNJOP**) rata-rata **+${st.njop_premium.avg_njop_premium_pct}%** (CI 95%: ${st.njop_premium.ci_lower_pct}% – ${st.njop_premium.ci_upper_pct}%) pasca penguatan koridor transit dan pedestrian.`
       }
     };
   }
@@ -808,14 +818,178 @@ export async function fetchTransitRoutes(stationId?: string): Promise<any> {
   return { type: 'FeatureCollection', features: [] };
 }
 
+export const FALLBACK_INTERMODAL_PLANS: Record<string, any[]> = {
+  gubeng: [
+    {
+      destination: 'Grand City Mall & Balai Kota',
+      total_time: '9 min',
+      total_distance_km: 1.4,
+      fare: 'Rp 5.000 (Integrasi)',
+      route_id: 'fd02',
+      modes_used: ['walk', 'feeder'],
+      steps: [
+        { mode: 'walk', desc: 'Jalan kaki ke Halte Stasiun Gubeng Barat', duration: '2 min', distance: '140m' },
+        { mode: 'feeder', line_code: 'FD02', line_color: '#8c2f31', desc: 'Naik Feeder WiraWiri FD02 arah Balai Kota (3 halte)', duration: '5 min', distance: '1.1 km' },
+        { mode: 'walk', desc: 'Jalan kaki ke Grand City / Balai Kota', duration: '2 min', distance: '160m' }
+      ]
+    },
+    {
+      destination: 'RSUD Dr. Soetomo & UNAIR Kampus B',
+      total_time: '11 min',
+      total_distance_km: 1.8,
+      fare: 'Rp 5.000 (Integrasi)',
+      route_id: 'tmk2',
+      modes_used: ['walk', 'bus'],
+      steps: [
+        { mode: 'walk', desc: 'Jalan kaki ke Halte RSGM Prof. Moestopo', duration: '2 min', distance: '100m' },
+        { mode: 'bus', line_code: 'R2', line_color: '#2f87a0', desc: 'Naik Trans Semanggi R2 arah Kejawan (4 halte)', duration: '7 min', distance: '1.5 km' },
+        { mode: 'walk', desc: 'Tiba di RSUD Dr. Soetomo Gate Dharmawangsa', duration: '2 min', distance: '200m' }
+      ]
+    },
+    {
+      destination: 'Tunjungan Plaza / Koridor Tunjungan',
+      total_time: '14 min',
+      total_distance_km: 2.5,
+      fare: 'Rp 5.000 (Integrasi)',
+      route_id: 'fd07',
+      modes_used: ['walk', 'feeder'],
+      steps: [
+        { mode: 'walk', desc: 'Jalan kaki ke Halte Gubeng Pojok', duration: '3 min', distance: '180m' },
+        { mode: 'feeder', line_code: 'FD07', line_color: '#4165ad', desc: 'Naik Feeder WiraWiri FD07 arah Pasar Turi (5 halte)', duration: '9 min', distance: '2.1 km' },
+        { mode: 'walk', desc: 'Jalan kaki menyeberang ke Tunjungan Plaza', duration: '2 min', distance: '150m' }
+      ]
+    }
+  ],
+  pasar_turi: [
+    {
+      destination: 'Tugu Pahlawan & Kawasan Bersejarah',
+      total_time: '7 min',
+      total_distance_km: 1.1,
+      fare: 'Rp 5.000 (Integrasi)',
+      route_id: 'fd07',
+      modes_used: ['walk', 'feeder'],
+      steps: [
+        { mode: 'walk', desc: 'Jalan kaki ke Halte Gate St. Pasar Turi', duration: '1 min', distance: '50m' },
+        { mode: 'feeder', line_code: 'FD07', line_color: '#4165ad', desc: 'Naik Feeder WiraWiri FD07 arah Bratang (2 halte)', duration: '4 min', distance: '900m' },
+        { mode: 'walk', desc: 'Jalan kaki ke Monumen Tugu Pahlawan', duration: '2 min', distance: '150m' }
+      ]
+    },
+    {
+      destination: 'Pusat Grosir Surabaya (PGS) & Pasar Turi Baru',
+      total_time: '4 min',
+      total_distance_km: 0.3,
+      fare: 'Gratis (Pedestrian)',
+      route_id: 'fd07',
+      modes_used: ['walk'],
+      steps: [
+        { mode: 'walk', desc: 'Jalan kaki melalui jalur pedestrian berkanopi Jalan Dupak', duration: '4 min', distance: '280m' }
+      ]
+    }
+  ],
+  wonokromo: [
+    {
+      destination: 'Kebun Binatang Surabaya (KBS)',
+      total_time: '5 min',
+      total_distance_km: 0.4,
+      fare: 'Gratis (Pedestrian)',
+      route_id: 'sbr1',
+      modes_used: ['walk'],
+      steps: [
+        { mode: 'walk', desc: 'Jalan kaki dari pintu utara stasiun menyeberang Jembatan Sawunggaling', duration: '5 min', distance: '350m' }
+      ]
+    },
+    {
+      destination: 'Terminal Intermoda Joyoboyo (TIJ)',
+      total_time: '3 min',
+      total_distance_km: 0.2,
+      fare: 'Gratis (Pedestrian)',
+      route_id: 'fd03',
+      modes_used: ['walk'],
+      steps: [
+        { mode: 'walk', desc: 'Jalan kaki melintasi skywalk intermoda menuju concourse bus TIJ', duration: '3 min', distance: '180m' }
+      ]
+    },
+    {
+      destination: 'Royal Plaza Surabaya',
+      total_time: '5 min',
+      total_distance_km: 0.4,
+      fare: 'Gratis (Pedestrian)',
+      route_id: 'sbr1',
+      modes_used: ['walk'],
+      steps: [
+        { mode: 'walk', desc: 'Jalan kaki menyusuri trotoar Jalan Ahmad Yani menuju lobby Royal Plaza', duration: '5 min', distance: '400m' }
+      ]
+    }
+  ],
+  semut: [
+    {
+      destination: 'Kawasan Kota Lama (Jembatan Merah)',
+      total_time: '6 min',
+      total_distance_km: 0.9,
+      fare: 'Rp 5.000 (Integrasi)',
+      route_id: 'fd04',
+      modes_used: ['walk', 'feeder'],
+      steps: [
+        { mode: 'walk', desc: 'Jalan kaki ke Halte Stasiun Surabaya Kota', duration: '1 min', distance: '60m' },
+        { mode: 'feeder', line_code: 'FD04', line_color: '#8f6768', desc: 'Naik Feeder WiraWiri FD04 arah Kota Lama (2 halte)', duration: '3 min', distance: '750m' },
+        { mode: 'walk', desc: 'Tiba di Zona Eropa Kota Lama / Jembatan Merah', duration: '2 min', distance: '100m' }
+      ]
+    },
+    {
+      destination: 'House of Sampoerna Heritage',
+      total_time: '7 min',
+      total_distance_km: 1.2,
+      fare: 'Rp 5.000 (Integrasi)',
+      route_id: 'fd04',
+      modes_used: ['walk', 'feeder'],
+      steps: [
+        { mode: 'walk', desc: 'Jalan kaki ke Halte Stasiun Surabaya Kota', duration: '1 min', distance: '60m' },
+        { mode: 'feeder', line_code: 'FD04', line_color: '#8f6768', desc: 'Naik Feeder FD04 turun di Halte Taman Sampoerna', duration: '4 min', distance: '1.0 km' },
+        { mode: 'walk', desc: 'Tiba di Museum House of Sampoerna', duration: '2 min', distance: '120m' }
+      ]
+    }
+  ],
+  waru: [
+    {
+      destination: 'Terminal Purabaya (Bungurasih)',
+      total_time: '5 min',
+      total_distance_km: 0.3,
+      fare: 'Gratis (Pedestrian Skybridge)',
+      route_id: 'sbr1',
+      modes_used: ['walk'],
+      steps: [
+        { mode: 'walk', desc: 'Jalan kaki melintasi skybridge intermoda Stasiun Waru ke Terminal Bungurasih', duration: '5 min', distance: '300m' }
+      ]
+    },
+    {
+      destination: 'City of Tomorrow Mall (CITO)',
+      total_time: '8 min',
+      total_distance_km: 0.9,
+      fare: 'Rp 5.000 (Integrasi)',
+      route_id: 'sbr1',
+      modes_used: ['walk', 'bus'],
+      steps: [
+        { mode: 'walk', desc: 'Jalan kaki ke Halte Waru 1', duration: '2 min', distance: '120m' },
+        { mode: 'bus', line_code: 'SB1', line_color: '#10b981', desc: 'Naik Suroboyo Bus Koridor 1 arah Rajawali', duration: '4 min', distance: '700m' },
+        { mode: 'walk', desc: 'Tiba di lobby CITO Mall', duration: '2 min', distance: '100m' }
+      ]
+    }
+  ]
+};
+
 export async function fetchIntermodalRoutes(stationId: StationId): Promise<any> {
   try {
     const res = await fetch(`${API_BASE_URL}/transit/intermodal-routes/${stationId}`);
-    if (res.ok) return await res.json();
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.plans && data.plans.length > 0) return data;
+    }
   } catch (err) {
-    console.warn(`fetchIntermodalRoutes(${stationId}) failed:`, err);
+    // Backend offline fallback handled below
   }
-  return { station_id: stationId, plans: [] };
+  
+  const plans = FALLBACK_INTERMODAL_PLANS[stationId] || FALLBACK_INTERMODAL_PLANS['gubeng'] || [];
+  return { station_id: stationId, plans };
 }
 
 
