@@ -230,7 +230,11 @@ export const TravelEstimator: React.FC<TravelEstimatorProps> = ({
       ) : (
         /* Fallback Static Estimates */
         <div className="space-y-2">
-          {estimates.map((est, idx) => (
+          {(estimates && estimates.length > 0 ? estimates : [
+            { destination: 'Pusat Kota (Balai Kota Surabaya)', time: '15–20 min', icon: 'transit' },
+            { destination: 'Simpul Stasiun Utama Terdekat', time: '8–12 min', icon: 'transit' },
+            { destination: 'Fasilitas Publik & Faskes Terdekat', time: '5–8 min', icon: 'walk' },
+          ]).map((est, idx) => (
             <div key={idx} className="bg-slate-950/60 border border-slate-800 rounded-lg p-2.5 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-300">

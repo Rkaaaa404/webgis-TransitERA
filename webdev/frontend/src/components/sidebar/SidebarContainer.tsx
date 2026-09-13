@@ -258,23 +258,27 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
           <Toggle
             active={choroplethMode === 'tod_score'}
             onToggle={() => onChangeChoroplethMode('tod_score')}
-            label="H3 TOD Grid"
+            label="H3 TOD Grid (5D)"
             icon={<Hexagon className="w-4 h-4" />}
           />
           <Toggle
             active={choroplethMode === 'njop_premium'}
             onToggle={() => onChangeChoroplethMode('njop_premium')}
-            label="Zona Nilai Lahan (NJOP)"
+            label="Zona Nilai Lahan (%ΔNJOP)"
             icon={<CircleDollarSign className="w-4 h-4" />}
           />
-          {activePersona === 'commuter' && (
-            <Toggle
-              active={choroplethMode === 'typology'}
-              onToggle={() => onChangeChoroplethMode('typology')}
-              label="Tipologi Kawasan (Cluster)"
-              icon={<Star className="w-4 h-4" />}
-            />
-          )}
+          <Toggle
+            active={choroplethMode === 'typology'}
+            onToggle={() => onChangeChoroplethMode('typology')}
+            label="Tipologi Kawasan (Cluster)"
+            icon={<Star className="w-4 h-4" />}
+          />
+          <Toggle
+            active={choroplethMode === 'none'}
+            onToggle={() => onChangeChoroplethMode('none')}
+            label="Tanpa Grid H3 (Clean View)"
+            icon={<EyeOff className="w-4 h-4" />}
+          />
         </div>
 
         {/* ── Pemisah Garis ── */}
@@ -353,21 +357,37 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
           >
             NJOP
           </button>
-          {activePersona === 'commuter' && (
-            <button
-              onClick={() => onChangeChoroplethMode('typology')}
-              title="Tampilkan Legenda & Layer Tipologi"
-              className={`px-1.5 py-0.5 rounded text-[9px] transition-colors ${
-                choroplethMode === 'typology'
-                  ? 'bg-brand-lime text-slate-950 font-bold shadow-sm'
-                  : 'bg-slate-800 text-slate-400 hover:text-slate-200'
-              }`}
-            >
-              Tipologi
-            </button>
-          )}
+          <button
+            onClick={() => onChangeChoroplethMode('typology')}
+            title="Tampilkan Legenda & Layer Tipologi"
+            className={`px-1.5 py-0.5 rounded text-[9px] transition-colors ${
+              choroplethMode === 'typology'
+                ? 'bg-brand-lime text-slate-950 font-bold shadow-sm'
+                : 'bg-slate-800 text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            Tipologi
+          </button>
+          <button
+            onClick={() => onChangeChoroplethMode('none')}
+            title="Nonaktifkan Grid H3"
+            className={`px-1.5 py-0.5 rounded text-[9px] transition-colors ${
+              choroplethMode === 'none'
+                ? 'bg-brand-lime text-slate-950 font-bold shadow-sm'
+                : 'bg-slate-800 text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            Clean
+          </button>
         </div>
       </div>
+
+      {/* Mode Bersih - Muncul saat mode none aktif */}
+      {choroplethMode === 'none' && (
+        <div className="p-2.5 rounded-lg bg-slate-800/40 border border-slate-700/50 text-[10px] text-slate-400 text-center">
+          Grid H3 dinonaktifkan (Peta Bersih Komuter &amp; Rute Transit).
+        </div>
+      )}
       
       {/* TOD Score Legend - Muncul saat mode TOD aktif */}
       {choroplethMode === 'tod_score' && (
@@ -525,18 +545,18 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
                     <MapPin className="w-3.5 h-3.5 text-brand-lime shrink-0" />
                     <span className="truncate">Titik Asal: {stationInfo.fullName}</span>
                   </div>
-                  <div className="grid grid-cols-5 gap-1 pt-1 border-t border-slate-800/70">
-                    {(['gubeng', 'pasar_turi', 'semut', 'wonokromo', 'waru'] as StationId[]).map((stId) => (
+                  <div className="flex flex-wrap gap-1 pt-1 border-t border-slate-800/70">
+                    {Array.from(new Set([activeStation, 'gubeng', 'pasar_turi', 'semut', 'wonokromo', 'waru'] as StationId[])).map((stId) => (
                       <button
                         key={stId}
                         onClick={() => onSelectStation?.(stId)}
-                        className={`px-1 py-1 rounded text-[9px] font-bold truncate transition-all text-center ${
+                        className={`px-2 py-1 rounded text-[9px] font-bold truncate transition-all text-center ${
                           activeStation === stId
                             ? 'bg-brand-lime text-slate-950 shadow-sm'
                             : 'bg-slate-800 text-slate-400 hover:text-slate-200'
                         }`}
                       >
-                        {STATION_NAMES[stId].shortName}
+                        {STATION_NAMES[stId]?.shortName || stId}
                       </button>
                     ))}
                   </div>
@@ -649,18 +669,18 @@ export const SidebarContainer: React.FC<SidebarContainerProps> = ({
                     <MapPin className="w-3.5 h-3.5 text-brand-lime shrink-0" />
                     <span className="truncate">{stationInfo.fullName}</span>
                   </div>
-                  <div className="grid grid-cols-5 gap-1 pt-1 border-t border-slate-800/70">
-                    {(['gubeng', 'pasar_turi', 'semut', 'wonokromo', 'waru'] as StationId[]).map((stId) => (
+                  <div className="flex flex-wrap gap-1 pt-1 border-t border-slate-800/70">
+                    {Array.from(new Set([activeStation, 'gubeng', 'pasar_turi', 'semut', 'wonokromo', 'waru', 'terminal_joyoboyo', 'terminal_purabaya', 'terminal_bratang'] as StationId[])).map((stId) => (
                       <button
                         key={stId}
                         onClick={() => onSelectStation?.(stId)}
-                        className={`px-1 py-1 rounded text-[9px] font-bold truncate transition-all text-center ${
+                        className={`px-2 py-1 rounded text-[9px] font-bold truncate transition-all text-center ${
                           activeStation === stId
                             ? 'bg-brand-lime text-slate-950 shadow-sm'
                             : 'bg-slate-800 text-slate-400 hover:text-slate-200'
                         }`}
                       >
-                        {STATION_NAMES[stId].shortName}
+                        {STATION_NAMES[stId]?.shortName || stId}
                       </button>
                     ))}
                   </div>

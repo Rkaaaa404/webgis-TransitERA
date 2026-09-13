@@ -63,7 +63,7 @@ export default function WebGISPage() {
   useEffect(() => {
     if (activePersona === 'government') setChoroplethMode('tod_score');
     if (activePersona === 'business') setChoroplethMode('njop_premium');
-    if (activePersona === 'commuter') setChoroplethMode('typology');
+    if (activePersona === 'commuter') setChoroplethMode('none'); // Clean view for commuters without grid clutter
   }, [activePersona]);
 
   const handleExecuteMapAction = (aiData: any) => {
@@ -167,6 +167,7 @@ export default function WebGISPage() {
               activeStation={activeStation}
               activeH3Index={selectedH3Index}
               onExecuteMapAction={handleExecuteMapAction}
+              onSelectStation={(stId) => setActiveStation(stId)}
             />
           )}
         </aside>
@@ -181,7 +182,13 @@ export default function WebGISPage() {
               <InvestorPanel station={currentStation} activeStation={activeStation} activeH3Index={selectedH3Index} onExecuteMapAction={handleExecuteMapAction} />
             )}
             {mobileTab === 'dashboard' && activePersona === 'commuter' && (
-              <CommuterPanel station={currentStation} activeStation={activeStation} activeH3Index={selectedH3Index} onExecuteMapAction={handleExecuteMapAction} />
+              <CommuterPanel 
+                station={currentStation} 
+                activeStation={activeStation} 
+                activeH3Index={selectedH3Index} 
+                onExecuteMapAction={handleExecuteMapAction} 
+                onSelectStation={(stId) => setActiveStation(stId)}
+              />
             )}
             {mobileTab === 'filter' && (
               <SidebarContainer

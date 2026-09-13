@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Sparkles, BarChart, Scale, AlertTriangle, TrendingUp, Utensils, Sliders, Coffee } from 'lucide-react';
+import { Sparkles, BarChart, Scale, AlertTriangle, TrendingUp, Utensils, Sliders, Coffee, Navigation, MessageCircle, Bus } from 'lucide-react';
 
 interface CuratedPromptChipsProps {
   onSelectPrompt: (promptText: string) => void;
@@ -10,39 +10,44 @@ interface CuratedPromptChipsProps {
 
 export const CURATED_PROMPTS_LIST = [
   {
-    title: 'Skor TOD Gubeng',
-    prompt: 'Tampilkan skor TOD di sekitar Stasiun Gubeng',
+    title: 'Rute Intermoda ke TP',
+    prompt: 'Bagaimana rute intermoda tercepat menuju Tunjungan Plaza dari simpul ini?',
+    icon: Navigation
+  },
+  {
+    title: 'Koneksi Feeder WiraWiri',
+    prompt: 'Rute feeder WiraWiri dan Suroboyo Bus apa saja yang terkoneksi di sini?',
+    icon: Bus
+  },
+  {
+    title: 'Sentimen Warga (Survei)',
+    prompt: 'Bagaimana hasil survei opini MAPID terkait kenyamanan trotoar dan transum di sini?',
+    icon: MessageCircle
+  },
+  {
+    title: 'Kuliner Menu Go Terdekat',
+    prompt: 'Rekomendasikan kuliner Menu Go terbaik dalam jarak jalan kaki 300 meter',
+    icon: Utensils
+  },
+  {
+    title: 'Skor TOD 5D',
+    prompt: 'Tampilkan analisis skor TOD dan dimensi terkuat di sekitar simpul ini',
     icon: BarChart
   },
   {
     title: 'Bandingkan Gubeng & Wonokromo',
-    prompt: 'Bandingkan skor TOD Gubeng dan Wonokromo',
+    prompt: 'Bandingkan kesiapan TOD Stasiun Gubeng dan Wonokromo',
     icon: Scale
   },
   {
-    title: 'Dimensi Terlemah Pasar Turi',
-    prompt: 'Apa dimensi TOD terlemah di Stasiun Pasar Turi?',
-    icon: AlertTriangle
-  },
-  {
-    title: 'Estimasi Nilai Lahan Waru',
-    prompt: 'Berapa estimasi kenaikan nilai tanah di sekitar Waru?',
+    title: 'Estimasi Nilai Lahan (%ΔNJOP)',
+    prompt: 'Berapa estimasi kenaikan nilai tanah di sekitar koridor transit ini?',
     icon: TrendingUp
   },
   {
-    title: 'Warung Ramai Dekat Stasiun',
-    prompt: 'Tampilkan lokasi warung makan ramai di dekat stasiun',
-    icon: Utensils
-  },
-  {
     title: 'Simulasi Ekstensi Feeder',
-    prompt: 'Jika feeder WiraWiri diperpanjang ke Waru, apa dampaknya?',
+    prompt: 'Jika feeder WiraWiri diperpanjang ke simpul ini, apa dampak TOD-nya?',
     icon: Sliders
-  },
-  {
-    title: 'Rekomendasi Kedai Kopi',
-    prompt: 'Di mana lokasi terbaik untuk buka kedai kopi dekat stasiun?',
-    icon: Coffee
   }
 ];
 
