@@ -177,3 +177,20 @@ async def add_timing_header(request: Request, call_next):
     response.headers["X-Response-Time"] = f"{elapsed_ms:.1f}ms"
     return response
 ```
+
+---
+
+## 7. Vercel React & Next.js 16 Web Vitals Playbook
+
+Terapkan aturan kunci dari Vercel Engineering untuk menjamin Core Web Vitals:
+1. **Eliminasi Network Waterfalls (Kritis)**:
+   - Mulai promise sedini mungkin dan gunakan `Promise.all()` untuk request independen (misal: memuat layer stasiun dan layer polygon kecamatan).
+2. **Optimasi Bundle Size**:
+   - Impor langsung modul spesifik, hindari import melalui barrel files raksasa.
+   - Pindahkan komponen berat (MapLibre, Radar Chart, Simulator) ke `next/dynamic`.
+3. **Mencegah Re-render Berlebih**:
+   - Turunkan nilai boolean/primitif saat render, hindari sinkronisasi state via `useEffect` yang memicu re-render ganda.
+   - Gunakan `useDeferredValue` untuk input pencarian stasiun/POI agar frame rate peta WebGL tidak terdegradasi.
+4. **Lifecycle & Memory WebGL**:
+   - Cegah memory leak WebGL: saat layer dimatikan, bersihkan sumber GeoJSON (`map.removeSource()`, `map.removeLayer()`).
+   - Batasi jumlah hexagon H3 yang dirender dalam satu viewport menggunakan bounding box filtering.

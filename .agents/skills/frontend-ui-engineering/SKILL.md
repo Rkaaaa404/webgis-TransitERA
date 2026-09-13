@@ -293,3 +293,46 @@ Memastikan navigasi tetap intuitif pada layar *smartphone*:
 4. **SVG Vektor / Kartografi Khusus**:
    - Untuk indikator popup MapLibre, buat elemen HTML dengan icon SVG inline atau styling badge CSS yang konsisten dengan tema Dark Mode TransitERA.
 
+---
+
+## 9. Evil Martians Tailwind CSS Best Practices
+
+Untuk menjaga keterbacaan dan pemeliharaan codebase styling:
+1. **Pangkas Utility Classes Redundan**:
+   - `pt-4 pb-4` → `py-4`
+   - `flex flex-row justify-between` → `flex justify-between` (`flex-row` adalah default)
+   - `border border-dotted border-2 border-black border-opacity-50` → `border-dotted border-2 border-black/50`
+2. **Kelompokkan Token Semantik & Hindari Magic Values**:
+   - Jangan gunakan magic values liar (`p-[13px]`, `text-[#aabbcc]`). Gunakan token tema (`p-3`, `text-slate-400`, `bg-brand-indigo`).
+   - Berikan nama semantik: `primary`, `accent`, `destructive`, bukan nama literal hex.
+3. **Hindari `@apply` Berlebihan**:
+   - Ekstrak styling berulang ke dalam komponen React kecil dan reusable, bukan membuat class CSS buatan dengan `@apply`.
+4. **Gunakan Fixed Variant Maps untuk Komponen Shared**:
+   ```tsx
+   const BADGE_VARIANTS = {
+     todHigh: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
+     todMedium: "bg-amber-500/20 text-amber-400 border-amber-500/30",
+     todLow: "bg-rose-500/20 text-rose-400 border-rose-500/30",
+   };
+   ```
+
+---
+
+## 10. Next.js 16 & React 19 App Router Standards
+
+1. **Async Request APIs**:
+   - Pada Next.js 16, `params`, `searchParams`, `cookies()`, dan `headers()` bersifat asynchronous. Selalu gunakan `await params`.
+2. **Server Components by Default**:
+   - Komponen halaman, metadata, dan layout berjalan sebagai Server Components.
+   - Tandai `"use client"` secara eksplisit hanya pada leaf components yang membutuhkan state, event listener, browser API, atau MapLibre/Recharts.
+3. **Dynamic Import untuk Library Client Berat**:
+   - Selalu load komponen MapLibre dan visualisasi data menggunakan `next/dynamic` dengan `ssr: false`:
+   ```tsx
+   const DynamicMapContainer = dynamic(() => import('@/components/map/MapContainer'), {
+     ssr: false,
+     loading: () => <MapSkeleton />,
+   });
+   ```
+4. **Eliminasi Waterfall Request**:
+   - Gunakan `Promise.all()` saat memuat beberapa data spasial atau endpoint backend secara paralel.
+

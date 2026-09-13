@@ -159,3 +159,20 @@ Setiap commit/PR memerlukan deskripsi yang berdiri sendiri:
 - ❌ "WIP"
 
 **Body:** Apa yang berubah dan mengapa. Sertakan konteks, keputusan, dan reasoning.
+
+---
+
+## 7. Karpathy Surgical Review & Vercel Performance Gate
+
+Sebelum menandai tinjauan kode selesai, terapkan checklist bedah:
+1. **Surgical Scope Check**:
+   - Apakah setiap baris yang diubah memiliki korelasi langsung dengan permintaan pengguna?
+   - Apakah ada kode atau pemformatan di sekitarnya yang diubah tanpa alasan? (Jika ya, kembalikan).
+   - Apakah import atau variabel yatim (*orphaned*) yang ditinggalkan sudah dibersihkan?
+2. **Vercel Performance Audit**:
+   - Apakah ada pemanggilan `await` bertingkat yang sebenarnya independen dan bisa menggunakan `Promise.all()`?
+   - Apakah komponen MapLibre/WebGL di-load secara dinamis dengan SSR nonaktif?
+   - Apakah ada re-render tidak perlu akibat passing objek inline sebagai props komponen berat?
+3. **TransitERA Compliance**:
+   - Apakah bebas dari raw emoji? (Wajib menggunakan `lucide-react`).
+   - Apakah bebas dari hardcoded secrets/API keys? (Wajib lolos `python scripts/scan_secrets.py`).
