@@ -29,14 +29,19 @@ SYSTEM_INSTRUCTION = (
     "Jika pengguna menanyakan hal di luar transportasi massal, stasiun transit, atau tata ruang Surabaya Raya "
     "(seperti resep masakan, pemrograman umum, politik umum, atau kota lain yang tidak relevan), "
     "tolak dengan sopan dalam Bahasa Indonesia dan arahkan kembali pengguna untuk menanyakan kesiapan TOD atau transportasi transit di Surabaya. "
+    "PERINGATAN FAKTA SPASIAL (ANTI-CROSS-CONTAMINATION): "
+    "Landmark, pusat perbelanjaan, nama jalan, dan rute feeder yang dinarasikan HARUS BENAR-BENAR BERADA DI SIMPUL STASIUN YANG BERSANGKUTAN "
+    "sebagaimana dikembalikan oleh data functionResponse (contoh: Plaza Surabaya/Delta Plaza, Grand City, dan WTC untuk Gubeng; DTC Mall dan Royal Plaza untuk Wonokromo; "
+    "Pusat Grosir Surabaya / PGS dan Pasar Turi Baru untuk Pasar Turi; Pasar Atom dan ITC untuk Semut; CITO Mall untuk Waru). "
+    "DILARANG KERAS mencampuradukkan data satu stasiun ke stasiun lainnya. "
     "PANDUAN PEMANGGILAN FUNGSI (FUNCTION CALLING): "
     "- Jika pengguna menanyakan rute feeder WiraWiri, Suroboyo Bus, atau angkutan massal apa saja yang lewat di stasiun, panggil 'get_transit_services' (station_id=...). "
     "- Jika pengguna menanyakan tarif Suroboyo Bus/WiraWiri, cara bayar non-tunai, atau sistem transfer gratis 2 jam, panggil 'get_fare_and_payment_info'. "
     "- Jika pengguna menanyakan rute perjalanan intermoda atau cara ke stasiun lain ATAU landmark/tempat populer Surabaya (seperti Tunjungan Plaza, Grand City, GBT, KBS, CITO, dll.), panggil 'get_route' (origin=..., destination=...). "
-    "- Jika pengguna menanyakan data survei warga, opini lapangan (#PakSibukGa), kenyamanan trotoar/fasilitas, atau profil ekonomi/transaksi di sekitar stasiun, panggil 'get_survey_data' (station_id=..., category='economy'|'pedestrian'|'transit'|'all'). "
+    "- Jika pengguna menanyakan data survei warga, opini lapangan (#PakSibukGa), kenyamanan trotoar/fasilitas, kawasan ekonomi, atau profil ekonomi/transaksi di sekitar stasiun, panggil 'get_survey_data' (station_id=..., category='economy'|'pedestrian'|'transit'|'all'). "
     "- Jika pengguna menanyakan skor 5D TOD (Density, Diversity, Design, Destination, Distance to Transit) atau indeks walkability, panggil 'get_area_score' (station_id=..., metric=...). "
     "- Jika pengguna meminta menampilkan atau memfilter lokasi titik survei/warung makan ramai di dekat stasiun, panggil 'filter_layer' (target_layer='survey_mission_menu', kondisi='ramai'). "
-    "- Jika pengguna menanyakan rekomendasi lokasi terbaik untuk MEMBUKA / MENDIRIKAN usaha/kedai kopi baru, panggil 'site_recommendation'. "
+    "- Jika pengguna menanyakan rekomendasi lokasi terbaik untuk MEMBUKA / MENDIRIKAN usaha/kedai kopi baru, panggil 'site_recommendation' (business_type=..., target_station=...). "
     "- Jika menanyakan dimensi terlemah, panggil 'get_weakest_dimension'. "
     "- Jika menanyakan kenaikan nilai tanah / NJOP, panggil 'get_njop_premium'. "
     "- Jika menanyakan perbandingan 2 stasiun, panggil 'compare_stations'. "
@@ -81,7 +86,15 @@ def match_fallback_intent(prompt: str) -> Tuple[str, Dict[str, Any]]:
 
     # 2. Simulate scenario / Perluasan Feeder (harus sebelum cek feeder rutin)
     if any(kw in p for kw in ["perpanjang", "simulasi", "skenario", "what-if", "dampak terhadap skor"]):
-        return "simulate_scenario", {"scenario_id": "extend_feeder_waru"}
+        if "gubeng" in p or "pedestrian" in p or "pejalan" in p:
+            sc_id = "dedicated_pedestrian_gubeng"
+        elif "semut" in p or "heritage" in p:
+            sc_id = "add_feeder_semut"
+        elif "turi" in p or "pgs" in p:
+            sc_id = "pasar_turi_integration"
+        else:
+            sc_id = "extend_feeder_waru"
+        return "simulate_scenario", {"scenario_id": sc_id}
 
     # 3. Transit Services & Feeder inquiries (e.g. "Rute feeder WiraWiri dan Suroboyo Bus apa saja yang lewat di stasiun ini?")
     if any(kw in p for kw in ["lewat di stasiun", "feeder wirawiri dan suroboyo bus", "rute feeder", "layanan feeder", "bus apa saja yang lewat", "feeder apa saja", "transit apa saja"]):
@@ -128,8 +141,12 @@ def match_fallback_intent(prompt: str) -> Tuple[str, Dict[str, Any]]:
 
         return "get_route", {"origin": st_orig, "destination": dest}
 
-    # 6. Survey data & Economic inquiries (e.g. "info ekonomi sekitar wonokromo based data survei mapid")
-    if any(kw in p for kw in ["info ekonomi", "data survei", "survei mapid", "suara warga", "survei", "survey", "struk go", "menu go", "aktivitas warga", "paksibukga", "kondisi ekonomi", "daya beli", "opini warga"]):
+    # 6. Survey data & Economic inquiries (e.g. "info ekonomi sekitar wonokromo based data survei mapid", "bagaimana kawasan ekonomi stasiun gubeng")
+    if any(kw in p for kw in [
+        "kawasan ekonomi", "profil ekonomi", "info ekonomi", "kondisi ekonomi", "sektor ekonomi",
+        "data survei", "survei mapid", "suara warga", "survei", "survey", "struk go", "menu go",
+        "aktivitas warga", "paksibukga", "daya beli", "opini warga"
+    ]):
         st = _parse_station_from_prompt(p)
         cat = "economy" if any(k in p for k in ["ekonomi", "economic", "daya beli", "belanja", "transaksi", "struk", "menu", "mall", "umkm", "pasar"]) else "all"
         return "get_survey_data", {"station_id": st, "category": cat}
@@ -147,7 +164,15 @@ def match_fallback_intent(prompt: str) -> Tuple[str, Dict[str, Any]]:
     # 9. Site recommendation / Rekomendasi lokasi usaha
     if any(kw in p for kw in ["lokasi terbaik", "rekomendasi lokasi", "buka kedai", "buka warung", "kedai kopi", "retail success"]):
         biz = "coffee_shop" if ("kopi" in p or "coffee" in p) else "warung_makan"
-        return "site_recommendation", {"business_type": biz, "target_station": _parse_station_from_prompt(p)}
+        p_clean = p.lower().replace("-", " ")
+        found_st = None
+        for s in ALL_STATION_SLUGS:
+            s_clean = s.replace("_", " ")
+            if s in p_clean or s_clean in p_clean:
+                found_st = s
+                break
+        target = found_st if found_st else "wonokromo"
+        return "site_recommendation", {"business_type": biz, "target_station": target}
 
     # 10. Weakest dimension
     if any(kw in p for kw in ["terlemah", "dimensi terlemah", "weakest", "kekurangan"]):

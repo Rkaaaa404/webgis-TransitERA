@@ -9,7 +9,14 @@ from app.db.models import Base
 logger = logging.getLogger(__name__)
 
 # Baca DATABASE_URL dari config / environment
-DATABASE_URL = os.getenv("DATABASE_URL", getattr(settings, "DATABASE_URL", ""))
+DATABASE_URL = str(os.getenv("DATABASE_URL", getattr(settings, "DATABASE_URL", "") or "")).strip()
+
+# Bersihkan quote wrap (' atau ") jika terbawa saat set environment variable
+if (DATABASE_URL.startswith('"') and DATABASE_URL.endswith('"')) or (DATABASE_URL.startswith("'") and DATABASE_URL.endswith("'")):
+    DATABASE_URL = DATABASE_URL[1:-1].strip()
+
+# Bersihkan whitespace liar, newline, atau carriage return yang terbawa dari copy-paste di dashboard cloud
+DATABASE_URL = "".join(DATABASE_URL.split())
 
 # Normalisasi protokol postgres:// ke postgresql:// untuk SQLAlchemy compatibility (standar Supabase/Heroku)
 if DATABASE_URL.startswith("postgres://"):

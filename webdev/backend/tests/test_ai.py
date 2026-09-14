@@ -175,3 +175,61 @@ async def test_ai_query_fare_and_payment(client):
     assert "2 jam" in ai_data["text_response"].lower()
 
 
+@pytest.mark.asyncio
+async def test_ai_query_economic_survey_gubeng(client):
+    """Kueri kawasan ekonomi Gubeng wajib mengembalikan profil riil Gubeng tanpa kontaminasi data Wonokromo."""
+    response = await client.post(
+        "/api/ai/query",
+        json={"prompt": "bagaimana kawasan ekonomi stasiun gubeng"}
+    )
+    assert response.status_code == 200
+    res = response.json()
+    assert res["status"] == "success"
+    ai_data = res["data"]
+    assert ai_data["action"] == "highlight_and_zoom"
+    assert ai_data["target_station"] == "gubeng"
+    assert ai_data["function_called"] == "get_survey_data"
+    text = ai_data["text_response"].lower()
+    assert "gubeng" in text
+    assert any(term in text for term in ["plaza surabaya", "delta plaza", "grand city", "wtc", "dharmahusada", "kalimas"])
+    # Anti-cross-contamination check: data Wonokromo tidak boleh bocor ke Gubeng
+    assert "darmo trade center" not in text
+    assert "dtc" not in text
+    assert "stasiun wonokromo" not in text
+
+
+@pytest.mark.asyncio
+async def test_ai_query_site_recommendation_gubeng(client):
+    """Kueri rekomendasi lokasi usaha di Gubeng wajib menyasar stasiun Gubeng dan bukan Wonokromo."""
+    response = await client.post(
+        "/api/ai/query",
+        json={"prompt": "di mana lokasi terbaik untuk buka kedai kopi di sekitar stasiun gubeng"}
+    )
+    assert response.status_code == 200
+    res = response.json()
+    assert res["status"] == "success"
+    ai_data = res["data"]
+    assert ai_data["action"] == "site_recommendation"
+    assert ai_data["target_station"] == "gubeng"
+    assert "gubeng" in ai_data["text_response"].lower()
+    assert "wonokromo" not in ai_data["text_response"].lower()
+
+
+@pytest.mark.asyncio
+async def test_ai_query_simulation_gubeng_pedestrian(client):
+    """Kueri simulasi intervensi pedestrian Gubeng wajib menjalankan skenario dedicated_pedestrian_gubeng."""
+    response = await client.post(
+        "/api/ai/query",
+        json={"prompt": "simulasi skenario jalur pedestrian berkanopi gubeng"}
+    )
+    assert response.status_code == 200
+    res = response.json()
+    assert res["status"] == "success"
+    ai_data = res["data"]
+    assert ai_data["action"] == "show_scenario"
+    assert ai_data["target_station"] == "gubeng"
+    assert ai_data["function_called"] == "simulate_scenario"
+    assert "grand city" in ai_data["text_response"].lower() or "pedestrian" in ai_data["text_response"].lower()
+
+
+

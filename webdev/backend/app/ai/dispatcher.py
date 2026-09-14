@@ -452,6 +452,244 @@ def _get_station_data(station_id: str) -> Dict[str, Any]:
     return STATIONS_DATA.get(st_id, STATIONS_DATA["gubeng"])
 
 
+# Profil Ekonomi, Retail Komersial, dan Survei Aktivitas per Simpul Stasiun Transit Surabaya
+STATION_ECONOMIC_PROFILES: Dict[str, Dict[str, Any]] = {
+    "gubeng": {
+        "malls": "Plaza Surabaya (Delta Plaza, ~350m di seberang Kalimas), Grand City Mall & Convention Hall (~600m / <10 menit via akses Stasiun Gubeng Lama, survei ACT-008), dan WTC Surabaya (~500m pusat gadget/teknologi)",
+        "avg_spending": 52000,
+        "spending_range": "Rp 48.000 – Rp 65.000 per transaksi",
+        "spending_desc": "Karakteristik komuter antarkota jarak jauh dan komuter aglomerasi dengan daya beli menengah-atas. Pengeluaran didominasi kategori makanan/minuman siap saji to-go, gerai kopi modern, oleh-oleh khas Surabaya, dan kebutuhan harian cepat saji.",
+        "umkm_desc": "Sisi barat (Gubeng Lama) didukung deretan rumah makan Padang, apotek, minimarket, dan fasilitas penunjang medis RS DKT (survei ACT-001). Sisi timur (Gubeng Baru) terkoneksi dengan area pertokoan F&B terpadu Jl. Gubeng Masjid (ACT-010), jasa logistik ekspedisi KALOG (ACT-005), serta Sentra Wisata Kuliner (SWK) Dharmahusada (ACT-057). Drop zone taksi dan ojek online tertata rapi di kedua lobi stasiun (ACT-009).",
+        "diversity_ses": "Diversitas guna lahan sangat tinggi (85.5/100) dengan status sosial ekonomi (SES) Menengah-Atas (B–A). Kawasan memadukan simpul transit, perhotelan bisnis koridor Jl. Pemuda/Panglima Sudirman, institusi kesehatan, dan layanan feeder WiraWiri rute FD02, FD07, FD10, serta Trans Semanggi Koridor 2."
+    },
+    "wonokromo": {
+        "malls": "Darmo Trade Center (DTC) Mall (~150–450m via akses pedestrian/JPO) dan Royal Plaza Surabaya (~800m di frontage barat Jl. Ahmad Yani)",
+        "avg_spending": 38500,
+        "spending_range": "Rp 35.000 – Rp 42.000 per transaksi",
+        "spending_desc": "Karakter komuter harian suburb-to-city (Sidoarjo–Surabaya) yang mencari kepraktisan retail grosir, kebutuhan sandang terjangkau, dan kuliner cepat saji.",
+        "umkm_desc": "Konsentrasi PKL aktif di sepanjang Jl. Stasiun Wonokromo dan Pasar Tradisional Wonokromo (kuliner siang hingga malam). Penataan trotoar dan pangkalan ojek online di bawah flyover Mayangkara menjadi prioritas perbaikan.",
+        "diversity_ses": "Diversitas guna lahan 79.0/100, didukung SES menengah produktif (C1–B) dan konektivitas Feeder WiraWiri FD03, FD04, FD09, Suroboyo Bus Koridor 1, serta integrasi Skybridge Sawunggaling langsung ke Terminal Intermoda Joyoboyo (TIJ) dan Kebun Binatang Surabaya."
+    },
+    "pasar_turi": {
+        "malls": "Pusat Grosir Surabaya (PGS) dan Pasar Turi Baru (terhubung langsung jembatan penyeberangan di lobi selatan, survei ACT-036), BG Junction Mall (~800m), dan Pasar Atom (~1.2 km)",
+        "avg_spending": 52000,
+        "spending_range": "Rp 45.000 – Rp 60.000 per transaksi",
+        "spending_desc": "Arus transaksi perdagangan grosir tekstil, garmen, perkulakan elektronik, serta belanja komuter KA Lintas Utara Jawa (Bojonegoro, Cepu, Semarang, Jakarta).",
+        "umkm_desc": "Koridor Jl. Semarang terkenal dengan sentra buku dan perkulakan niaga (ACT-037). Pertokoan ruko niaga dan sentra kuliner lokal melayani ribuan pedagang dan pengunjung stasiun.",
+        "diversity_ses": "Diversitas guna lahan 86.0/100 (Sangat Tinggi), didukung SES menengah komersial (C1–B) dan akses Feeder WiraWiri FD01, FD07, serta Suroboyo Bus Koridor 3 (ACT-038)."
+    },
+    "semut": {
+        "malls": "Pasar Atom Mall dan ITC Surabaya Mega Grosir (~200m bersebelahan langsung), serta Jembatan Merah Plaza (JMP, ~800m)",
+        "avg_spending": 42000,
+        "spending_range": "Rp 38.000 – Rp 50.000 per transaksi",
+        "spending_desc": "Didominasi belanja grosir pakaian/tekstil, perlengkapan rumah tangga, dan perburuan kuliner legendaris khas pecinan/oriental dan tradisional.",
+        "umkm_desc": "Kawasan wisata heritage Kota Tua Surabaya, sentra kuliner malam Kya-Kya Kembang Jepun, serta ruko-ruko cagar budaya bernilai sejarah tinggi.",
+        "diversity_ses": "Diversitas guna lahan 78.0/100, SES C1–B, terhubung Feeder WiraWiri FD04 (Jembatan Merah) dan FD10 (Pasar Atom – Gubeng – Keputih)."
+    },
+    "waru": {
+        "malls": "City of Tomorrow (CITO) Mall (~700m di Bundaran Waru) dan sentra retail perbatasan Surabaya-Sidoarjo",
+        "avg_spending": 35000,
+        "spending_range": "Rp 30.000 – Rp 40.000 per transaksi",
+        "spending_desc": "Tingginya volume mobilitas harian komuter pekerja dan mahasiswa aglomerasi Sidoarjo–Surabaya dengan kebutuhan belanja cepat saji dan to-go.",
+        "umkm_desc": "Deretan warung makan rakyat, pusat oleh-oleh khas Jawa Timur, serta integrasi pedestrian layang Skybridge Bungurasih menuju concourse bus Terminal Purabaya.",
+        "diversity_ses": "Diversitas guna lahan 68.2/100, SES C1–C2, didukung Feeder WiraWiri FD06 (Bandara Juanda), FD12 (SIER Rungkut), dan Suroboyo Bus Koridor 1."
+    },
+    "tandes": {
+        "malls": "Sentra Niaga & Ruko Modern Manukan Tama, Grand Pakuwon Mall (~2.5km)",
+        "avg_spending": 32000,
+        "spending_range": "Rp 25.000 – Rp 38.000 per transaksi",
+        "spending_desc": "Karakter komuter koridor barat (Surabaya-Gresik), belanja harian pangan segar dan kebutuhan transit komuter.",
+        "umkm_desc": "Sentra Wisata Kuliner (SWK) Manukan, warung siap saji di Jl. Balongsari Tama, dan pasar tradisional Tandes.",
+        "diversity_ses": "Diversitas guna lahan 67.5/100, SES C1–C2, Feeder WiraWiri FD-01 dan Suroboyo Bus Koridor 5."
+    },
+    "kandangan": {
+        "malls": "Pasar Tradisional Sememi dan Sentra Niaga Benowo-Kandangan",
+        "avg_spending": 30000,
+        "spending_range": "Rp 25.000 – Rp 35.000 per transaksi",
+        "spending_desc": "Komuter suburban harian dan warga permukiman padat barat Surabaya, belanja to-go dan kebutuhan logistik.",
+        "umkm_desc": "Pasar Sememi dan pedagang kuliner lokal di sepanjang koridor rel dan akses stasiun.",
+        "diversity_ses": "Diversitas guna lahan 64.0/100, terlayani Feeder WiraWiri FD-01B dan Suroboyo Bus Koridor 5."
+    },
+    "benowo": {
+        "malls": "Pasar Tradisional Benowo dan Kompleks Olahraga Stadion Gelora Bung Tomo (GBT)",
+        "avg_spending": 28000,
+        "spending_range": "Rp 20.000 – Rp 35.000 per transaksi",
+        "spending_desc": "Komuter perbatasan Gresik-Surabaya serta arus pengunjung saat matchday/event di Stadion GBT.",
+        "umkm_desc": "Warung makan tradisional, minimarket, dan pangkalan pedagang kaki lima di Terminal Benowo.",
+        "diversity_ses": "Diversitas guna lahan 62.0/100, didukung Shuttle Feeder WiraWiri GBT (FD08), FD-01C, dan Suroboyo Bus Koridor 5."
+    },
+    "ngagel": {
+        "malls": "Marvell City Mall (~300m) dan Plasa Marina (~1.8km)",
+        "avg_spending": 40000,
+        "spending_range": "Rp 35.000 – Rp 48.000 per transaksi",
+        "spending_desc": "Komuter mahasiswa UBAYA Ngagel, staf perkantoran kreatif, dan penghuni apartemen bertingkat.",
+        "umkm_desc": "Sentra kuliner Ngagel Jaya, kafe mahasiswa, dan pertokoan jasa percetakan/kreatif.",
+        "diversity_ses": "Diversitas guna lahan 77.0/100, SES B–C1, Feeder WiraWiri FD03."
+    },
+    "margorejo": {
+        "malls": "Plaza Marina (~1.2km), koridor retail Frontage A. Yani, Royal Plaza (~1.5km)",
+        "avg_spending": 38000,
+        "spending_range": "Rp 32.000 – Rp 45.000 per transaksi",
+        "spending_desc": "Komuter pekerja koridor Jl. A. Yani, kebutuhan to-go dan kuliner makan siang.",
+        "umkm_desc": "Sentra kuliner Margorejo Indah dan warung tenda malam di sepanjang Jl. Margorejo.",
+        "diversity_ses": "Diversitas guna lahan 72.0/100, didukung Trans Semanggi Koridor 2L."
+    },
+    "jemursari": {
+        "malls": "Plaza Marina (~800m), Sentra Bisnis & Perbankan Jemursari",
+        "avg_spending": 42000,
+        "spending_range": "Rp 35.000 – Rp 50.000 per transaksi",
+        "spending_desc": "Pekerja koridor industri SIER Rungkut dan perbankan Jemursari.",
+        "umkm_desc": "Deretan rumah makan dan ruko kuliner di Jl. Raya Jemursari.",
+        "diversity_ses": "Diversitas guna lahan 74.0/100, didukung Trans Semanggi Koridor 2L."
+    },
+    "kertomenanggal": {
+        "malls": "Trans Icon Mall Surabaya (~500m) dan City of Tomorrow Mall (~800m)",
+        "avg_spending": 45000,
+        "spending_range": "Rp 38.000 – Rp 55.000 per transaksi",
+        "spending_desc": "Mahasiswa Universitas Kristen Petra dan pengunjung mall keluarga di gerbang selatan Surabaya.",
+        "umkm_desc": "Pertokoan dan kafe di koridor Siwalankerto dan Menanggal.",
+        "diversity_ses": "Diversitas guna lahan 76.0/100, terlayani Suroboyo Bus Koridor 1."
+    }
+}
+
+# Profil Rekomendasi Lokasi Usaha (Site Recommendation) per Stasiun
+STATION_SITE_RECOMMENDATION_PROFILES: Dict[str, Dict[str, Any]] = {
+    "gubeng": {
+        "station_name": "Stasiun Surabaya Gubeng",
+        "h3_index": "88654c6537fffff",
+        "center": [112.7521, -7.2654],
+        "avg_spending": 52000,
+        "market_density": "Sangat Tinggi (Arus Komuter Eksekutif & Jarak Jauh)",
+        "competitor_count": 5,
+        "recommended_spot": "Koridor Lobi Timur Stasiun Gubeng Baru (Jl. Gubeng Masjid radius 150m) atau koridor pedestrian menuju Grand City Mall",
+        "rationale": "Arus komuter eksekutif & jarak jauh dengan daya beli tinggi (Rp 52.000/orang) serta skor diversitas 85.5/100 meminimalkan risiko kekosongan pasar."
+    },
+    "wonokromo": {
+        "station_name": "Stasiun Wonokromo",
+        "h3_index": "898d80824cbffff",
+        "center": [112.7383, -7.3014],
+        "avg_spending": 38500,
+        "market_density": "Tinggi (Komuter Aglomerasi & Retail Sekunder)",
+        "competitor_count": 4,
+        "recommended_spot": "Radius 250m dari pintu utara Stasiun Wonokromo menuju concourse DTC Mall / Skybridge Sawunggaling",
+        "rationale": "Rata-rata transaksi Struk Go Rp 38.500/orang, percampuran guna lahan komersial aktif, dan tingginya pergerakan komuter harian suburb-to-city."
+    },
+    "pasar_turi": {
+        "station_name": "Stasiun Surabaya Pasar Turi",
+        "h3_index": "88654c6527fffff",
+        "center": [112.7306, -7.2478],
+        "avg_spending": 52000,
+        "market_density": "Sangat Tinggi (Pusat Grosir & Komuter Lintas Utara)",
+        "competitor_count": 6,
+        "recommended_spot": "Koridor Concourse Selatan Stasiun Pasar Turi (terkoneksi langsung jembatan PGS / Jl. Semarang)",
+        "rationale": "Pusat aktivitas perdagangan grosir dan arus penumpang kereta lintas utara Jawa dengan rata-rata belanja Rp 52.000/orang."
+    },
+    "semut": {
+        "station_name": "Stasiun Surabaya Kota (Semut)",
+        "h3_index": "88654c6525fffff",
+        "center": [112.7431, -7.2372],
+        "avg_spending": 42000,
+        "market_density": "Tinggi (Kawasan Heritage & Grosir)",
+        "competitor_count": 5,
+        "recommended_spot": "Akses utama menuju Pasar Atom Mall / Jl. Stasiun Kota radius 150m",
+        "rationale": "Kawasan wisata belanja legendaris dan sentra kuliner heritage dengan transaksi rerata Rp 42.000/orang."
+    },
+    "waru": {
+        "station_name": "Stasiun Waru (Gerbang Selatan)",
+        "h3_index": "88654c6563fffff",
+        "center": [112.7297, -7.3547],
+        "avg_spending": 35000,
+        "market_density": "Tinggi (Gerbang Suburban Selatan)",
+        "competitor_count": 3,
+        "recommended_spot": "Koridor Bundaran Waru / Akses Skybridge Terminal Purabaya",
+        "rationale": "Volume komuter harian komuter suburban Sidoarjo-Surabaya yang mencari kepraktisan F&B to-go dengan rata-rata belanja Rp 35.000."
+    }
+}
+
+# Profil Skenario Intervensi Feeder & Walkability
+STATION_SCENARIO_PROFILES: Dict[str, Dict[str, Any]] = {
+    "extend_feeder_waru": {
+        "title": "Simulasi Intervensi Feeder Waru",
+        "station_id": "waru",
+        "center": [112.7297, -7.3519],
+        "zoom": 14.0,
+        "data": {
+            "baseline_score": 68.3,
+            "simulated_score": 75.8,
+            "delta_score": 7.5,
+            "baseline_njop": 8.2,
+            "simulated_njop": 11.4,
+            "delta_njop": 3.2
+        },
+        "narrative": (
+            "Simulasi skenario **Perluasan Feeder WiraWiri ke Stasiun Waru** "
+            "menunjukkan peningkatan TOD Readiness Score dari **68,3 menjadi 75,8 (+7,5 poin)**. "
+            "Dimensi *Distance to Transit* dan *Diversity* mengalami kenaikan paling signifikan. "
+            "Estimasi %ΔNJOP diproyeksikan dari 8,2% menjadi **11,4% (+3,2% apresiasi tambahan)**."
+        )
+    },
+    "dedicated_pedestrian_gubeng": {
+        "title": "Simulasi Jalur Pedestrian Berkanopi Gubeng – Grand City",
+        "station_id": "gubeng",
+        "center": [112.7521, -7.2654],
+        "zoom": 14.8,
+        "data": {
+            "baseline_score": 84.5,
+            "simulated_score": 92.7,
+            "delta_score": 8.2,
+            "baseline_njop": 14.8,
+            "simulated_njop": 18.6,
+            "delta_njop": 3.8
+        },
+        "narrative": (
+            "Simulasi skenario **Jalur Pedestrian Berkanopi & Concourse Terintegrasi Gubeng – Grand City Mall** "
+            "memproyeksikan lonjakan TOD Readiness Score dari **84,5 menjadi 92,7 (+8,2 poin)**. "
+            "Dimensi *Design / Walkability* melesat dari 78,0 menjadi 89,5 berkat pemisahan grade pejalan kaki dari lalu lintas kendaraan. "
+            "Estimasi apresiasi nilai tanah (%ΔNJOP) meningkat dari 14,8% menjadi **18,6% (+3,8% apresiasi tambahan)**."
+        )
+    },
+    "add_feeder_semut": {
+        "title": "Simulasi Feeder Wisata Heritage Semut – JMP",
+        "station_id": "semut",
+        "center": [112.7431, -7.2372],
+        "zoom": 14.5,
+        "data": {
+            "baseline_score": 71.0,
+            "simulated_score": 76.8,
+            "delta_score": 5.8,
+            "baseline_njop": 9.4,
+            "simulated_njop": 11.5,
+            "delta_njop": 2.1
+        },
+        "narrative": (
+            "Simulasi skenario **Penambahan Rute Feeder Wisata Heritage Stasiun Semut – JMP – Kawasan Pecinan** "
+            "meningkatkan TOD Readiness Score dari **71,0 menjadi 76,8 (+5,8 poin)** dengan peningkatan dimensi *Destination Accessibility*. "
+            "Estimasi kenaikan nilai tanah (%ΔNJOP) terdongkrak dari 9,4% menjadi **11,5% (+2,1% apresiasi tambahan)**."
+        )
+    },
+    "pasar_turi_integration": {
+        "title": "Simulasi Skybridge Multimoda Stasiun Pasar Turi – PGS",
+        "station_id": "pasar_turi",
+        "center": [112.7306, -7.2478],
+        "zoom": 14.5,
+        "data": {
+            "baseline_score": 79.2,
+            "simulated_score": 86.1,
+            "delta_score": 6.9,
+            "baseline_njop": 12.3,
+            "simulated_njop": 15.2,
+            "delta_njop": 2.9
+        },
+        "narrative": (
+            "Simulasi skenario **Integrasi Skybridge Stasiun Pasar Turi ke Pusat Grosir Surabaya (PGS) & Pasar Turi Baru** "
+            "meningkatkan TOD Readiness Score dari **79,2 menjadi 86,1 (+6,9 poin)**. "
+            "Dimensi *Design* dan *Distance to Transit* terkoreksi positif. "
+            "Estimasi %ΔNJOP naik dari 12,3% menjadi **15,2% (+2,9% apresiasi tambahan)**."
+        )
+    }
+}
+
+
 
 def dispatch_spatial_function(func_name: str, args: Dict[str, Any]) -> AIData:
     """
@@ -619,31 +857,20 @@ def dispatch_spatial_function(func_name: str, args: Dict[str, Any]) -> AIData:
         )
 
     elif func_name == "simulate_scenario":
-        sc_id = args.get("scenario_id", "extend_feeder_waru")
+        sc_id = str(args.get("scenario_id", "extend_feeder_waru")).lower().strip()
+        sc_prof = STATION_SCENARIO_PROFILES.get(sc_id, STATION_SCENARIO_PROFILES["extend_feeder_waru"])
 
         return AIData(
             action="show_scenario",
             target_layer="h3_tod_score",
-            target_station="waru",
-            view_state=ViewState(center=[112.7297, -7.3519], zoom=14.0),
+            target_station=sc_prof["station_id"],
+            view_state=ViewState(center=sc_prof["center"], zoom=sc_prof["zoom"]),
             chart_payload=ChartPayload(
                 type="scenario_impact",
-                title="Simulasi Intervensi Feeder Waru",
-                data={
-                    "baseline_score": 68.3,
-                    "simulated_score": 75.8,
-                    "delta_score": 7.5,
-                    "baseline_njop": 8.2,
-                    "simulated_njop": 11.4,
-                    "delta_njop": 3.2
-                }
+                title=sc_prof["title"],
+                data=sc_prof["data"]
             ),
-            text_response=(
-                f"Simulasi skenario **Perluasan Feeder WiraWiri ke Stasiun Waru** "
-                f"menunjukkan peningkatan TOD Readiness Score dari **68,3 menjadi 75,8 (+7,5 poin)**. "
-                f"Dimensi *Distance to Transit* dan *Diversity* mengalami kenaikan paling signifikan. "
-                f"Estimasi %ΔNJOP diproyeksikan dari 8,2% menjadi **11,4% (+3,2% apresiasi tambahan)**."
-            ),
+            text_response=sc_prof["narrative"],
             function_called=func_name,
             function_args=args
         )
@@ -651,35 +878,50 @@ def dispatch_spatial_function(func_name: str, args: Dict[str, Any]) -> AIData:
     elif func_name == "site_recommendation":
         biz = args.get("business_type", "coffee_shop")
         biz_label = biz.replace("_", " ").title()
+        st_id = str(args.get("target_station", "wonokromo")).lower().strip().replace("-", "_").replace(" ", "_")
+        station = _get_station_data(st_id)
+
+        site_prof = STATION_SITE_RECOMMENDATION_PROFILES.get(st_id)
+        if not site_prof:
+            site_prof = {
+                "station_name": station["name"],
+                "h3_index": station.get("h3_index", "88654c6537fffff"),
+                "center": [station["longitude"], station["latitude"]],
+                "avg_spending": STATION_ECONOMIC_PROFILES.get(st_id, {}).get("avg_spending", 35000),
+                "market_density": "Sedang - Tinggi",
+                "competitor_count": 3,
+                "recommended_spot": f"Radius 200m dari pintu gate utama {station['name']}",
+                "rationale": f"Arus penumpang transit harian dengan skor diversitas {station['scores']['diversity']}/100."
+            }
 
         return AIData(
             action="site_recommendation",
             target_layer="survey_mission_menu",
-            target_station="wonokromo",
-            view_state=ViewState(center=[112.7383, -7.3014], zoom=14.5),
+            target_station=st_id,
+            view_state=ViewState(center=site_prof["center"], zoom=14.5),
             chart_payload=ChartPayload(
                 type="spending_cluster",
-                title="Profil Daya Beli & Keramaian",
+                title=f"Rekomendasi Lokasi — {station['name']}",
                 data={
-                    "recommended_station": "Stasiun Wonokromo",
-                    "h3_index": "898d80824cbffff",
-                    "avg_spending": 38500,
-                    "market_density": "Tinggi",
-                    "competitor_count": 4
+                    "recommended_station": station["name"],
+                    "h3_index": site_prof["h3_index"],
+                    "avg_spending": site_prof["avg_spending"],
+                    "market_density": site_prof["market_density"],
+                    "competitor_count": site_prof["competitor_count"]
                 }
             ),
             text_response=(
-                f"Untuk membuka usaha **{biz_label}**, lokasi terbaik adalah sekitar "
-                f"**Stasiun Wonokromo (Grid Sel H3: 898d80824cbffff)** radius 250m dari pintu utara. "
-                f"Rata-rata transaksi Struk Go Rp 38.500/orang, percampuran guna lahan komersial aktif, "
-                f"dan tingginya pergerakan komuter harian meminimalkan risiko *tenant mismatch*."
+                f"Untuk membuka usaha **{biz_label}**, lokasi terbaik berada di sekitar "
+                f"**{station['name']} (Grid Sel H3: {site_prof['h3_index']})** tepatnya di {site_prof['recommended_spot']}. "
+                f"Rata-rata transaksi komuter mencapai **Rp {site_prof['avg_spending']:,}/orang** dengan tingkat kepadatan pasar **{site_prof['market_density']}**. "
+                f"{site_prof['rationale']}"
             ),
             function_called=func_name,
             function_args=args
         )
 
     elif func_name == "get_survey_data":
-        st_id = str(args.get("station_id", "wonokromo")).lower().strip()
+        st_id = str(args.get("station_id", "gubeng")).lower().strip().replace("-", "_").replace(" ", "_")
         cat = str(args.get("category", "all")).lower().strip()
         station = _get_station_data(st_id)
 
@@ -693,24 +935,34 @@ def dispatch_spatial_function(func_name: str, args: Dict[str, Any]) -> AIData:
             except Exception:
                 pass
 
-        respondents = st_sentiment.get("respondent_count", 35 if st_id == "wonokromo" else 20)
+        respondents = st_sentiment.get("respondent_count", 20 if st_id == "gubeng" else (35 if st_id in ["wonokromo", "pasar_turi"] else 15))
         pos_pct = st_sentiment.get("sentiment", {}).get("positive_pct", 55)
         neg_pct = st_sentiment.get("sentiment", {}).get("negative_pct", 15)
 
-        if cat == "economy" or st_id == "wonokromo":
-            text = (
-                f"### Profil Ekonomi & Survei Warga Sekitar {station['name']}\n\n"
-                f"Berdasarkan data aktivitas survei lapangan **GEO MAPID #PakSibukGa** ({respondents} titik observasi terverifikasi) "
-                f"dan data transaksi merchant kawasan:\n\n"
-                f"1. **Pusat Perbelanjaan & Retail Sekunder**: Koridor stasiun berhadapan langsung dengan **Darmo Trade Center (DTC) Mall** "
-                f"(jarak ~150–450m) dan **Royal Plaza Surabaya** (~800m), yang menjadi magnet belanja grosir dan retail utama komuter harian.\n"
-                f"2. **Daya Beli & Transaksi (Struk Go & Menu Go)**: Rata-rata nilai belanja komuter di merchant sekitar simpul adalah **Rp 38.500 per transaksi**, "
-                f"dengan dominasi kategori makanan/minuman to-go dan kebutuhan harian cepat saji.\n"
-                f"3. **Aktivitas UMKM & PKL**: Survei mencatat konsentrasi PKL aktif di sepanjang Jl. Stasiun Wonokromo (kuliner siang hingga malam). "
-                f"Sebagian titik memerlukan penataan trotoar agar tidak menyempitkan jalur pejalan kaki.\n"
-                f"4. **Diversitas & Status Ekonomi**: Diversitas guna lahan meraih skor **{station['scores']['diversity']}/100**, "
-                f"didukung status sosial ekonomi (SES) menengah produktif (C1–B) dan konektivitas feeder WiraWiri rute FD03 langsung ke Terminal Joyoboyo."
-            )
+        # Resolusi profil ekonomi spesifik simpul stasiun
+        if cat == "economy":
+            profile = STATION_ECONOMIC_PROFILES.get(st_id)
+            if profile:
+                text = (
+                    f"### Profil Ekonomi & Survei Komersial Sekitar {station['name']}\n\n"
+                    f"Berdasarkan data observasi lapangan **GEO MAPID #PakSibukGa** ({respondents} titik observasi terverifikasi) "
+                    f"dan data transaksi merchant kawasan:\n\n"
+                    f"1. **Pusat Perbelanjaan & Retail**: Koridor kawasan terhubung dengan **{profile['malls']}**.\n"
+                    f"2. **Daya Beli & Pola Transaksi (Struk Go & Menu Go)**: Rata-rata nilai belanja komuter adalah **Rp {profile['avg_spending']:,} per transaksi** "
+                    f"({profile['spending_range']}). {profile['spending_desc']}\n"
+                    f"3. **Aktivitas UMKM & Fasilitas Kawasan**: {profile['umkm_desc']}\n"
+                    f"4. **Diversitas Guna Lahan & SES**: {profile['diversity_ses']}"
+                )
+                avg_spending = profile["avg_spending"]
+            else:
+                text = (
+                    f"### Profil Ekonomi & Survei Warga Sekitar {station['name']}\n\n"
+                    f"Berdasarkan observasi lapangan GEO MAPID #PakSibukGa ({respondents} titik observasi):\n\n"
+                    f"1. **Aktivitas Komersial & Retail**: Kawasan simpul {station['name']} didukung oleh percampuran guna lahan komersial lokal dengan skor diversitas **{station['scores']['diversity']}/100**.\n"
+                    f"2. **Daya Beli & Transaksi**: Rata-rata transaksi to-go komuter diperkirakan **Rp 35.000 per transaksi** didominasi kebutuhan harian cepat saji.\n"
+                    f"3. **Status Ekonomi**: Didominasi kelas sosial ekonomi (SES) produktif dengan tipologi **{station['typology']}**."
+                )
+                avg_spending = 35000
         else:
             text = (
                 f"### Hasil Survei Warga MAPID — {station['name']}\n\n"
@@ -721,6 +973,7 @@ def dispatch_spatial_function(func_name: str, args: Dict[str, Any]) -> AIData:
                 f"({station.get('walkability', {}).get('label', 'Cukup Nyaman')})\n"
                 f"- **Data Provenance**: Terverifikasi melalui kampanye GEO MAPID #PakSibukGa 2026."
             )
+            avg_spending = STATION_ECONOMIC_PROFILES.get(st_id, {}).get("avg_spending", 38500)
 
         return AIData(
             action="highlight_and_zoom",
@@ -739,7 +992,7 @@ def dispatch_spatial_function(func_name: str, args: Dict[str, Any]) -> AIData:
                     "station_name": station["name"],
                     "respondents": respondents,
                     "positive_pct": pos_pct,
-                    "avg_spending": 38500 if st_id == "wonokromo" else 42000,
+                    "avg_spending": avg_spending,
                     "diversity_score": station["scores"]["diversity"],
                     "walkability_score": station["scores"]["design"]
                 }
